@@ -156,9 +156,6 @@ void CollisionSystem::RectRect(RectangleCollider *rectangle1, RectangleCollider 
 */
 void CollisionSystem::CircleRect(CircleCollider *circle, RectangleCollider *rectangle) {
 
-    // Boolean variable of type true or false that defines collisions.
-    bool collision = false;
-
     // Distance between centers in x-axis.
     double distanceX = abs(circle->GetCenter().m_x - rectangle->GetRectanglePoint().m_x
                            - rectangle->GetWidth() / divisor);
@@ -191,6 +188,9 @@ void CollisionSystem::CircleRect(CircleCollider *circle, RectangleCollider *rect
         crosses the rect vertice) is lesser than circle radius^2, in that case,
         collision occurs.
     */
+
+    // Boolean variable of type true or false that defines collisions.
+    bool collision = false;
 
     // Compares the rectangle distances.
     if (((distanceX <= (rectangle->GetWidth() / divisor)) || (distanceY <= (rectangle -> GetHeight() / divisor)))

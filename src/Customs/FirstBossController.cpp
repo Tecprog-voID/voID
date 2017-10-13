@@ -119,7 +119,6 @@ void FirstBossController::ActivateTentacle(int indexTentacle) {
 
 void FirstBossController::ActivateCreditsAnimation() {
     m_creditsAnimation->active = true;
-
 }
 
 
