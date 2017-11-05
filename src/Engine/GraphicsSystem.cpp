@@ -33,7 +33,10 @@ GraphicsSystem *GraphicsSystem::GetInstance() {
     // Create a new instance if it does't exist.
     if (!m_instance) {
         m_instance = new GraphicsSystem();
+    } else {
+        // Do nothing.
     }
+
     return m_instance;
 }
 
@@ -58,6 +61,8 @@ void GraphicsSystem::Draw(Image *img, Vector *position,
     if (result < noErrorReturnValue) {
         // Show a error message.
         ERROR(SDL_GetError());
+    } else {
+        // Do nothing.
     }
 }
 
@@ -84,6 +89,8 @@ void GraphicsSystem::DrawFrame(Image *img, Frame *frame, Vector *position,
     if (result < noErrorReturnValue) {
         // Show a error message.
         ERROR(SDL_GetError());
+    } else {
+        // Do nothing.
     }
 }
 
@@ -108,6 +115,8 @@ void GraphicsSystem::DrawPoint(Vector point) {
     if (result < noErrorReturnValue) {
         // Show a error message.
         SDL_ERROR("Drawing point error");
+    } else {
+        // Do nothing.
     }
 }
 
@@ -133,6 +142,8 @@ void GraphicsSystem::DrawCircle(Vector &center, float radius, Uint8 redValue,
         if (result < noErrorReturnValue) {
             // Show a error message.
             ERROR(SDL_GetError());
+        } else {
+            // Do nothing.
         }
     }
 }
@@ -162,7 +173,9 @@ void GraphicsSystem::DrawFillCircle(Vector &center, float radius,
         if (result < noErrorReturnValue) {
             // Show a error message.
             ERROR(SDL_GetError());
-        }
+        } else {
+        // Do nothing.
+    }
     }
 }
 
@@ -191,6 +204,8 @@ void GraphicsSystem::DrawFillRectangle(Vector &position, int width, int height,
     if (result < noErrorReturnValue) {
         // Show a error message.
         ERROR(SDL_GetError());
+    } else {
+        // Do nothing.
     }
 }
 
@@ -218,5 +233,7 @@ void GraphicsSystem::DrawFillRectangle(SDL_Rect* source, int /*width*/, int /*he
     if (result < noErrorReturnValue) {
         // Show a error message.
         ERROR(SDL_GetError());
+    } else {
+        // Do nothing.
     }
 }

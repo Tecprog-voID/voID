@@ -15,6 +15,8 @@ Component::Component(GameObject *owner, ComponentType type) {
     // Test if owner exists and show a error if doesn't exists.
     if (!owner) {
         ERROR("Invalid null owner");
+    } else {
+        // Do nothing.
     }
     // Instance the owner and type objects
     m_owner = owner;
