@@ -11,25 +11,25 @@
 UISound::UISound(GameObject *owner, string message, string audioPath,
                  bool isMusic, bool playOnStart)
                  : Component (owner, C_COMMON) {
-    INFO("UISound UISound() - initializing")
+    INFO("UISound UISound() - initializing");
     m_message = message;
     m_audioPath = audioPath;
     m_isMusic = isMusic;
     m_playOnStart = playOnStart;
     OnPropertyChange();
-    INFO("UISound UISound() - completed")
+    INFO("UISound UISound() - completed");
 }
 
 
 void UISound::Start() {
-    INFO("UISound Start() - completed")
+    INFO("UISound Start() - completed");
 }
 
 /**
  @brief Avoids the sound to play on start while updating a component.
  */
 void UISound::ComponentUpdate() {
-    INFO("UISound ComponentUpdate() - initializing")
+    INFO("UISound ComponentUpdate() - initializing");
     // Check if the sound should play in the start.
     if (m_playOnStart) {
         // Play the sound and disable the play on the start.
@@ -38,14 +38,14 @@ void UISound::ComponentUpdate() {
     } else {
         // Do nothing
     }
-    INFO("UISound ComponentUpdate() - completed")
+    INFO("UISound ComponentUpdate() - completed");
 }
 
 /**
  @brief Do nothing.
  */
 void UISound::FixedComponentUpdate() {
-    INFO("UISound FixedComponentUpdate() - completed")
+    INFO("UISound FixedComponentUpdate() - completed");
 }
 
 /**
@@ -54,7 +54,7 @@ void UISound::FixedComponentUpdate() {
  shown.
  */
 void UISound::OnPropertyChange() {
-    INFO("UISound OnPropertyChange() - initializing")
+    INFO("UISound OnPropertyChange() - initializing");
     // Check if the audio file is a music or a sound.
     switch (m_isMusic) {
         // Loads the music file.
@@ -81,7 +81,7 @@ void UISound::OnPropertyChange() {
         }
         break;
     }
-    INFO("UISound OnPropertyChange() - completed")
+    INFO("UISound OnPropertyChange() - completed");
 }
 
 /**
@@ -90,7 +90,7 @@ void UISound::OnPropertyChange() {
  @param channel.
  */
 void UISound::Play(int loops, int channel) {
-    INFO("UISound Play() - initializing")
+    INFO("UISound Play() - initializing");
     // Plays the file if is a music.
     if (m_isMusic) {
         Mix_PlayMusic(m_music, loops);
@@ -98,7 +98,7 @@ void UISound::Play(int loops, int channel) {
     } else {
         Mix_PlayChannel(channel, m_sound, loops);
     }
-    INFO("UISound Play() - completed")
+    INFO("UISound Play() - completed");
 }
 
 /**
@@ -106,7 +106,7 @@ void UISound::Play(int loops, int channel) {
  @param channel.
  */
 void UISound::Stop(int channel) {
-    INFO("UISound Stop() - initializing")
+    INFO("UISound Stop() - initializing");
     // Stops the music.
     if (m_isMusic) {
         Mix_HaltMusic();
@@ -114,7 +114,7 @@ void UISound::Stop(int channel) {
     } else {
         Mix_HaltChannel(channel);
     }
-    INFO("UISound Stop() - completed")
+    INFO("UISound Stop() - completed");
 }
 
 /**
@@ -122,7 +122,7 @@ void UISound::Stop(int channel) {
  @param channel.
  */
 void UISound::Pause(int channel) {
-    INFO("UISound Pause() - initializing")
+    INFO("UISound Pause() - initializing");
     // Pauses the music.
     if (m_isMusic) {
         Mix_PauseMusic();
@@ -130,5 +130,5 @@ void UISound::Pause(int channel) {
     } else {
         Mix_Pause(channel);
     }
-    INFO("UISound Pause() - completed")
+    INFO("UISound Pause() - completed");
 }

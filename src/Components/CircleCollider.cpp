@@ -16,7 +16,7 @@
 */
 CircleCollider::CircleCollider(GameObject *owner, Vector &offset, float radius,
                                int layer) : Collider(owner, layer) {
-    INFO("CircleCollider CircleCollider() - initializing")
+    INFO("CircleCollider CircleCollider() - initializing");
     // Set the offset of the circle.
     m_circleOffset = offset;
     // Set the radius of the circle.
@@ -24,15 +24,15 @@ CircleCollider::CircleCollider(GameObject *owner, Vector &offset, float radius,
     // Set the position of the circle.
     m_circleShape.x = owner->GetPosition()->m_x + offset.m_x;
     m_circleShape.y = owner->GetPosition()->m_y + offset.m_y;
-    INFO("CircleCollider CircleCollider() - completed")
+    INFO("CircleCollider CircleCollider() - completed");
 }
 
 void CircleCollider::FixedComponentUpdate() {
-    INFO("CircleCollider FixedComponentUpdate() - initializing")
+    INFO("CircleCollider FixedComponentUpdate() - initializing");
     // Get the position of the circle.
     m_circleShape.x = GetOwner()->GetPosition()->m_x + m_circleOffset.m_x;
     m_circleShape.y = GetOwner()->GetPosition()->m_y + m_circleOffset.m_y;
     // Get the radius of the circle.
     m_circleShape.radius = GetOwner()->GetWidth() / 2;
-    INFO("CircleCollider FixedComponentUpdate() - completed")
+    INFO("CircleCollider FixedComponentUpdate() - completed");
 }
