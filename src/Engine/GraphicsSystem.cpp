@@ -7,7 +7,6 @@
 #include "Engine/GraphicsSystem.hpp"
 #include "Engine/SDLSystem.hpp"
 #include "Engine/sdl2include.hpp"
-
 #include "Log/log.hpp"
 
 #include <iostream>
@@ -17,19 +16,23 @@ GraphicsSystem *GraphicsSystem::m_instance = 0;
 /**
     @brief Constructor of the GraphicsSystem class.
 */
-GraphicsSystem::GraphicsSystem() {}
-
-/**
-    @brief Destructor of the GraphicsSystem class.
-*/
-GraphicsSystem::~GraphicsSystem() {
-    m_instance = nullptr;
+GraphicsSystem::GraphicsSystem() {
+    INFO("GraphicsSystem GraphicsSystem() - completed");
 }
 
 /**
-    @brief Get a instance of the GraphicsSystem class.
-*/
+ @brief Destructor of the GraphicsSystem class.
+ */
+GraphicsSystem::~GraphicsSystem() {
+    m_instance = nullptr;
+    INFO("GraphicsSystem ~GraphicsSystem() - completed");
+}
+
+/**
+ @brief Get a instance of the GraphicsSystem class.
+ */
 GraphicsSystem *GraphicsSystem::GetInstance() {
+    INFO("GraphicsSystem GetInstance() - initializing");
     // Create a new instance if it does't exist.
     if (!m_instance) {
         m_instance = new GraphicsSystem();
@@ -38,13 +41,15 @@ GraphicsSystem *GraphicsSystem::GetInstance() {
     }
 
     return m_instance;
+    INFO("GraphicsSystem GetInstance() - completed");
 }
 
 /**
-    @brief Draw a image in the game.
-*/
+ @brief Draw a image in the game.
+ */
 void GraphicsSystem::Draw(Image *img, Vector *position,
-                          std::pair<int, int> sizes) {
+    std::pair<int, int> sizes) {
+    INFO("GraphicsSystem Draw() - initializing");
     SDL_Rect dest;
     dest.w = sizes.first;
     dest.h = sizes.second;
@@ -64,13 +69,15 @@ void GraphicsSystem::Draw(Image *img, Vector *position,
     } else {
         // Do nothing.
     }
+    INFO("GraphicsSystem Draw() - completed");
 }
 
 /**
-    @brief Draw a frame in the game.
-*/
+ @brief Draw a frame in the game.
+ */
 void GraphicsSystem::DrawFrame(Image *img, Frame *frame, Vector *position,
                                int destWidth, int destHeight) {
+    INFO("GraphicsSystem DrawFrame() - initializing");
     SDL_Rect dest;
     dest.w = destWidth;
     dest.h = destHeight;
@@ -92,6 +99,7 @@ void GraphicsSystem::DrawFrame(Image *img, Frame *frame, Vector *position,
     } else {
         // Do nothing.
     }
+    INFO("GraphicsSystem DrawFrame() - completed");
 }
 
 /**
@@ -101,12 +109,14 @@ void GraphicsSystem::DrawText(SDL_Texture *texture, SDL_Rect *destRect) {
     // Copy a portion of the texture to the current rendering target.
     SDL_RenderCopy(SDLSystem::GetInstance()->GetRenderer(), texture, NULL,
     destRect);
+    INFO("GraphicsSystem DrawText() - completed");
 }
 
 /**
-    @brief Draw a point in the game.
-*/
+ @brief Draw a point in the game.
+ */
 void GraphicsSystem::DrawPoint(Vector point) {
+    INFO("GraphicsSystem DrawPoint() - initializing");
     // Draw a point on the current rendering target.
     int result = SDL_RenderDrawPoint(SDLSystem::GetInstance()->GetRenderer(),
     point.m_x, point.m_y);
@@ -118,6 +128,7 @@ void GraphicsSystem::DrawPoint(Vector point) {
     } else {
         // Do nothing.
     }
+    INFO("GraphicsSystem DrawPoint() - completed");
 }
 
 /**
@@ -126,6 +137,7 @@ void GraphicsSystem::DrawPoint(Vector point) {
 void GraphicsSystem::DrawCircle(Vector &center, float radius, Uint8 redValue,
                                 Uint8 greenValue, Uint8 blueValue,
                                 Uint8 alphaValue) {
+    INFO("GraphicsSystem DrawCircle() - initializing");
     // Set the color used for drawing operations.
     SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), redValue,
                            greenValue, blueValue, alphaValue);
@@ -146,6 +158,7 @@ void GraphicsSystem::DrawCircle(Vector &center, float radius, Uint8 redValue,
             // Do nothing.
         }
     }
+    INFO("GraphicsSystem DrawCircle() - completed");
 }
 
 /**
@@ -154,6 +167,7 @@ void GraphicsSystem::DrawCircle(Vector &center, float radius, Uint8 redValue,
 void GraphicsSystem::DrawFillCircle(Vector &center, float radius,
                                     Uint8 redValue, Uint8 greenValue,
                                     Uint8 blueValue, Uint8 alphaValue) {
+    INFO("GraphicsSystem DrawFillCircle() - initializing");
     // Set the color used for drawing operations.
     SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), redValue,
                            greenValue, blueValue, alphaValue);
@@ -175,8 +189,9 @@ void GraphicsSystem::DrawFillCircle(Vector &center, float radius,
             ERROR(SDL_GetError());
         } else {
         // Do nothing.
+        }
     }
-    }
+    INFO("GraphicsSystem DrawFillCircle() - completed");
 }
 
 /**
@@ -185,6 +200,7 @@ void GraphicsSystem::DrawFillCircle(Vector &center, float radius,
 void GraphicsSystem::DrawFillRectangle(Vector &position, int width, int height,
                                        Uint8 redValue, Uint8 greenValue,
                                        Uint8 blueValue, Uint8 alphaValue) {
+    INFO("GraphicsSystem DrawFillRectangle() - initializing");
     // Set the color used for drawing operations.
     SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), redValue,
                            greenValue, blueValue, alphaValue);
@@ -207,6 +223,7 @@ void GraphicsSystem::DrawFillRectangle(Vector &position, int width, int height,
     } else {
         // Do nothing.
     }
+    INFO("GraphicsSystem DrawFillRectangle() - completed");
 }
 
 /**
@@ -215,6 +232,7 @@ void GraphicsSystem::DrawFillRectangle(Vector &position, int width, int height,
 void GraphicsSystem::DrawFillRectangle(SDL_Rect* source, int /*width*/, int /*height*/,
                                        Uint8 redValue, Uint8 greenValue,
                                        Uint8 blueValue, Uint8 alphaValue) {
+    INFO("GraphicsSystem DrawFillRectangle() - initializing");
     // Set the color used for drawing operations.
     SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), redValue,
                            greenValue, blueValue, alphaValue);
@@ -236,4 +254,5 @@ void GraphicsSystem::DrawFillRectangle(SDL_Rect* source, int /*width*/, int /*he
     } else {
         // Do nothing.
     }
+    INFO("GraphicsSystem DrawFillRectangle() - completed");
 }
