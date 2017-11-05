@@ -28,6 +28,8 @@ void UISound::ComponentUpdate() {
         // Play the sound and disable the play on the start.
         Play(playForever, emptyChannel);
         m_playOnStart = false;
+    } else {
+        // Do nothing
     }
 }
 
@@ -51,6 +53,8 @@ void UISound::OnPropertyChange() {
         if( m_music == NULL) {
             printf("Failed to load music! SDL_mixer Error: %s\n",
             Mix_GetError());
+        } else {
+            // Do nothing
         }
         break;
 
@@ -61,6 +65,8 @@ void UISound::OnPropertyChange() {
         if (m_sound == NULL) {
             printf("Failed to load sound effect! SDL_mixer Error: %s\n",
                    Mix_GetError());
+        } else {
+            // Do nothing
         }
         break;
     }
