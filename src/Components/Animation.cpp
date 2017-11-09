@@ -20,7 +20,7 @@ Animation::Animation(GameObject *owner, Image *image, bool playOnStart)
                     : Component(owner, C_DRAW) {
     // Image validation.
     if (!image) {
-        ERROR("Null image not allowed");
+        ERROR("Animation - Null image not allowed");
     } else {
         // Nothing to do
     }
@@ -34,13 +34,14 @@ Animation::Animation(GameObject *owner, Image *image, bool playOnStart)
     already running it sends to the SetPlaying method the release to start.
 */
 void Animation::Start() {
-
+    INFO("Animation - Initializing");
     // Checks if gamer is playing.
     if (!m_isPlaying) {
         SetPlaying(false);
     } else {
         SetPlaying(true);
     }
+    INFO("Animation - Completed");
 }
 
 
@@ -96,7 +97,7 @@ void Animation::SetPlaying(bool condition) {
 */
 void Animation::AddFrame(Frame *frame) {
     if (!frame) {
-        ERROR("Null frame pointer");
+        ERROR("Animation - Null frame pointer");
     } else {
         // Nothing to do
     }

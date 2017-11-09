@@ -5,6 +5,7 @@
 */
 
 #include "Globals/EngineGlobals.hpp"
+#include "Log/log.hpp"
 
 #include "Customs/ForestActivatorScript3.hpp"
 #include "Customs/TopCenterLightScript.hpp"
@@ -36,7 +37,7 @@ ForestActivatorScript3::ForestActivatorScript3(GameObject *owner) : Script(owner
     position, animator, controller, input and the map.
 */
 void ForestActivatorScript3::Start() {
-
+    INFO("ForestActivatorScript3 - Starting");
     // Creates the animator.
     CreateAnimations();
 
@@ -50,7 +51,7 @@ void ForestActivatorScript3::Start() {
 
     // Gets the game controller.
     gamecontroller = input->GetGameController(0);
-    GetOwner()->SetZoomProportion(Vector(0,0));
+    GetOwner()->SetZoomProportion(Vector(0, 0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->
                                             GetGameObject("Map");
 
@@ -63,13 +64,14 @@ void ForestActivatorScript3::Start() {
     } else {
         // Nothing to do
     }
+    INFO("ForestActivatorScript3 - Completed");
 }
 
 /**
     @brief That function create the image and animation of the forest three.
 */
 void ForestActivatorScript3::CreateAnimations() {
-
+    INFO("ForestActivatorScript3 - Creating animations");
     // Creates the image.
     auto forestactivatorSprite = new Image("assets/forestactivator.png",
                                            imageActivatorPositionX, imageActivatorPositionY,
@@ -100,7 +102,7 @@ void ForestActivatorScript3::CreateAnimations() {
                                           forestactivatorAnimation);
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION2",
                                           forestactivatorAnimation2);
-
+    INFO("ForestActivatorScript3 - Animations created");
 }
 
 /**
