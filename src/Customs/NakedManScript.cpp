@@ -61,7 +61,9 @@ void NakedManScript::Start() {
                                              / GetOwner()->originalWidth,
                                              map->originalHeight
                                              / GetOwner()->originalHeight));
-	}
+	} else {
+        // nothing to do.
+    }
 
     nakedManCollider = new RectangleCollider(GetOwner(), Vector(0, 0),
 	                                         GetOwner()->GetWidth(),
@@ -92,6 +94,8 @@ void NakedManScript::SetDirection() {
         } else if (mousePosition.first > position->m_x && movements == kLeft) {
             // Moving to left
             isMovingLooking = false;
+        } else {
+            // nothing to do.
         }
 
         // Looking to left, set if is also moving to left
@@ -101,6 +105,8 @@ void NakedManScript::SetDirection() {
         } else if (mousePosition.first < position->m_x && movements == kRight) {
             // Moving to right
             isMovingLooking = false;
+        } else {
+            // nothing to do.
         }
 
         // Looking to up, set if is also moving to up
@@ -110,6 +116,8 @@ void NakedManScript::SetDirection() {
         } else if (mousePosition.second < position->m_y && movements == kDown) {
             // Moving to down
             isMovingLooking = false;
+        } else {
+            // nothing to do.
         }
 
         // Looking and moving to down
@@ -121,6 +129,8 @@ void NakedManScript::SetDirection() {
             } else if (mousePosition.second > position->m_y && movements == kUp) {
                 // Moving to up
                 isMovingLooking = false;
+            } else {
+                // nothing to do.
             }
 
             // Looking to up right, set if is also moving to up right
@@ -131,8 +141,12 @@ void NakedManScript::SetDirection() {
             } else if (mousePosition.second > position->m_y && movements == kUp) {
                 // Moving to up
                 isMovingLooking = false;
+            } else {
+                // nothing to do.
             }
-        } // if -- Looking and moving to down
+        } else {
+            // nothing to do.
+        }// if -- Looking and moving to down
 
         // Looking to down right, set if is also moving to down right
         if (mousePosition.first >= position->m_x && mousePosition.second
@@ -143,6 +157,8 @@ void NakedManScript::SetDirection() {
             >= position->m_y && movements == kUpLeft) {
             // Moving to up left
             isMovingLooking = false;
+        } else {
+            // nothing to do.
         }
 
         // Looking to up left, set if is also moving to up left
@@ -154,6 +170,8 @@ void NakedManScript::SetDirection() {
             <= position->m_y && movements == kDownRight) {
             // Moving to down right
             isMovingLooking = false;
+        } else {
+            // nothing to do.
         }
     } else {
         /*
@@ -170,6 +188,8 @@ void NakedManScript::SetDirection() {
             && movements == kLeft) {
             // Moving to left
             isMovingLooking = false;
+        } else {
+            // nothing to do.
         }
 
         // Looking to left, set if is also moving to left
@@ -181,6 +201,8 @@ void NakedManScript::SetDirection() {
                    && movements == kRight) {
             // Moving to right
             isMovingLooking = false;
+        } else {
+            // nothing to do.
         }
 
         // Looking to up, set if is also moving to up
@@ -192,6 +214,8 @@ void NakedManScript::SetDirection() {
                    && movements == kDown) {
             // Moving to down
             isMovingLooking = false;
+        } else {
+            // nothing to do.
         }
 
         // Looking to down, set if is also moving to down
@@ -203,6 +227,8 @@ void NakedManScript::SetDirection() {
                    && movements == kUp) {
             // Moving to up
             isMovingLooking = false;
+        } else {
+            // nothing to do.
         }
 
         // Looking to up right, set if is also moving to up right
@@ -216,6 +242,8 @@ void NakedManScript::SetDirection() {
                    && movements == kDownLeft) {
             // Moving to down left
             isMovingLooking = false;
+        } else {
+            // nothing to do.
         }
 
         // Looking to down left, set if is also moving to down left
@@ -229,6 +257,8 @@ void NakedManScript::SetDirection() {
                    && movements == kUpRight) {
             // Moving to up right
             isMovingLooking = false;
+        } else {
+            // nothing to do.
         }
 
         // Looking to down right, set if is also moving to down right
@@ -242,6 +272,8 @@ void NakedManScript::SetDirection() {
                    && movements == kUpLeft) {
             // Moving to up left
             isMovingLooking = false;
+        } else {
+            // nothing to do.
         }
 
         // Looking to up left, set if is also moving to up left
@@ -255,6 +287,8 @@ void NakedManScript::SetDirection() {
                    && movements == kDownRight) {
             // Moving to down right
             isMovingLooking = false;
+        } else {
+            // nothing to do.
         }
     } // if -- Compare direction the player is looking and moving
 }
@@ -267,11 +301,15 @@ void NakedManScript::KeyBoardUpdate() {
     if ((input->GetKeyPressed(INPUT_DOWN))
          || (input->GetKeyPressed(INPUT_UP))) {
         isZooming = true;
+    } else {
+        // nothing to do.
     }
 
     // Detect if zoom is not required
     if ((input->GetKeyUp(INPUT_DOWN)) || (input->GetKeyUp(INPUT_UP))) {
         isZooming = false;
+    } else {
+        // nothing to do.
     }
 
     /*
@@ -423,6 +461,8 @@ void NakedManScript::KeyBoardUpdate() {
             deadzoneX = EngineGlobals::screen_width;
             deadzoneY = EngineGlobals::screen_height;
             animator->StopAllAnimations();
+        } else {
+            // nothing to do.
         } // if -- Detect requests to lock the Camera
     } // if -- Define move direction, define the deadzone and adjust player's image
 }
@@ -443,6 +483,8 @@ void NakedManScript::GameControllerUpdate() {
     if (abs(game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY)) < 1000
             && abs(game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX)) < 1000) {
         gameControllerAngle = 0;
+    } else {
+        // nothing to do.
     }
 
 
@@ -451,12 +493,16 @@ void NakedManScript::GameControllerUpdate() {
         gameControllerAngle *= -1;
         gameControllerAngle = kStraightAngle +
                               (kStraightAngle - gameControllerAngle);
+    } else {
+        // nothing to do.
     }
 
 
     // Get absolute value of the angle
     if (gameControllerAngle != 0) {
         gameControllerAngle = abs(kFullAngle - gameControllerAngle);
+    } else {
+        // nothing to do.
     }
 
 
@@ -604,11 +650,15 @@ void NakedManScript::GameControllerUpdate() {
                 animator->PlayAnimation("Stop Right");
             } // if -- Detect if player is stopped
         }
+    } else {
+        // nothing to do.
     } // if -- Define move direction and adjust player's image
 
     // Print attack message base in game controller input
     if (game_controller->GetButtonDown(GC_INPUT_X)) {
         printf("Attack\n");
+    } else {
+        // nothing to do.
     }
 
     // Play or stop animations based on dash actions
@@ -616,6 +666,8 @@ void NakedManScript::GameControllerUpdate() {
         && dashController == 0) {
         animator->StopAllAnimations();
         animator->PlayAnimation("Right Dash");
+    } else {
+        // nothing to do.
     }
     dashController = game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERLEFT);
 
@@ -645,7 +697,11 @@ void NakedManScript::GameControllerUpdate() {
         if (bulletNumber == 0) {
             bulletNumber = 10;
            // Wait delay reload time
+        } else {
+            // nothing to do.
         } // if -- Reload gun
+    } else {
+        // nothing to do.
     } // if -- Shoot
 
     bulletController = game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERRIGHT);
@@ -658,6 +714,8 @@ void NakedManScript::GameControllerUpdate() {
                                            ->GetComponent("UIText");
         textContinue->SetText("Continue");
         SceneManager::GetInstance()->SetCurrentScene("Main");
+    } else {
+        // nothing to do.
     }
 }
 
@@ -763,6 +821,8 @@ void NakedManScript::ComponentUpdate() {
          && (CameraSystem::GetInstance()->worldCameraX > 3410)
          && (CameraSystem::GetInstance()->worldCameraX < 3500)) {
         rainScript->m_play = 1;
+    } else {
+        // nothing to do.
     }
 
     // Deactivate rainScript based in position of camera
@@ -770,6 +830,8 @@ void NakedManScript::ComponentUpdate() {
          && (CameraSystem::GetInstance()->worldCameraX > 3410)
          && (CameraSystem::GetInstance()->worldCameraX < 3500)) {
         rainScript->m_play = 0;
+    } else {
+        // nothing to do.
     }
 
     // Initialize snow script
@@ -782,12 +844,16 @@ void NakedManScript::ComponentUpdate() {
     if ((CameraSystem::GetInstance()->worldCameraX < 3315)
          && (CameraSystem::GetInstance()->worldCameraY > 3860)) {
         snowScript->play = 1;
+    } else {
+        // nothing to do.
     }
 
     // Deactivate snowScript based in position of camera
     if ((CameraSystem::GetInstance()->worldCameraX > 3315)
          && (CameraSystem::GetInstance()->worldCameraY > 3860)) {
         snowScript->play = 0;
+    } else {
+        // nothing to do.
     }
 
     SetDirection();
@@ -798,11 +864,15 @@ void NakedManScript::ComponentUpdate() {
     // Go back to menu based in keyboard input
     if (InputSystem::GetInstance()->GetKeyUp(INPUT_ESCAPE)) {
         SDLSystem::GetInstance()->SetRunning(false);
+    } else {
+        // nothing to do.
     }
 
     // Shoot gun based in keyboard input
     if (InputSystem::GetInstance()->GetKeyDown(INPUT_SPACE)) {
         Shoot();
+    } else {
+        // nothing to do.
     }
 
     // Detect request to lock or unlock Camera based on keyboard input
@@ -817,6 +887,8 @@ void NakedManScript::ComponentUpdate() {
         deadzoneX = EngineGlobals::screen_width;
         deadzoneY = EngineGlobals::screen_height;
         animator->StopAllAnimations();
+    } else {
+        // nothing to do.
     } // if -- Detect request to lock or unlock
 
     walkSpeed = fixedWalkSpeed;
@@ -847,6 +919,8 @@ void NakedManScript::MovementsSounds() {
         // There are some key being pressed
         if (!walking) {
             walking = true;
+        } else {
+            // nothing to do.
         }
     } else {
         // There are not some key being pressed
@@ -865,6 +939,8 @@ void NakedManScript::FixedComponentUpdate() {
     // Call Movements method if lockplayerMovements is no activate
     if (!lockplayerMovements) {
         Movements();
+    } else {
+        // nothing to do.
     }
 
     ReloadGun();
@@ -883,6 +959,8 @@ void NakedManScript::FixedComponentUpdate() {
         CameraSystem::GetInstance()->MoveRight(200, SceneManager::GetInstance()
                                    ->GetCurrentScene());
         endBossFight =  false;
+    } else {
+        // nothing to do.
     }
 }
 
@@ -899,7 +977,11 @@ void NakedManScript::PlayerLife() {
         if(lifeRecover.GetTime() >= 0.5 * 1000) {
             life ++;
             lifeRecover.Restart();
+        } else {
+            // nothing to do.
         } // if -- Increase life and restart lifeRecover
+    } else {
+        // nothing to do.
     } // if -- Recover life
 
     // Detect when player dies to active the end boss fight
@@ -910,6 +992,8 @@ void NakedManScript::PlayerLife() {
             Desactivate boos fight
             Posit player outside boss fight
         */
+    } else {
+        // nothing to do.
     }
 }
 
@@ -935,6 +1019,8 @@ void NakedManScript::Shoot() {
         attackScript->SetShoot(true);
 
         bulletNumber--;
+    } else {
+        // nothing to do.
     }
 }
 
@@ -948,12 +1034,16 @@ void NakedManScript::ReloadGun() {
     */
     if (bulletNumber == 0) {
         timerReload.Update(EngineGlobals::fixed_update_interval);
+    } else {
+        // nothing to do.
     }
 
     // Reload the number of bullets when  pass a certain time limit
     if (timerReload.GetTime() >= 2 * 1000) {
         bulletNumber = 10;
         timerReload.Restart();
+    } else {
+        // nothing to do.
     }
 }
 
@@ -972,14 +1062,22 @@ void NakedManScript::Animations() {
             // Reset m_hitFrames value when it gets bigger than 12
             if (m_hitFrames >= 12) {
                 m_hitFrames = 0;
+            } else {
+                // nothing to do.
             } // if -- Reset m_hitFrames
+        } else {
+            // nothing to do.
         } // if -- Stop animations
+    } else {
+        // nothing to do.
     } // if -- Mange m_hitFrames value when m_hit is true
 
     // Restart timerHit and set m_hit as false
     if (timerHit.GetTime() >= 1 * 1000) {
         m_hit =  false;
         timerHit.Restart();
+    } else {
+        // nothing to do.
     }
 }
 
@@ -1016,6 +1114,8 @@ void NakedManScript::Movements() {
         position->m_x -= walkSpeed;
     } else if (movements == kRight) {
         position->m_x += walkSpeed;
+    } else {
+        // nothing to do.
     }
 
     if (cameraLock) {
@@ -1030,6 +1130,8 @@ void NakedManScript::Movements() {
                                                        SceneManager::GetInstance()
                                                        ->GetCurrentScene());
             }
+        } else {
+            // nothing to do.
         }
 
         // Mount deadzode on x-
@@ -1043,6 +1145,8 @@ void NakedManScript::Movements() {
                                                       SceneManager::GetInstance()
                                                       ->GetCurrentScene());
             }
+        } else {
+            // nothing to do.
         }
 
         // Mount deadzode on y++
@@ -1056,6 +1160,8 @@ void NakedManScript::Movements() {
                                                       SceneManager::GetInstance()
                                                       ->GetCurrentScene());
             }
+        } else {
+            // nothing to do.
         }
 
         // Mount deadzode on y--
@@ -1069,6 +1175,8 @@ void NakedManScript::Movements() {
                                                     SceneManager::GetInstance()
                                                     ->GetCurrentScene());
             }
+        } else {
+            // nothing to do.
         }
 
     } else {
@@ -1082,6 +1190,8 @@ void NakedManScript::Movements() {
                                                        SceneManager::GetInstance()
                                                        ->GetCurrentScene());
             }
+        } else {
+            // nothing to do.
         }
 
         if (position->m_x <= 0) {
@@ -1094,6 +1204,8 @@ void NakedManScript::Movements() {
                                                       SceneManager::GetInstance()
                                                       ->GetCurrentScene());
             }
+        } else {
+            // nothing to do.
         }
 
         if (position->m_y + GetOwner()->GetWidth() >= deadzoneY) {
@@ -1106,6 +1218,8 @@ void NakedManScript::Movements() {
                                                       SceneManager::GetInstance()
                                                       ->GetCurrentScene());
             }
+        } else {
+            // nothing to do.
         }
     }
 
@@ -1119,6 +1233,8 @@ void NakedManScript::Movements() {
                                                 SceneManager::GetInstance()
                                                 ->GetCurrentScene());
         }
+    } else {
+        // nothing to do.
     }
 }
 
@@ -1140,6 +1256,8 @@ void NakedManScript::GameCollisionCheck() {
             if (object->active) {
                 m_hit = true;
                 life --;
+            } else {
+                // nothing to do.
             }
 
             // Clear first boss collistions
@@ -1151,10 +1269,14 @@ void NakedManScript::GameCollisionCheck() {
             if (object->active) {
                 m_hit = true;
                 life --;
+            } else {
+                // nothing to do.
             }
 
             // Clear first boss attack collistions
             GetOwner()->ClearCollisions();
+        } else {
+            // nothing to do.
         } // if -- Manage collistions according to the object's tag
     } // for -- Run through objects
 }
@@ -1168,6 +1290,8 @@ void NakedManScript::StartFirstBoss() {
     if (input->GetKeyDown(INPUT_X)) {
         cout << "X: " << CameraSystem::GetInstance()->worldCameraX << endl;
         cout << "Y: " << CameraSystem::GetInstance()->worldCameraY << endl;
+    } else {
+        // nothing to do.
     }
 
     // Prepare camera, audio controller and boss controller for boss fight.
@@ -1205,7 +1329,11 @@ void NakedManScript::StartFirstBoss() {
 
             AudioController::GetInstance()->PlayAudio("bossBattleSound", -1);
             bossFight = true;
+        } else {
+            // nothing to do.
         }
+    } else {
+        // nothing to do.
     }
 }
 
@@ -1221,5 +1349,7 @@ void NakedManScript::WallCollisionResolution() {
     // Detect wall collisions if mapscript exist
     if (mapscript) {
         mapscript->DetectWallCollision(GetOwner());
+    } else {
+        // nothing to do.
     }
 }
