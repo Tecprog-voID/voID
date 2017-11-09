@@ -44,6 +44,8 @@ void PlayButtonScript::ComponentUpdate() {
         menuSound->Stop();
         AudioController::GetInstance()->PlayAudio("mainSound", -1);
         SceneManager::GetInstance()->SetCurrentScene("Gameplay");
+    } else {
+        // nothing to do.
     }
 
     // Text component to updates the colors of the Play Button

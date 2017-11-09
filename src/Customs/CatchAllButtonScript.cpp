@@ -34,6 +34,8 @@ void CatchAllButtonScript::ComponentUpdate() {
     // Select game mode when mouse is clicked
     if (m_interactiveButton->IsClicked()) {
         MenuController::GetInstance()->SelectGamemode(gameMode);
+    } else {
+        // nothing to do.
     }
 
     // Change checkbox value comparing the selected game mode

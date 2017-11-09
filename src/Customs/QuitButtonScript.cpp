@@ -38,6 +38,8 @@ void QuitButtonScript::ComponentUpdate() {
     if (m_interactiveButton->IsClicked()) {
         soundButton->Play(0, -1);
         SDLSystem::GetInstance()->SetRunning(false);
+    } else {
+        // nothing to do.
     }
 
     // Text component to set the colors of the Quit Button
