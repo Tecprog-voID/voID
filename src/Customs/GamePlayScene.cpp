@@ -200,9 +200,9 @@ void GamePlayScene::CreateMap() {
                               gameObjectCreateMapMapLayer);
 
     // Renderer the map image.
-    auto mapImage = new Image("assets/mapa2.png", imageScenePositionX,
+    auto mapImage = new Image("assets/map.png", imageScenePositionX,
                               imageScenePositionY, imageSceneWidth, imageSceneHeight);
-    //auto mapImage = new Image("assets/transitavel.png", 0, 0, 2678, 2678);
+
     auto mapRenderer = new Renderer(map, mapImage);
 
 
@@ -228,7 +228,7 @@ void GamePlayScene::CreateMap() {
     AudioController::GetInstance()->AddAudio(bossBattleSound);
 
     auto mainSound = new UISound(map, "mainSound",
-                                 "assets/Audio/florestafinal.ogg",
+                                 "assets/Audio/forestfinal.ogg",
                                  false, false);
 
     // Add the audio in the scene.
@@ -447,17 +447,17 @@ void GamePlayScene::CreateFirstBossAttack() {
 
         //Sounds.
         auto firstAttackSound = new UISound(firstBossAttack, "firstAttackSound",
-                                            "assets/Audio/Boss/grito1.ogg",
+                                            "assets/Audio/Boss/shout1.ogg",
                                             false, false);
         AudioController::GetInstance()->AddAudio(firstAttackSound);
 
         auto secondAttackSound = new UISound(firstBossAttack, "secondAttackSound",
-                                            "assets/Audio/Boss/grito2.ogg",
+                                            "assets/Audio/Boss/shout2.ogg",
                                             false, false);
         AudioController::GetInstance()->AddAudio(secondAttackSound);
 
         auto thirdAttackSound = new UISound(firstBossAttack, "thirdAttackSound",
-                                            "assets/Audio/Boss/grito3.ogg",
+                                            "assets/Audio/Boss/shout3.ogg",
                                             false, false);
         AudioController::GetInstance()->AddAudio(thirdAttackSound);
 
@@ -567,7 +567,7 @@ void GamePlayScene::CreateRain() {
     auto rain = new GameObject("Rain", new Vector(0, 0), 1024, 800, 1);
     auto rainScript = new RainScript(rain);
     auto rainSound = new UISound(rain, "rainSound",
-                                 "assets/Audio/Boss/chuva.ogg",
+                                 "assets/Audio/Boss/rain.ogg",
                                  false, false);
     AudioController::GetInstance()->AddAudio(rainSound);
     AddGameObject(rain);
