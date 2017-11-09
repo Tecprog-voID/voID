@@ -7,6 +7,7 @@
 
 #include "Customs/TopCenterLightScript.hpp"
 #include "Globals/EngineGlobals.hpp"
+#include "Log/log.hpp"
 
 const int imagePositionX = 0;
 const int imagePositionY = 0;
@@ -33,7 +34,7 @@ TopCenterLightScript::TopCenterLightScript(GameObject *owner) : Script(owner) {
     properties.
 */
 void TopCenterLightScript::Start() {
-
+    INFO("TopCenterLightScript - Initializing");
     CreateAnimations();
 
     // Gets the position.
@@ -54,7 +55,7 @@ void TopCenterLightScript::Start() {
     } else {
         // Nothing to do
     }
-
+    INFO("TopCenterLightScript - Completed");
 }
 
 /**
@@ -62,7 +63,7 @@ void TopCenterLightScript::Start() {
     and image's position.
 */
 void TopCenterLightScript::CreateAnimations() {
-
+    INFO("TopCenterLightScript - Creating animations");
     // Creates the image.
     auto topCenterLightSprite = new Image("assets/topcenter.png",
                                           imagePositionX, imagePositionY,
@@ -77,7 +78,7 @@ void TopCenterLightScript::CreateAnimations() {
     topCenterLightAnimation->SetFramesPerSecond(framesPerSecond);
     topCenterLightAnimator->AddAnimation("CENTRAL LIGHT ANIMATION",
                                          topCenterLightAnimation);
-
+    INFO("TopCenterLightScript - Animations created");
 
 }
 
