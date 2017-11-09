@@ -1,5 +1,5 @@
 /**
-    @file nowScript.cpp
+    @file SnowScript.cpp
     @brief This class contains all attributes and methods that manages the
     snow in the game.
     @copyright LGPL. MIT License.
@@ -13,7 +13,7 @@ const float vectorZoomProportionAxisX = 0;
 const float vectorZoomProportionAxisY = 0;
 
 // Image snow script
-const std::string snowImagePath = "assets/neve.png";
+const std::string snowImagePath = "assets/snow.png";
 const int snowImagePositionX = 0;
 const int snowImagePositionY = 0;
 const int snowImageWidth = 6820;
