@@ -6,6 +6,7 @@
 */
 
 #include "Customs/MissileButtonScript.hpp"
+#include "Log/log.hpp"
 
 /**
     @brief Initializes MissileButtonScript instance.
@@ -19,9 +20,11 @@ MissileButtonScript::MissileButtonScript(GameObject *owner) : Script(owner) {
     @brief Start the missile button script, instantiate button and checkbox.
 */
 void MissileButtonScript::Start() {
+    INFO("MissileButtonScript - Initializing");
     m_uiButton = (UIButton *)GetOwner()->GetComponent("UIButton");
     m_checkbox = SceneManager::GetInstance()->GetScene("Main")->
                                               GetGameObject("Missile_CB");
+    INFO("MissileButtonScript - Completed");
 }
 
 /**
