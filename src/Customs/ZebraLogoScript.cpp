@@ -7,6 +7,8 @@
 #include "Customs/ZebraLogoScript.hpp"
 #include "Globals/EngineGlobals.hpp"
 
+#include <cassert>
+
 const int width = 341;
 const int height = 256;
 
@@ -15,7 +17,7 @@ const int height = 256;
     @param[in] GameObject *owner - Owns the component.
 */
 ZebraLogoScript::ZebraLogoScript(GameObject *owner) : Script(owner) {
-
+    assert((owner != NULL) && "the owner must be equal to NULL");
 }
 
 /**

@@ -6,6 +6,8 @@
 
 #include "Engine/Frame.hpp"
 
+#include <cassert>
+
 /**
     @brief Set start coordinates and frame size.
     @param[in] positionX - Horizontal coordinate of the frame.
@@ -14,10 +16,16 @@
     @param[in] height - Vertical frame size.
 */
 Frame::Frame(int positionX, int positionY, int width, int height) {
-    originOfRectangle.x = positionX;
-    originOfRectangle.y = positionY;
-    originOfRectangle.w = width;
-    originOfRectangle.h = height;
+
+    assert((positionX >= 0) && "the positionX must be greater than zero");
+    assert((positionY >= 0) && "the positionY must be greater than zero");
+    assert((width >= 0) && "the width must be greater than zero");
+    assert((height >= 0) && "the height must be greater than zero");
+
+    sourceRectangle.x = positionX;
+    sourceRectangle.y = positionY;
+    sourceRectangle.w = width;
+    sourceRectangle.h = height;
 }
 
 /**

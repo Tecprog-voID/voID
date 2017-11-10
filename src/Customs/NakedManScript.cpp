@@ -11,6 +11,7 @@
 #include "Customs/SnowScript.hpp"
 #include "Customs/RainScript.hpp"
 
+#include <cassert>
 #include <math.h>
 #include <stdio.h>
 
@@ -36,7 +37,7 @@ bool NakedManScript::isZooming = false;
     @param[in] GameObject *owner - Owns the component.
 */
 NakedManScript::NakedManScript(GameObject *owner) : Script(owner) {
-
+    assert((owner != NULL) && "the owner must be equal to NULL");
 }
 
 /**
