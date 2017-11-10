@@ -13,6 +13,8 @@
 #include "Customs/EndScene1.hpp"
 #include "Customs/EndScene2.hpp"
 
+#include <cassert>
+
 const int red = 0;
 const int green = 0;
 const int blue = 0;
@@ -48,23 +50,15 @@ SDLSystem::~SDLSystem() {
 void SDLSystem::Init() {
     INFO("SDLSystem - initializing");
 
-    // Check initialization fails, error is default
-    if (!(InitSDL() && InitIMG() && InitMixer() && InitTTF())) {
-        // Display error message
-        ERROR("SDLSystem - failed.");
-            return;
-    } else {
-        //nothing to do.
-    }
+    // Check initialization fails
+    assert((InitSDL() != NULL) && "InitSDL() must be equal to zero");
+    assert((InitIMG() != NULL) && "InitIMG() must be equal to zero");
+    assert((InitMixer() != NULL) && "InitMixer() must be equal to zero");
+    assert((InitTTF() != NULL) && "InitTTF() must be equal to zero");
 
-    // Check creation fails, error is default
-    if (!(CreateWindow() && CreateRenderer())) {
-        // Display error message
-        ERROR("SDLSystem - failed.");
-        return;
-    } else {
-        //nothing to do.
-    }
+    // Check creation fails
+    assert((CreateWindow() != NULL) && "CreateWindow() must be equal to zero");
+    assert((CreateRenderer() != NULL) && "CreateRenderer() must be equal to zero");
 
     INFO("SDLSystem - completed");
 }
@@ -169,6 +163,7 @@ bool SDLSystem::InitSDL() {
     int initialize = SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO |
                SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER | SDL_INIT_EVENTS);
 
+<<<<<<< HEAD
     // Check initialization fail, error is default.
     if (initialize != 0) {
         // Display error message
@@ -177,9 +172,13 @@ bool SDLSystem::InitSDL() {
     } else {
         // nothing to do.
     }
+=======
+    // Check initialization fail
+    assert((initialize == 0) && "initialize must be equal to zero");
+>>>>>>> 2af5e64... Applying assertive in SDLSystem class
 
     INFO("SDL Initialized.")
-        return true;
+    return true;
 }
 
 /**
@@ -193,6 +192,7 @@ bool SDLSystem::InitIMG() {
     int flags = IMG_INIT_PNG | IMG_INIT_JPG;
     int initialize = IMG_Init(flags);
 
+<<<<<<< HEAD
     // Check image initialization fail, error is default
     if ((initialize & flags) != flags) {
         // Display error message
@@ -201,6 +201,10 @@ bool SDLSystem::InitIMG() {
     } else {
         // nothing to do.
     }
+=======
+    // Check image initialization fail
+    assert(((initialize & flags) == flags) && "initialize and flags must have the same status");
+>>>>>>> 2af5e64... Applying assertive in SDLSystem class
 
     INFO("SDLSystem - IMG Initialized.");
     return true;
@@ -216,6 +220,7 @@ bool SDLSystem::InitMixer() {
     // Choose frequency, Uint16 format, channels and chunksize
     int initialize = Mix_OpenAudio(frequency, MIX_DEFAULT_FORMAT, channels, chunksize);
 
+<<<<<<< HEAD
     // Check mixer initialization fail, error is default
     if (initialize != 0) {
         // Display error message
@@ -224,6 +229,10 @@ bool SDLSystem::InitMixer() {
     } else {
         // nothing to do.
     }
+=======
+    // Check mixer initialization fail
+    assert((initialize == 0) && "initialize must be equal to zero");
+>>>>>>> 2af5e64... Applying assertive in SDLSystem class
 
     INFO("SDLSystem - Mixer Initialized.");
     return true;
@@ -238,6 +247,7 @@ bool SDLSystem::InitTTF() {
 
     int initialize = TTF_Init();
 
+<<<<<<< HEAD
     // Check TTF initialization fail, error is default
     if (initialize != 0) {
         // Display error message
@@ -246,6 +256,10 @@ bool SDLSystem::InitTTF() {
     } else {
         // nothing to do.
     }
+=======
+    // Check TTF initialization fail
+    assert((initialize == 0) && "initialize must be equal to zero");
+>>>>>>> 2af5e64... Applying assertive in SDLSystem class
 
     INFO("SDLSystem - TTF Initialized.");
     return true;
@@ -263,6 +277,7 @@ bool SDLSystem::CreateWindow() {
                                 EngineGlobals::screen_width,
                                 EngineGlobals::screen_height, SDL_WINDOW_SHOWN);
 
+<<<<<<< HEAD
     // Check window creation fail, error is default
     if (!m_window) {
         // Display error message
@@ -271,6 +286,10 @@ bool SDLSystem::CreateWindow() {
     } else {
         // nothing to do.
     }
+=======
+    // Check window creation fail
+    assert((m_window != nullptr) && "m_window can not be null");
+>>>>>>> 2af5e64... Applying assertive in SDLSystem class
 
     INFO("SDLSystem - Created window successfully.");
         return true;
@@ -286,6 +305,7 @@ bool SDLSystem::CreateRenderer() {
     // Use hardware acceleration with first rendering driver that support it.
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
 
+<<<<<<< HEAD
     // Check renderer creation fail, error is default
     if (!m_renderer) {
         // Display error message
@@ -294,6 +314,10 @@ bool SDLSystem::CreateRenderer() {
     } else {
         // nothing to do.
     }
+=======
+    // Check renderer creation fail
+    assert((m_renderer != nullptr) && "m_renderer can not be null");
+>>>>>>> 2af5e64... Applying assertive in SDLSystem class
 
     SDL_SetRenderDrawBlendMode(m_renderer,SDL_BLENDMODE_BLEND);
     INFO("SDLSystem - Created renderer successfully.");
