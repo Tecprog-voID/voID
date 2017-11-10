@@ -21,7 +21,9 @@ const int blueCounter = 6;
     @brief Constructor for the ThunderScript class.
     @param[in] owner
 */
-ThunderScript::ThunderScript(GameObject *owner) : Script(owner) {}
+ThunderScript::ThunderScript(GameObject *owner) : Script(owner) {
+    INFO("ThunderScript - initialized");
+}
 
 /**
     @brief Start the animation for thunder in game.
@@ -36,12 +38,14 @@ void ThunderScript::Start() {
     m_animator = (Animator *)GetOwner()->GetComponent("Animator");
     m_input = InputSystem::GetInstance();
     GetOwner()->SetZoomProportion(Vector(0,0));
+    
 }
 
 /**
     @brief Create animations of thunders with different colors.
 */
 void ThunderScript::CreateAnimations() {
+    INFO("ThunderScript - Creating animations");
     //Image Thunder.
     auto thunderImage = new Image("assets/Sprites/dashes.png", 0, 0, thunderWidth, thunderHeight);
 
@@ -66,8 +70,9 @@ void ThunderScript::CreateAnimations() {
     auto thunderAnimator = new Animator(GetOwner());
 
     thunderAnimator->AddAnimation("thunderBlueAnimation", thunderBlueAnimation);
-    thunderAnimator->AddAnimation("thunderYellowAnimation",
-                                  thunderYellowAnimation);
+    thunderAnimator->AddAnimation("thunderYellowAnimation",thunderYellowAnimation);
+
+    INFO("ThunderScript - Animations created.");
 }
 
 /**
@@ -77,18 +82,17 @@ void ThunderScript::ComponentUpdate() {
     // Checks the input status to set the blue animation.
     if (m_input->GetKeyDown(INPUT_1)) {
         m_animator->PlayAnimation("thunderBlueAnimation");
+    } else {
+        // Do nothing
     }
 
     // Checks the input status to set the yellow animation.
     if (m_input->GetKeyDown(INPUT_2)) {
         m_animator->PlayAnimation("thunderYellowAnimation");
     } else {
-        //nothing to do.
+        //Do nothing
     }
 }
 
-/**
-    @brief Do nothing.
-*/
 void ThunderScript::FixedComponentUpdate() {
 }

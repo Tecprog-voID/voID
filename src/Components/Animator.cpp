@@ -10,7 +10,9 @@
     @param[in] owner
     @param[in] C_DRAW Enumerator from ComponentTypes.
 */
-Animator::Animator(GameObject *owner) : Component(owner, C_DRAW) {}
+Animator::Animator(GameObject *owner) : Component(owner, C_DRAW) {
+    INFO("Animator - initialized");
+}
 
 /**
     @brief Add a animation to a map of Animation pointers.
@@ -47,6 +49,8 @@ void Animator::StopAnimation(std::string name) {
     // If the current animations name wasnt found, show error message.
     if (result == m_animationMap.end()) {
         ERROR("Couldn't find animation: " << name);
+    } else {
+        // Do nothing
     }
     result->second->SetPlaying(false);
 }
@@ -72,11 +76,16 @@ bool Animator::IsPlaying(std::string name){
     // Searches the name of the current animation, if doesnt exist, display error message.
     if (result == m_animationMap.end()) {
         ERROR("Couldn't find animation: " << name);
+    } else {
+        // Do nothing
     }
+
     // If the name matches, set the playing state.
     if (result->second->IsPlaying()) {
         return true;
-    }
+    } else {
+        // Do nothing
+    } 
     return false;
 }
 
@@ -90,6 +99,8 @@ Animation *Animator::GetAnimation(std::string name) {
         // If the first name of the animation was found, return the second name.
         if (result.first == name) {
             return result.second;
+        } else {
+            // Do nothing
         }
         //If not, returns a null pointer.
     }

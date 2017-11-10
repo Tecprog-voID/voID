@@ -5,7 +5,7 @@
 */
 
 #include "Customs/ControleLogoScript.hpp"
-
+#include "Log/log.hpp"
 #include "Globals/EngineGlobals.hpp"
 
 #include <stdio.h>
@@ -29,6 +29,7 @@ ControleLogoScript::ControleLogoScript(GameObject *owner) : Script(owner) {}
     @brief Start the animation of the controle logo.
 */
 void ControleLogoScript::Start() {
+    INFO("ControleLogoScript - initializing");
     /*
         Creates the animations defining position the place to insert
         and the scene that will be inserted.
@@ -38,15 +39,16 @@ void ControleLogoScript::Start() {
     m_animator = (Animator *)GetOwner()->GetComponent("Animator");
     m_input = InputSystem::GetInstance();
     GetOwner()->SetZoomProportion(Vector(0,0));
+    INFO("ControleLogoScript - initialized");
 }
 
 /**
     @brief Create the animations for controle logo.
 */
 void ControleLogoScript::CreateAnimations() {
-
+    INFO("ControleLogoScript - Creating Animations");
     // Image logo sprite.
-    auto controle_LogoSprite = new Image("assets/introcontrole.png", 0, 0, logoWidth, logoHeight);
+    auto controle_LogoSprite = new Image("assets/introjoystick.png", 0, 0, logoWidth, logoHeight);
     // Aniamtion logo sprite.
     auto controleAnimation = new Animation(GetOwner(), controle_LogoSprite);
 
@@ -63,6 +65,7 @@ void ControleLogoScript::CreateAnimations() {
     auto controleAnimator = new Animator(GetOwner());
     controleAnimation -> SetFramesPerSecond(framesPerSecond);
     controleAnimator -> AddAnimation("CONTROLE ANIMATION", controleAnimation);
+    INFO("ControleLogoScript - Animations Created");
 }
 
 /**
@@ -81,15 +84,21 @@ void ControleLogoScript::FixedComponentUpdate() {
     // Compares time to play the animation.
     if (time.GetTime() >= timePlayAnimation) {
         m_animator->PlayAnimation("CONTROLE ANIMATION");
+    } else {
+        // Do nothing
     }
 
     // Compares time to stop the animation.
     if (time.GetTime() >= timeStopAnimation) {
         m_animator->StopAllAnimations();
+    } else {
+        // Do nothing
     }
 
     // Compares time to update the animation.
     if (time.GetTime() >= timeUpdateAnimation) {
         SceneManager::GetInstance()->SetCurrentScene("Main");
+    } else {
+        // Do nothing
     }
 }

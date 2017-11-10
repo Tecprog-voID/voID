@@ -73,7 +73,7 @@ void FirstBossScript::CreateAnimations() {
             Add 4 frames, changing the X position of the frame in crescent
             order.
             */
-            for (int animMulti = 0; i < eightNewFrames; i++) {
+            for (i = lastFrameJumpAnimation; i < eightNewFrames; i++) {
                 firstBossJumpAnimation->AddFrame(new Frame(i * 236,0, 236,
                                                            406));
                 firstBossJumpAnimation->AddFrame(new Frame(i * 236,0, 236,

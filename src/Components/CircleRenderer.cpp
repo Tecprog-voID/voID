@@ -4,12 +4,15 @@
     @copyright MIT License.
 */
 #include "Components/CircleRenderer.hpp"
+#include "Log/log.hpp"
 
 
 CircleRenderer::CircleRenderer(GameObject *owner, Vector offset, float radius)
                                                     : Component(owner, C_DRAW) {
+    INFO("CircleRenderer - initializing");
     m_offset = offset;
     m_radius = radius;
+    INFO("CircleRenderer - initialized");
 }
 
 /**

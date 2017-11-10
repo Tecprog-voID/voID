@@ -63,8 +63,6 @@ void MainScene::CreateLogo() {
         Setting and render the game logo image in the middle of the screen,
         in a gameobject.
     */
-    unsigned int xMiddle = EngineGlobals::screen_width / middlePosition - 240;
-
     auto logo = new GameObject("Logo", new Vector(-30,0), 1024, 800,1);
 
     auto logoImage = new Image("assets/logo2.png", 0, 0, 311, 256);

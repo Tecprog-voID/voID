@@ -20,8 +20,10 @@ CreditsScript::CreditsScript(GameObject *owner) : Script(owner) {
     @brief Start the credit position.
 */
 void CreditsScript::Start() {
+    INFO("CreditsScript - initializing");
     position = GetOwner()->GetPosition();
     GetOwner()->SetZoomProportion(Vector(0, 0));
+    INFO("CreditsScript - completed");
 }
 
 /**

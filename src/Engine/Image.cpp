@@ -13,7 +13,7 @@
     @brief Simple constructor of the Image class.
 */
 Image::Image() {
-
+    INFO("Image - initialized");
 }
 
 /**
@@ -44,6 +44,8 @@ void Image::LoadImage(std::string path, int _x, int _y, int _width, int _height)
     // Checks if the surface exists, if not, return an error message. 
     if (!surface) {
         ERROR(IMG_GetError());
+    } else {
+        // Do nothing
     }
 
     m_texture = SDL_CreateTextureFromSurface(SDLSystem::GetInstance()
@@ -53,6 +55,8 @@ void Image::LoadImage(std::string path, int _x, int _y, int _width, int _height)
     // Checks if the texture exists, if not, return an error message.                                          
     if (!m_texture) {
         ERROR(SDL_GetError());
+    } else {
+        // Do nothing
     }
 
     SDL_FreeSurface(surface);
@@ -84,14 +88,20 @@ void Image::SetPivot(int _x, int _y) {
     // Checks for the pointer of the image, if not, set it.
     if (!m_sdlPivotPtr) {
         m_sdlPivotPtr = &m_sdlPivot;
+    } else {
+        // Do nothing
     }
+    
     m_sdlPivot.x = _x;
     m_sdlPivot.y = _y;
 
     // Checks for the pivot pointer of the image, if not, set it.
     if (!m_pivot) {
         m_pivot = new Vector(0, 0);
+    } else {
+        // Do nothing
     }
+
     m_pivot->m_x = _x;
     m_pivot->m_y = _y;
 }
@@ -102,6 +112,7 @@ void Image::SetPivot(int _x, int _y) {
     @param[in] vertical Inform if the image must be flipped vertically.
 */
 void Image::Flip(bool horizontal, bool vertical) {
+
     m_horizontalFlip = horizontal;
     m_verticalFlip = vertical;
 

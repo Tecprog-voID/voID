@@ -17,13 +17,14 @@ const int bossLifeY = 10;
     @brief Constructor of the FirstBossLifeScript class.
 */
 FirstBossLifeScript::FirstBossLifeScript(GameObject *owner) : Script(owner) {
-
+    INFO("FirstBossLifeScript - initialized");
 }
 
 /**
     @brief Start the script that control the life of the first boss.
 */
 void FirstBossLifeScript::Start() {
+    INFO("FirstBossLifeScript - Start initializing");
     // Define the position of life bar.
     position = GetOwner()->GetPosition();
     GetOwner()->SetZoomProportion(Vector(0,0));
@@ -45,12 +46,16 @@ void FirstBossLifeScript::ComponentUpdate() {
         cout << actualLife << endl;
         firstBossLifeRenderer->SetWidth(actualLife - lifePosition);
         hit = false;
+    } else {
+        // Do nothing
     }
 
     // Compares the actual life. 
     if (actualLife <= lifeComparer) {
         FirstBossController::GetInstance()->ActivateCreditsAnimation();
         FirstBossController::GetInstance()->DeactivateLifeBars();
+    } else {
+        // Do nothing
     }
 }
 

@@ -43,6 +43,7 @@ NakedManScript::NakedManScript(GameObject *owner) : Script(owner) {
     @brief Start the first definitions of the player.
 */
 void NakedManScript::Start() {
+    INFO("NakedManScript - initializing");
     CreateAnimations();
     position = GetOwner()->GetPosition();
     animator = (Animator *)GetOwner()->GetComponent("Animator");
@@ -65,6 +66,7 @@ void NakedManScript::Start() {
     nakedManCollider = new RectangleCollider(GetOwner(), Vector(0, 0),
 	                                         GetOwner()->GetWidth(),
 											 GetOwner()->GetHeight(), 0);
+    INFO("NakedManScript - completed");
 }
 
 /**

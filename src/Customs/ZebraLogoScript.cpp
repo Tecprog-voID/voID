@@ -22,18 +22,20 @@ ZebraLogoScript::ZebraLogoScript(GameObject *owner) : Script(owner) {
     @brief Starts the animation of the Zebra logo.
 */
 void ZebraLogoScript::Start() {
-
+    INFO("ZebraLogoScript - initializing");
     CreateAnimations();
     zebra_position = GetOwner()->GetPosition();
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
     GetOwner()->SetZoomProportion(Vector(0, 0));
+    INFO("ZebraLogoScript - Completed");
 }
 
 /**
     @brief Creates the animations for Zebra logo.
 */
 void ZebraLogoScript::CreateAnimations(){
+    INFO("ZebraLogoScript - initializing create animations");
     // Keeps the path, positions x and y, width and height of the Zebra image
     auto zebraSprite = new Image("assets/introzebra.png", 0, 0,
                                  width * 15, height * 2);
@@ -55,21 +57,19 @@ void ZebraLogoScript::CreateAnimations(){
     // Insert the ZebraLogo in the map.
     auto zebraAnimator = new Animator(GetOwner());
     zebraAnimator->AddAnimation("ZEBRA ANIMATION", zebraAnimation);
-
+    INFO("ZebraLogoScript - Create animations completed");
 }
 
 /**
     @brief Do nothing.
 */
 void ZebraLogoScript::ComponentUpdate() {
-
 }
 
 /**
     @brief Controls the duration of the Zebra logo's animation.
 */
 void ZebraLogoScript::FixedComponentUpdate() {
-
     time.Update(1);
 
     // Set the time when ZebraLogo will start to be displayed in the screen

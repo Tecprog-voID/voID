@@ -21,7 +21,9 @@ QuitButtonScript::QuitButtonScript(GameObject *owner) : Script(owner) {
     @brief Starts the Quit button.
 */
 void QuitButtonScript::Start() {
+    INFO("QuitButtonScript - initializing");
     m_interactive_button = (UIButton *)GetOwner()->GetComponent("UIButton");
+    INFO("QuitButtonScript - completed");
 }
 
 /**

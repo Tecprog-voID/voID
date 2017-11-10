@@ -47,7 +47,7 @@ void FirstBossCentralEffectScript::Start() {
 void FirstBossCentralEffectScript::CreateAnimations() {
 
     // Image Attacks.
-    auto firstBossCentralImage1 = new Image("assets/centroboss11.png", 0, 0, 
+    auto firstBossCentralImage1 = new Image("assets/centerBoss11.png", 0, 0, 
                                             centralImageWidth, centralImageheight);
 
     // Surge Animation.
@@ -73,6 +73,8 @@ void FirstBossCentralEffectScript::ComponentUpdate() {
     // Checks the boss state.
     if (m_boss) {
         m_animator->PlayAnimation("firstBossCentralAnimation1");
+    } else {
+        // Do nothing
     }
 }
 
@@ -96,5 +98,7 @@ void FirstBossCentralEffectScript::FixedComponentUpdate() {
                                                 - GetOwner()->GetHeight() / 2
                                                 + GetOwner()->GetHeight()
                                                 / bossYPosition;
+    } else {
+        // Do nothing
     }
 }

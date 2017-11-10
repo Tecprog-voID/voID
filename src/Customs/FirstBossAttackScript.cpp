@@ -6,6 +6,7 @@
 
 #include "Customs/FirstBossAttackScript.hpp"
 #include "Customs/AudioController.hpp"
+#include "Log/log.hpp"
 
 const int imageHeight = 151;
 const int imageWidth = 600;
@@ -19,7 +20,7 @@ const int framesNumber = 40;
     @brief Constructor for the FirstBossAttackScript class.
 */
 FirstBossAttackScript::FirstBossAttackScript(GameObject *owner) : Script(owner) {
-
+    INFO("FirstBossAttackScript - initialized");
 }
 
 /**
@@ -87,6 +88,7 @@ void FirstBossAttackScript::CreateAnimations() {
     //Gone Animator of boss attack.
     firstBossAttackAnimator->AddAnimation("firstBossAttackGoneAnimation",
                                             firstBossAttackGoneAnimation);
+
 }
 
 /**
@@ -103,11 +105,15 @@ void FirstBossAttackScript::ComponentUpdate() {
     // Checks the attack status.
     if(attack) {
        Attack();
+    } else {
+        // Do nothing
     }
 
     // Checks the input system status set the attack status.
     if(InputSystem::GetInstance()->GetKeyUp(INPUT_M) && attack == false){
         attack = true;
+    } else {
+        // Do nothing
     }
 
 }
@@ -121,6 +127,8 @@ void FirstBossAttackScript::FixedComponentUpdate() {
     // Checks the status of the deasactivateobject.
     if (deactivateObj){
         m_timerGone.Update(EngineGlobals::fixed_update_interval);
+    } else {
+        // Do nothing
     }
 
     CameraShakeAttack();
@@ -144,12 +152,15 @@ void FirstBossAttackScript::Attack() {
         m_idleAnimation = true;
         m_timerAnimation.Restart();
         AudioController::GetInstance()->PlayAudio("secondAttackSound", 0);
-
+    } else {
+        // Do nothing
     }
 
     // Compares the idle animation, to activate the animator.
     if (m_idleAnimation && m_timerAnimation.GetTime() >= 1 * 1000) {
         m_animator -> PlayAnimation("firstBossAttackIdleAnimation");
+    } else {
+        // Do nothing
     }
 
     // Checks gone animation status to set its properties.
@@ -162,12 +173,16 @@ void FirstBossAttackScript::Attack() {
         m_surgeAnimation = true;
         deactivateObj = true;
         GetOwner()->active = false;
+    } else {
+        // Do nothing
     }
 
     // Compares the timer gone animation to update the desactivateobj.
     if(m_timerGone.GetTime() >= 1 * 1000) {
         m_timerGone.Restart();
         deactivateObj = false;
+    } else {
+        // Do nothing
     }
 }
 
@@ -180,6 +195,10 @@ void FirstBossAttackScript::CameraShakeAttack(){
                                                      -> GetCurrentScene());
         if (!CameraSystem::GetInstance() -> IsShaking()){
             cameraShake = false;
+        } else {
+            // Do nothing
         }
-  }
+  } else {
+    // Do nothing
+}
 }

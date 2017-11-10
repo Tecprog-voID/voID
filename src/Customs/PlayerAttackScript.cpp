@@ -146,6 +146,6 @@ void PlayerAttackScript::GameCollisionCheck() {
     @param[in] When shoot is false, there are no shoots or bullets, and is the
     opposite when shoot is true.
 */
-void PlayerAttackScript::SetShoot(bool shoot) {
-    this->shoot = shoot;
+void PlayerAttackScript::SetShoot(bool m_shoot) {
+    this->shoot = m_shoot;
 }

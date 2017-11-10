@@ -71,8 +71,6 @@ void FirstBossScene::CreatePlayer() {
     yPos = EngineGlobals::screen_height / 2 - 96 / 2;
     auto nakedMan = new GameObject("NakedMan", new Vector(xPos,yPos),96 ,
                                                                      96, 1);
-    // Script
-    auto nakedManScript = new NakedManScript(nakedMan);
     AddGameObject(nakedMan);
     FirstBossController::GetInstance()->AddPlayer(nakedMan);
 }
@@ -85,7 +83,6 @@ void FirstBossScene::CreateBoss() {
     // Instantiating the first boss central effect, by gameobject with a vector for its positions.
     auto FirstBossCentralEffect = new GameObject("FirstBossCentralEffect",
                                             new Vector(0,0),211.86,211.86, 1);
-    auto firstBossCentralEffectScript = new FirstBossCentralEffectScript(FirstBossCentralEffect);
     AddGameObject(FirstBossCentralEffect);
     // Instantiating the first boss, on a gameobject with a vector for its positions.
     auto firstBoss = new GameObject("FirstBoss", new Vector(0,0),690,930, 2);
@@ -93,8 +90,6 @@ void FirstBossScene::CreateBoss() {
     //Tag
     firstBoss->SetTag("FirstBoss");
 
-    // Script
-    auto firstBossScript = new  FirstBossScript(firstBoss);
     // Inserting the first boss gameobject into the gameobjects vector.
     AddGameObject(firstBoss);
     FirstBossController::GetInstance()->AddBoss(firstBoss);
@@ -112,9 +107,6 @@ void FirstBossScene::CreateFirstBossAttack() {
     //Tag
     firstBossAttack->SetTag("FirstBossAtack");
 
-    // Script
-    auto firstBossAttackScript = new  FirstBossAttackScript(firstBossAttack);
-
     // Inserting the first boss attack gameobject into the gameobjects vector.
     AddGameObject(firstBossAttack);
     FirstBossController::GetInstance()->AddTentacle(firstBossAttack);
@@ -131,10 +123,6 @@ void FirstBossScene::CreatePlayerAttack() {
         auto bullet = new GameObject(bulletName, new Vector(100 * counter, 0),15, 15, 2);
         bullet->SetTag("Bullet");
 
-        // On every iteration, adds a bullet into the instantiaded player attack script.
-        auto bulletScript = new PlayerAttackScript(bullet);
-        //MissileController::GetInstance()->AddPlayer(bullet);
-
         // Insert each gameobject bullet into the gameobjects vector.
         AddGameObject(bullet);
     //bullet->active = false;
@@ -148,7 +136,6 @@ void FirstBossScene::CreatePlayerAttack() {
 void FirstBossScene::CreateRain() {
     // Instantiating the rain, on a gameobject with its name, and a vector for its positions.
     auto rain = new GameObject("Rain", new Vector(0,0),1024,800,1);
-    auto rainScript = new RainScript(rain);
 
     // Insert the gameobject rain into the gameobjects vector.
     AddGameObject(rain);
@@ -161,7 +148,6 @@ void FirstBossScene::CreateRain() {
 void FirstBossScene::CreatePlayerHit() {
     // Instantiating a player hit, on a gameobject with its name, and a vector for its positions.
     auto hit = new GameObject("Hit", new Vector(0,0),1024,800,1);
-    auto hitScript = new HitScript(hit);
 
     // Insert the gameobject hit into the gameobjects vector.
     AddGameObject(hit);
@@ -175,7 +161,6 @@ void FirstBossScene::CreatePlayerHit() {
 void FirstBossScene::CreateThunder() {
     // Instantiating a thunder, on a gameobject with its name, and a vector for its positions.
     auto thunder = new GameObject("Rain", new Vector(200,0),113,267,1);
-    auto thunderScript = new ThunderScript(thunder);
 
     // Insert the gameobject thunder into the gameobjects vector.
     AddGameObject(thunder);
@@ -188,7 +173,6 @@ void FirstBossScene::CreateThunder() {
 void FirstBossScene::CreateSnow(){
     // Instantiating snow, on a gameobject with its name, and a vector for its positions.
     auto snow = new GameObject("Snow", new Vector(0,0),1024,800,1);
-    auto snowScript = new SnowScript(snow);
 
     // Insert the gameobject snow into the gameobjects vector.
     AddGameObject(snow);
@@ -201,10 +185,6 @@ void FirstBossScene::CreateSnow(){
 void FirstBossScene::CreateLight() {
     // Instantiating the light, on a gameobject with its name, and a vector for its positions.
     auto light = new GameObject("Light", new Vector(0,0),2*1024,2*800,1);
-
-    //auto lightImage = new Image("assets/luz.png",0,0,682, 512);
-    //auto mapRenderer = new Renderer(light, lightImage);
-    auto lightScript = new LightScript(light);
 
     // Insert the gameobject snow into the gameobjects vector.
     AddGameObject(light);

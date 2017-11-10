@@ -22,104 +22,104 @@
 
 class NakedManScript : public Script {
 
-public:
+    public:
 
-    // Initicial values of the player informations in the game
-    bool lockplayerMovements = false;
-    bool gameControllerActivated = false;
-    bool activated = true;
-    int bulletNumber = 10;
-    int life = 100;
-    float gameControllerAngle = 0;
+        // Initicial values of the player informations in the game
+        bool lockplayerMovements = false;
+        bool gameControllerActivated = false;
+        bool activated = true;
+        int bulletNumber = 10;
+        int life = 100;
+        float gameControllerAngle = 0;
 
-    NakedManScript(GameObject *owner);
+        NakedManScript(GameObject *owner);
 
-    // Replace the component name and return it.
-    std::string GetComponentName() override {
-        return "NakedManScript";
-    };
+        // Replace the component name and return it.
+        std::string GetComponentName() override {
+            return "NakedManScript";
+        };
 
-    void FixedComponentUpdate() override;
-    void Start() override;
+        void FixedComponentUpdate() override;
+        void Start() override;
 
-    char GetMovement() {
-        return movements;
-    };
+        char GetMovement() {
+            return movements;
+        };
 
-protected:
+    private:
 
-    void ComponentUpdate() override;
+        bool zoom = true;
 
-private:
+        bool bossFight = false;
 
-    bool zoom = true;
+        // Player's walk
+        bool walking = false;
 
-    bool bossFight = false;
+        int bulletController = 0;
 
-    // Player's walk
-    bool walking = false;
+        int dashController = 0;
 
-    int bulletController = 0;
+        InputSystem *input = nullptr;
+        GameController *game_controller = nullptr;
+        Animator *animator = nullptr;
+        Vector *position = nullptr;
 
-    int dashController = 0;
+        // Player's speeds
+        float walkSpeed = 15;
+        float fixedWalkSpeed = 15;
 
-    InputSystem *input = nullptr;
-    GameController *game_controller = nullptr;
-    Animator *animator = nullptr;
-    Vector *position = nullptr;
+        /*
+            1 = UP, 2 = DOWN, 3 = LEFT, 4 = RIGHT, 5 = UP LEFT,
+            6 = UP RIGHT, 7 = DOWN LEFT, 8 = DOWN RIGHT
+        */
+        int movements = 0;
 
-    // Player's speeds
-    float walkSpeed = 15;
-    float fixedWalkSpeed = 15;
+        // X and Y positions of dead zone
+        int deadzoneX = EngineGlobals::screen_width / 2;
+        int deadzoneY = EngineGlobals::screen_height / 2;
 
-    /*
-        1 = UP, 2 = DOWN, 3 = LEFT, 4 = RIGHT, 5 = UP LEFT,
-        6 = UP RIGHT, 7 = DOWN LEFT, 8 = DOWN RIGHT
-    */
-    int movements = 0;
+        int lastDirection = 1;
+        RectangleCollider *nakedManCollider = nullptr;
 
-    // X and Y positions of dead zone
-    int deadzoneX = EngineGlobals::screen_width / 2;
-    int deadzoneY = EngineGlobals::screen_height / 2;
+        int m_hitFrames = 0;
+        bool m_hit = false;
 
-    int lastDirection = 1;
-    RectangleCollider *nakedManCollider = nullptr;
+        bool cameraLock = true;
+        bool isMovingLooking = true;
 
-    int m_hitFrames = 0;
-    bool m_hit = false;
+        bool endBossFight = false;
 
-    bool cameraLock = true;
-    bool isMovingLooking = true;
+        // Map's zoom requests.
+        static bool isZooming;
 
-    bool endBossFight = false;
+        std::pair<int, int> mousePosition;
 
-    // Map's zoom requests.
-    static bool isZooming;
+        Timer timerReload;
+        Timer lifeRecover;
+        Timer timerHit;
 
-    std::pair<int, int> mousePosition;
+        void SetDirection();
+        void KeyBoardUpdate();
+        void GameControllerUpdate();
+        void CreateAnimations();
+        void WallCollisionResolution();
+        void GameCollisionCheck();
+        void StartFirstBoss();
 
-    Timer timerReload;
-    Timer lifeRecover;
-    Timer timerHit;
+        //Player Movements
+        void Movements();
 
-    void SetDirection();
-    void KeyBoardUpdate();
-    void GameControllerUpdate();
-    void CreateAnimations();
-    void WallCollisionResolution();
-    void GameCollisionCheck();
-    void StartFirstBoss();
+        void Animations();
 
-    //Player Movements
-    void Movements();
+        void Shoot();
+        void ReloadGun();
+        void PlayerLife();
 
-    void Animations();
+        void MovementsSounds();
+        
+    protected:
 
-    void Shoot();
-    void ReloadGun();
-    void PlayerLife();
-
-    void MovementsSounds();
+        void ComponentUpdate() override;
 };
 
 #endif

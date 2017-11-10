@@ -22,7 +22,9 @@ PlayButtonScript::PlayButtonScript(GameObject *owner) : Script(owner) {
     @brief Start the Play button.
 */
 void PlayButtonScript::Start() {
+    INFO("PlayButtonScript - initializing");
     m_interactive_button = (UIButton *)GetOwner()->GetComponent("UIButton");
+    INFO("PlayButtonScript - completed");
 }
 
 /**

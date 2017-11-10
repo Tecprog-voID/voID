@@ -55,7 +55,7 @@ Renderer::~Renderer() {
     @brief Do nothing.
 */
 void Renderer::Start() {
-
+    INFO("Renderer - start");
 }
 
 /**
@@ -63,6 +63,7 @@ void Renderer::Start() {
     @param[in] point
 */
 void Renderer::RotateTowards(Vector *point) {
+    INFO("Renderer - Initializing rotate towards");
     // Calculate arc tangent in degrees.
     double angles = 0.0;
     angles = atan2(point->m_y - m_position->m_y, point->m_x - m_position->m_x);
@@ -74,6 +75,7 @@ void Renderer::RotateTowards(Vector *point) {
     }
 
     Rotate(angles);
+    INFO("Renderer - rotate towards initialized");
 }
 
 /**

@@ -19,8 +19,10 @@ BulletCounterScript::BulletCounterScript(GameObject *owner) : Script(owner) {
     @brief Starts the Bullet Counter position.
 */
 void BulletCounterScript::Start() {
+    INFO("PlayButtonScript - initializing");
     counter_position = GetOwner()->GetPosition();
     GetOwner()->SetZoomProportion(Vector(0, 0));
+    INFO("PlayButtonScript - completed");
 }
 
 /**

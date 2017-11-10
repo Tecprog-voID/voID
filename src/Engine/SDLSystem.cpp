@@ -46,30 +46,30 @@ SDLSystem::~SDLSystem() {
     @brief Initialize all systems.
 */
 void SDLSystem::Init() {
-    INFO("SDLSystem::Init() initialized");
+    INFO("SDLSystem - initializing");
 
     // Check initialization fails
     if (!(InitSDL() && InitIMG() && InitMixer() && InitTTF())) {
         // Display error message
-        ERROR("SDLSystem::Init() failed.");
+        ERROR("SDLSystem - failed.");
             return;
     }
 
     // Check creation fails
     if (!(CreateWindow() && CreateRenderer())) {
         // Display error message
-        ERROR("SDLSystem::Init() failed.");
+        ERROR("SDLSystem - failed.");
             return;
     }
 
-    INFO("SDLSystem::Init() completed");
+    INFO("SDLSystem - completed");
 }
 
 /**
     @brief Runs the SDL library.
 */
 void SDLSystem::Run() {
-    INFO("Starting Run().");
+    INFO("SDLSystem - Run() initialized");
 
     m_isRunning = true;
 
@@ -112,14 +112,14 @@ void SDLSystem::Run() {
         SDL_RenderPresent(m_renderer);
     } // while -- Update utilities while SDL System is nunning
 
-    INFO("Ending Run().");
+    INFO("SDLSystem - Run() Ending");
 }
 
 /**
     @brief Shut down SDL library and its subsystems used in the game.
 */
 void SDLSystem::Shutdown() {
-    INFO("Shutdown() Initialized.")
+    INFO("SDLSystem - Shutdown() Initialized.")
 
     /*
         Get number of milliseconds since the SDL library initialization
@@ -132,7 +132,7 @@ void SDLSystem::Shutdown() {
     TTF_Quit();
     SDL_Quit();
 
-    INFO("Shutdown completed.")
+    INFO("SDLSystem - Shutdown() completed.")
 }
 
 /**
@@ -162,7 +162,7 @@ bool SDLSystem::InitSDL() {
     // Check initialization fail
     if (initialize != 0) {
         // Display error message
-        SDL_ERROR("SDLSystem::InitSDL() failed.");
+        SDL_ERROR("SDLSystem - InitSDL() failed.");
         return false;
     }
 
@@ -175,7 +175,7 @@ bool SDLSystem::InitSDL() {
     @return False if the initialization fails and true if it's succeed.
 */
 bool SDLSystem::InitIMG() {
-    INFO("Initializing IMG");
+    INFO("SDLSystem - Initializing IMG");
 
     // Receives 0 if the chosen flags are initialized
     int flags = IMG_INIT_PNG | IMG_INIT_JPG;
@@ -188,7 +188,7 @@ bool SDLSystem::InitIMG() {
         return false;
     }
 
-    INFO("IMG Initialized.");
+    INFO("SDLSystem - IMG Initialized.");
     return true;
 }
 
@@ -197,7 +197,7 @@ bool SDLSystem::InitIMG() {
     @return False if the initialization fails and true if it's succeed.
 */
 bool SDLSystem::InitMixer() {
-    INFO("Initializing Mixer");
+    INFO("SDLSystem - Initializing Mixer");
 
     // Choose frequency, Uint16 format, channels and chunksize
     int initialize = Mix_OpenAudio(frequency, MIX_DEFAULT_FORMAT, channels, chunksize);
@@ -209,7 +209,7 @@ bool SDLSystem::InitMixer() {
         return false;
     }
 
-    INFO("Mixer Initialized.");
+    INFO("SDLSystem - Mixer Initialized.");
     return true;
 }
 
@@ -218,18 +218,18 @@ bool SDLSystem::InitMixer() {
     @return False if the initialization fails and true if it's succeed.
 */
 bool SDLSystem::InitTTF() {
-    INFO("Initializing TTF");
+    INFO("SDLSystem - Initializing TTF");
 
     int initialize = TTF_Init();
 
     // Check TTF initialization fail
     if (initialize != 0) {
         // Display error message
-        SDL_TTF_ERROR("SDLSystem::InitTTF() failed.");
+        SDL_TTF_ERROR("SDLSystem - InitTTF() failed.");
         return false;
     }
 
-    INFO("TTF Initialized.");
+    INFO("SDLSystem - TTF Initialized.");
     return true;
 }
 
@@ -238,7 +238,7 @@ bool SDLSystem::InitTTF() {
     @return False if the window creation fails and true if it's succeed.
 */
 bool SDLSystem::CreateWindow() {
-    INFO("Creating window.");
+    INFO("SDLSystem - Creating window.");
 
     m_window = SDL_CreateWindow(EngineGlobals::window_title.c_str(),
                                 SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
@@ -248,11 +248,11 @@ bool SDLSystem::CreateWindow() {
     // Check window creation fail
     if (!m_window) {
         // Display error message
-        SDL_ERROR("SDLSystem::CreateWindow() failed.");
+        SDL_ERROR("SDLSystem - CreateWindow() failed.");
         return false;
     }
 
-    INFO("Created window successfully.");
+    INFO("SDLSystem - Created window successfully.");
         return true;
 }
 
@@ -261,7 +261,7 @@ bool SDLSystem::CreateWindow() {
     @return False if the renderer creation fails and true if it's succeed.
 */
 bool SDLSystem::CreateRenderer() {
-    INFO("Creating renderer.");
+    INFO("SDLSystem - Creating renderer.");
 
     // Use hardware acceleration with first rendering driver that support it.
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
@@ -269,12 +269,12 @@ bool SDLSystem::CreateRenderer() {
     // Check renderer creation fail
     if (!m_renderer) {
         // Display error message
-        SDL_ERROR("SDLSystem::CreateRenderer() failed.");
+        SDL_ERROR("SDLSystem - CreateRenderer() failed.");
         return false;
     }
 
     SDL_SetRenderDrawBlendMode(m_renderer,SDL_BLENDMODE_BLEND);
-    INFO("Created renderer successfully.");
+    INFO("SDLSystem - Created renderer successfully.");
         return true;
 }
 
@@ -297,6 +297,7 @@ void SDLSystem::CalculateFramerate() {
     @brief Loads necessary game scenes.
 */
 void SDLSystem::LoadCommons() {
+    INFO("SDLSystem - Load common initialized");
     // Instantiate and add multiple scenes to scene manager.
     auto endScene1 = new EndScene1();
     SceneManager::GetInstance()->AddScene(std::make_pair("EndScene1",
@@ -316,6 +317,7 @@ void SDLSystem::LoadCommons() {
     auto firstBossScene = new FirstBossScene();
     SceneManager::GetInstance()->AddScene(std::make_pair("FirstBossScene",
                                                          firstBossScene));
+    INFO("SDLSystem - load commons completed");
 }
 
 /**

@@ -16,7 +16,7 @@ CollisionSystem *CollisionSystem::m_instance = nullptr;
     @brief Constructor for the class CollisionSystem.
 */
 CollisionSystem::CollisionSystem() {
-
+    INFO("CollisionSystem - initialized");
 }
 
 /**
@@ -27,7 +27,10 @@ CollisionSystem *CollisionSystem::GetInstance() {
     // Checks if the collision system was instantiated, if not, instantiates it.
     if (!m_instance) {
         m_instance = new CollisionSystem();
+    } else {
+        // Do nothing
     }
+    
     return m_instance;
 }
 
@@ -89,6 +92,8 @@ void CollisionSystem::PushColliders() {
                 if (element->GetComponentName() == "CircleCollider"
                 || element->GetComponentName() == "RectangleCollider") {
                     m_colliders.push_back((Collider *)element);
+                } else {
+                    // Do nothing
                 }
             }
         }
@@ -110,12 +115,16 @@ void CollisionSystem::CircleCircle(CircleCollider *circle1, CircleCollider *circ
     // Compares the distance of the center of the circle.
     if (circle1->GetCenter().GetDistance(circle2Center) <= circle1->GetRadius() + circle2->GetRadius()){
         collision = true;
+    } else {
+        // Do nothing
     }
 
     // Checks the collision status, and updates it.
     if (collision) {
         circle1->GetOwner()->AddCollision(circle2->GetOwner());
         circle2->GetOwner()->AddCollision(circle1->GetOwner());
+    } else {
+        // Do nothing
     }
 }
 
@@ -140,12 +149,16 @@ void CollisionSystem::RectRect(RectangleCollider *rectangle1, RectangleCollider 
         && ((posR1.m_y + rectangle1->GetHeight()) >= posR2.m_y))
         && (rectangle1->m_owner->active) && (rectangle2->m_owner->active)) {
             collision = true;
+    } else {
+        // Do nothing
     }
 
     // Checks the collision status, and updates it.
     if (collision) {
         rectangle1->GetOwner()->AddCollision(rectangle2->GetOwner());
         rectangle2->GetOwner()->AddCollision(rectangle1->GetOwner());
+    } else {
+        // Do nothing
     }
 }
 
@@ -183,6 +196,8 @@ void CollisionSystem::CircleRect(CircleCollider *circle, RectangleCollider *rect
     if (!((distanceX > (rectangle->GetWidth() / divisor + circle->GetRadius()))
         || (distanceY > (rectangle->GetHeight() / divisor + circle->GetRadius())))){
         //nothing to do.
+    } else {
+        // Do nothing
     }
 
     /*
@@ -197,11 +212,15 @@ void CollisionSystem::CircleRect(CircleCollider *circle, RectangleCollider *rect
         || (((distancex * distancex) + (distancey *distancey))
         <= (circle->GetRadius() *circle->GetRadius()))) {
         collision = true;
+    } else {
+        // Do nothing
     }
 
     // Checks the collision status, and updates it.
     if (collision) {
         circle->GetOwner()->AddCollision(rectangle->GetOwner());
         rectangle->GetOwner()->AddCollision(circle->GetOwner());
+    } else {
+        // Do nothing
     }
 }
