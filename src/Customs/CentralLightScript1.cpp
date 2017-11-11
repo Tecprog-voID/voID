@@ -9,12 +9,16 @@
 /**
     @brief Constructor for the classe CentralLightScript1.
 */
-CentralLightScript1::CentralLightScript1(GameObject *owner) : Script(owner) {}
+CentralLightScript1::CentralLightScript1(GameObject *owner) : Script(owner) {
+    INFO("CentralLightScript1 CentralLightScript1() - initializing");
+    INFO("CentralLightScript1 CentralLightScript1() - completed");
+}
 
 /**
     @brief Sets the initial definitions when starting the animation.
 */
 void CentralLightScript1::Start() {
+    INFO("CentralLightScript1 Start() - initializing");
     // Creates the animations and the animator for the script.
     CreateAnimations();
     m_position = GetOwner()->GetPosition();
@@ -35,12 +39,14 @@ void CentralLightScript1::Start() {
     } else {
         // Do nothing.
     }
+    INFO("CentralLightScript1 Start() - completed");
 }
 
 /**
     @brief Generates the animations on the screen.
 */
 void CentralLightScript1::CreateAnimations() {
+    INFO("CentralLightScript1 CreateAnimations() - initializing");
     // Create the animation.
     auto centrallightSprite = new Image("assets/centro4.png", 0, 0, 832, 64);
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
@@ -53,12 +59,14 @@ void CentralLightScript1::CreateAnimations() {
     centrallightAnimation->SetFramesPerSecond(numberFramesPerSecond);
     centrallightAnimator->AddAnimation("CENTRAL LIGHT ANIMATION",
                                        centrallightAnimation);
+    INFO("CentralLightScript1 CreateAnimations() - completed");
 }
 
 /**
     @brief Handles with changes on the component.
 */
 void CentralLightScript1::ComponentUpdate() {
+    INFO("CentralLightScript1 ComponentUpdate() - initializing");
     // Play the CENTRAL LIGHT ANIMATION if isn't being played and is active.
     if (!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") && m_active) {
         // Play the animation CENTRAL LIGHT ANIMATION
@@ -66,6 +74,9 @@ void CentralLightScript1::ComponentUpdate() {
     } else {
         // Do nothing.
     }
+    INFO("CentralLightScript1 ComponentUpdate() - completed");
 }
 
-void CentralLightScript1::FixedComponentUpdate() {}
+void CentralLightScript1::FixedComponentUpdate() {
+    INFO("CentralLightScript1 FixedComponentUpdate() - completed");
+}
