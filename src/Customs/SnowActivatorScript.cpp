@@ -11,12 +11,16 @@
 /**
     @brief Constructor for the class SnowActivatorScript.
 */
-SnowActivatorScript::SnowActivatorScript(GameObject *owner) : Script(owner) {}
+SnowActivatorScript::SnowActivatorScript(GameObject *owner) : Script(owner) {
+    INFO("SnowActivatorScript SnowActivatorScript() - initializing");
+    INFO("SnowActivatorScript SnowActivatorScript() - completed");
+}
 
 /**
     @brief Sets the SnowActivator first definitions.
 */
 void SnowActivatorScript::Start() {
+    INFO("SnowActivatorScript Start() - initializing");
     // Creates the animations of snow.
     CreateAnimations();
 
@@ -44,12 +48,14 @@ void SnowActivatorScript::Start() {
     } else {
         // Do nothing.
     }
+    INFO("SnowActivatorScript Start() - completed");
 }
 
 /**
     @brief Builds the snow animations.
 */
 void SnowActivatorScript::CreateAnimations() {
+    INFO("SnowActivatorScript CreateAnimations() - initializing");
     // Create the animation for the snow activator.
     auto snowActivatorSprite = new Image("assets/snowactivator.png",
                                          0, 0,832, 64);
@@ -77,13 +83,14 @@ void SnowActivatorScript::CreateAnimations() {
                                         snowActivatorAnimation);
     snowActivatorAnimator->AddAnimation("SNOW ACTIVATOR ANIMATION2",
                                         snowActivatorAnimation2);
-
+    INFO("SnowActivatorScript CreateAnimations() - completed");
 }
 
 /**
     @brief Updates the component's status/ changes during the game.
 */
 void SnowActivatorScript::ComponentUpdate() {
+    INFO("SnowActivatorScript ComponentUpdate() - initializing");
     // Play the SNOW ACTIVATOR ANIMATION if isn't playing and has been activated.
     if (!m_animator->IsPlaying("SNOW ACTIVATOR ANIMATION")
                     && m_activateAnimation == animationActivated
@@ -137,10 +144,12 @@ void SnowActivatorScript::ComponentUpdate() {
     } else {
         // Do nothing.
     }
-
+    INFO("SnowActivatorScript ComponentUpdate() - completed");
 }
 
 /**
     @brief Do nothing.
 */
-void SnowActivatorScript::FixedComponentUpdate() {}
+void SnowActivatorScript::FixedComponentUpdate() {
+    INFO("SnowActivatorScript FixedComponentUpdate() - completed");
+}

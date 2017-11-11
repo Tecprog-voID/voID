@@ -9,12 +9,15 @@
 /**
     @brief Constructor for the classe UnbLogoScript.
 */
-UnbLogoScript::UnbLogoScript(GameObject *owner) : Script(owner) {}
+UnbLogoScript::UnbLogoScript(GameObject *owner) : Script(owner) {
+    INFO("UnbLogoScript UnbLogoScript() - completed");
+}
 
 /**
     @brief Sets the initial definitions when starting the animation.
 */
 void UnbLogoScript::Start() {
+    INFO("UnbLogoScript Start() - initializing");
     // Creates the logo animations.
     CreateAnimations();
     // Get the position and the animator of the logo
@@ -27,13 +30,14 @@ void UnbLogoScript::Start() {
     m_gameController = m_input->GetGameController(gameControllerIndex);
     // Set the zoom of the logo.
     GetOwner()->SetZoomProportion(Vector(0,0));
-
+    INFO("UnbLogoScript Start() - completed");
 }
 
 /**
     @brief Generates the animations on the screen.
 */
 void UnbLogoScript::CreateAnimations() {
+    INFO("UnbLogoScript CreateAnimations() - initializing");
     // Set the animation of the logo.
     auto unb_LogoSprite = new Image("assets/introunb.png", 0, 0, 5115, 512);
     auto unbAnimation = new Animation(GetOwner(), unb_LogoSprite);
@@ -58,12 +62,14 @@ void UnbLogoScript::CreateAnimations() {
     const int numberFramesPerSecond = 9;
     unbAnimation->SetFramesPerSecond(numberFramesPerSecond);
     unbAnimator->AddAnimation("UNB ANIMATION", unbAnimation);
+    INFO("UnbLogoScript CreateAnimations() - completed");
 }
 
 /**
     @brief Handles with changes on the component.
 */
 void UnbLogoScript::ComponentUpdate() {
+    INFO("UnbLogoScript ComponentUpdate() - initializing");
     // Check if the player is using a game controller.
     if (m_gameController) {
         // Check if the button GC_INPUT_X of the controller has been pressed.
@@ -84,7 +90,7 @@ void UnbLogoScript::ComponentUpdate() {
     } else {
         // Do nothing.
     }
-
+    INFO("UnbLogoScript ComponentUpdate() - completed");
 }
 
 /**
@@ -92,6 +98,7 @@ void UnbLogoScript::ComponentUpdate() {
     after 100 seconds.
 */
 void UnbLogoScript::FixedComponentUpdate() {
+    INFO("UnbLogoScript FixedComponentUpdate() - initializing");
     // Time to be added to the timer.
     const float addedTime = 1;
     m_time.Update(addedTime);
@@ -106,4 +113,5 @@ void UnbLogoScript::FixedComponentUpdate() {
     } else {
         // Do nothing.
     }
+    INFO("UnbLogoScript FixedComponentUpdate() - completed");
 }
