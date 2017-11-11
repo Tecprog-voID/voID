@@ -70,13 +70,19 @@ void UnbLogoScript::ComponentUpdate() {
         if (m_gameController->GetButtonDown(GC_INPUT_X)) {
             // Change the scene during the logo presentation.
             SceneManager::GetInstance()->SetCurrentScene("Main");
+        } else {
+            // Do nothing.
         }
+    } else {
+        // Do nothing.
     }
 
     // Check if the key INPUT_RETURN of the keyboard has been pressed.
     if (m_input->GetKeyPressed(INPUT_RETURN)) {
         // Change the scene during the logo presentation.
         SceneManager::GetInstance()->SetCurrentScene("Main");
+    } else {
+        // Do nothing.
     }
 
 }
@@ -97,5 +103,7 @@ void UnbLogoScript::FixedComponentUpdate() {
     // Stop all the animations if the time is bigger than 100 miliseconds.
     if (m_time.GetTime() >= timeLimit) {
         m_animator->StopAllAnimations();
+    } else {
+        // Do nothing.
     }
 }

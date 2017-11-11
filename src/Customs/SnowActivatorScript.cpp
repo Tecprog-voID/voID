@@ -41,6 +41,8 @@ void SnowActivatorScript::Start() {
         GetOwner()->SetZoomProportion(Vector(
                             map->originalWidth / GetOwner()->originalWidth,
                             map->originalHeight / GetOwner()->originalHeight));
+    } else {
+        // Do nothing.
     }
 }
 
@@ -90,6 +92,8 @@ void SnowActivatorScript::ComponentUpdate() {
         m_animator->PlayAnimation("SNOW ACTIVATOR ANIMATION");
         m_activateAnimation = animationEnded;
         m_runnedAnimation = true;
+    } else {
+        // Do nothing.
     }
 
     /*
@@ -100,6 +104,8 @@ void SnowActivatorScript::ComponentUpdate() {
                     && !m_animator->IsPlaying("SNOW ACTIVATOR ANIMATION")) {
         // Play the animation.
         m_animator->PlayAnimation("SNOW ACTIVATOR ANIMATION2");
+    } else {
+        // Do nothing.
     }
     // Check if the snow animation has run.
     if (m_runnedAnimation) {
@@ -128,6 +134,8 @@ void SnowActivatorScript::ComponentUpdate() {
         map->rightWallsOriginal[indexOfWall].m_y = defaultWallsMetricsValues;
         map->rightWallsOriginal[indexOfWall].m_w = defaultWallsMetricsValues;
         map->rightWallsOriginal[indexOfWall].m_h = defaultWallsMetricsValues;
+    } else {
+        // Do nothing.
     }
 
 }
