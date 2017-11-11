@@ -10,13 +10,17 @@
 
 #include "Log/log.hpp"
 
+#include <cassert>
+
 
 /**
     @brief Initializes RectangleCollider instance.
     @param[in] GameObject *owner - owns the component.
     @param[in] C_PHYSICS - physics component.
 */
-Rigidbody::Rigidbody(GameObject *owner) : Component(owner, C_PHYSICS) {}
+Rigidbody::Rigidbody(GameObject *owner) : Component(owner, C_PHYSICS) {
+    assert((owner != NULL) && "the owner must be equal to NULL");
+}
 
 /**
     @brief Updates the position of a fixed component, based on it velocity.
