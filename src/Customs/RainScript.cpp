@@ -52,6 +52,8 @@ void RainScript::ComponentUpdate() {
     if (m_play == startPlay) {
         // Play the rain animation.
         m_animator->PlayAnimation("rainAnimation");
+    } else {
+        // Do nothing.
     }
 
     // Check if the INPUT_R key is pressed and m_play is set to 0.
@@ -64,6 +66,8 @@ void RainScript::ComponentUpdate() {
         // Set m_play to 0 and stop all animations playing.
         m_play = stopPlay;
         m_animator->StopAllAnimations();
+    } else {
+        // Do nothing.
     }
 }
 

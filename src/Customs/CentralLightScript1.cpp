@@ -32,6 +32,8 @@ void CentralLightScript1::Start() {
         // Set the zoom for the map.
         GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->
                originalWidth,map->originalHeight / GetOwner()->originalHeight));
+    } else {
+        // Do nothing.
     }
 }
 
@@ -61,6 +63,8 @@ void CentralLightScript1::ComponentUpdate() {
     if (!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") && m_active) {
         // Play the animation CENTRAL LIGHT ANIMATION
         m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
+    } else {
+        // Do nothing.
     }
 }
 
