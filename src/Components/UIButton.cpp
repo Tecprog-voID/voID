@@ -35,6 +35,8 @@ bool UIButton::IsClicked() {
     if (IsOver() && InputSystem::GetInstance()->GetMouseButtonDown(M_INPUT_LEFT)) {
         INFO("UIButton - the button is clicked");
         return true;
+    } else {
+        // Do nothing
     }
 
     INFO("UIButton - the button is not clicked");
@@ -67,6 +69,8 @@ bool UIButton::IsOver() {
         mousePos.second < m_position->m_y + rendererHeight) {
             INFO("UIButton - mouse is over");
             return true;
+    } else {
+        // Do nothing
     }
 
     INFO("UIButton - mouse is not over");

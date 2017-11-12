@@ -47,12 +47,16 @@ void MapScript::ComponentUpdate() {
     if (input->GetKeyPressed(INPUT_P)) {
         INFO("MapScript - P pressed; camera shaking");
         cameraShake = true;
+    } else {
+        // Do nothing
     }
 
     // If the player presses "Z", the camera is locked.
     if (input->GetKeyPressed(INPUT_Z)) {
         INFO("MapScript - Z pressed; camera locked");
         CameraSystem::GetInstance()->Lock();
+    } else {
+        // Do nothing
     }
 
     // Zooms the camera out when the corresponding keys are pressed.
@@ -62,6 +66,8 @@ void MapScript::ComponentUpdate() {
                                                                                                 ->GetCurrentScene());
         CameraSystem::GetInstance()->ZoomIn(1,nakedMan,SceneManager::GetInstance()->GetCurrentScene());
         CameraSystem::GetInstance()->currentZoom -=25;
+    } else {
+        // Do nothing
     }
 
     // Zooms the camera in when the corresponding keys are pressed.
@@ -71,6 +77,8 @@ void MapScript::ComponentUpdate() {
                                                                                             ->GetCurrentScene());
         CameraSystem::GetInstance()->ZoomOut(1,nakedMan,SceneManager::GetInstance()->GetCurrentScene());
         CameraSystem::GetInstance()->currentZoom +=25;
+    } else {
+        // Do nothing
     }
 }
 
@@ -88,6 +96,8 @@ void MapScript::FixedComponentUpdate() {
     if (nakedManScript->life <= 0) {
         INFO("MapScript - ends scene with endscene1");
         SceneManager::GetInstance()->SetCurrentScene("EndScene1");
+    } else {
+        // Do nothing
     }
 
     INFO("MapScript - rendering first boss life");
@@ -103,6 +113,8 @@ void MapScript::FixedComponentUpdate() {
     if (actualLife <= 0) {
         INFO("MapScript - ends scene with endscene2");
         SceneManager::GetInstance()->SetCurrentScene("EndScene2");
+    } else {
+        // Do nothing
     }
 
     /*
@@ -115,6 +127,8 @@ void MapScript::FixedComponentUpdate() {
                                                                 ->GetCurrentScene());
         if (!CameraSystem::GetInstance()->IsShaking()) {
             cameraShake = false;
+        } else {
+            // Do nothing
         }
     }
 
@@ -967,6 +981,8 @@ int MapScript::DetectWallCollision(GameObject* object){
             playerprevious_vec.m_x = leftWalls[i].m_x - 1 - object->GetWidth();
             playerprevious_vec.m_y = object->GetPosition()->m_y;
             object->SetPosition(playerprevious_vec);
+        } else {
+            // Do nothing
         }
     }
 
@@ -983,6 +999,8 @@ int MapScript::DetectWallCollision(GameObject* object){
                                                                 ->GetComponent("SnowActivatorScript");
                 snowActivatorScript->Activate();
                 return 0;
+            } else {
+                // Do nothing
             }
 
             // central
@@ -993,6 +1011,8 @@ int MapScript::DetectWallCollision(GameObject* object){
                                                                     ->GetComponent("ForestActivatorScript2");
                 forestActivatorScript2->Activate();
                 return 0;
+            } else {
+                // Do nothing
             }
 
             // left
@@ -1003,6 +1023,8 @@ int MapScript::DetectWallCollision(GameObject* object){
                                                                     ->GetComponent("ForestActivatorScript3");
                 forestActivatorScript3->Activate();
                 return 0;
+            } else {
+                // Do nothing
             }
 
             // blue
@@ -1013,6 +1035,8 @@ int MapScript::DetectWallCollision(GameObject* object){
                                                                     ->GetComponent("ForestActivatorScript");
                 forestActivatorScript->Activate();
                 return 0;
+            } else {
+                // Do nothing
             }
 
             Vector playerprevious_vec;
@@ -1020,6 +1044,8 @@ int MapScript::DetectWallCollision(GameObject* object){
             playerprevious_vec.m_y = object->GetPosition()->m_y;
             object->SetPosition(playerprevious_vec);
 
+        } else {
+            // Do nothing
         }
     }
 
@@ -1033,6 +1059,8 @@ int MapScript::DetectWallCollision(GameObject* object){
             playerprevious_vec.m_x = object->GetPosition()->m_x;
             playerprevious_vec.m_y = upWalls[k].m_y - 1 - object->GetHeight();
             object->SetPosition(playerprevious_vec);
+        } else {
+            // Do nothing
         }
     }
 
@@ -1047,6 +1075,8 @@ int MapScript::DetectWallCollision(GameObject* object){
             playerprevious_vec.m_x = object->GetPosition()->m_x;
             playerprevious_vec.m_y = downWalls[l].m_y + downWalls[l].m_h + 1;
             object->SetPosition(playerprevious_vec);
+        } else {
+            // Do nothing
         }
     }
     INFO("MapScript - detected either there are or not character's collisions with walls");
