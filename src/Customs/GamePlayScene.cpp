@@ -6,6 +6,7 @@
 */
 
 #include "Globals/EngineGlobals.hpp"
+#include "Log/log.hpp"
 
 #include "Customs/GamePlayScene.hpp"
 #include "Customs/CutScene1Script.hpp"
@@ -152,7 +153,7 @@ const Uint8 bulletCountermode = 1;
     needed to run the game scene that are defined further down.
 */
 void GamePlayScene::OnActivation() {
-
+    INFO("GamePlayScene - Initializing OnActivation");
     //This must be the first function to be called.
     CreateMap();
     CreateCreditAnimation();
@@ -170,7 +171,7 @@ void GamePlayScene::OnActivation() {
     CreateCentralLights();
     CreateCutScenes();
     FirstBossController::GetInstance()->StartBossFight();
-
+    INFO("GamePlayScene - OnActivation completed");
 }
 
 void GamePlayScene::OnDeactivation() {
@@ -190,25 +191,28 @@ void GamePlayScene::OnHidden() {
     trees and correcting the screen rendering.
 */
 void GamePlayScene::CreateMap() {
-
+    INFO("GamePlayScene - Creating map");
 
     //Original resolution is 2048/2048.
     //6144,6144 = 3x.
     auto m_map = new GameObject("Map", new Vector(vectorMapTreeAxisX, vectorMapTreeAxisY),
-                                gameObjectCreateMapWigth, gameObjectCreateMapHeight, gameObjectCreateMapMapLayer);
+                              gameObjectCreateMapWigth, gameObjectCreateMapHeight,
+                              gameObjectCreateMapMapLayer);
 
     // Renderer the map image.
-    auto m_mapImage = new Image("assets/mapa2.png", imageScenePositionX, 
+    auto m_mapImage = new Image("assets/map.png", imageScenePositionX,
                               imageScenePositionY, imageSceneWidth, imageSceneHeight);
-    //auto mapImage = new Image("assets/transitavel.png", 0, 0, 2678, 2678);
+
     new Renderer(m_map, m_mapImage);
 
 
-    auto m_trees = new GameObject("Tree", new Vector(vectorMapTreeAxisX ,vectorMapTreeAxisY),
-                                gameObjectCreateMapWigth,gameObjectCreateMapHeight,gameObjectCreateMapTreeLayer);
+
+    auto m_trees = new GameObject("Tree", new Vector(vectorMapTreeAxisX, vectorMapTreeAxisY),
+                                gameObjectCreateMapWigth, gameObjectCreateMapHeight,
+                                gameObjectCreateMapTreeLayer);
 
     // Renderer the trees image.
-    auto m_treesImage = new Image("assets/trees.png", imageScenePositionX, 
+    auto m_treesImage = new Image("assets/trees.png", imageScenePositionX,
                                 imageScenePositionY, imageSceneWidth, imageSceneHeight);
 
     new Renderer(m_trees, m_treesImage);
@@ -225,7 +229,7 @@ void GamePlayScene::CreateMap() {
     AudioController::GetInstance()->AddAudio(bossBattleSound);
 
     auto mainSound = new UISound(m_map, "mainSound",
-                                 "assets/Audio/florestafinal.ogg",
+                                 "assets/Audio/forestfinal.ogg",
                                  false, false);
 
     // Add the audio in the scene.
@@ -241,20 +245,21 @@ void GamePlayScene::CreateMap() {
 
     // Add the trees.
     AddGameObject(m_trees);
-
+    INFO("GamePlayScene - Map created");
 }
 
 
 void GamePlayScene::CreateCutScenes() {
-
-    auto scene1 = new GameObject("SCENE1", new Vector(vectorScene1AxisX,vectorScene1AxisY),
-                                 gameObjectScene1Wigth,gameObjectScene1Height,
+    INFO("GamePlayScene - Creating cut scenes");
+    auto scene1 = new GameObject("SCENE1", new Vector(vectorScene1AxisX, vectorScene1AxisY),
+                                 gameObjectScene1Wigth, gameObjectScene1Height,
                                  gameObjectScene1Layer);
 
     auto  scene1Script = new CutScene1Script(scene1);
 
     scene1Script->Activate();
     AddGameObject(scene1);
+    INFO("GamePlayScene - Cut scenes created");
 }
 
 
@@ -262,26 +267,33 @@ void GamePlayScene::CreateCutScenes() {
     @brief Responsible for creating three forest-activating objects.
 */
 void  GamePlayScene::CreateForestActivator() {
+    INFO("GamePlayScene - Creating forest activator");
     //left
     auto m_forestActivator = new GameObject("FOREST ACTIVATOR",
-                                          new Vector(vectorForestActivatorAxisX, vectorForestActivatorAxisY), 
-                                          gameObjectForestActivatorWigth, gameObjectForestActivatorHeight,
+                                          new Vector(vectorForestActivatorAxisX,
+                                          vectorForestActivatorAxisY),
+                                          gameObjectForestActivatorWigth,
+                                          gameObjectForestActivatorHeight,
                                           gameObjectForestActivatorLayer);
     new ForestActivatorScript(m_forestActivator);
     AddGameObject(m_forestActivator);
 
     //blue
     auto m_forestActivator2 = new GameObject("FOREST ACTIVATOR2",
-                                           new Vector(vectorForestActivator2AxisX,vectorForestActivator2AxisY),
-                                           gameObjectForestActivatorWigth, gameObjectForestActivatorHeight,
+                                           new Vector(vectorForestActivator2AxisX,
+                                           vectorForestActivator2AxisY),
+                                           gameObjectForestActivatorWigth,
+                                           gameObjectForestActivatorHeight,
                                            gameObjectForestActivatorLayer);
     new ForestActivatorScript2(m_forestActivator2);
     AddGameObject(m_forestActivator2);
 
     //central
     auto m_forestActivator3 = new GameObject("FOREST ACTIVATOR3",
-                                           new Vector(vectorForestActivator3AxisX, vectorForestActivator3AxisY),
-                                           gameObjectForestActivatorWigth, gameObjectForestActivatorHeight,
+                                           new Vector(vectorForestActivator3AxisX,
+                                           vectorForestActivator3AxisY),
+                                           gameObjectForestActivatorWigth,
+                                           gameObjectForestActivatorHeight,
                                            gameObjectForestActivatorLayer);
     new ForestActivatorScript3(m_forestActivator3);
     AddGameObject(m_forestActivator3);
@@ -293,7 +305,7 @@ void  GamePlayScene::CreateForestActivator() {
     the end it sends to the class that treats the objects of the game.
 */
 void GamePlayScene::CreateSnowActivator(){
-
+    INFO("GamePlayScene - Creating snow activator");
     auto m_snowActivator = new GameObject("SNOW ACTIVATOR",
                                         new Vector(vectorSnowActivatorAxisX,vectorSnowActivatorAxisY),
                                         gameObjectSnowActivatorWigth,gameObjectSnowActivatorHeight,
@@ -301,7 +313,7 @@ void GamePlayScene::CreateSnowActivator(){
 
     new SnowActivatorScript(m_snowActivator);
     AddGameObject(m_snowActivator);
-
+    INFO("GamePlayScene - Snow activator created");
 }
 
 /**
@@ -309,26 +321,32 @@ void GamePlayScene::CreateSnowActivator(){
     the end it sends to the class that treats the objects of the game.
 */
 void GamePlayScene::CreateCentralLights(){
-
+    INFO("GamePlayScene - Creating central lights");
     auto m_bottomCenterLight = new GameObject("CENTRAL LIGHT 1",
-                                           new Vector(vectorBottomCenterLightAxisX,vectorBottomCentralLightAxisY),
-                                           gameObjectCenterLightWigth,gameObjectCenterLightHeight,
+                                           new Vector(vectorBottomCenterLightAxisX,
+                                           vectorBottomCentralLightAxisY),
+                                           gameObjectCenterLightWigth,
+                                           gameObjectCenterLightHeight,
                                            gameObjectCenterLightLayer);
 
     new CentralLightScript1(m_bottomCenterLight);
     AddGameObject(m_bottomCenterLight);
 
     auto m_leftCenterLight = new GameObject("CENTRAL LIGHT 2",
-                                           new Vector(vectorLeftCenterLightAxisX,vectorLeftCentralLightAxisY),
-                                           gameObjectCenterLightWigth, gameObjectCenterLightHeight,
+                                           new Vector(vectorLeftCenterLightAxisX,
+                                           vectorLeftCentralLightAxisY),
+                                           gameObjectCenterLightWigth,
+                                           gameObjectCenterLightHeight,
                                            gameObjectCenterLightLayer);
 
     new LeftCenterLightScript(m_leftCenterLight);
     AddGameObject(m_leftCenterLight);
 
     auto m_rightCenterLight = new GameObject("CENTRAL LIGHT 2",
-                                           new Vector(vectorRightCenterLightAxisX,vectorRightCentralLightAxisY),
-                                           gameObjectCenterLightWigth, gameObjectCenterLightHeight,
+                                           new Vector(vectorRightCenterLightAxisX,
+                                           vectorRightCentralLightAxisY),
+                                           gameObjectCenterLightWigth,
+                                           gameObjectCenterLightHeight,
                                            gameObjectCenterLightLayer);
 
     new CentralLightScript3(m_rightCenterLight);
@@ -341,17 +359,18 @@ void GamePlayScene::CreateCentralLights(){
 
     new TopCenterLightScript(m_topCenterLight);
     AddGameObject(m_topCenterLight);
+    INFO("GamePlayScene - Central lights created");
 }
 
 void GamePlayScene::CreateNakedMan() {
-
+    INFO("GamePlayScene - Creating naked man");
     int positionX = 0;
     int positionY = 0;
     positionX = EngineGlobals::screen_width / 2 - gameObjectNackedManWigth / 2;
     positionY = EngineGlobals::screen_height / 2 - gameObjectNackedManHeight / 2;
 
     auto m_nakedMan = new GameObject("NakedMan", new Vector(positionX,positionY),
-                                    gameObjectNackedManWigth , gameObjectNackedManHeight, 
+                                    gameObjectNackedManWigth , gameObjectNackedManHeight,
                                     gameObjectNackedManLayer);
 
     // Script.
@@ -364,7 +383,7 @@ void GamePlayScene::CreateNakedMan() {
 
     AddGameObject(m_nakedMan);
     FirstBossController::GetInstance()->AddPlayer(m_nakedMan);
-
+    INFO("GamePlayScene - Naked man created");
 }
 
 /**
@@ -373,10 +392,13 @@ void GamePlayScene::CreateNakedMan() {
     effect he will have when he is found.
 */
 void GamePlayScene::CreateFirstBoss() {
+    INFO("GamePlayScene - Creating first boss");
     // Boss Inside FX
     auto m_firstBossCentralEffect = new GameObject("FirstBossCentralEffect",
-                                                 new Vector(vectorFirstBossEffectAxisX, vectorFirstBossEffectAxisY),
-                                                 gameObjectFirstBossEffectWigth, gameObjectFirstBossEffectHeight, 
+                                                 new Vector(vectorFirstBossEffectAxisX,
+                                                 vectorFirstBossEffectAxisY),
+                                                 gameObjectFirstBossEffectWigth,
+                                                 gameObjectFirstBossEffectHeight,
                                                  gameObjectFirstBossEffectLayer);
 
     new FirstBossCentralEffectScript(m_firstBossCentralEffect);
@@ -386,8 +408,9 @@ void GamePlayScene::CreateFirstBoss() {
     FirstBossController::GetInstance()->DeactivateInsideBossFx();
 
     // Boss.
-    auto firstBoss = new GameObject("FirstBoss", new Vector(vectorFirstBossAxisX, vectorFirstBossAxisY),
-                                    gameObjectFirstBossWigth, gameObjectFirstBossHeight, gameObjectFirstBossLayer);
+    auto firstBoss = new GameObject("FirstBoss", new Vector(vectorFirstBossAxisX,
+                                    vectorFirstBossAxisY), gameObjectFirstBossWigth,
+                                    gameObjectFirstBossHeight, gameObjectFirstBossLayer);
 
     // Tag.
     firstBoss->SetTag("FirstBoss");
@@ -398,6 +421,7 @@ void GamePlayScene::CreateFirstBoss() {
 
     FirstBossController::GetInstance()->AddBoss(firstBoss);
     FirstBossController::GetInstance()->DeactivateBoss();
+    INFO("GamePlayScene - First boss created");
 }
 
 /**
@@ -406,16 +430,17 @@ void GamePlayScene::CreateFirstBoss() {
     the cries of the first three attacks.
 */
 void GamePlayScene::CreateFirstBossAttack() {
-
+    INFO("GamePlayScene - Creating first boss attack");
     // Create the tentacle of boss attack and the effects.
     for (int i = 1; i < maxTentacle; i++) {
 
         std::string tentacleName = "FirstBossAttack" + std::to_string(i);
-
         auto m_firstBossAttack = new GameObject(tentacleName,
-                                              new Vector(vectorFirstBossAttackAxisX, vectorFirstBossAttackAxisY),
-                                               gameObjectFirstBossAttackWigth, gameObjectFirstBossAttackHeight,
-                                               gameObjectFirstBossAttackLayer);
+                                              new Vector(vectorFirstBossAttackAxisX,
+                                              vectorFirstBossAttackAxisY),
+                                              gameObjectFirstBossAttackWigth,
+                                              gameObjectFirstBossAttackHeight,
+                                              gameObjectFirstBossAttackLayer);
         // Tag.
         m_firstBossAttack->SetTag("FirstBossAtack");
 
@@ -424,17 +449,17 @@ void GamePlayScene::CreateFirstBossAttack() {
 
         //Sounds.
         auto firstAttackSound = new UISound(m_firstBossAttack, "firstAttackSound",
-                                            "assets/Audio/Boss/grito1.ogg",
+                                            "assets/Audio/Boss/shout1.ogg",
                                             false, false);
         AudioController::GetInstance()->AddAudio(firstAttackSound);
 
         auto secondAttackSound = new UISound(m_firstBossAttack, "secondAttackSound",
-                                            "assets/Audio/Boss/grito2.ogg",
+                                            "assets/Audio/Boss/shout2.ogg",
                                             false, false);
         AudioController::GetInstance()->AddAudio(secondAttackSound);
 
         auto thirdAttackSound = new UISound(m_firstBossAttack, "thirdAttackSound",
-                                            "assets/Audio/Boss/grito3.ogg",
+                                            "assets/Audio/Boss/shout3.ogg",
                                             false, false);
         AudioController::GetInstance()->AddAudio(thirdAttackSound);
 
@@ -449,6 +474,7 @@ void GamePlayScene::CreateFirstBossAttack() {
         FirstBossController::GetInstance()->AddTentacle(m_firstBossAttack);
 
     } // for -- Create the tentacle of boss attack and the effects.
+    INFO("GamePlayScene - First boss attack created");
 }
 
 /**
@@ -456,12 +482,12 @@ void GamePlayScene::CreateFirstBossAttack() {
     life bar and sending it to the class that creates the game objects.
 */
 void GamePlayScene::CreateFirstBossLife() {
-
+    INFO("GamePlayScene - Creating first boss life");
     // Life Border.
     auto m_firstBossLifeBorderSprite = new GameObject("FirstBossBorderLife",
-                                                    new Vector(vectorFirstBossLifeBorderAxisX, 
+                                                    new Vector(vectorFirstBossLifeBorderAxisX,
                                                     vectorFirstBossLifeBorderAxisY),
-                                                    gameObjectFirstBossLifeBorderWigth, 
+                                                    gameObjectFirstBossLifeBorderWigth,
                                                     gameObjectFirstBossLifeBorderHeight,
                                                     gameObjectFirstBossLifeBorderLayer);
 
@@ -474,15 +500,15 @@ void GamePlayScene::CreateFirstBossLife() {
                                         new Vector(vectorFirstBossLifeAxisX, vectorFirstBossLifeAxisY),
                                         gameObjectFirstBossLifeWigth, gameObjectFirstBossLifeHeight,
                                         gameObjectFirstBossLifeLayer);
-    
-    auto lifeRectangle = new RectangleRenderer(m_firstBossLife, Vector(vectorFisrtBossRectangleRenderAxisX, 
+
+    auto lifeRectangle = new RectangleRenderer(m_firstBossLife, Vector(vectorFisrtBossRectangleRenderAxisX,
                                                 vectorFisrtBossRectangleRenderAxisY),
                                                 fisrtBossRectangleRenderWidth, fisrtBossRectangleRenderHeight);
 
     lifeRectangle->SetColor(rectangleRenderRed, rectangleRenderGreen, rectangleRenderBlue, rectangleRenderAlpha);
 
     new  FirstBossLifeScript(m_firstBossLife);
-    
+
     AddGameObject(m_firstBossLife);
 
     // Add to controller
@@ -490,6 +516,7 @@ void GamePlayScene::CreateFirstBossLife() {
 
     // Desable all life bars
     FirstBossController::GetInstance()->DeactivateLifeBars();
+    INFO("GamePlayScene - First boss life created");
 }
 
 /**
@@ -497,12 +524,13 @@ void GamePlayScene::CreateFirstBossLife() {
     the player launches against the boss.
 */
 void GamePlayScene::CreatePlayerAttack() {
-
+    INFO("GamePlayScene - Creating player attack");
     // Creating Bullets
     for (int i = 1; i < maxBullet; i++) {
         std::string bulletName = "Bullet" + std::to_string(i);
-        auto m_bullet = new GameObject(bulletName, new Vector(vectorBulletNameAxisX * i, vectorBulletNameAxisY),
-                                     gameObjectBulletNameWigth, gameObjectBulletNameHeight, gameObjectBulletNameLayer);
+        auto m_bullet = new GameObject(bulletName, new Vector(vectorBulletNameAxisX * i,
+                                     vectorBulletNameAxisY), gameObjectBulletNameWigth,
+                                     gameObjectBulletNameHeight, gameObjectBulletNameLayer);
 
         m_bullet->SetTag("Bullet");
         new  PlayerAttackScript(m_bullet);
@@ -518,16 +546,19 @@ void GamePlayScene::CreatePlayerAttack() {
     }
 
     // Bullet Counter
-    auto bulletCounter = new GameObject("Score", new Vector(vectorBulletCounterAxisX, vectorBulletCounterAxisY),
-                                        gameObjectBulletCounterWigth , gameObjectBulletCounterHeight, gameObjectBulletCounterLayer);
+    auto bulletCounter = new GameObject("Score", new Vector(vectorBulletCounterAxisX,
+                                        vectorBulletCounterAxisY), gameObjectBulletCounterWigth,
+                                        gameObjectBulletCounterHeight, gameObjectBulletCounterLayer);
     bulletCounter->SetTag("BulletCounter");
     new UIText(bulletCounter, bulletCounterMessage,
                                  "assets/Fonts/advanced-pixel-7/advanced_pixel-7.ttf",
-                                  bulletCounterSize, bulletCounterRed , bulletCounterGreen, bulletCounterBlue,
+                                  bulletCounterSize, bulletCounterRed,
+                                  bulletCounterGreen, bulletCounterBlue,
                                   bulletCounterAlpha, bulletCountermode);
 
     new BulletCounterScript(bulletCounter);
     AddGameObject(bulletCounter);
+    INFO("GamePlayScene - Player attack created");
 }
 
 /**
@@ -535,69 +566,74 @@ void GamePlayScene::CreatePlayerAttack() {
     raindrops and the sound effect of rain.
 */
 void GamePlayScene::CreateRain() {
-
-    auto rain = new GameObject("Rain", new Vector(0,0),1024,800,1);
+    INFO("GamePlayScene - Creating rain");
+    auto rain = new GameObject("Rain", new Vector(0, 0), 1024, 800, 1);
     new RainScript(rain);
     auto rainSound = new UISound(rain, "rainSound",
-                                 "assets/Audio/Boss/chuva.ogg",
+                                 "assets/Audio/Boss/rain.ogg",
                                  false, false);
     AudioController::GetInstance()->AddAudio(rainSound);
     AddGameObject(rain);
+    INFO("GamePlayScene - Rain created");
 }
 
 /**
     @brief Responsible for creating the hit object, which is the game's music.
 */
 void GamePlayScene::CreatePlayerHit() {
-
-    auto hit = new GameObject("Hit", new Vector(0,0),1024,800,1);
+    INFO("GamePlayScene - Creating player hit");
+    auto hit = new GameObject("Hit", new Vector(0, 0), 1024, 800, 1);
 
     new HitScript(hit);
     AddGameObject(hit);
+    INFO("GamePlayScene - Player hit created");
 }
 
 /**
     @grief Responsible for creating the visual effects of thunder.
 */
 void GamePlayScene::CreateThunder() {
-
-    auto thunder = new GameObject("Rain", new Vector(200,0),113,267,1);
+    INFO("GamePlayScene - Creating thunder");
+    auto thunder = new GameObject("Rain", new Vector(200, 0), 113, 267, 1);
     new ThunderScript(thunder);
     AddGameObject(thunder);
+    INFO("GamePlayScene - Thunder created");
 }
 
 /**
     @grief Responsible for creating the visual effects of snow and the effect.
 */
 void GamePlayScene::CreateSnow(){
-
-    auto snow = new GameObject("Snow", new Vector(0,0),1024,800,1);
+    INFO("GamePlayScene - Creating snow");
+    auto snow = new GameObject("Snow", new Vector(0, 0), 1024, 800, 1);
     new SnowScript(snow);
     auto snowSound = new UISound(snow, "snowSound",
                                 "assets/Audio/Clima/winteriscomming.ogg",
                                 false, false);
     AudioController::GetInstance()->AddAudio(snowSound);
     AddGameObject(snow);
+    INFO("GamePlayScene - Snow created");
 }
 
 /**
     @grief Responsible for creating the visual effect of light.
 */
 void GamePlayScene::CreateLight() {
-
-    auto light = new GameObject("Light", new Vector(0,0),2*1024,2*800,2);
+    INFO("GamePlayScene - Creating light");
+    auto light = new GameObject("Light", new Vector(0, 0),2 * 1024, 2 * 800, 2);
     new LightScript(light);
     AddGameObject(light);
+    INFO("GamePlayScene - Light created");
 }
 
 /**
     @grief Creates the visual effect of game credits.
 */
 void GamePlayScene::CreateCreditAnimation() {
-
+    INFO("GamePlayScene - Creating credit animation");
     /** Credits Animation **/
     auto creditAnimation = new GameObject("CreditAnimation",
-                                          new Vector(0, 0),1200, 800, 3);
+                                          new Vector(0, 0), 1200, 800, 3);
 
     auto creditRectangle = new RectangleRenderer(creditAnimation,
                                                  Vector(0, 0), 1200, 800);
@@ -606,6 +642,7 @@ void GamePlayScene::CreateCreditAnimation() {
     AddGameObject(creditAnimation);
     FirstBossController::GetInstance()->AddCreditsAnimation(creditAnimation);
     FirstBossController::GetInstance()->DeactivateCreditsAnimation();
+    INFO("GamePlayScene - Credit animation created");
 }
 
 /**

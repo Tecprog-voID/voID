@@ -20,7 +20,9 @@ Animation::Animation(GameObject *owner, Image *image, bool playOnStart)
                     : Component(owner, C_DRAW) {
     // Image validation.
     if (!image) {
-        ERROR("Null image not allowed");
+        ERROR("Animation - Null image not allowed");
+    } else {
+        // Nothing to do
     }
     m_image = image;
     m_isPlaying = playOnStart;
@@ -32,13 +34,14 @@ Animation::Animation(GameObject *owner, Image *image, bool playOnStart)
     already running it sends to the SetPlaying method the release to start.
 */
 void Animation::Start() {
-
+    INFO("Animation - Initializing");
     // Checks if gamer is playing.
     if (!m_isPlaying) {
         SetPlaying(false);
     } else {
         SetPlaying(true);
     }
+    INFO("Animation - Completed");
 }
 
 
@@ -62,7 +65,7 @@ void Animation::SetPlaying(bool condition) {
     if (m_isPlaying == condition) {
         return;
     } else {
-        //nothing to do.
+        // Nothing to do
     }
 
     // Checks if condition variable is true.
@@ -70,7 +73,7 @@ void Animation::SetPlaying(bool condition) {
         if (auto comp = GetOwner()->GetComponent("Renderer")) {
             comp->m_active = false;
         } else {
-            //nothing to do.
+            // Nothing to do
         }
     } else {
         if (m_hasExitTime && m_currentFrame != m_framesQuantity - 1) {
@@ -79,7 +82,7 @@ void Animation::SetPlaying(bool condition) {
             if (auto comp = GetOwner()->GetComponent("Renderer")) {
                 comp->m_active = true;
             } else {
-                //nothing to do.
+                // Nothing to do
             }
         }
     } // else -- condition variable.
@@ -94,9 +97,9 @@ void Animation::SetPlaying(bool condition) {
 */
 void Animation::AddFrame(Frame *frame) {
     if (!frame) {
-        ERROR("Null frame pointer");
+        ERROR("Animation - Null frame pointer");
     } else {
-        //nothing to do.
+        // Nothing to do
     }
 
     m_frames.push_back(frame);
@@ -112,10 +115,10 @@ void Animation::ComponentUpdate() {
         if (!m_loop && m_currentFrame == m_framesQuantity - 1) {
             SetPlaying(false);
         } else {
-            //nothing to do.
+            // Nothing to do
         }
     } else {
-        //nothing to do.
+        // Nothing to do
     }
 }
 

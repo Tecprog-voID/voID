@@ -1,18 +1,19 @@
 /**
-    @file nowScript.cpp
+    @file SnowScript.cpp
     @brief This class contains all attributes and methods that manages the
     snow in the game.
     @copyright LGPL. MIT License.
 */
 
 #include "Customs/SnowScript.hpp"
+#include "Log/log.hpp"
 
 // Start snow script, zoom proportion
 const float vectorZoomProportionAxisX = 0;
 const float vectorZoomProportionAxisY = 0;
 
 // Image snow script
-const std::string snowImagePath = "assets/neve.png";
+const std::string snowImagePath = "assets/snow.png";
 const int snowImagePositionX = 0;
 const int snowImagePositionY = 0;
 const int snowImageWidth = 6820;
@@ -41,7 +42,7 @@ SnowScript::SnowScript(GameObject *owner) : Script(owner) {
     @brief Start the snow animation by setting the starting position.
 */
 void SnowScript::Start() {
-
+    INFO("SnowScript - Initializing");
     // Creates the animations.
     CreateAnimations();
 
@@ -51,14 +52,16 @@ void SnowScript::Start() {
     // Get the animator.
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
-    GetOwner()->SetZoomProportion(Vector(vectorZoomProportionAxisX, vectorZoomProportionAxisY));
+    GetOwner()->SetZoomProportion(Vector(vectorZoomProportionAxisX,
+                                         vectorZoomProportionAxisY));
+    INFO("SnowScript - Completed");
 }
 
 /**
     @brief Create the snow animation by setting the frames of snow.
 */
 void SnowScript::CreateAnimations() {
-
+    INFO("SnowScript - Creating animations");
     // Creates the show image.
     auto snowImage = new Image(snowImagePath, snowImagePositionX, snowImagePositionY,
                                snowImageWidth, snowImageHeight);
@@ -68,13 +71,15 @@ void SnowScript::CreateAnimations() {
 
     // Create the animations by adding the snowflakes in the frames.
     for (int i = 0; i < maxSnowFlakes; i++) {
-        snowAnimation->AddFrame(new Frame(i * snowAnimationPositionAxisX, snowAnimationPositionAxisY,
-                                 snowAnimationWigth, snowAnimationHeight));
+        snowAnimation->AddFrame(new Frame(i * snowAnimationPositionAxisX,
+                                snowAnimationPositionAxisY, snowAnimationWigth,
+                                snowAnimationHeight));
     } // for -- Create the animations snow.
 
     // Creates the animator.
     auto weatherAnimator = new Animator(GetOwner());
     weatherAnimator->AddAnimation("snowAnimation", snowAnimation);
+    INFO("SnowScript - Animations created");
 }
 
 /**
@@ -85,6 +90,8 @@ void SnowScript::ComponentUpdate() {
     // Start the snow animation.
     if (play == 1) {
         animator->PlayAnimation("snowAnimation");
+    } else {
+        // Nothing to do
     }
 
     // Update the play variable and the sound effect.
@@ -95,6 +102,8 @@ void SnowScript::ComponentUpdate() {
         play = 0;
         AudioController::GetInstance()->StopAudio("snowSound");
         animator->StopAllAnimations();
+    } else {
+        // Nothing to do
     }
 }
 

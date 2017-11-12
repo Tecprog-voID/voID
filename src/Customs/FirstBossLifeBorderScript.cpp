@@ -6,6 +6,7 @@
 */
 
 #include "Customs/FirstBossLifeBorderScript.hpp"
+#include "Log/log.hpp"
 
 const float vectorAxisX = 0;
 const float vectorAxisY = 0;
@@ -30,7 +31,7 @@ const int maxRow = 3;
 FirstBossLifeBorderScript::FirstBossLifeBorderScript(GameObject *owner) :
     Script(owner) {
 
-    }
+}
 
 
 /**
@@ -45,10 +46,11 @@ void FirstBossLifeBorderScript::Start() {
     input = InputSystem::GetInstance();
     position = GetOwner()->GetPosition();
     GetOwner()->SetZoomProportion(Vector(vectorAxisX, vectorAxisY));
-    firstBossAttackCollider = new RectangleCollider(GetOwner(), Vector(vectorAxisX, vectorAxisY),
-                                                  GetOwner()->GetWidth(),
-                                                  GetOwner()->GetHeight(), 0);
-    INFO("FirstBossLifeBorderScript - Initialized");
+    firstBossAttackCollider = new RectangleCollider(GetOwner(), Vector(vectorAxisX,
+                                                    vectorAxisY),
+                                                    GetOwner()->GetWidth(),
+                                                    GetOwner()->GetHeight(), 0);
+    INFO("FirstBossLifeBorderScript - Completed");
 }
 
 /**
@@ -56,28 +58,29 @@ void FirstBossLifeBorderScript::Start() {
 */
 void FirstBossLifeBorderScript::CreateAnimations() {
     INFO("FirstBossLifeBorderScript - Creating animations");
-
     // Creates the image.
-    auto firstBossLifeBorderImage = new Image("assets/boss_life_bar.png",imageBorderPositionX,
-                                              imageBorderPositionY, imageBorderWidth, imageBorderHeight);
+    auto firstBossLifeBorderImage = new Image("assets/boss_life_bar.png",
+                                              imageBorderPositionX,
+                                              imageBorderPositionY,
+                                              imageBorderWidth, imageBorderHeight);
 
     // Creates the animation
     auto firstBossLifeBorderAnimation = new Animation(GetOwner(),
-                                        firstBossLifeBorderImage );
+                                                      firstBossLifeBorderImage );
     // Creates the boss's life bar
     for (int column = 0; column < maxColumn; column++) {
         for (int row = 0 ; row < maxRow ; row++) {
             firstBossLifeBorderAnimation->AddFrame(new Frame(row * frameBorderPositionX,
-                                                       column * frameBorderPositionY, frameBorderWidth, frameBorderHeight));
+                                                   column * frameBorderPositionY,
+                                                   frameBorderWidth, frameBorderHeight));
+        }
     }
-  }
 
 
     // Creates and add the animator.
     auto firstBossLifeBorderAnimator = new Animator(GetOwner());
     firstBossLifeBorderAnimator->AddAnimation("firstBossLifeBorderAnimation",
                                                 firstBossLifeBorderAnimation);
-
     INFO("FirstBossLifeBorderScript - Animations created");
 }
 
