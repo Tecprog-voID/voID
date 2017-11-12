@@ -8,12 +8,15 @@
 /**
     @brief Constructor for the class FirstBossScript.
 */
-FirstBossScript::FirstBossScript(GameObject *owner) : Script(owner) {}
+FirstBossScript::FirstBossScript(GameObject *owner) : Script(owner) {
+    INFO("FirstBossScript FirstBossScript() - completed");
+}
 
 /**
     @brief Starts the script of the first boss of the game.
 */
 void FirstBossScript::Start() {
+    INFO("FirstBossScript Start() - initializing");
     // Create the animations of the first boss
     CreateAnimations();
 
@@ -35,7 +38,10 @@ void FirstBossScript::Start() {
                                                   Vector(0, 0),
                                                   GetOwner()->GetWidth(),
                                                   GetOwner()->GetHeight(), 0);
+    } else {
+        // Do nothing.
     }
+    INFO("FirstBossScript Start() - completed");
 }
 
 /**
@@ -43,6 +49,7 @@ void FirstBossScript::Start() {
     game.
 */
 void FirstBossScript::CreateAnimations() {
+    INFO("FirstBossScript CreateAnimations() - initializing");
     // Get images from the first boss.
     auto firstBossImage = new Image("assets/boss1.png",0,0,1896, 324);
     auto firstBossJumpImage = new Image("assets/boss1_jump.png",0,0,1180, 406);
@@ -79,6 +86,8 @@ void FirstBossScript::CreateAnimations() {
                 firstBossJumpAnimation->AddFrame(new Frame(i * 236,0, 236,
                                                            406));
             }
+        } else {
+            // Do nothing.
         }
     }
 
@@ -97,12 +106,14 @@ void FirstBossScript::CreateAnimations() {
                                     firstBossJumpAnimation);
     firstBossAnimator->AddAnimation("firstBossFallAnimation",
                                     firstBossFallAnimation);
+    INFO("FirstBossScript CreateAnimations() - completed");
 }
 
 /**
     @brief Decides what happens to the boss depending on the game's circumstances.
 */
 void FirstBossScript::ComponentUpdate() {
+    INFO("FirstBossScript ComponentUpdate() - initializing");
     /*
     Play the firstBossAnimation animation if isn't the second attack and the
     second attack doesn't fall.
@@ -110,6 +121,8 @@ void FirstBossScript::ComponentUpdate() {
     if (!m_secondAttack && !m_secondAttackFall) {
         //Idle animation
         m_animator->PlayAnimation("firstBossAnimation");
+    } else {
+        // Do nothing.
     }
 
     /*
@@ -119,31 +132,43 @@ void FirstBossScript::ComponentUpdate() {
     if (m_input->GetKeyPressed(INPUT_N)) {
         m_secondAttack = true;
         m_animator->PlayAnimation("firstBossJumpAnimation");
+    } else {
+        // Do nothing.
     }
+    INFO("FirstBossScript ComponentUpdate() - completed");
 }
 
 /**
     @brief Handles with the boss behavior depending on which attack is being shot.
 */
 void FirstBossScript::FixedComponentUpdate() {
+    INFO("FirstBossScript FixedComponentUpdate() - initializing");
     // If is the first attack, update the timer of the first attack cooldown.
     if (m_firstAttack) {
         m_timerFirstAttackCooldown.Update(EngineGlobals::fixed_update_interval);
+    } else {
+        // Do nothing.
     }
 
     // If the first attack has gone, update the timer of the first attack gone.
     if (m_goneFirstAttack) {
         m_timerFirstAttackGone.Update(EngineGlobals::fixed_update_interval);
+    } else {
+        // Do nothing.
     }
 
     // If is the second attack, update the timer of the second attack.
     if (m_secondAttack) {
         m_timerSecondAttack.Update(EngineGlobals::fixed_update_interval);
+    } else {
+        // Do nothing.
     }
 
     // If is the second attack fall, update the timer of the second attack fall.
     if (m_secondAttackFall) {
         m_timerSecondAttackFall.Update(EngineGlobals::fixed_update_interval);
+    } else {
+        // Do nothing.
     }
 
     // Update the timer of the cooldown of the attacks.
@@ -158,8 +183,13 @@ void FirstBossScript::FixedComponentUpdate() {
                                 SceneManager::GetInstance()->GetCurrentScene());
         if (!CameraSystem::GetInstance()->IsShaking()) {
             m_cameraShake = false;
+        } else {
+            // Do nothing.
         }
+    } else {
+        // Do nothing.
     }
+    INFO("FirstBossScript FixedComponentUpdate() - completed");
 }
 
 /**
@@ -167,6 +197,7 @@ void FirstBossScript::FixedComponentUpdate() {
     happen, etc.
 */
 void FirstBossScript::Attack() {
+    INFO("FirstBossScript Attack() - initializing");
     // Check if the game object is active to start the attack.
     if (GetOwner()->active) {
         // Cooldown time between all attacks.
@@ -177,6 +208,8 @@ void FirstBossScript::Attack() {
             m_randomNumber = rand() % 2;
             m_timerAttackCooldown.Restart();
             cout << m_randomNumber << endl;
+        } else {
+            // Do nothing.
         }
 
         // Default number for the second attack.
@@ -189,6 +222,8 @@ void FirstBossScript::Attack() {
                         && m_secondAttackFall == false) {
             m_secondAttack = true;
             m_animator->PlayAnimation("firstBossJumpAnimation");
+        } else {
+            // Do nothing.
         }
 
         // Default number for the first attack.
@@ -212,11 +247,15 @@ void FirstBossScript::Attack() {
                 m_timerFirstAttackCooldown.Restart();
                 m_firstAttackCounter++;
                 // Delay for next sord
+            } else {
+            // Do nothing.
             }
             // If is the fourth first attack, set the first attack as gone.
             if (m_firstAttackCounter == maxFirstAttackCounter) {
                 // Activate timer to gone tentacle
                 m_goneFirstAttack = true;
+            } else {
+                // Do nothing.
             }
 
             // Wait 2 seconds to make attack gone
@@ -229,7 +268,11 @@ void FirstBossScript::Attack() {
                 m_timerFirstAttackGone.Restart();
                 m_timerFirstAttackCooldown.Restart();
                 m_randomNumber = defaultRandomNumber;
+            } else {
+                // Do nothing.
             }
+        } else {
+            // Do nothing.
         }
 
         // Max time for the second attack.
@@ -248,6 +291,8 @@ void FirstBossScript::Attack() {
                 m_secondAttackFall = true;
                 m_timerSecondAttack.Restart();
             }
+        } else {
+            // Do nothing.
         }
 
         // Time before the second attack fall.
@@ -280,6 +325,9 @@ void FirstBossScript::Attack() {
                 m_cameraShake = false;
                 m_randomNumber = defaultRandomNumber;
             }
+        } else {
+            // Do nothing.
         }
     }
+    INFO("FirstBossScript Attack() - completed");
 }

@@ -9,12 +9,15 @@
 /**
     @brief Constructor for the class RainScript.
 */
-RainScript::RainScript(GameObject *owner) : Script(owner) {}
+RainScript::RainScript(GameObject *owner) : Script(owner) {
+    INFO("RainScript RainScript() - completed");
+}
 
 /**
     @brief Sets the RainScript first definitions.
 */
 void RainScript::Start() {
+    INFO("RainScript Start() - initializing");
     // Create the animations and the animator for the rain script.
     CreateAnimations();
     m_position = GetOwner()->GetPosition();
@@ -23,12 +26,14 @@ void RainScript::Start() {
     m_input = InputSystem::GetInstance();
     // Set the zoom proportion.
     GetOwner()->SetZoomProportion(Vector(0,0));
+    INFO("RainScript Start() - completed");
 }
 
 /**
     @brief Builds the rain animations.
 */
 void RainScript::CreateAnimations() {
+    INFO("RainScript CreateAnimations() - initializing");
     // Creates the animations for the rain script.
     auto rainImage = new Image("assets/chuva.png",0,0,3410, 256);
     auto rainAnimation= new Animation(GetOwner(),rainImage);
@@ -42,16 +47,20 @@ void RainScript::CreateAnimations() {
     // Creates the animator for the rain script.
     auto weatherAnimator = new Animator(GetOwner());
     weatherAnimator->AddAnimation("rainAnimation", rainAnimation);
+    INFO("RainScript CreateAnimations() - completed");
 }
 
 /**
     @brief Updates the component's status/ changes during the game.
 */
 void RainScript::ComponentUpdate() {
+    INFO("RainScript ComponentUpdate() - initializing");
     // Check if the animation must be played.
     if (m_play == startPlay) {
         // Play the rain animation.
         m_animator->PlayAnimation("rainAnimation");
+    } else {
+        // Do nothing.
     }
 
     // Check if the INPUT_R key is pressed and m_play is set to 0.
@@ -64,16 +73,21 @@ void RainScript::ComponentUpdate() {
         // Set m_play to 0 and stop all animations playing.
         m_play = stopPlay;
         m_animator->StopAllAnimations();
+    } else {
+        // Do nothing.
     }
+    INFO("RainScript ComponentUpdate() - completed");
 }
 
 /**
     @brief Sets the position of the owner as 0 on x and 0 on y.
 */
 void RainScript::FixedComponentUpdate() {
+    INFO("RainScript FixedComponentUpdate() - initializing");
     // Set the positions X and Y of the component.
     // Coordinate for the position.
     const int valuePosition = 0;
     m_position->m_x = valuePosition;
     m_position->m_y = valuePosition;
+    INFO("RainScript FixedComponentUpdate() - completed");
 }
