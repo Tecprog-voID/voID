@@ -38,7 +38,10 @@ void LeftCenterLightScript::Start() {
                                                     ->originalWidth,map
                                                     ->originalHeight/GetOwner()
                                                     ->originalHeight));
+    } else {
+        // Do nothing
     }
+
     INFO("LeftCenterLightScript - initialized");
 }
 
@@ -69,7 +72,10 @@ void LeftCenterLightScript::ComponentUpdate() {
 
     if(!animator->IsPlaying("CENTRAL LIGHT ANIMATION") && active){
         animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
-    }
+    } else {
+       // Do nothing
+   }
+
     INFO("LeftCenterLightScript - updated component");
 }
 

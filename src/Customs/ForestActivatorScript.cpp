@@ -33,6 +33,8 @@ void ForestActivatorScript::Start() {
     if (map) {
         GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,
                                              map->originalHeight/GetOwner()->originalHeight));
+    } else {
+        // Do nothing
     }
 
     INFO("ForestActivatorScript - initialized");
@@ -79,6 +81,8 @@ void ForestActivatorScript::ComponentUpdate() {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION");
         activate = 1;
         runned = true;
+    } else {
+        // Do nothing
     }
 
     /*
@@ -89,6 +93,8 @@ void ForestActivatorScript::ComponentUpdate() {
         INFO("ForestActivatorScript - playing forest's animation2");
 
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION2");
+    } else {
+        // Do nothing
     }
 
     // If the animations have already ran activates the CentralLightScript3.
@@ -100,6 +106,8 @@ void ForestActivatorScript::ComponentUpdate() {
                                         ->GetGameObject("CENTRAL LIGHT 3")
                                         ->GetComponent("CentralLightScript3");
         script->Activate();
+    } else {
+        // Do nothing
     }
 
     INFO("ForestActivatorScript - updated components");
