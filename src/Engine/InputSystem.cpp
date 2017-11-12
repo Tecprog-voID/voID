@@ -47,6 +47,8 @@ InputSystem *InputSystem::GetInstance() {
     // If the m_instance is not initialized, intializes it.
     if (!m_instance) {
         m_instance = new InputSystem();
+    } else {
+        // Do nothing
     }
     INFO("InputSystem - initialized instance");
     return m_instance;
@@ -85,6 +87,8 @@ bool InputSystem::GetKeyDown(KeyboardInputGlobal key) {
     */
     if (m_states[key] && !m_oldStates[key]) {
         return true;
+    } else {
+        // Do nothing
     }
     return false;
 }
@@ -102,6 +106,8 @@ bool InputSystem::GetKeyUp(KeyboardInputGlobal key) {
     */
     if (!m_states[key] && m_oldStates[key]) {
         return true;
+    } else {
+        // Do nothing
     }
     return false;
 }
@@ -116,6 +122,8 @@ bool InputSystem::GetKeyPressed(KeyboardInputGlobal key) {
     // If the respective key is being pressed, returns true.
     if (m_states[key]) {
         return true;
+    } else {
+        // Do nothing
     }
     return false;
 }
@@ -137,6 +145,8 @@ bool InputSystem::GetMouseButtonDown(MouseInputGlobal button) {
     */
     if (isPressed && !wasPressed) {
         return true;
+    } else {
+        // Do nothing
     }
     return false;
 }
@@ -158,6 +168,8 @@ bool InputSystem::GetMouseButtonUp(MouseInputGlobal button) {
     */
     if (!isPressed && wasPressed) {
         return true;
+    } else {
+        // Do nothing
     }
     return false;
 }
@@ -175,6 +187,8 @@ bool InputSystem::GetMouseButtonPressed(MouseInputGlobal button) {
     */
     if (m_mouseStates & SDL_BUTTON(button)) {
         return true;
+    } else {
+        // Do nothing
     }
     return false;
 }
@@ -206,7 +220,11 @@ void InputSystem::LoadGameControllers() {
             GameController *gc = new GameController(sdl_gc);
             if (sdl_gc) {
                 m_gameControllers.push_back(gc);
+            } else {
+                // Do nothing
             }
+        } else {
+            // Do nothing
         }
     }
     INFO("InputSystem - loaded game controllers");
@@ -239,6 +257,8 @@ GameController *InputSystem::GetGameController(int index) {
     // Returns NULL if an error occurred.
     if (m_gameControllers.size() < (unsigned)index + 1) {
         return nullptr;
+    } else {
+        // Do nothing
     }
     // Returns a controller identifier.
     return m_gameControllers.at(index);

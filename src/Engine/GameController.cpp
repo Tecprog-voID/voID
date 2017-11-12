@@ -73,6 +73,8 @@ bool GameController::GetButtonDown(GameControllerButton button) {
     if (m_currentButtonsStates[button] && !m_oldButtonsStates[button]){
         INFO("GameController - button's state changed");
         return true;
+    } else {
+        // Do nothing
     }
     INFO("GameController - button's state did not change");
     return false;
@@ -92,6 +94,8 @@ bool GameController::GetButtonUp(GameControllerButton button) {
     if (!m_currentButtonsStates[button] && m_oldButtonsStates[button]){
         INFO("GameController - button's state changed");
         return true;
+    } else {
+        // Do nothing
     }
     INFO("GameController - button's state did not change");
     return false;
