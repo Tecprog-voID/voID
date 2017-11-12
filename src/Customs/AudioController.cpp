@@ -20,6 +20,8 @@ AudioController *AudioController::GetInstance() {
     // If the m_instance is not initialized, intializes it.
     if (!m_instance){
         m_instance = new AudioController();
+    } else {
+        // Do nothing
     }
 
     INFO("AudioController - got instance");
@@ -95,6 +97,8 @@ void AudioController::PauseAudio(string name){
         */
         if(sound->GetMessage() == name){
             sound->Stop(-1);
+        } else {
+            // Do nothing
         }
     }
     INFO("AudioController - paused audio");

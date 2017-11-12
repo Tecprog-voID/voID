@@ -22,6 +22,8 @@ MenuController *MenuController::GetInstance() {
     // If the m_instance is not initialized, intializes it.
     if (!m_instance){
         m_instance = new MenuController();
+    } else {
+        // Do nothing
     }
     return m_instance;
     INFO("MenuController - got instance");
