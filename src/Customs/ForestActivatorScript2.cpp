@@ -3,12 +3,14 @@
 #include "Log/log.hpp"
 #include "Globals/EngineGlobals.hpp"
 
+#include <cassert>
+
 const int quantityFrame = 13;
 const int framePerSecond = 9;
 
 
 ForestActivatorScript2::ForestActivatorScript2(GameObject *owner) : Script(owner) {
-
+    assert((owner != NULL) && "the owner must be equal to NULL");
 }
 
 /**
@@ -28,10 +30,10 @@ void ForestActivatorScript2::Start() {
     input = InputSystem::GetInstance();
     gamecontroller = input->GetGameController(0);
     GetOwner()->SetZoomProportion(Vector(0, 0));
-    auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
+    auto m_map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
     // Check for map, and if exists, sets its map on a vector.
-    if (map) {
-        GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
+    if (m_map) {
+        GetOwner()->SetZoomProportion(Vector(m_map->originalWidth/GetOwner()->originalWidth,m_map->originalHeight/GetOwner()->originalHeight));
     } else {
         // Do nothing
     }
@@ -45,24 +47,24 @@ void ForestActivatorScript2::CreateAnimations(){
     INFO("ForestActivatorScript - Create Animations");
 
     // Instantiating forest activator Sprite image and its position.
-    auto forestactivatorSprite = new Image("assets/Forest_activator.png", 0, 0,832, 64);
+    auto m_forestactivatorSprite = new Image("assets/Forest_activator.png", 0, 0,832, 64);
 
     // Instantiating forest activator animation by gameobject components, and setting its image and frame.
-    auto forestactivatorAnimation = new Animation(GetOwner(), forestactivatorSprite);
+    auto m_forestactivatorAnimation = new Animation(GetOwner(), m_forestactivatorSprite);
     for (int counter = 0; counter < quantityFrame; counter++) {
-        forestactivatorAnimation->AddFrame(new Frame(counter * 64, 0, 64, 64));
+        m_forestactivatorAnimation->AddFrame(new Frame(counter * 64, 0, 64, 64));
     }
 
     // Instantiating forest activator animation2, by gameobject, and setting its image and animation.
-    auto forestactivatorAnimation2 = new Animation(GetOwner(), forestactivatorSprite);
-    forestactivatorAnimation2->AddFrame(new Frame(12 * 64, 0, 64, 64));
+    auto m_forestactivatorAnimation2 = new Animation(GetOwner(), m_forestactivatorSprite);
+    m_forestactivatorAnimation2->AddFrame(new Frame(12 * 64, 0, 64, 64));
 
     // Instantiating animator, setting its animation and frames per second.
-    auto forestactivatorAnimator = new Animator(GetOwner());
-    forestactivatorAnimation->SetFramesPerSecond(framePerSecond);
+    auto m_forestactivatorAnimator = new Animator(GetOwner());
+    m_forestactivatorAnimation->SetFramesPerSecond(framePerSecond);
     //forestactivatorAnimation2->SetFramesPerSecond(1);
-    forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION", forestactivatorAnimation);
-    forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION2", forestactivatorAnimation2);
+    m_forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION", m_forestactivatorAnimation);
+    m_forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION2", m_forestactivatorAnimation2);
 }
 
 /**

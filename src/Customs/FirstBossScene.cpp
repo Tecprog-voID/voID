@@ -86,18 +86,18 @@ void FirstBossScene::CreatePlayer() {
 void FirstBossScene::CreateBoss() {
     INFO("FirstBossScene - Create Boss");
     // Instantiating the first boss central effect, by gameobject with a vector for its positions.
-    auto FirstBossCentralEffect = new GameObject("FirstBossCentralEffect",
+    auto m_FirstBossCentralEffect = new GameObject("FirstBossCentralEffect",
                                             new Vector(0,0),211.86,211.86, 1);
-    AddGameObject(FirstBossCentralEffect);
+    AddGameObject(m_FirstBossCentralEffect);
     // Instantiating the first boss, on a gameobject with a vector for its positions.
-    auto firstBoss = new GameObject("FirstBoss", new Vector(0,0),690,930, 2);
+    auto m_firstBoss = new GameObject("FirstBoss", new Vector(0,0),690,930, 2);
 
     //Tag
-    firstBoss->SetTag("FirstBoss");
+    m_firstBoss->SetTag("FirstBoss");
 
     // Inserting the first boss gameobject into the gameobjects vector.
-    AddGameObject(firstBoss);
-    FirstBossController::GetInstance()->AddBoss(firstBoss);
+    AddGameObject(m_firstBoss);
+    FirstBossController::GetInstance()->AddBoss(m_firstBoss);
 }
 
 
@@ -108,14 +108,14 @@ void FirstBossScene::CreateBoss() {
 void FirstBossScene::CreateFirstBossAttack() {
     INFO("FirstBossScene - Create First Boss Attack");
     // Instantiating the first boss attack, by gameobject with the name of the object, and a vector for its positions.
-    auto firstBossAttack = new GameObject("FirstBossAttack", new Vector(-4750,-1700),39,147, 1);
+    auto m_firstBossAttack = new GameObject("FirstBossAttack", new Vector(-4750,-1700),39,147, 1);
 
     //Tag
-    firstBossAttack->SetTag("FirstBossAtack");
+    m_firstBossAttack->SetTag("FirstBossAtack");
 
     // Inserting the first boss attack gameobject into the gameobjects vector.
-    AddGameObject(firstBossAttack);
-    FirstBossController::GetInstance()->AddTentacle(firstBossAttack);
+    AddGameObject(m_firstBossAttack);
+    FirstBossController::GetInstance()->AddTentacle(m_firstBossAttack);
 }
 
 /**
@@ -127,11 +127,11 @@ void FirstBossScene::CreatePlayerAttack() {
     // The loop adds a bullet on an instantiated gameobject with its name and positions, on every iteration.
     for (int counter = 1; counter < 10; counter++) {
         std::string bulletName = "Bullet" + std::to_string(counter);
-        auto bullet = new GameObject(bulletName, new Vector(100 * counter, 0),15, 15, 2);
-        bullet->SetTag("Bullet");
+        auto m_bullet = new GameObject(bulletName, new Vector(100 * counter, 0),15, 15, 2);
+        m_bullet->SetTag("Bullet");
 
         // Insert each gameobject bullet into the gameobjects vector.
-        AddGameObject(bullet);
+        AddGameObject(m_bullet);
     //bullet->active = false;
   }
 }
@@ -143,10 +143,10 @@ void FirstBossScene::CreatePlayerAttack() {
 void FirstBossScene::CreateRain() {
     INFO("FirstBossScene - Create Rain");
     // Instantiating the rain, on a gameobject with its name, and a vector for its positions.
-    auto rain = new GameObject("Rain", new Vector(0,0),1024,800,1);
+    auto m_rain = new GameObject("Rain", new Vector(0,0),1024,800,1);
 
     // Insert the gameobject rain into the gameobjects vector.
-    AddGameObject(rain);
+    AddGameObject(m_rain);
 }
 
 /**
@@ -156,10 +156,10 @@ void FirstBossScene::CreateRain() {
 void FirstBossScene::CreatePlayerHit() {
     INFO("FirstBossScene - Create Player Hit");
     // Instantiating a player hit, on a gameobject with its name, and a vector for its positions.
-    auto hit = new GameObject("Hit", new Vector(0,0),1024,800,1);
+    auto m_hit = new GameObject("Hit", new Vector(0,0),1024,800,1);
 
     // Insert the gameobject hit into the gameobjects vector.
-    AddGameObject(hit);
+    AddGameObject(m_hit);
 }
 
 
@@ -170,10 +170,10 @@ void FirstBossScene::CreatePlayerHit() {
 void FirstBossScene::CreateThunder() {
     INFO("FirstBossScene - Create Thunder");
     // Instantiating a thunder, on a gameobject with its name, and a vector for its positions.
-    auto thunder = new GameObject("Rain", new Vector(200,0),113,267,1);
+    auto m_thunder = new GameObject("Rain", new Vector(200,0),113,267,1);
 
     // Insert the gameobject thunder into the gameobjects vector.
-    AddGameObject(thunder);
+    AddGameObject(m_thunder);
 }
 
 /**
@@ -183,10 +183,10 @@ void FirstBossScene::CreateThunder() {
 void FirstBossScene::CreateSnow(){
     INFO("FirstBossScene - Create Snow");
     // Instantiating snow, on a gameobject with its name, and a vector for its positions.
-    auto snow = new GameObject("Snow", new Vector(0,0),1024,800,1);
+    auto m_snow = new GameObject("Snow", new Vector(0,0),1024,800,1);
 
     // Insert the gameobject snow into the gameobjects vector.
-    AddGameObject(snow);
+    AddGameObject(m_snow);
 }
 
 /**
@@ -196,8 +196,8 @@ void FirstBossScene::CreateSnow(){
 void FirstBossScene::CreateLight() {
     INFO("FirstBossScene - Create Light");
     // Instantiating the light, on a gameobject with its name, and a vector for its positions.
-    auto light = new GameObject("Light", new Vector(0,0),2*1024,2*800,1);
+    auto m_light = new GameObject("Light", new Vector(0,0),2*1024,2*800,1);
 
     // Insert the gameobject snow into the gameobjects vector.
-    AddGameObject(light);
+    AddGameObject(m_light);
 }

@@ -2,9 +2,13 @@
 #include "Globals/EngineGlobals.hpp"
 #include "Log/log.hpp"
 
+#include <cassert>
+
 const int middlePosition = 2;
 
-LightScript::LightScript(GameObject *owner) : Script(owner) {}
+LightScript::LightScript(GameObject *owner) : Script(owner) {
+     assert((owner != NULL) && "the owner must be equal to NULL");
+}
 
 /**
     @brief that function starts the light script. Create the animation,
@@ -28,17 +32,17 @@ void LightScript::Start() {
 void LightScript::CreateAnimations(){
     INFO("LightScript - Create Animations");
     // Instantiating lightimage by image file and define its positons.
-    auto lightImage = new Image("assets/light.png",0,0,682, 512);
+    auto m_lightImage = new Image("assets/light.png",0,0,682, 512);
 
     // Instantiating light animation by gameobject components, image and play state.
-    auto lightAnimation = new Animation(GetOwner(),lightImage );
+    auto m_lightAnimation = new Animation(GetOwner(),m_lightImage );
 
     // Setting frames of light animation.
-    lightAnimation->AddFrame(new Frame(0,0, 682, 512));
+    m_lightAnimation->AddFrame(new Frame(0,0, 682, 512));
 
     // Instantiating animator, and setting its animation.
-    auto lightAnimator = new Animator(GetOwner());
-    lightAnimator->AddAnimation("lightAnimation", lightAnimation);
+    auto m_lightAnimator = new Animator(GetOwner());
+    m_lightAnimator->AddAnimation("lightAnimation", m_lightAnimation);
 }
 
 /**

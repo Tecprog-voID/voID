@@ -67,12 +67,12 @@ void MainScene::CreateLogo() {
         Setting and render the game logo image in the middle of the screen,
         in a gameobject.
     */
-    auto logo = new GameObject("Logo", new Vector(-30,0), 1024, 800,1);
+    auto m_logo = new GameObject("Logo", new Vector(-30,0), 1024, 800,1);
 
-    auto logoImage = new Image("assets/logo2.png", 0, 0, 311, 256);
-    new Renderer(logo, logoImage);
+    auto m_logoImage = new Image("assets/logo2.png", 0, 0, 311, 256);
+    new Renderer(m_logo, m_logoImage);
 
-    AddGameObject(logo);
+    AddGameObject(m_logo);
 }
 
 /**
@@ -86,13 +86,13 @@ void MainScene::CreatePlayButton() {
         middle position of the screen, and instantiates the sound of the button.
     */
     int xMiddle = EngineGlobals::screen_width / middlePosition - 100;
-    auto play = new GameObject("Play", new Vector(xMiddle, 400), 200, 100,1);
-    new UIText(play, "Play", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
+    auto m_play = new GameObject("Play", new Vector(xMiddle, 400), 200, 100,1);
+    new UIText(m_play, "Play", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
                                200, 255, 255, 255, 150, 1);
-    new UIButton(play);
-    new UISound(play, "playSound", "assets/Audio/Button/MusicButton1.wav", false, false);
-    new PlayButtonScript(play);
-    AddGameObject(play);
+    new UIButton(m_play);
+    new UISound(m_play, "playSound", "assets/Audio/Button/MusicButton1.wav", false, false);
+    new PlayButtonScript(m_play);
+    AddGameObject(m_play);
 }
 
 /**
@@ -107,13 +107,13 @@ void MainScene::CreateQuitButton() {
         middle position of the screen, and instantiates the sound of the button.
     */
     int xMiddle = EngineGlobals::screen_width / middlePosition - 100;
-    auto quit = new GameObject("Quit", new Vector(xMiddle, 500), 200, 100, 1);
-    new UIText(quit, "Quit", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
+    auto m_quit = new GameObject("Quit", new Vector(xMiddle, 500), 200, 100, 1);
+    new UIText(m_quit, "Quit", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
                                200, 255, 255, 255, 150, 1);
-    new UIButton(quit);
-    new UISound(quit, "playSound", "assets/Audio/Button/MusicButton1.wav", false, false);
-    new QuitButtonScript(quit);
-    AddGameObject(quit);
+    new UIButton(m_quit);
+    new UISound(m_quit, "playSound", "assets/Audio/Button/MusicButton1.wav", false, false);
+    new QuitButtonScript(m_quit);
+    AddGameObject(m_quit);
 }
 
 /**
@@ -124,9 +124,9 @@ void MainScene::CreateQuitButton() {
 void MainScene::CreateAnimation() {
     INFO("MainScene - Create Animation");
     // Create a gameobject for the background animation and its script, and a vector with its positions.
-    auto BackgroundAnimation = new GameObject("BackgroundAnimation", new Vector(0 ,0), 1024, 800, 0);
-    new MenuAnimationScript(BackgroundAnimation);
-    AddGameObject(BackgroundAnimation);
+    auto m_BackgroundAnimation = new GameObject("BackgroundAnimation", new Vector(0 ,0), 1024, 800, 0);
+    new MenuAnimationScript(m_BackgroundAnimation);
+    AddGameObject(m_BackgroundAnimation);
 }
 
 
@@ -137,9 +137,9 @@ void MainScene::CreateAnimation() {
 void MainScene::CreateMusic() {
     INFO("MainScene - Create Music");
     // Create a gameobject for the game music, and a vector with its positions.
-    auto music = new GameObject("Music", new Vector(200, 200), 200, 100);
+    auto m_music = new GameObject("Music", new Vector(200, 200), 200, 100);
     // Instantiate the UI sound, and define its states.
-    new UISound(music, "Music", "assets/Audio/Menu/Menu.ogg", false, true);
+    new UISound(m_music, "Music", "assets/Audio/Menu/Menu.ogg", false, true);
     // Add the whole music instantiated in a vector of gameobjects.
-    AddGameObject(music);
+    AddGameObject(m_music);
 }

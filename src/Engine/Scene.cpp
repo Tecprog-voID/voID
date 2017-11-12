@@ -23,8 +23,8 @@ Scene::~Scene() {
 void Scene::Start() {
     INFO("Scene - Start");
     // Run through the vector of game objects, starting them.
-    for (auto object : m_gameObjects) {
-        object->Start();
+    for (auto m_object : m_gameObjects) {
+        m_object->Start();
     }
 }
 
@@ -37,10 +37,10 @@ void Scene::Update() {
     INFO("Scene - Update");
     // Sort and compares the gameobjects by the first element in its vector, and the last one, for update them.
     std::sort(m_gameObjects.begin(), m_gameObjects.end(), CompareGameObjects);
-    for (auto it : m_gameObjects) {
+    for (auto m_it : m_gameObjects) {
         // Check if is active and them update it.
-        if (it->active) {
-            it->Update();
+        if (m_it->active) {
+            m_it->Update();
         } else {
             // Do nothing
         }
@@ -54,12 +54,12 @@ void Scene::Update() {
 */
 void Scene::DrawUpdate() {
     INFO("Scene - Draw Update");
-    // Sort and compares the gameobjects by the first element in its vector, and the last one, for update the object's draw.
+    // Sort and compares the gameobjects by tm_he first element in its vector, and the last one, for update the object's draw.
     std::sort(m_gameObjects.begin(), m_gameObjects.end(), CompareGameObjects);
-    for (auto it : m_gameObjects) {
+    for (auto m_it : m_gameObjects) {
         // Check if is active and them update it.
-        if (it->active) {
-            it->DrawUpdate();
+        if (m_it->active) {
+            m_it->DrawUpdate();
         } else {
             // Do nothing
         }
@@ -89,10 +89,10 @@ void Scene::AddGameObject(std::vector<GameObject *> gameObjects) {
 void Scene::FixedUpdate() {
     INFO("Scene - Fix update");
     //Run through the gameobjects vector, and updates the active gameObjects.
-    for (auto it : m_gameObjects) {
+    for (auto m_it : m_gameObjects) {
         // Check if is active and them update it.
-        if (it->active) {
-            it->FixedUpdate();
+        if (m_it->active) {
+            m_it->FixedUpdate();
         } else {
             // Do nothing
         }
@@ -167,9 +167,9 @@ void Scene::Hidden() {
 */
 GameObject *Scene::GetGameObject(std::string name) {
     //Run through the gameobjects vector, and get one gameobject by the given name.
-    for (auto it : m_gameObjects) {
-        if (it->GetName() == name) {
-            return it;
+    for (auto m_it : m_gameObjects) {
+        if (m_it->GetName() == name) {
+            return m_it;
         } else {
             // Do nothing
         }

@@ -7,11 +7,13 @@
 #include "Customs/GameOverScript.hpp"
 #include "Log/log.hpp"
 
+#include <cassert>
+
 const int quantityFrameLine = 22;
 const int quantityFrameColumn = 12;
 
 GameOverScript::GameOverScript(GameObject *owner) : Script(owner) {
-
+     assert((owner != NULL) && "the owner must be equal to NULL");
 }
 
 /**
@@ -37,19 +39,19 @@ void GameOverScript::CreateAnimations() {
         Creates game-over animation by setting a image and a animation with
         defined frames positions over it.
     */
-    auto snowImage = new Image("assets/Ending_show_image.png",0,0,4096, 2048);
+    auto m_snowImage = new Image("assets/Ending_show_image.png",0,0,4096, 2048);
 
-    auto gameOverAnimation= new Animation(GetOwner(),snowImage );
+    auto m_gameOverAnimation= new Animation(GetOwner(), m_snowImage );
     for (int  line = 0; line < quantityFrameLine; line++) {
         for (int column = 0 ; column < quantityFrameColumn ; column++) {
-            gameOverAnimation->AddFrame(new Frame(column * 341,line* 256, 341, 256));
-            gameOverAnimation->AddFrame(new Frame(column * 341,line* 256, 341, 256));
+            m_gameOverAnimation->AddFrame(new Frame(column * 341,line* 256, 341, 256));
+            m_gameOverAnimation->AddFrame(new Frame(column * 341,line* 256, 341, 256));
         }
     }
 
     // animator.
-    auto gameOverAnimator = new Animator(GetOwner());
-    gameOverAnimator->AddAnimation("snowAnimation", gameOverAnimation);
+    auto m_gameOverAnimator = new Animator(GetOwner());
+    m_gameOverAnimator->AddAnimation("snowAnimation", m_gameOverAnimation);
 }
 
 /**

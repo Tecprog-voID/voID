@@ -2,13 +2,14 @@
 #include "Log/log.hpp"
 
 #include <stdio.h>
+#include <cassert>
 
 const int quantityFrame = 16;
 const int framePerSecond = 10;
 
 // Constructor
 MenuAnimationScript::MenuAnimationScript(GameObject *owner) : Script(owner) {
-
+     assert((owner != NULL) && "the owner must be equal to NULL");
 }
 
 /**
@@ -32,30 +33,30 @@ void MenuAnimationScript::Start() {
 void MenuAnimationScript::CreateAnimations() {
     INFO("MenuAnimationsScript - Create Animations");
     // Instantiating the menu script animator.
-    auto MenuAnimationScriptAnimator = new Animator(GetOwner());
+    auto m_MenuAnimationScriptAnimator = new Animator(GetOwner());
 
     // Instantiating the menu image and its position.
-    auto mainSprite = new Image("assets/menu_animation.png", 0, 0, 5456, 256);
+    auto m_mainSprite = new Image("assets/menu_animation.png", 0, 0, 5456, 256);
 
     /*
         Instantiating the main animation and its position.
         A for loop defines the frames in the main animation and in the second main animation.
     */
-    auto mainAnimation = new Animation(GetOwner(), mainSprite);
-    for (int i = 0; i < quantityFrame; i++) {
-        mainAnimation->AddFrame(new Frame(i * 341, 0, 341, 256));
+    auto m_mainAnimation = new Animation(GetOwner(), m_mainSprite);
+    for (int counter = 0; counter < quantityFrame; counter++) {
+        m_mainAnimation->AddFrame(new Frame(counter * 341, 0, 341, 256));
     }
 
-    auto mainAnimation2 = new Animation(GetOwner(), mainSprite);
-    for (int i = 0; i < quantityFrame; i++) {
-        mainAnimation2->AddFrame(new Frame(i * 341, 256, 341, 256));
+    auto m_mainAnimation2 = new Animation(GetOwner(), m_mainSprite);
+    for (int counter = 0; counter < quantityFrame; counter++) {
+        m_mainAnimation2->AddFrame(new Frame(counter * 341, 256, 341, 256));
     }
 
-    mainAnimation->SetFramesPerSecond(framePerSecond);
-    mainAnimation2->SetFramesPerSecond(framePerSecond);
+    m_mainAnimation->SetFramesPerSecond(framePerSecond);
+    m_mainAnimation2->SetFramesPerSecond(framePerSecond);
 
-    MenuAnimationScriptAnimator->AddAnimation("mainAnimation", mainAnimation);
-    MenuAnimationScriptAnimator->AddAnimation("mainAnimation2", mainAnimation2);
+    m_MenuAnimationScriptAnimator->AddAnimation("mainAnimation", m_mainAnimation);
+    m_MenuAnimationScriptAnimator->AddAnimation("mainAnimation2", m_mainAnimation2);
 }
 
 /**
@@ -73,11 +74,12 @@ void MenuAnimationScript::ComponentUpdate() {
 
     // Check the current state of the initial animation, if true, checks the animator state. If false, plays the animator.
     if (initialAnimation) {
-        if (!animator->IsPlaying("mainAnimation"))
-        if (!animator->IsPlaying("mainAnimation2") && initialAnimation) {
-            animator->PlayAnimation("mainAnimation2");
-        } else {
-            // Do nothing
+        if (!animator->IsPlaying("mainAnimation")) {
+            if (!animator->IsPlaying("mainAnimation2") && initialAnimation) {
+                animator->PlayAnimation("mainAnimation2");
+            } else {
+                // Do nothing
+            }
         }
     } else {
         // Do nothing
