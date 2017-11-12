@@ -1,4 +1,5 @@
 #include "Customs/MapScript.hpp"
+#include "Log/log.hpp"
 
 #include <stdio.h>
 
@@ -16,6 +17,7 @@ const int forestActivatorIndex = 48;
 MapScript::MapScript(GameObject *owner) : Script(owner) {}
 
 void MapScript::Start() {
+    INFO("MapScript - initializing");
 
     map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
 
@@ -35,21 +37,27 @@ void MapScript::Start() {
     input = InputSystem::GetInstance();
     CreateWalls();
 
+    INFO("MapScript - initialized");
 }
 
 void MapScript::ComponentUpdate() {
+    INFO("MapScript - updating components");
+
     // If the player presses "P", the camera shakes.
     if (input->GetKeyPressed(INPUT_P)) {
+        INFO("MapScript - P pressed; camera shaking");
         cameraShake = true;
     }
 
     // If the player presses "Z", the camera is locked.
     if (input->GetKeyPressed(INPUT_Z)) {
+        INFO("MapScript - Z pressed; camera locked");
         CameraSystem::GetInstance()->Lock();
     }
 
     // Zooms the camera out when the corresponding keys are pressed.
     if (InputSystem::GetInstance()->GetKeyUp(INPUT_DOWN) && CameraSystem::GetInstance()->currentZoom > -50) {
+        INFO("MapScript - zoom out");
         CameraSystem::GetInstance()->ZoomOut(GetOwner()->originalWidth/4 + 1,nakedMan,SceneManager::GetInstance()
                                                                                                 ->GetCurrentScene());
         CameraSystem::GetInstance()->ZoomIn(1,nakedMan,SceneManager::GetInstance()->GetCurrentScene());
@@ -58,6 +66,7 @@ void MapScript::ComponentUpdate() {
 
     // Zooms the camera in when the corresponding keys are pressed.
     if (InputSystem::GetInstance()->GetKeyUp(INPUT_UP) && CameraSystem::GetInstance()->currentZoom < 0) {
+        INFO("MapScript - zoom in");
         CameraSystem::GetInstance()->ZoomIn(GetOwner()->originalWidth/4 +1,nakedMan,SceneManager::GetInstance()
                                                                                             ->GetCurrentScene());
         CameraSystem::GetInstance()->ZoomOut(1,nakedMan,SceneManager::GetInstance()->GetCurrentScene());
@@ -66,7 +75,7 @@ void MapScript::ComponentUpdate() {
 }
 
 void MapScript::FixedComponentUpdate() {
-
+    INFO("MapScript - updating fixed components");
     auto nakedManScript = (NakedManScript*) SceneManager::GetInstance()
                                                 ->GetCurrentScene()
                                                 ->GetGameObject("NakedMan")
@@ -77,17 +86,22 @@ void MapScript::FixedComponentUpdate() {
     EndScene1.
     */
     if (nakedManScript->life <= 0) {
+        INFO("MapScript - ends scene with endscene1");
         SceneManager::GetInstance()->SetCurrentScene("EndScene1");
     }
 
+    INFO("MapScript - rendering first boss life");
     auto firstBossLifeRenderer = (RectangleRenderer*)SceneManager::GetInstance()
                                                                 ->GetCurrentScene()
                                                                 ->GetGameObject("FirstBossLife")
                                                                 ->GetComponent("RectangleRenderer");
 
+    INFO("MapScript - getting actual life");
     int actualLife = firstBossLifeRenderer->GetWidth();
+
     // If boss's actual life is lower or equal to 0, ends game with EndScene2.
     if (actualLife <= 0) {
+        INFO("MapScript - ends scene with endscene2");
         SceneManager::GetInstance()->SetCurrentScene("EndScene2");
     }
 
@@ -107,7 +121,8 @@ void MapScript::FixedComponentUpdate() {
 }
 
 void MapScript::RenderWallsRects() {
-
+    INFO("MapScript - rendering walls rectangles");
+    INFO("MapScript - setting left walls");
     for (int i = 0; i < leftWallsAmount; i++) {
         SDL_Rect x = {
             static_cast<int>(leftWalls[i].m_x),
@@ -117,7 +132,9 @@ void MapScript::RenderWallsRects() {
         };
         GraphicsSystem::GetInstance()->DrawFillRectangle(&x, x.w,x.h, 255,0,0,100);
     }
+    INFO("MapScript - set left walls");
 
+    INFO("MapScript - setting right walls");
     for (int j = 0; j < rightWallsAmount; j++) {
         SDL_Rect x = {
             static_cast<int>(rightWalls[j].m_x),
@@ -127,7 +144,9 @@ void MapScript::RenderWallsRects() {
         };
         GraphicsSystem::GetInstance()->DrawFillRectangle(&x, x.w,x.h, 255,0,0,100);
     }
+    INFO("MapScript - set right walls");
 
+    INFO("MapScript - setting up walls");
     for (int k = 0; k < upWallsAmount; k++) {
         SDL_Rect x = {
             static_cast<int>(upWalls[k].m_x),
@@ -137,7 +156,9 @@ void MapScript::RenderWallsRects() {
         };
         GraphicsSystem::GetInstance()->DrawFillRectangle(&x, x.w,x.h, 255,0,0,100);
     }
+    INFO("MapScript - set up walls");
 
+    INFO("MapScript - setting down walls");
     for(int l = 0; l < downWallsAmount; l++) {
         SDL_Rect x = {
             static_cast<int>(downWalls[l].m_x),
@@ -147,10 +168,12 @@ void MapScript::RenderWallsRects() {
         };
         GraphicsSystem::GetInstance()->DrawFillRectangle(&x, x.w,x.h, 255,0,0,100);
     }
-
+    INFO("MapScript - set down walls");
+    INFO("MapScript - rendered walls rectangles");
 }
 
 void MapScript::CreateWalls() {
+    INFO("MapScript - creating walls");
     // defines the walls' positions on the map (three lines defining each wall)
     downWalls[downWallsAmount] = {-3507,-2538,4364,75};
     downWallsOriginal[downWallsAmount] = {-3507,-2538,4364,75};
@@ -924,9 +947,12 @@ void MapScript::CreateWalls() {
     downWalls[downWallsAmount] = {1472,-2711,1000,45};
     downWallsOriginal[downWallsAmount] = {1472,-2711,1000,45};
     downWallsAmount++;
+
+    INFO("MapScript - created walls");
 }
 
 int MapScript::DetectWallCollision(GameObject* object){
+    INFO("MapScript - detecting character's collisions with walls");
     /*
     determines the player's behavior when facing (or not) a wall, where:
     0 not colliding; 1 = left; 2 = right; 3 = up; 4 = down
@@ -944,7 +970,7 @@ int MapScript::DetectWallCollision(GameObject* object){
         }
     }
 
-    for(int j = 0; j < rightWallsAmount; j++) {
+    for (int j = 0; j < rightWallsAmount; j++) {
         if (((rightWalls[j].m_x <= (object->GetPosition()->m_x + object->GetWidth())) &&
             ((rightWalls[j].m_x + rightWalls[j].m_w) >= object->GetPosition()->m_x)) &&
             ((rightWalls[j].m_y <=(object->GetPosition()->m_y + object->GetHeight())) &&
@@ -1023,7 +1049,6 @@ int MapScript::DetectWallCollision(GameObject* object){
             object->SetPosition(playerprevious_vec);
         }
     }
-
+    INFO("MapScript - detected either there are or not character's collisions with walls");
     return 0;
-
 }
