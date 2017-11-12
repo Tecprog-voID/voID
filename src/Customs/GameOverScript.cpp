@@ -5,6 +5,7 @@
 */
 
 #include "Customs/GameOverScript.hpp"
+#include "Log/log.hpp"
 
 const int quantityFrameLine = 22;
 const int quantityFrameColumn = 12;
@@ -18,6 +19,7 @@ GameOverScript::GameOverScript(GameObject *owner) : Script(owner) {
     position, the animator and the input.
 */
 void GameOverScript::Start() {
+    INFO("GameOverScript - Start");
     // Starts game-over animations by setting its positions and animator.Sets gameobject's vector zoom proportion.
     position = GetOwner()->GetPosition();
     animator = (Animator *)GetOwner()->GetComponent("Animator");
@@ -30,11 +32,12 @@ void GameOverScript::Start() {
     over animation and animator.
 */
 void GameOverScript::CreateAnimations() {
+    INFO("GameOverScript - Create Animations");
     /*
         Creates game-over animation by setting a image and a animation with
         defined frames positions over it.
     */
-    auto snowImage = new Image("assets/Ending_PARTE_FINAL.png",0,0,4096, 2048);
+    auto snowImage = new Image("assets/Ending_show_image.png",0,0,4096, 2048);
 
     auto gameOverAnimation= new Animation(GetOwner(),snowImage );
     for (int  line = 0; line < quantityFrameLine; line++) {
@@ -53,6 +56,7 @@ void GameOverScript::CreateAnimations() {
     @brief that function updates the components of the game over.
 */
 void GameOverScript::ComponentUpdate() {
+    INFO("GameOverScript - Component Update");
     /*
         Updates the game-over component and sets the state of played audios.
     */
@@ -60,6 +64,8 @@ void GameOverScript::ComponentUpdate() {
     // Check for the player and its animator and input state.
     if (play==1) {
         animator->PlayAnimation("snowAnimation");
+    } else {
+        // Do nothing
     }
 
     if (input->GetKeyDown(INPUT_T) && play==0) {
@@ -79,6 +85,7 @@ void GameOverScript::ComponentUpdate() {
     They set the position x and y to zero.
 */
 void GameOverScript::FixedComponentUpdate() {
+    INFO("GameOverScript - Fixed Component Update");
     // Check the components positions, and end them by setting it to zero.
     position->m_x = 0;
     position->m_y = 0;

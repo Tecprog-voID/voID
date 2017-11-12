@@ -21,6 +21,7 @@ Scene::~Scene() {
     @brief That function is for start the scene of the game.
 */
 void Scene::Start() {
+    INFO("Scene - Start");
     // Run through the vector of game objects, starting them.
     for (auto object : m_gameObjects) {
         object->Start();
@@ -33,12 +34,15 @@ void Scene::Start() {
     active and update it.
 */
 void Scene::Update() {
+    INFO("Scene - Update");
     // Sort and compares the gameobjects by the first element in its vector, and the last one, for update them.
     std::sort(m_gameObjects.begin(), m_gameObjects.end(), CompareGameObjects);
     for (auto it : m_gameObjects) {
         // Check if is active and them update it.
         if (it->active) {
             it->Update();
+        } else {
+            // Do nothing
         }
     }
 }
@@ -49,12 +53,15 @@ void Scene::Update() {
     active and update the draws.
 */
 void Scene::DrawUpdate() {
+    INFO("Scene - Draw Update");
     // Sort and compares the gameobjects by the first element in its vector, and the last one, for update the object's draw.
     std::sort(m_gameObjects.begin(), m_gameObjects.end(), CompareGameObjects);
     for (auto it : m_gameObjects) {
         // Check if is active and them update it.
         if (it->active) {
             it->DrawUpdate();
+        } else {
+            // Do nothing
         }
     }
 }
@@ -64,6 +71,7 @@ void Scene::DrawUpdate() {
     @param[in] GameObject pointer that points to the current gameobject
 */
 void Scene::AddGameObject(GameObject *gameObject) {
+    INFO("Scene - Add game object");
     //Appends a gameobject to the end of the vector of gameobjects.
     m_gameObjects.push_back(gameObject);
 }
@@ -79,11 +87,14 @@ void Scene::AddGameObject(std::vector<GameObject *> gameObjects) {
     Checks if gameObjects are active and fix the update.
 */
 void Scene::FixedUpdate() {
+    INFO("Scene - Fix update");
     //Run through the gameobjects vector, and updates the active gameObjects.
     for (auto it : m_gameObjects) {
         // Check if is active and them update it.
         if (it->active) {
             it->FixedUpdate();
+        } else {
+            // Do nothing
         }
     }
 }
@@ -95,6 +106,7 @@ void Scene::FixedUpdate() {
     @param[in] state = is the state of the scene.
 */
 void Scene::SetState(SceneStates state) {
+    INFO("Scene - Set states");
     // Sets the current state scene according to the int constants defined on the SceneStates enum.
     m_currentState = state;
     INFO("[SCENE] " << m_name << " state: " << m_currentState);
@@ -119,6 +131,7 @@ void Scene::SetState(SceneStates state) {
     starts.
 */
 void Scene::Activation() {
+    INFO("Scene - State of Activation");
     OnActivation();
     Start();
 }
@@ -127,6 +140,7 @@ void Scene::Activation() {
     @brief That function is for when the state isn't activated.
 */
 void Scene::Deactivation() {
+    INFO("Scene - State of Deactivation");
     OnDeactivation();
 }
 
@@ -134,6 +148,7 @@ void Scene::Deactivation() {
     @brief That function is for when the state is shown.
 */
 void Scene::Shown() {
+    INFO("Scene - State of Shown");
     OnShown();
 }
 
@@ -141,6 +156,7 @@ void Scene::Shown() {
     @brief That function is for when the state is shown.
 */
 void Scene::Hidden() {
+    INFO("Scene - State of Hidden");
     OnHidden();
 }
 
@@ -154,6 +170,8 @@ GameObject *Scene::GetGameObject(std::string name) {
     for (auto it : m_gameObjects) {
         if (it->GetName() == name) {
             return it;
+        } else {
+            // Do nothing
         }
     }
     return nullptr;

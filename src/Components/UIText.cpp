@@ -6,6 +6,9 @@
 
 #include "Components/UIText.hpp"
 
+#include "Log/log.hpp"
+
+
 /**
     @brief Initializes UIText instance.
     @param[in] GameObject *owner - owns the component.
@@ -37,8 +40,12 @@ UIText::UIText(GameObject *owner, string message, string fontPath, int size,
     m_font = TTF_OpenFont(fontPath.c_str(), size);
 
     // Check if there is something diferent of the font and if is diferent print a error message.
-    if (!m_font)
+    if (!m_font) {
         SDL_TTF_ERROR("Font could not be loaded");
+    }
+    else {
+        // Do nothing
+    }
     m_color = {red, green, blue, alpha};
 
     m_background = {0, 0, 0, 0};
@@ -49,7 +56,9 @@ UIText::UIText(GameObject *owner, string message, string fontPath, int size,
 }
 
 
-void UIText::Start() {}
+void UIText::Start() {
+    INFO("UIText - start");
+}
 
 /**
     @brief Sets the UIText offset. Offset is the mean value of a wave,
@@ -57,6 +66,7 @@ void UIText::Start() {}
     @param[in] offset vector reference.
 */
 void UIText::SetOffset(Vector &offset){
+    INFO("UIText - set the offset");
     m_offset = offset;
 }
 
@@ -65,6 +75,7 @@ void UIText::SetOffset(Vector &offset){
     @brief Updates the position of the component that holds the text.
 */
 void UIText::ComponentUpdate() {
+    INFO("UIText - update the component");
 
     /*
         Sets the x, y, width and height positions of the rectangle component.
@@ -83,13 +94,16 @@ void UIText::ComponentUpdate() {
 /**
     @brief Updates the position of a fixed component.
 */
-void UIText::FixedComponentUpdate() {}
+void UIText::FixedComponentUpdate() {
+    INFO("UIText - Fix the component update");
+}
 
 
 /**
     @brief Sets the type of the surface of the UIText, and creates a texture from it.
 */
 void UIText::OnPropertyChange() {
+    INFO("On property Change");
     m_surface = nullptr;
 
     // Sets the surface type based on the mode, to render the appropriated texture.
@@ -117,6 +131,7 @@ void UIText::OnPropertyChange() {
     @param[in] text - A string of the message.
 */
 void UIText::SetText(string text) {
+    INFO("UIText - set the text");
     m_message = text;
     OnPropertyChange();
 }
@@ -131,6 +146,7 @@ void UIText::SetText(string text) {
 
 */
 void UIText::SetColor(Uint8 red, Uint8 green, Uint8 blue, Uint8 alpha) {
+    INFO("UIText - set the color");
     m_color = {red, green, blue, alpha};
     OnPropertyChange();
 }

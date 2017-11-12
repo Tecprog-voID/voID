@@ -6,6 +6,8 @@
 
 #include "Customs/MainScene.hpp"
 #include "Customs/MenuAnimationScript.hpp"
+#include "Log/log.hpp"
+
 
 const int middlePosition = 2;
 
@@ -18,6 +20,7 @@ MainScene::MainScene() {
     playButton, QuitButton, the music and animation.
 */
 void MainScene::OnActivation() {
+    INFO("MainScene - On Activation");
     // On activation, gets the screen width and height to middle position the basic components of the game.
     m_widthMiddle = EngineGlobals::screen_width / middlePosition;
     m_heightMiddle = EngineGlobals::screen_height / middlePosition;
@@ -34,7 +37,7 @@ void MainScene::OnActivation() {
     nothing is created.
 */
 void MainScene::OnDeactivation() {
-
+    INFO("MainScene - On Deactivation");
 }
 
 /**
@@ -42,7 +45,7 @@ void MainScene::OnDeactivation() {
     nothing is created.
 */
 void MainScene::OnShown() {
-
+    INFO("MainScene - On Shown");
 }
 
 /**
@@ -50,7 +53,7 @@ void MainScene::OnShown() {
     nothing is created.
 */
 void MainScene::OnHidden() {
-
+    INFO("MainScene - On Hidden");
 }
 
 
@@ -59,6 +62,7 @@ void MainScene::OnHidden() {
     then create the logo as a game object. After create the logo image and renderer it.
 */
 void MainScene::CreateLogo() {
+    INFO("MainScene - Create Logo");
     /*
         Setting and render the game logo image in the middle of the screen,
         in a gameobject.
@@ -76,6 +80,7 @@ void MainScene::CreateLogo() {
     the button, create the "Play" as a GameObject, the text of it, the button and the sound.
 */
 void MainScene::CreatePlayButton() {
+    INFO("MainScene - Create Play Button");
     /*
         Position the play button and its text, by setting the new gameobject in the
         middle position of the screen, and instantiates the sound of the button.
@@ -95,6 +100,7 @@ void MainScene::CreatePlayButton() {
     the button, create the "Quit" as a GameObject, the text of it, the button and the sound.
 */
 void MainScene::CreateQuitButton() {
+    INFO("MainScene - Create Quit Button");
     /*
         Position the quit button and its text, by setting the new gameobject in the    //CreateBackground();
     //CreateGamemodes();
@@ -116,6 +122,7 @@ void MainScene::CreateQuitButton() {
     MenuAnimationScript.
 */
 void MainScene::CreateAnimation() {
+    INFO("MainScene - Create Animation");
     // Create a gameobject for the background animation and its script, and a vector with its positions.
     auto BackgroundAnimation = new GameObject("BackgroundAnimation", new Vector(0 ,0), 1024, 800, 0);
     new MenuAnimationScript(BackgroundAnimation);
@@ -128,6 +135,7 @@ void MainScene::CreateAnimation() {
     GameObject and the themeMusic as a UISound.
 */
 void MainScene::CreateMusic() {
+    INFO("MainScene - Create Music");
     // Create a gameobject for the game music, and a vector with its positions.
     auto music = new GameObject("Music", new Vector(200, 200), 200, 100);
     // Instantiate the UI sound, and define its states.
