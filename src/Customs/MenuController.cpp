@@ -1,4 +1,5 @@
 #include "Customs/MenuController.hpp"
+#include "Log/log.hpp"
 
 /**
     @file MenuController.cpp
@@ -16,11 +17,16 @@ MenuController::MenuController() {}
     @return m_instance of MenuController
 */
 MenuController *MenuController::GetInstance() {
+    INFO("MenuController - getting instance");
+
     // If the m_instance is not initialized, intializes it.
     if (!m_instance){
         m_instance = new MenuController();
+    } else {
+        // Do nothing
     }
     return m_instance;
+    INFO("MenuController - got instance");
 }
 
 /**
@@ -28,7 +34,11 @@ MenuController *MenuController::GetInstance() {
     @param[in] gamemode - a char that define the selected game mode.
 */
 void MenuController::SelectGamemode(char gamemode) {
+    INFO("MenuController - selecting game mode");
+
     m_selectedGamemode = gamemode;
+
+    INFO("MenuController - selected game mode");
 }
 
 /**
@@ -36,5 +46,9 @@ void MenuController::SelectGamemode(char gamemode) {
     @return char
 */
 char MenuController::GetGamemode() {
+    INFO("MenuController - getting game mode");
+
     return m_selectedGamemode;
+
+    INFO("MenuController - got game mode");
 }

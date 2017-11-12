@@ -17,6 +17,7 @@ InputSystem *InputSystem::m_instance = 0;
     @brief Initializes InputSystem instance.
 */
 InputSystem::InputSystem() {
+    INFO("InputSystem - initializing input system");
     SDL_PumpEvents();
     SDL_GameControllerEventState(SDL_IGNORE);
 
@@ -25,13 +26,16 @@ InputSystem::InputSystem() {
     m_states = SDL_GetKeyboardState(&m_statesSize);
     m_oldStates = new Uint8[m_statesSize];
     m_mouseStates = SDL_GetMouseState(&m_mouseHorizontal, &m_mouseVertical);
+    INFO("InputSystem - initialized input system");
 }
 
 // Destructor
 InputSystem::~InputSystem() {
+    INFO("InputSystem - destroying input system");
     m_states = nullptr;
     delete[] m_oldStates;
     m_oldStates = nullptr;
+    INFO("InputSystem - destroyed input system");
 }
 
 /**
@@ -39,10 +43,14 @@ InputSystem::~InputSystem() {
     @return m_instance.
 */
 InputSystem *InputSystem::GetInstance() {
+    INFO("InputSystem - initializing instance");
     // If the m_instance is not initialized, intializes it.
     if (!m_instance) {
         m_instance = new InputSystem();
+    } else {
+        // Do nothing
     }
+    INFO("InputSystem - initialized instance");
     return m_instance;
 }
 
@@ -50,6 +58,7 @@ InputSystem *InputSystem::GetInstance() {
     @brief Update the state of the input.
 */
 void InputSystem::UpdateStates() {
+    INFO("InputSystem - updating states");
     // Update old states to be equal to actual.
     for (int i = 0; i < m_statesSize; i++) {
         m_oldStates[i] = m_states[i];
@@ -62,6 +71,7 @@ void InputSystem::UpdateStates() {
     UpdateGameControllers();
 
     m_mouseStates = SDL_GetMouseState(&m_mouseHorizontal, &m_mouseVertical);
+    INFO("InputSystem - updated states");
 }
 
 /**
@@ -70,12 +80,15 @@ void InputSystem::UpdateStates() {
     @return bool.
 */
 bool InputSystem::GetKeyDown(KeyboardInputGlobal key) {
+    INFO("InputSystem - getting key beying pressed");
     /*
     If respective button is being pressed but was not pressed previously,
     returns true.
     */
     if (m_states[key] && !m_oldStates[key]) {
         return true;
+    } else {
+        // Do nothing
     }
     return false;
 }
@@ -86,12 +99,15 @@ bool InputSystem::GetKeyDown(KeyboardInputGlobal key) {
     @return bool.
 */
 bool InputSystem::GetKeyUp(KeyboardInputGlobal key) {
+    INFO("InputSystem - getting key beying pressed");
     /*
     If respective button is being pressed but was not pressed previously,
     returns true.
     */
     if (!m_states[key] && m_oldStates[key]) {
         return true;
+    } else {
+        // Do nothing
     }
     return false;
 }
@@ -102,9 +118,12 @@ bool InputSystem::GetKeyUp(KeyboardInputGlobal key) {
     @return bool.
 */
 bool InputSystem::GetKeyPressed(KeyboardInputGlobal key) {
+    INFO("InputSystem - getting key beying pressed");
     // If the respective key is being pressed, returns true.
     if (m_states[key]) {
         return true;
+    } else {
+        // Do nothing
     }
     return false;
 }
@@ -116,6 +135,7 @@ bool InputSystem::GetKeyPressed(KeyboardInputGlobal key) {
     @return bool.
 */
 bool InputSystem::GetMouseButtonDown(MouseInputGlobal button) {
+    INFO("InputSystem - getting mouse button beying pressed");
     // Defines if the mouse is being pressed right at the moment
     bool isPressed = m_mouseStates & SDL_BUTTON(button);
     bool wasPressed = m_oldMouseStates & SDL_BUTTON(button);
@@ -125,6 +145,8 @@ bool InputSystem::GetMouseButtonDown(MouseInputGlobal button) {
     */
     if (isPressed && !wasPressed) {
         return true;
+    } else {
+        // Do nothing
     }
     return false;
 }
@@ -136,6 +158,7 @@ bool InputSystem::GetMouseButtonDown(MouseInputGlobal button) {
     @return bool.
 */
 bool InputSystem::GetMouseButtonUp(MouseInputGlobal button) {
+    INFO("InputSystem - getting mouse button beying pressed");
     // Defines if the mouse was pressed, but is not being pressed anymore
     bool isPressed = m_mouseStates & SDL_BUTTON(button);
     bool wasPressed = m_oldMouseStates & SDL_BUTTON(button);
@@ -145,6 +168,8 @@ bool InputSystem::GetMouseButtonUp(MouseInputGlobal button) {
     */
     if (!isPressed && wasPressed) {
         return true;
+    } else {
+        // Do nothing
     }
     return false;
 }
@@ -155,12 +180,15 @@ bool InputSystem::GetMouseButtonUp(MouseInputGlobal button) {
     @return bool.
 */
 bool InputSystem::GetMouseButtonPressed(MouseInputGlobal button) {
+    INFO("InputSystem - getting mouse button beying pressed");
     /*
     If respective button is being pressed but was not pressed previously,
     returns true.
     */
     if (m_mouseStates & SDL_BUTTON(button)) {
         return true;
+    } else {
+        // Do nothing
     }
     return false;
 }
@@ -170,8 +198,10 @@ bool InputSystem::GetMouseButtonPressed(MouseInputGlobal button) {
     @return position.
 */
 std::pair<int, int> InputSystem::GetMousePosition() {
+    INFO("InputSystem - getting mouse position");
     std::pair<int, int> position;
     position = std::make_pair(m_mouseHorizontal, m_mouseVertical);
+    INFO("InputSystem - got mouse position");
     return position;
 }
 
@@ -179,8 +209,8 @@ std::pair<int, int> InputSystem::GetMousePosition() {
     @brief Count connected joysticks, and load them.
 */
 void InputSystem::LoadGameControllers() {
+    INFO("InputSystem - loading game controllers");
     int quantity = SDL_NumJoysticks();
-    INFO("[INPUT] Loading game controllers");
 
     // Count available game controllers.
     for (int i = 0; i < quantity; i++) {
@@ -190,19 +220,26 @@ void InputSystem::LoadGameControllers() {
             GameController *gc = new GameController(sdl_gc);
             if (sdl_gc) {
                 m_gameControllers.push_back(gc);
+            } else {
+                // Do nothing
             }
+        } else {
+            // Do nothing
         }
     }
+    INFO("InputSystem - loaded game controllers");
 }
 
 /**
     @brief Update status of current joystick.
 */
 void InputSystem::UpdateGameControllers() {
+    INFO("InputSystem - updating game controllers");
     CheckGameControllersConnections();
     for (auto gc : m_gameControllers) {
         gc->Update();
     }
+    INFO("InputSystem - updated game controllers");
 }
 
 /**
@@ -216,9 +253,12 @@ void InputSystem::CheckGameControllersConnections() {}
     @return GameController.
 */
 GameController *InputSystem::GetGameController(int index) {
+    INFO("InputSystem - getting game controllers");
     // Returns NULL if an error occurred.
     if (m_gameControllers.size() < (unsigned)index + 1) {
         return nullptr;
+    } else {
+        // Do nothing
     }
     // Returns a controller identifier.
     return m_gameControllers.at(index);

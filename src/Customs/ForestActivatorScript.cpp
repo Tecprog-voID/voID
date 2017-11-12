@@ -1,6 +1,7 @@
 #include "Customs/ForestActivatorScript.hpp"
 #include "Globals/EngineGlobals.hpp"
 #include "Customs/CentralLightScript3.hpp"
+#include "Log/log.hpp"
 
 /**
     @file UIButton.cpp
@@ -19,6 +20,7 @@ ForestActivatorScript::ForestActivatorScript(GameObject *owner) : Script(owner) 
     @brief Initializes the forest script.
 */
 void ForestActivatorScript::Start() {
+    INFO("ForestActivatorScript - initializing");
 
     CreateAnimations();
     position = GetOwner()->GetPosition();
@@ -31,13 +33,19 @@ void ForestActivatorScript::Start() {
     if (map) {
         GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,
                                              map->originalHeight/GetOwner()->originalHeight));
+    } else {
+        // Do nothing
     }
+
+    INFO("ForestActivatorScript - initialized");
 }
 
 /**
     @brief Creates animations.
 */
 void ForestActivatorScript::CreateAnimations() {
+    INFO("ForestActivatorScript - creating animations");
+
     // Sets the animations' image and its frames.
     auto forestactivatorSprite = new Image("assets/Forest_activator.png",
                                             0, 0, 832, 64);
@@ -55,20 +63,26 @@ void ForestActivatorScript::CreateAnimations() {
     forestactivatorAnimation->SetFramesPerSecond(framesPerSecond);
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION", forestactivatorAnimation);
     forestactivatorAnimator->AddAnimation("FOREST ACTIVATOR ANIMATION2", forestactivatorAnimation2);
+
+    INFO("ForestActivatorScript - created animations");
 }
 
 /**
     @brief Updates the animations components.
 */
 void ForestActivatorScript::ComponentUpdate() {
+    INFO("ForestActivatorScript - updating components");
     /*
     The animation is not playing, activate equals 0, and it has not runned,
     runs the animation.
     */
     if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") && activate == 0 && runned == false) {
+        INFO("ForestActivatorScript - playing forest's animation");
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION");
         activate = 1;
         runned = true;
+    } else {
+        // Do nothing
     }
 
     /*
@@ -76,17 +90,27 @@ void ForestActivatorScript::ComponentUpdate() {
     played, runs the second animation.
     */
     if (runned && !animator->IsPlaying("FOREST ACTIVATOR ANIMATION")) {
+        INFO("ForestActivatorScript - playing forest's animation2");
+
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION2");
+    } else {
+        // Do nothing
     }
 
     // If the animations have already ran activates the CentralLightScript3.
     if (runned) {
+        INFO("ForestActivatorScript - activating centrallightscript3");
+
         auto script = (CentralLightScript3*)SceneManager::GetInstance()
                                         ->GetCurrentScene()
                                         ->GetGameObject("CENTRAL LIGHT 3")
                                         ->GetComponent("CentralLightScript3");
         script->Activate();
+    } else {
+        // Do nothing
     }
+
+    INFO("ForestActivatorScript - updated components");
 }
 
 /**

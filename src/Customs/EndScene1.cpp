@@ -1,5 +1,6 @@
 #include "Customs/EndScene1.hpp"
-//#include "Customs/MenuAnimationScript.hpp"
+#include "Customs/MenuAnimationScript.hpp"
+#include "Log/log.hpp"
 
 /**
     @file EndScene1.cpp
@@ -14,10 +15,14 @@ EndScene1::EndScene1() {}
     @brief On activation of the game over scene, creates 'quit' button.
 */
 void EndScene1::OnActivation() {
+    INFO("EndScene1 - setting on activation's behavior");
+
     m_widthMiddle = EngineGlobals::screen_width / 2;
     m_heightMiddle = EngineGlobals::screen_height / 2;
     CreateGameOver();
     CreateQuitButton();
+
+    INFO("EndScene1 - set on activation's behavior");
 }
 
 /**
@@ -40,18 +45,24 @@ void EndScene1::OnHidden() {}
     @brief Creates game over scene.
 */
 void EndScene1::CreateGameOver() {
+    INFO("EndScene1 - creating game over scene");
+
     // defines the current center position
     int xMiddle = EngineGlobals::screen_width / 2 - 240;
     auto gameOver = new GameObject("Logo", new Vector(xMiddle,0), 500, 500,1);
     new UIText(gameOver, "GAME OVER", "assets/Fonts/mini-pixel-7/mini-pixel-7.ttf",
                                200, 255, 255, 255, 150, 1);
-  AddGameObject(gameOver);
+    AddGameObject(gameOver);
+
+    INFO("EndScene1 - created game over scene");
 }
 
 /**
     @brief Creates 'quit' button on the middle of the screen.
 */
 void EndScene1::CreateQuitButton() {
+    INFO("EndScene1 - creating quit button");
+
     // Defines the current center position
     int xMiddle = EngineGlobals::screen_width / 2 - 100;
 
@@ -64,4 +75,5 @@ void EndScene1::CreateQuitButton() {
     new QuitButtonScript(quit);
 
     AddGameObject(quit);
+    INFO("EndScene1 - created quit button");
 }

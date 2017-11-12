@@ -1,5 +1,6 @@
 #include "Customs/LeftCenterLightScript.hpp"
 #include "Globals/EngineGlobals.hpp"
+#include "Log/log.hpp"
 
 /**
     @file LeftCenterLightScript.cpp
@@ -21,6 +22,8 @@ LeftCenterLightScript::LeftCenterLightScript(GameObject *owner) : Script(owner) 
     @brief Creates the animations in-game, with some of the gameobject properties.
 */
 void LeftCenterLightScript::Start() {
+    INFO("LeftCenterLightScript - initializing");
+
     CreateAnimations();
     position = GetOwner()->GetPosition();
     animator = (Animator *)GetOwner()->GetComponent("Animator");
@@ -35,13 +38,19 @@ void LeftCenterLightScript::Start() {
                                                     ->originalWidth,map
                                                     ->originalHeight/GetOwner()
                                                     ->originalHeight));
+    } else {
+        // Do nothing
     }
+
+    INFO("LeftCenterLightScript - initialized");
 }
 
 /**
     @brief Positions the animations in-game, through the settings of frames, and image's position.
 */
 void LeftCenterLightScript::CreateAnimations(){
+    INFO("LeftCenterLightScript - creating animations");
+
     // Sets the image of the little square placed on the map, where the player has to go to
     auto centrallightSprite = new Image("assets/left_center.png", 0, 0, imagePlacing * 13, imagePlacing);
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
@@ -51,15 +60,23 @@ void LeftCenterLightScript::CreateAnimations(){
     auto centrallightAnimator = new Animator(GetOwner());
     centrallightAnimation->SetFramesPerSecond(framesPerSecond);
     centrallightAnimator->AddAnimation("CENTRAL LIGHT ANIMATION", centrallightAnimation);
+
+    INFO("LeftCenterLightScript - created animations");
 }
 
 /**
     @brief Updates the animator component by looking for a previous light animation.
 */
 void LeftCenterLightScript::ComponentUpdate() {
+    INFO("LeftCenterLightScript - updating component");
+
     if(!animator->IsPlaying("CENTRAL LIGHT ANIMATION") && active){
         animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
-    }
+    } else {
+       // Do nothing
+   }
+
+    INFO("LeftCenterLightScript - updated component");
 }
 
 /**

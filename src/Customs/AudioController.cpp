@@ -1,4 +1,5 @@
 #include "Customs/AudioController.hpp"
+#include "Log/log.hpp"
 
 /**
     @file AudioController.cpp
@@ -14,12 +15,17 @@ AudioController *AudioController::m_instance = nullptr;
 */
 AudioController *AudioController::GetInstance() {
     // Singleton class
+    INFO("AudioController - getting instance");
 
     // If the m_instance is not initialized, intializes it.
     if (!m_instance){
         m_instance = new AudioController();
+    } else {
+        // Do nothing
     }
-return m_instance;
+
+    INFO("AudioController - got instance");
+    return m_instance;
 }
 
 //Constructor void
@@ -31,8 +37,11 @@ AudioController::AudioController() {
     @param[in] sound - the UI sound component.
 */
 void AudioController::AddAudio(UISound *sound) {
+    INFO("AudioController - adding sound");
+
     // Add
     m_sounds.push_back(sound);
+    INFO("AudioController - added sound");
 }
 
 /**
@@ -41,7 +50,8 @@ void AudioController::AddAudio(UISound *sound) {
     @param[in] loops - the number of times that the audio will play.
 */
 void AudioController::PlayAudio(string name, int loops){
-    // Play
+    INFO("AudioController - playing sound");
+
     for (auto sound : m_sounds) {
         /*
         If the message is correspondent to the sound component name, plays
@@ -51,6 +61,7 @@ void AudioController::PlayAudio(string name, int loops){
             sound->Play(loops, -1);
         }
     }
+    INFO("AudioController - played sound");
 }
 
 /**
@@ -58,7 +69,8 @@ void AudioController::PlayAudio(string name, int loops){
     @param[in] sound - the name of the sound component.
 */
 void AudioController::StopAudio(string name){
-    // Stop
+    INFO("AudioController - stopping sound");
+
     for (auto sound : m_sounds) {
         /*
         If the message is correspondent to the sound component name, stops
@@ -68,7 +80,7 @@ void AudioController::StopAudio(string name){
             sound->Stop(-1);
         }
     }
-
+    INFO("AudioController - stopped sound");
 }
 
 /**
@@ -76,7 +88,8 @@ void AudioController::StopAudio(string name){
     @param[in] sound - the name of the sound component.
 */
 void AudioController::PauseAudio(string name){
-    // Pause
+    INFO("AudioController - pausing audio");
+
     for (auto sound : m_sounds) {
         /*
         If the message is correspondent to the sound component name, stops
@@ -84,6 +97,9 @@ void AudioController::PauseAudio(string name){
         */
         if(sound->GetMessage() == name){
             sound->Stop(-1);
+        } else {
+            // Do nothing
         }
     }
+    INFO("AudioController - paused audio");
 }
