@@ -203,7 +203,8 @@ void GamePlayScene::CreateMap() {
     auto m_mapImage = new Image("assets/map.png", imageScenePositionX,
                               imageScenePositionY, imageSceneWidth, imageSceneHeight);
 
-    auto mapRenderer = new Renderer(m_map, m_mapImage);
+    new Renderer(m_map, m_mapImage);
+
 
 
     auto m_trees = new GameObject("Tree", new Vector(vectorMapTreeAxisX, vectorMapTreeAxisY),
@@ -227,7 +228,7 @@ void GamePlayScene::CreateMap() {
 
     AudioController::GetInstance()->AddAudio(bossBattleSound);
 
-    auto mainSound = new UISound(map, "mainSound",
+    auto mainSound = new UISound(m_map, "mainSound",
                                  "assets/Audio/forestfinal.ogg",
                                  false, false);
 
@@ -447,17 +448,17 @@ void GamePlayScene::CreateFirstBossAttack() {
         new  FirstBossAttackScript(m_firstBossAttack);
 
         //Sounds.
-        auto firstAttackSound = new UISound(firstBossAttack, "firstAttackSound",
+        auto firstAttackSound = new UISound(m_firstBossAttack, "firstAttackSound",
                                             "assets/Audio/Boss/shout1.ogg",
                                             false, false);
         AudioController::GetInstance()->AddAudio(firstAttackSound);
 
-        auto secondAttackSound = new UISound(firstBossAttack, "secondAttackSound",
+        auto secondAttackSound = new UISound(m_firstBossAttack, "secondAttackSound",
                                             "assets/Audio/Boss/shout2.ogg",
                                             false, false);
         AudioController::GetInstance()->AddAudio(secondAttackSound);
 
-        auto thirdAttackSound = new UISound(firstBossAttack, "thirdAttackSound",
+        auto thirdAttackSound = new UISound(m_firstBossAttack, "thirdAttackSound",
                                             "assets/Audio/Boss/shout3.ogg",
                                             false, false);
         AudioController::GetInstance()->AddAudio(thirdAttackSound);
