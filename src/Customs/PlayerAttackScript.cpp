@@ -9,8 +9,10 @@
 #include "Log/log.hpp"
 #include "Customs/NakedManScript.hpp"
 
-PlayerAttackScript::PlayerAttackScript(GameObject *owner) : Script(owner) {
+#include <cassert>
 
+PlayerAttackScript::PlayerAttackScript(GameObject *owner) : Script(owner) {
+    assert((owner != NULL) && "the owner must be equal to NULL");
 }
 
 /**
@@ -27,11 +29,11 @@ void PlayerAttackScript::Start() {
     // Get the animator.
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
-    auto map = SceneManager::GetInstance()->GetScene("Gameplay")->
+    auto m_map = SceneManager::GetInstance()->GetScene("Gameplay")->
                                             GetGameObject("Map");
     // Check for map, and if exists, sets its map on a vector.
-    if (map) {
-        GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
+    if (m_map) {
+        GetOwner()->SetZoomProportion(Vector(m_map->originalWidth/GetOwner()->originalWidth,m_map->originalHeight/GetOwner()->originalHeight));
     }
     else {
         // Do nothing
@@ -50,8 +52,8 @@ void PlayerAttackScript::CreateAnimations() {
     INFO("Player Attack Script - Create Animations");
 
     // Renderer the bullet image.
-    auto bulletImage = new Image("assets/Sprites/green_bullet.png",0,0,124, 124);
-    new Renderer(GetOwner(), bulletImage);
+    auto m_bulletImage = new Image("assets/Sprites/green_bullet.png",0,0,124, 124);
+    new Renderer(GetOwner(), m_bulletImage);
 
 }
 
@@ -65,10 +67,10 @@ void PlayerAttackScript::ComponentUpdate() {
 
     player =  SceneManager::GetInstance()->GetCurrentScene()->
               GetGameObject("NakedMan");
-    auto playerScript = (NakedManScript*)player->GetComponent("NakedManScript");
+    auto m_playerScript = (NakedManScript*)player->GetComponent("NakedManScript");
 
     // Check for the player and playerScript, and if exists, get the position of the player and his mouse position.
-    if (player && playerScript) {
+    if (player && m_playerScript) {
 
         //Get player Position.
         playerPosition.m_x  =  player->GetPosition()->m_x +  player->GetWidth() / 2;
@@ -79,7 +81,7 @@ void PlayerAttackScript::ComponentUpdate() {
         mousePosition.m_y = input->GetMousePosition().second;
 
         // Check for shoot and something diferent of the playerScript.
-        if (shoot && !playerScript->gameControllerActivated) {
+        if (shoot && !m_playerScript->gameControllerActivated) {
             GetOwner()->active = true;
             // angle  according to the player position and his mouse position.
             angle = playerPosition.GetAngleRadians(mousePosition);
@@ -94,9 +96,9 @@ void PlayerAttackScript::ComponentUpdate() {
             shoot = false;
         }
         // Check for shoot and the playerScript.
-        if (shoot && playerScript->gameControllerActivated) {
+        if (shoot && m_playerScript->gameControllerActivated) {
             GetOwner()->active = true;
-            angle = playerScript->gameControllerAngle*3.14/180;
+            angle = m_playerScript->gameControllerAngle*3.14/180;
             bulletVelocity.m_x = bulletSpeed * cos(angle);
             bulletVelocity.m_y = bulletSpeed * sin(angle);
             position->m_x = playerPosition.m_x;
@@ -131,12 +133,12 @@ void PlayerAttackScript::FixedComponentUpdate() {
 void PlayerAttackScript::GameCollisionCheck() {
     INFO("Player Attack Script - Game Collisions Check");
     // The loop get the collisions according to the tag set in the ifs.
-    for (auto object : GetOwner()->GetCollisions()) {
+    for (auto m_object : GetOwner()->GetCollisions()) {
         // If that collisions is the bullet, get his collisions.
-        if (object->GetTag() == "Bullet") {
+        if (m_object->GetTag() == "Bullet") {
             GetOwner()->ClearCollisions();
         // If the collisions is the FirstBoss.
-        } else if (object->GetTag() == "FirstBoss") {
+    } else if (m_object->GetTag() == "FirstBoss") {
             cout << "Boss Colider" << endl;
             auto firstBossLifeScript = (FirstBossLifeScript*)SceneManager::GetInstance()
                ->GetCurrentScene()
@@ -147,7 +149,7 @@ void PlayerAttackScript::GameCollisionCheck() {
             GetOwner()->active = false;
             GetOwner()->ClearCollisions();
         // If the collisions is the FirstBossAtack.
-        } else if(object->GetTag() == "FirstBossAtack") {
+    } else if(m_object->GetTag() == "FirstBossAtack") {
             cout << "Boss Atack Colider" << endl;
             GetOwner()->ClearCollisions();
         }

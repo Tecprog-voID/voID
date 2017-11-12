@@ -32,16 +32,16 @@ SceneManager *SceneManager::GetInstance() {
 
 void SceneManager::SetCurrentScene(std::string sceneName) {
     INFO("SceneManager - Set currante scene");
-    auto found = m_scenes.find(sceneName);
+    auto m_found = m_scenes.find(sceneName);
     // Check for found diferent of scenes and set the current state.
-    if (found != m_scenes.end()) {
+    if (m_found != m_scenes.end()) {
         if (m_currentScene.second != nullptr) {
             m_currentScene.second->SetState(SCENE_HIDDEN);
         } else {
             // Do nothing
         }
 
-        m_currentScene = std::make_pair(found->first, found->second);
+        m_currentScene = std::make_pair(m_found->first, m_found->second);
         // Check for found diferent of scenes and set current the state.
         if (m_currentScene.second->GetState() == SCENE_DEACTIVATED) {
             m_currentScene.second->SetState(SCENE_ACTIVATED);
@@ -66,10 +66,10 @@ void SceneManager::AddScene(std::pair<std::string, Scene *> scenePair) {
 
 void SceneManager::Start() {
     INFO("SceneManager - Start");
-    for (auto scene : m_scenes) {
+    for (auto m_scene : m_scenes) {
         // Check for the state equal to deactivated and active it.
-        if (scene.second->GetState() == SCENE_DEACTIVATED) {
-            scene.second->SetState(SCENE_ACTIVATED);
+        if (m_scene.second->GetState() == SCENE_DEACTIVATED) {
+            m_scene.second->SetState(SCENE_ACTIVATED);
         } else {
             // Do nothing
         }
@@ -108,9 +108,9 @@ void SceneManager::FixedUpdate() {
 
 Scene *SceneManager::GetScene(std::string name) {
     INFO("SceneManager - Get Scene");
-    for (auto pair : m_scenes) {
-        if (pair.first == name) {
-            return pair.second;
+    for (auto m_pair : m_scenes) {
+        if (m_pair.first == name) {
+            return m_pair.second;
         } else {
             // Do nothing
         }
