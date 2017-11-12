@@ -6,6 +6,7 @@
 
 #include "Customs/PlayerAttackScript.hpp"
 #include "Globals/EngineGlobals.hpp"
+#include "Log/log.hpp"
 #include "Customs/NakedManScript.hpp"
 
 PlayerAttackScript::PlayerAttackScript(GameObject *owner) : Script(owner) {
@@ -17,6 +18,7 @@ PlayerAttackScript::PlayerAttackScript(GameObject *owner) : Script(owner) {
     the component, scene and the GameObject to starts.
 */
 void PlayerAttackScript::Start() {
+    INFO("Player Attack Script - Start");
 
     CreateAnimations();
     // Get the position.
@@ -31,6 +33,9 @@ void PlayerAttackScript::Start() {
     if (map) {
         GetOwner()->SetZoomProportion(Vector(map->originalWidth/GetOwner()->originalWidth,map->originalHeight/GetOwner()->originalHeight));
     }
+    else {
+        // Do nothing
+    }
     player =  SceneManager::GetInstance()->GetCurrentScene()->GetGameObject("NakedMan");
 
     playerCollider = new RectangleCollider(GetOwner(), Vector(0, 0), GetOwner()->GetWidth(), GetOwner()->GetHeight(), 0);
@@ -42,6 +47,7 @@ void PlayerAttackScript::Start() {
     and after that the image is renderer.
 */
 void PlayerAttackScript::CreateAnimations() {
+    INFO("Player Attack Script - Create Animations");
 
     // Renderer the bullet image.
     auto bulletImage = new Image("assets/Sprites/green_bullet.png",0,0,124, 124);
@@ -55,6 +61,7 @@ void PlayerAttackScript::CreateAnimations() {
 the game).
 */
 void PlayerAttackScript::ComponentUpdate() {
+    INFO("Player Attack Script - Component Update");
 
     player =  SceneManager::GetInstance()->GetCurrentScene()->
               GetGameObject("NakedMan");
@@ -95,7 +102,11 @@ void PlayerAttackScript::ComponentUpdate() {
             position->m_x = playerPosition.m_x;
             position->m_y = playerPosition.m_y;
             shoot = false;
+        } else {
+            // Do nothing
         }
+    } else {
+        // Do nothing
     }
 }
 
@@ -104,6 +115,7 @@ void PlayerAttackScript::ComponentUpdate() {
     to check the bullet speed.
 */
 void PlayerAttackScript::FixedComponentUpdate() {
+    INFO("Player Attack Script - Fixes component update");
     GameCollisionCheck();
 
     bulletSpeed = bulletSpeed;
@@ -117,13 +129,14 @@ void PlayerAttackScript::FixedComponentUpdate() {
     collisions, like the bullet, and check the velocity for exemple.
 */
 void PlayerAttackScript::GameCollisionCheck() {
+    INFO("Player Attack Script - Game Collisions Check");
     // The loop get the collisions according to the tag set in the ifs.
     for (auto object : GetOwner()->GetCollisions()) {
         // If that collisions is the bullet, get his collisions.
         if (object->GetTag() == "Bullet") {
             GetOwner()->ClearCollisions();
         // If the collisions is the FirstBoss.
-    } else if (object->GetTag() == "FirstBoss") {
+        } else if (object->GetTag() == "FirstBoss") {
             cout << "Boss Colider" << endl;
             auto firstBossLifeScript = (FirstBossLifeScript*)SceneManager::GetInstance()
                ->GetCurrentScene()
@@ -134,7 +147,7 @@ void PlayerAttackScript::GameCollisionCheck() {
             GetOwner()->active = false;
             GetOwner()->ClearCollisions();
         // If the collisions is the FirstBossAtack.
-    } else if(object->GetTag() == "FirstBossAtack") {
+        } else if(object->GetTag() == "FirstBossAtack") {
             cout << "Boss Atack Colider" << endl;
             GetOwner()->ClearCollisions();
         }
@@ -147,5 +160,6 @@ void PlayerAttackScript::GameCollisionCheck() {
     opposite when shoot is true.
 */
 void PlayerAttackScript::SetShoot(bool m_shoot) {
+    INFO("Player Attack Script - Set Shoot");
     this->shoot = m_shoot;
 }

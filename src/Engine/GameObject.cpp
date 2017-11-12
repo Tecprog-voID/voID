@@ -39,6 +39,7 @@ GameObject::~GameObject() {
     if the key is different of the end.
 */
 void GameObject::Start() {
+     INFO("GameObject - Start");
     // Run through the map of components, starting each one of them.
     for (auto key = m_components.begin(); key != m_components.end(); key++) {
         for (auto component : key->second) {
@@ -50,13 +51,17 @@ void GameObject::Start() {
 /**
     @brief that function updates all the components of the game objects.
 */
-void GameObject::Update() { ComponentsUpdate(); }
+void GameObject::Update() {
+    INFO("GameObject - Update");
+    ComponentsUpdate();
+}
 
 /**
     @brief that function updates all the draw components. Find the draws, check
     if is active and update the component.
 */
 void GameObject::DrawUpdate() {
+    INFO("GameObject - Update the Draw");
     // Search for the component type(DRAW) on the components vector, and set it.
     auto it = m_components.find(C_DRAW);
 
@@ -65,8 +70,12 @@ void GameObject::DrawUpdate() {
         for (auto component : it->second) {
             if (component->m_active) {
                 component->Update();
+            } else {
+                // Do nothing
             }
         }
+    } else {
+        // Do nothing
     }
 }
 
@@ -75,6 +84,7 @@ void GameObject::DrawUpdate() {
     components, check if is active and update the component.
 */
 void GameObject::PhysicsUpdate() {
+    INFO("GameObject - Physics Update");
     // Search for the component type(PHYSICS) on the components vector, and set it.
     auto it = m_components.find(C_PHYSICS);
 
@@ -83,8 +93,12 @@ void GameObject::PhysicsUpdate() {
         for (auto component : it->second) {
             if (component->m_active) {
                 component->Update();
+            } else {
+                // Do nothing
             }
         }
+    } else {
+        // Do nothing
     }
 }
 
@@ -93,17 +107,22 @@ void GameObject::PhysicsUpdate() {
     if is active and update the component.
 */
 void GameObject::ComponentsUpdate() {
+    INFO("GameObject - Components Update");
     // Search for the component type(COMMON) on the components vector, and set it.
     auto it = m_components.find(C_COMMON);
 
-        // If the component type wasn't found on the vector, updates the component.
-        if (it != m_components.end()) {
-            for (auto component : it->second) {
-                if (component->m_active) {
-                    component->Update();
+    // If the component type wasn't found on the vector, updates the component.
+    if (it != m_components.end()) {
+        for (auto component : it->second) {
+            if (component->m_active) {
+                component->Update();
+            } else {
+                // Do nothing
             }
-          }
-        }
+         }
+    } else {
+        // Do nothing
+    }
 }
 
 /**
@@ -111,6 +130,7 @@ void GameObject::ComponentsUpdate() {
     @param[in] Component pointer that points to the current component.
 */
 void GameObject::AddComponent(Component *component) {
+    INFO("GameObject - Add component");
     // Set variable 'type' according to the type of the current component.
     auto type = component->GetType();
     auto it = m_components.find(type);
@@ -146,11 +166,14 @@ void GameObject::AddComponent(std::vector<Component *> components) {
     @return nullptr if the name doesn't match any gameobject, or the component name.
 */
 Component *GameObject::GetComponent(std::string name) {
+    INFO("GameObject - Update");
     // Run through the map of components, searching for the current given name.
     for (auto key = m_components.begin(); key != m_components.end(); key++) {
         for (auto value : key->second) {
             if (value->GetComponentName() == name) {
                 return value;
+            } else {
+                // Do nothing
             }
         }
     }
@@ -161,6 +184,7 @@ Component *GameObject::GetComponent(std::string name) {
     @brief that function is for fix the updates that were done before.
 */
 void GameObject::FixedUpdate() {
+    INFO("GameObject - Fix the Update");
     /*
         Run through the map of components, and puts them in a struct that holds
         two objects of arbitrary type. Then updates it with the FixedComponent and PhysicsUpdate();.
@@ -178,6 +202,7 @@ void GameObject::FixedUpdate() {
     @param[in] width and height in centimeters.
 */
 void GameObject::SetSize(int width, int height) {
+    INFO("GameObject - Set the size");
     // Sets the gameobject width and height with the given values.
     m_width = width;
     m_height = height;
@@ -193,6 +218,7 @@ bool GameObject::operator<(const GameObject &go) const {
     vertical)
 */
 void GameObject::AddVelocity(Vector velocity) {
+    INFO("GameObject - Add velocity");
     // Sets the gameobject velocity vector with the given values.
     m_velocity->m_x += velocity.m_x;
     m_velocity->m_y += velocity.m_y;
@@ -203,6 +229,7 @@ void GameObject::AddVelocity(Vector velocity) {
     @return the vector of gameobject's velocity.
 */
 Vector GameObject::GetVelocity() {
+    INFO("GameObject - Get the velocity");
     return *m_velocity;
 }
 
@@ -211,6 +238,7 @@ Vector GameObject::GetVelocity() {
     @param[in] GameObject pointer that points to the current gameobject.
 */
 void GameObject::AddCollision(GameObject *gameobject) {
+    INFO("GameObject - Add collision");
     // Inserts the current gameobject collision in the end of the gameobject's collisions vector.
     m_colliding.push_back(gameobject);
 }
@@ -218,12 +246,16 @@ void GameObject::AddCollision(GameObject *gameobject) {
 /**
     @brief that function is for clear the collisions tha were made before.
 */
-void GameObject::ClearCollisions() { m_colliding.clear(); }
+void GameObject::ClearCollisions() {
+    INFO("GameObject - Clear the collisions");
+    m_colliding.clear();
+ }
 
 /**
     @brief Get the gameobject's collisions.
     @return the vector of gameobject's collisions.
 */
 std::vector<GameObject *> GameObject::GetCollisions() {
+    INFO("GameObject - Get collisions");
     return m_colliding;
 }

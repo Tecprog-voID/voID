@@ -8,6 +8,8 @@
 #include "Globals/ComponentTypes.hpp"
 #include "Math/Vector.hpp"
 
+#include "Log/log.hpp"
+
 
 /**
     @brief Initializes RectangleCollider instance.
@@ -23,6 +25,9 @@ void Rigidbody::FixedComponentUpdate() {
     // Check for gravity, and if exists, sets its force on a vector.
     if (m_gravity) {
         GetOwner()->AddVelocity(Vector(0, m_gravityForce));
+    }
+    else {
+       // Do nothing
     }
 
     // Sets the x,y positions in the owner component of the gameobject, according to its velocity.

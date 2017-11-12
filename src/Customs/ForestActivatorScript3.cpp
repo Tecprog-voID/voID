@@ -69,7 +69,7 @@ void ForestActivatorScript3::Start() {
 void ForestActivatorScript3::CreateAnimations() {
 
     // Creates the image.
-    auto forestactivatorSprite = new Image("assets/forestactivator.png", 
+    auto forestactivatorSprite = new Image("assets/Forest_activator.png", 
                                            imageActivatorPositionX, imageActivatorPositionY,
                                            imageActivatorWidth, imageActivatorHeight);
 
@@ -79,17 +79,17 @@ void ForestActivatorScript3::CreateAnimations() {
 
 
     for (int counter = 0; counter < maxCounter; counter++) {
-        forestactivatorAnimation->AddFrame(new Frame(counter * frameActivatorPositionX, 
-                                                     frameActivatorPositionY, 
-                                                     frameActivatorWidth, 
+        forestactivatorAnimation->AddFrame(new Frame(counter * frameActivatorPositionX,
+                                                     frameActivatorPositionY,
+                                                     frameActivatorWidth,
                                                      frameActivatorHeight));
     }
 
     auto forestactivatorAnimation2 = new Animation(GetOwner(),
                                                    forestactivatorSprite);
-    forestactivatorAnimation2->AddFrame(new Frame(12 * frameActivatorPositionX, 
-                                                     frameActivatorPositionY, 
-                                                     frameActivatorWidth, 
+    forestactivatorAnimation2->AddFrame(new Frame(12 * frameActivatorPositionX,
+                                                     frameActivatorPositionY,
+                                                     frameActivatorWidth,
                                                      frameActivatorHeight));
 
     auto forestactivatorAnimator = new Animator(GetOwner());

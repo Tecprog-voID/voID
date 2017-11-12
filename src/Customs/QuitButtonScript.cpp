@@ -5,6 +5,7 @@
 */
 
 #include "Customs/QuitButtonScript.hpp"
+#include "Log/log.hpp"
 
 const int grayTone = 160;
 const int whiteTone = 255;
