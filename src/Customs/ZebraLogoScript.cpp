@@ -37,7 +37,7 @@ void ZebraLogoScript::Start() {
 void ZebraLogoScript::CreateAnimations(){
     INFO("ZebraLogoScript - initializing create animations");
     // Keeps the path, positions x and y, width and height of the Zebra image
-    auto zebraSprite = new Image("assets/introzebra.png", 0, 0,
+    auto zebraSprite = new Image("assets/zebraengineintroduction.png", 0, 0,
                                  width * 15, height * 2);
 
     auto zebraAnimation = new Animation(GetOwner(), zebraSprite);
