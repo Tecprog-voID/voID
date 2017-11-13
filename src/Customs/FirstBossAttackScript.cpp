@@ -8,6 +8,8 @@
 #include "Customs/AudioController.hpp"
 #include "Log/log.hpp"
 
+#include <cassert>
+
 const int imageHeight = 151;
 const int imageWidth = 600;
 const int cameraShakeIntensity = 8;
@@ -20,6 +22,7 @@ const int framesNumber = 40;
     @brief Constructor for the FirstBossAttackScript class.
 */
 FirstBossAttackScript::FirstBossAttackScript(GameObject *owner) : Script(owner) {
+    assert((owner != NULL) && "the owner must be equal to NULL");
     INFO("FirstBossAttackScript - initialized");
 }
 
