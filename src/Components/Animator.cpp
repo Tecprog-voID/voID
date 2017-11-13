@@ -5,12 +5,14 @@
 */
 #include "Components/Animator.hpp"
 
+#include <cassert>
 /**
     @brief Animator constructor.
     @param[in] owner
     @param[in] C_DRAW Enumerator from ComponentTypes.
 */
 Animator::Animator(GameObject *owner) : Component(owner, C_DRAW) {
+    assert((owner != NULL) && "the owner must be equal to NULL");
     INFO("Animator - initialized");
 }
 

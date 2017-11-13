@@ -6,9 +6,14 @@
 #include "Components/CircleRenderer.hpp"
 #include "Log/log.hpp"
 
+#include <cassert>
+
 
 CircleRenderer::CircleRenderer(GameObject *owner, Vector offset, float radius)
                                                     : Component(owner, C_DRAW) {
+
+    assert((owner != NULL) && "the owner must be equal to NULL");
+    
     INFO("CircleRenderer - initializing");
     m_offset = offset;
     m_radius = radius;
