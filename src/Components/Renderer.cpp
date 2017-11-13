@@ -41,6 +41,8 @@ Renderer::Renderer(GameObject *owner, Image *image) : Component(owner, C_DRAW) {
     if (!m_image) {
         // Return error
         ERROR("Null image on renderer");
+    } else {
+        // nothing to do.
     }
 }
 
@@ -72,6 +74,8 @@ void Renderer::RotateTowards(Vector *point) {
     // Keep angles in 0 to 360 range
     if (angles < 0) {
         angles = fullAngle - (-angles);
+    } else {
+        // nothing to do.
     }
 
     Rotate(angles);

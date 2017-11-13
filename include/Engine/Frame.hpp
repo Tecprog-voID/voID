@@ -16,7 +16,7 @@ class Frame {
 
 	private:
 	    // Rectangular area of the frame
-	    SDL_Rect sourceRectangle = {
+	    SDL_Rect originOfRectangle = {
 	    	0, 0, 0, 0
 	    };
 };

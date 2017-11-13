@@ -48,18 +48,22 @@ SDLSystem::~SDLSystem() {
 void SDLSystem::Init() {
     INFO("SDLSystem - initializing");
 
-    // Check initialization fails
+    // Check initialization fails, error is default
     if (!(InitSDL() && InitIMG() && InitMixer() && InitTTF())) {
         // Display error message
         ERROR("SDLSystem - failed.");
             return;
+    } else {
+        //nothing to do.
     }
 
-    // Check creation fails
+    // Check creation fails, error is default
     if (!(CreateWindow() && CreateRenderer())) {
         // Display error message
         ERROR("SDLSystem - failed.");
-            return;
+        return;
+    } else {
+        //nothing to do.
     }
 
     INFO("SDLSystem - completed");
@@ -82,6 +86,8 @@ void SDLSystem::Run() {
     while (m_isRunning) {
         if (!FixFramerate()) {
             continue;
+        } else {
+            //nothing to do.
         }
 
         // Clear front buffer.
@@ -106,6 +112,8 @@ void SDLSystem::Run() {
             SceneManager::GetInstance()->FixedUpdate();
             CollisionSystem::GetInstance()->Update();
             m_lastFixedUpdate = SDL_GetTicks();
+        } else {
+            //nothing to do.
         }
 
         // Getting back buffer and sending to front buffer.
@@ -143,6 +151,8 @@ SDLSystem *SDLSystem::GetInstance() {
     // Create if there is no instance
     if (!m_instance) {
         m_instance = new SDLSystem();
+    } else {
+        // nothing to do.
     }
 
     return m_instance;
@@ -159,11 +169,13 @@ bool SDLSystem::InitSDL() {
     int initialize = SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO |
                SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER | SDL_INIT_EVENTS);
 
-    // Check initialization fail
+    // Check initialization fail, error is default.
     if (initialize != 0) {
         // Display error message
         SDL_ERROR("SDLSystem - InitSDL() failed.");
         return false;
+    } else {
+        // nothing to do.
     }
 
     INFO("SDL Initialized.")
@@ -181,11 +193,13 @@ bool SDLSystem::InitIMG() {
     int flags = IMG_INIT_PNG | IMG_INIT_JPG;
     int initialize = IMG_Init(flags);
 
-    // Check image initialization fail
+    // Check image initialization fail, error is default
     if ((initialize & flags) != flags) {
         // Display error message
         SDL_IMG_ERROR("SDLSystem::InitIMG() failed.");
         return false;
+    } else {
+        // nothing to do.
     }
 
     INFO("SDLSystem - IMG Initialized.");
@@ -202,11 +216,13 @@ bool SDLSystem::InitMixer() {
     // Choose frequency, Uint16 format, channels and chunksize
     int initialize = Mix_OpenAudio(frequency, MIX_DEFAULT_FORMAT, channels, chunksize);
 
-    // Check mixer initialization fail
+    // Check mixer initialization fail, error is default
     if (initialize != 0) {
         // Display error message
         SDL_MIX_ERROR("SDLSystem::InitMixer() failed.");
         return false;
+    } else {
+        // nothing to do.
     }
 
     INFO("SDLSystem - Mixer Initialized.");
@@ -222,11 +238,13 @@ bool SDLSystem::InitTTF() {
 
     int initialize = TTF_Init();
 
-    // Check TTF initialization fail
+    // Check TTF initialization fail, error is default
     if (initialize != 0) {
         // Display error message
         SDL_TTF_ERROR("SDLSystem - InitTTF() failed.");
         return false;
+    } else {
+        // nothing to do.
     }
 
     INFO("SDLSystem - TTF Initialized.");
@@ -245,11 +263,13 @@ bool SDLSystem::CreateWindow() {
                                 EngineGlobals::screen_width,
                                 EngineGlobals::screen_height, SDL_WINDOW_SHOWN);
 
-    // Check window creation fail
+    // Check window creation fail, error is default
     if (!m_window) {
         // Display error message
         SDL_ERROR("SDLSystem - CreateWindow() failed.");
         return false;
+    } else {
+        // nothing to do.
     }
 
     INFO("SDLSystem - Created window successfully.");
@@ -266,11 +286,13 @@ bool SDLSystem::CreateRenderer() {
     // Use hardware acceleration with first rendering driver that support it.
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
 
-    // Check renderer creation fail
+    // Check renderer creation fail, error is default
     if (!m_renderer) {
         // Display error message
         SDL_ERROR("SDLSystem - CreateRenderer() failed.");
         return false;
+    } else {
+        // nothing to do.
     }
 
     SDL_SetRenderDrawBlendMode(m_renderer,SDL_BLENDMODE_BLEND);
@@ -289,6 +311,8 @@ void SDLSystem::CalculateFramerate() {
         m_frameRate = m_frameCounter;
         m_frameCounter = 0;
         m_lastFrameTicks = m_currentTicks;
+    } else {
+        // nothing to do.
     }
     m_frameCounter++;
 }
@@ -332,6 +356,8 @@ bool SDLSystem::FixFramerate() {
     // Compare intervals to check the need to fix frame rate
     if (fixInterval < update_rate_interval){
         return false;
+    } else {
+        // nothing to do.
     }
 
     m_lastFix = SDL_GetTicks();

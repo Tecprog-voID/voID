@@ -30,7 +30,7 @@ public:
 
 private:
     // Set the CatchAll button as a UIButton
-    UIButton *m_interactive_button = nullptr;
+    UIButton *m_interactiveButton = nullptr;
 
     // Set a checkbox game object
     GameObject *m_checkbox = nullptr;

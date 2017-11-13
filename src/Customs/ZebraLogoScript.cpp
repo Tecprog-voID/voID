@@ -75,10 +75,14 @@ void ZebraLogoScript::FixedComponentUpdate() {
     // Set the time when ZebraLogo will start to be displayed in the screen
     if (time.GetTime() >= 260) {
         animator->PlayAnimation("ZEBRA ANIMATION");
+    } else {
+        // nothing to do.
     }
 
     // Set the time when ZebraLogo will stop to be displayed in the screen
     if (time.GetTime() >= 360) {
         animator->StopAllAnimations();
+    } else {
+        // nothing to do.
     }
 }

@@ -14,10 +14,10 @@
     @param[in] height - Vertical frame size.
 */
 Frame::Frame(int positionX, int positionY, int width, int height) {
-    sourceRectangle.x = positionX;
-    sourceRectangle.y = positionY;
-    sourceRectangle.w = width;
-    sourceRectangle.h = height;
+    originOfRectangle.x = positionX;
+    originOfRectangle.y = positionY;
+    originOfRectangle.w = width;
+    originOfRectangle.h = height;
 }
 
 /**
@@ -25,5 +25,5 @@ Frame::Frame(int positionX, int positionY, int width, int height) {
     @return - The rectangular area of the frame
 */
 SDL_Rect *Frame::GetRect() {
-    return &sourceRectangle;
+    return &originOfRectangle;
 }
