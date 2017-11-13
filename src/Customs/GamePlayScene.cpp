@@ -200,10 +200,10 @@ void GamePlayScene::CreateMap() {
                               gameObjectCreateMapMapLayer);
 
     // Renderer the map image.
-    auto m_mapImage = new Image("assets/map.png", imageScenePositionX,
+    auto mapImage = new Image("assets/image/mapa2.png", imageScenePositionX,
                               imageScenePositionY, imageSceneWidth, imageSceneHeight);
-
-    new Renderer(m_map, m_mapImage);
+    //auto mapImage = new Image("assets/image/transitavel.png", 0, 0, 2678, 2678);
+    auto mapRenderer = new Renderer(map, mapImage);
 
 
 
@@ -212,7 +212,7 @@ void GamePlayScene::CreateMap() {
                                 gameObjectCreateMapTreeLayer);
 
     // Renderer the trees image.
-    auto m_treesImage = new Image("assets/trees.png", imageScenePositionX,
+    auto treesImage = new Image("assets/image/trees.png", imageScenePositionX,
                                 imageScenePositionY, imageSceneWidth, imageSceneHeight);
 
     new Renderer(m_trees, m_treesImage);

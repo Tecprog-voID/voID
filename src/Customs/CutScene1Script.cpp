@@ -53,7 +53,7 @@ void CutScene1Script::Start() {
 void CutScene1Script::CreateAnimations() {
     INFO("CutScene1Script - Creating animations");
     // Image light sprite.
-    auto centrallightSprite = new Image("assets/cut1.png", 0, 0, imageWidth, imageHeight);
+    auto centrallightSprite = new Image("assets/image/cut1.png", 0, 0, imageWidth, imageHeight);
 
     // Animation light.
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);

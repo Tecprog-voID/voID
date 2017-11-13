@@ -36,7 +36,7 @@ void MenuAnimationScript::CreateAnimations() {
     auto m_MenuAnimationScriptAnimator = new Animator(GetOwner());
 
     // Instantiating the menu image and its position.
-    auto m_mainSprite = new Image("assets/menu_animation.png", 0, 0, 5456, 256);
+    auto mainSprite = new Image("assets/image/menu_animation.png", 0, 0, 5456, 256);
 
     /*
         Instantiating the main animation and its position.

@@ -13,7 +13,7 @@ const float vectorZoomProportionAxisX = 0;
 const float vectorZoomProportionAxisY = 0;
 
 // Image snow script
-const std::string snowImagePath = "assets/snow.png";
+const std::string snowImagePath = "assets/image/neve.png";
 const int snowImagePositionX = 0;
 const int snowImagePositionY = 0;
 const int snowImageWidth = 6820;

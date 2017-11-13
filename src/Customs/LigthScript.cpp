@@ -32,7 +32,7 @@ void LightScript::Start() {
 void LightScript::CreateAnimations(){
     INFO("LightScript - Create Animations");
     // Instantiating lightimage by image file and define its positons.
-    auto m_lightImage = new Image("assets/light.png",0,0,682, 512);
+    auto lightImage = new Image("assets/image/light.png",0,0,682, 512);
 
     // Instantiating light animation by gameobject components, image and play state.
     auto m_lightAnimation = new Animation(GetOwner(),m_lightImage );

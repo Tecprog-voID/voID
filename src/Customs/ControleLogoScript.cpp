@@ -52,7 +52,7 @@ void ControleLogoScript::Start() {
 void ControleLogoScript::CreateAnimations() {
     INFO("ControleLogoScript - Creating Animations");
     // Image logo sprite.
-    auto controle_LogoSprite = new Image("assets/introjoystick.png", 0, 0, logoWidth, logoHeight);
+    auto controle_LogoSprite = new Image("assets/image/introjoystick.png", 0, 0, logoWidth, logoHeight);
     // Aniamtion logo sprite.
     auto controleAnimation = new Animation(GetOwner(), controle_LogoSprite);
 

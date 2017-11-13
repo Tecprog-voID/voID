@@ -725,7 +725,7 @@ void NakedManScript::GameControllerUpdate() {
 */
 void NakedManScript::CreateAnimations() {
     // Prepare animations with pictures of the player in motion.
-    auto dashrightSprite = new Image("assets/dashright.png", 0, 0, 210, 27);
+    auto dashrightSprite = new Image("assets/image/dashright.png", 0, 0, 210, 27);
     auto dashrightAnimation = new Animation(GetOwner(), dashrightSprite);
 
     // Run through 0 to 4 adding frames in different x positions
@@ -739,7 +739,7 @@ void NakedManScript::CreateAnimations() {
     dashrightAnimation->SetFramesPerSecond(10);
 
     // Prepare animations with player images in various directions.
-    auto nakedManSprite = new Image("assets/player.png", 0, 0, 1664, 512);
+    auto nakedManSprite = new Image("assets/image/player.png", 0, 0, 1664, 512);
     auto StopDownAnimation = new Animation(GetOwner(), nakedManSprite);
     StopDownAnimation->AddFrame(new Frame(0, 256, 128, 128));
     auto StopRightAnimation = new Animation(GetOwner(), nakedManSprite);

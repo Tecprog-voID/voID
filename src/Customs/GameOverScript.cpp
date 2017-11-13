@@ -39,7 +39,7 @@ void GameOverScript::CreateAnimations() {
         Creates game-over animation by setting a image and a animation with
         defined frames positions over it.
     */
-    auto m_snowImage = new Image("assets/Ending_show_image.png",0,0,4096, 2048);
+    auto snowImage = new Image("assets/image/Ending_show_image.png",0,0,4096, 2048);
 
     auto m_gameOverAnimation= new Animation(GetOwner(), m_snowImage );
     for (int  line = 0; line < quantityFrameLine; line++) {

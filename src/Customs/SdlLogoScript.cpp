@@ -52,7 +52,7 @@ void SdlLogoScript::Start() {
 */
 void SdlLogoScript::CreateAnimations(){
 
-    auto sdl_LogoSprite = new Image("assets/introsdl.png", imageSDLPositionX, 
+    auto sdl_LogoSprite = new Image("assets/image/introsdl.png", imageSDLPositionX, 
                                    imageSDLPositionY, imageSDLWidth, imageSDLHeight);
     auto sdlAnimation = new Animation(GetOwner(), sdl_LogoSprite);
 

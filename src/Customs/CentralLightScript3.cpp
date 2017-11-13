@@ -64,7 +64,7 @@ void CentralLightScript3::Start() {
 void CentralLightScript3::CreateAnimations(){
 
     // Create the animation.
-    auto centrallightSprite = new Image("assets/centro3.png", imageLightSpritePositionX, 
+    auto centrallightSprite = new Image("assets/image/centro3.png", imageLightSpritePositionX, 
                                         imageLightSpritePositionY, imageLightSpriteWidth, imageLightSpriteHeight);
 
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
