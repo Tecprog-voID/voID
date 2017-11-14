@@ -8,6 +8,8 @@
 
 #include "Globals/EngineGlobals.hpp"
 
+#include <cassert>
+
 const int lifePosition = 10;
 const int lifeComparer = 0;
 const int bossLifeX = 650;
@@ -17,6 +19,7 @@ const int bossLifeY = 10;
     @brief Constructor of the FirstBossLifeScript class.
 */
 FirstBossLifeScript::FirstBossLifeScript(GameObject *owner) : Script(owner) {
+    assert((owner != NULL) && "the owner must be equal to NULL");
     INFO("FirstBossLifeScript - initialized");
 }
 
