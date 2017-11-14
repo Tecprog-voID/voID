@@ -16,7 +16,7 @@
 class GameController {
 
 public:
-    GameController(SDL_GameController *gc);
+    explicit GameController(SDL_GameController *gc);
     ~GameController();
     void Update();
     bool GetButtonDown(GameControllerButton button);
