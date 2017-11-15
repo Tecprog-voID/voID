@@ -8,17 +8,15 @@
 #include "Engine/GameObject.hpp"
 #include "Log/log.hpp"
 
+#include <cassert>
+
 /**
     @brief Constructor of Component's class.
 */
 Component::Component(GameObject *owner, ComponentType type) {
     INFO("Component Component() - initializing");
     // Test if owner exists and show a error if doesn't exists.
-    if (!owner) {
-        ERROR("Invalid null owner");
-    } else {
-        // Do nothing.
-    }
+    assert((owner != NULL) && "Invalid null owner");
     // Instance the owner and type objects
     m_owner = owner;
     m_type = type;
@@ -31,7 +29,6 @@ Component::Component(GameObject *owner, ComponentType type) {
  */
 Component::~Component() {
     m_owner = nullptr;
-    INFO("Component ~Component() - completed");
 }
 
 /**
@@ -39,5 +36,4 @@ Component::~Component() {
  */
 void Component::Update() {
     ComponentUpdate();
-    INFO("Component Update() - completed");
 }
