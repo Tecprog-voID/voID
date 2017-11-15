@@ -4,11 +4,15 @@
     @copyright MIT License.
 */
 #include "Customs/FirstBossScript.hpp"
+#include "Log/log.hpp"
+
+#include <cassert>
 
 /**
     @brief Constructor for the class FirstBossScript.
 */
 FirstBossScript::FirstBossScript(GameObject *owner) : Script(owner) {
+    assert((owner != NULL) && "the owner must be equal to NULL");
     INFO("FirstBossScript FirstBossScript() - completed");
 }
 
@@ -16,7 +20,6 @@ FirstBossScript::FirstBossScript(GameObject *owner) : Script(owner) {
     @brief Starts the script of the first boss of the game.
 */
 void FirstBossScript::Start() {
-    INFO("FirstBossScript Start() - initializing");
     // Create the animations of the first boss
     CreateAnimations();
 
@@ -41,7 +44,6 @@ void FirstBossScript::Start() {
     } else {
         // Do nothing.
     }
-    INFO("FirstBossScript Start() - completed");
 }
 
 /**
@@ -49,7 +51,6 @@ void FirstBossScript::Start() {
     game.
 */
 void FirstBossScript::CreateAnimations() {
-    INFO("FirstBossScript CreateAnimations() - initializing");
     // Get images from the first boss.
     auto firstBossImage = new Image("assets/boss1.png",0,0,1896, 324);
     auto firstBossJumpImage = new Image("assets/boss1_jump.png",0,0,1180, 406);
@@ -135,14 +136,12 @@ void FirstBossScript::ComponentUpdate() {
     } else {
         // Do nothing.
     }
-    INFO("FirstBossScript ComponentUpdate() - completed");
 }
 
 /**
     @brief Handles with the boss behavior depending on which attack is being shot.
 */
 void FirstBossScript::FixedComponentUpdate() {
-    INFO("FirstBossScript FixedComponentUpdate() - initializing");
     // If is the first attack, update the timer of the first attack cooldown.
     if (m_firstAttack) {
         m_timerFirstAttackCooldown.Update(EngineGlobals::fixed_update_interval);
@@ -189,7 +188,6 @@ void FirstBossScript::FixedComponentUpdate() {
     } else {
         // Do nothing.
     }
-    INFO("FirstBossScript FixedComponentUpdate() - completed");
 }
 
 /**
@@ -197,7 +195,6 @@ void FirstBossScript::FixedComponentUpdate() {
     happen, etc.
 */
 void FirstBossScript::Attack() {
-    INFO("FirstBossScript Attack() - initializing");
     // Check if the game object is active to start the attack.
     if (GetOwner()->active) {
         // Cooldown time between all attacks.
@@ -329,5 +326,4 @@ void FirstBossScript::Attack() {
             // Do nothing.
         }
     }
-    INFO("FirstBossScript Attack() - completed");
 }
