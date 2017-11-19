@@ -8,12 +8,14 @@
 #include "Customs/UnbLogoScript.hpp"
 #include "Customs/ZebraLogoScript.hpp"
 #include "Customs/ControleLogoScript.hpp"
+#include "Log/log.hpp"
+
+#include <cassert>
 
 /**
     @brief Tells what happens when the PreMenuScene is activated.
 */
 void PreMenuScene::OnActivation() {
-    INFO("PreMenuScene OnActivation() - completed");
     // Create logos on activation.
     CreateLogoSdl();
     CreateLogoUnb();
@@ -21,17 +23,11 @@ void PreMenuScene::OnActivation() {
     CreateLogoZebra();
 }
 
-void  PreMenuScene::OnDeactivation() {
-    INFO("PreMenuScene OnDeactivation() - completed");
-}
+void  PreMenuScene::OnDeactivation() {}
 
-void  PreMenuScene::OnShown() {
-    INFO("PreMenuScene OnShown() - completed");
-}
+void  PreMenuScene::OnShown() {}
 
-void  PreMenuScene::OnHidden() {
-    INFO("PreMenuScene OnHidden() - completed");
-}
+void  PreMenuScene::OnHidden() {}
 
 /**
     @brief Shows the Sdl Logo.
