@@ -12,6 +12,7 @@
 #include "Customs/PreMenuScene.hpp"
 #include "Customs/EndScene1.hpp"
 #include "Customs/EndScene2.hpp"
+#include "Customs/Exception.hpp"
 
 #include <cassert>
 
@@ -51,14 +52,14 @@ void SDLSystem::Init() {
     INFO("SDLSystem - initializing");
 
     // Check initialization fails
-    assert((InitSDL() != NULL) && "InitSDL() must be equal to zero");
-    assert((InitIMG() != NULL) && "InitIMG() must be equal to zero");
-    assert((InitMixer() != NULL) && "InitMixer() must be equal to zero");
-    assert((InitTTF() != NULL) && "InitTTF() must be equal to zero");
+    assert((InitSDL() != '\0') && "InitSDL() must be equal to zero");
+    assert((InitIMG() != '\0') && "InitIMG() must be equal to zero");
+    assert((InitMixer() != '\0') && "InitMixer() must be equal to zero");
+    assert((InitTTF() != '\0') && "InitTTF() must be equal to zero");
 
     // Check creation fails
-    assert((CreateWindow() != NULL) && "CreateWindow() must be equal to zero");
-    assert((CreateRenderer() != NULL) && "CreateRenderer() must be equal to zero");
+    assert((CreateWindow() != '\0') && "CreateWindow() must be equal to zero");
+    assert((CreateRenderer() != '\0') && "CreateRenderer() must be equal to zero");
 
     INFO("SDLSystem - completed");
 }
@@ -163,19 +164,8 @@ bool SDLSystem::InitSDL() {
     int initialize = SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO |
                SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER | SDL_INIT_EVENTS);
 
-<<<<<<< HEAD
-    // Check initialization fail, error is default.
-    if (initialize != 0) {
-        // Display error message
-        SDL_ERROR("SDLSystem - InitSDL() failed.");
-        return false;
-    } else {
-        // nothing to do.
-    }
-=======
     // Check initialization fail
     assert((initialize == 0) && "initialize must be equal to zero");
->>>>>>> 2af5e64... Applying assertive in SDLSystem class
 
     INFO("SDL Initialized.")
     return true;
@@ -185,29 +175,23 @@ bool SDLSystem::InitSDL() {
     @brief Initialize image support.
     @return False if the initialization fails and true if it's succeed.
 */
-bool SDLSystem::InitIMG() {
+bool SDLSystem::InitIMG() throw (Exception){
     INFO("SDLSystem - Initializing IMG");
 
     // Receives 0 if the chosen flags are initialized
     int flags = IMG_INIT_PNG | IMG_INIT_JPG;
     int initialize = IMG_Init(flags);
 
-<<<<<<< HEAD
-    // Check image initialization fail, error is default
-    if ((initialize & flags) != flags) {
-        // Display error message
-        SDL_IMG_ERROR("SDLSystem::InitIMG() failed.");
-        return false;
-    } else {
-        // nothing to do.
-    }
-=======
     // Check image initialization fail
     assert(((initialize & flags) == flags) && "initialize and flags must have the same status");
->>>>>>> 2af5e64... Applying assertive in SDLSystem class
 
-    INFO("SDLSystem - IMG Initialized.");
-    return true;
+    if(initialize != '\0'){
+        INFO("SDLSystem - IMG Initialized.");
+        return true;
+    } else {
+        throw Exception("SDLSystem - Initialized nust be different of null.");
+    }
+
 }
 
 /**
@@ -220,19 +204,8 @@ bool SDLSystem::InitMixer() {
     // Choose frequency, Uint16 format, channels and chunksize
     int initialize = Mix_OpenAudio(frequency, MIX_DEFAULT_FORMAT, channels, chunksize);
 
-<<<<<<< HEAD
-    // Check mixer initialization fail, error is default
-    if (initialize != 0) {
-        // Display error message
-        SDL_MIX_ERROR("SDLSystem::InitMixer() failed.");
-        return false;
-    } else {
-        // nothing to do.
-    }
-=======
     // Check mixer initialization fail
     assert((initialize == 0) && "initialize must be equal to zero");
->>>>>>> 2af5e64... Applying assertive in SDLSystem class
 
     INFO("SDLSystem - Mixer Initialized.");
     return true;
@@ -247,19 +220,8 @@ bool SDLSystem::InitTTF() {
 
     int initialize = TTF_Init();
 
-<<<<<<< HEAD
-    // Check TTF initialization fail, error is default
-    if (initialize != 0) {
-        // Display error message
-        SDL_TTF_ERROR("SDLSystem - InitTTF() failed.");
-        return false;
-    } else {
-        // nothing to do.
-    }
-=======
     // Check TTF initialization fail
     assert((initialize == 0) && "initialize must be equal to zero");
->>>>>>> 2af5e64... Applying assertive in SDLSystem class
 
     INFO("SDLSystem - TTF Initialized.");
     return true;
@@ -277,19 +239,8 @@ bool SDLSystem::CreateWindow() {
                                 EngineGlobals::screen_width,
                                 EngineGlobals::screen_height, SDL_WINDOW_SHOWN);
 
-<<<<<<< HEAD
-    // Check window creation fail, error is default
-    if (!m_window) {
-        // Display error message
-        SDL_ERROR("SDLSystem - CreateWindow() failed.");
-        return false;
-    } else {
-        // nothing to do.
-    }
-=======
     // Check window creation fail
     assert((m_window != nullptr) && "m_window can not be null");
->>>>>>> 2af5e64... Applying assertive in SDLSystem class
 
     INFO("SDLSystem - Created window successfully.");
         return true;
@@ -299,25 +250,14 @@ bool SDLSystem::CreateWindow() {
     @brief Creates a 2D rendering context for the window.
     @return False if the renderer creation fails and true if it's succeed.
 */
-bool SDLSystem::CreateRenderer() {
+bool SDLSystem::CreateRenderer() throw (Exception) {
     INFO("SDLSystem - Creating renderer.");
 
     // Use hardware acceleration with first rendering driver that support it.
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
 
-<<<<<<< HEAD
-    // Check renderer creation fail, error is default
-    if (!m_renderer) {
-        // Display error message
-        SDL_ERROR("SDLSystem - CreateRenderer() failed.");
-        return false;
-    } else {
-        // nothing to do.
-    }
-=======
     // Check renderer creation fail
     assert((m_renderer != nullptr) && "m_renderer can not be null");
->>>>>>> 2af5e64... Applying assertive in SDLSystem class
 
     SDL_SetRenderDrawBlendMode(m_renderer,SDL_BLENDMODE_BLEND);
     INFO("SDLSystem - Created renderer successfully.");
@@ -344,27 +284,57 @@ void SDLSystem::CalculateFramerate() {
 /**
     @brief Loads necessary game scenes.
 */
-void SDLSystem::LoadCommons() {
+void SDLSystem::LoadCommons() throw (Exception) {
     INFO("SDLSystem - Load common initialized");
     // Instantiate and add multiple scenes to scene manager.
     auto endScene1 = new EndScene1();
-    SceneManager::GetInstance()->AddScene(std::make_pair("EndScene1",
-                                                         endScene1));
+    if(endScene1 != NULL){
+        SceneManager::GetInstance()->AddScene(std::make_pair("EndScene1",
+                                                             endScene1));
+    } else {
+        throw Exception("SDLSystem - endScene1 must be different of null.");
+    }
+
     auto endScene2 = new EndScene2();
-    SceneManager::GetInstance()->AddScene(std::make_pair("EndScene2",
-                                                         endScene2));
+    if(endScene2 != NULL){
+        SceneManager::GetInstance()->AddScene(std::make_pair("EndScene2",
+                                                             endScene2));
+    } else {
+        throw Exception("SDLSystem - endScene2 must be different of null.");
+    }
+
     auto preMenuScene = new PreMenuScene();
-    SceneManager::GetInstance()->AddScene(std::make_pair("Pre Menu",
-                                                         preMenuScene));
+    if(preMenuScene != NULL){
+        SceneManager::GetInstance()->AddScene(std::make_pair("Pre Menu",
+                                                             preMenuScene));
+    } else {
+        throw Exception("SDLSystem - preMenuScene must be different of null.");
+    }
+
     auto mainScene = new MainScene();
-    SceneManager::GetInstance()->AddScene(std::make_pair("Main",
-                                                         mainScene));
+    if(mainScene != NULL){
+        SceneManager::GetInstance()->AddScene(std::make_pair("Main",
+                                                             mainScene));
+    } else {
+        throw Exception("SDLSystem - mainScene must be different of null.");
+    }
+
     auto gameplayScene = new GamePlayScene();
-    SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay",
-                                                         gameplayScene));
+    if(gameplayScene != NULL){
+        SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay",
+                                                             gameplayScene));
+    } else {
+        throw Exception("SDLSystem - gameplayScene must be different of null.");
+    }
+
     auto firstBossScene = new FirstBossScene();
-    SceneManager::GetInstance()->AddScene(std::make_pair("FirstBossScene",
-                                                         firstBossScene));
+    if(firstBossScene != NULL){
+        SceneManager::GetInstance()->AddScene(std::make_pair("FirstBossScene",
+                                                             firstBossScene));
+    } else {
+        throw Exception("SDLSystem - firstBossScene must be different of null.");
+    }
+
     INFO("SDLSystem - load commons completed");
 }
 
@@ -373,17 +343,20 @@ void SDLSystem::LoadCommons() {
     @return False if the calculated interval is less than the update rate
     interval and true if it's not.
 */
-bool SDLSystem::FixFramerate() {
+bool SDLSystem::FixFramerate() throw (Exception) {
     m_currentFix = SDL_GetTicks();
-    float fixInterval = m_currentFix - m_lastFix;
+    if(m_currentFix != '\0'){
+        float fixInterval = m_currentFix - m_lastFix;
 
-    // Compare intervals to check the need to fix frame rate
-    if (fixInterval < update_rate_interval){
-        return false;
+        // Compare intervals to check the need to fix frame rate
+        if (fixInterval < update_rate_interval){
+            return false;
+        }
+
+        m_lastFix = SDL_GetTicks();
+        return true;
     } else {
-        // nothing to do.
+        throw Exception("SDLSystem - m_currentFix must be different of null.");
     }
 
-    m_lastFix = SDL_GetTicks();
-    return true;
 }

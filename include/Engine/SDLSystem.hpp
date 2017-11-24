@@ -12,6 +12,8 @@
 #include "Engine/SceneManager.hpp"
 #include "Engine/sdl2include.hpp"
 
+#include "Customs/Exception.hpp"
+
 #include "Globals/EngineGlobals.hpp"
 #include "Globals/InputGlobals.hpp"
 #include "Log/log.hpp"
@@ -74,20 +76,20 @@ private:
 
     // Systems init
     bool InitSDL();
-    bool InitIMG();
+    bool InitIMG() throw (Exception);
     bool InitMixer();
     bool InitTTF();
 
     // Commons init
-    void LoadCommons();
+    void LoadCommons() throw (Exception);
 
     // Graphics methods
     bool CreateWindow();
-    bool CreateRenderer();
+    bool CreateRenderer() throw (Exception);
 
     // System framerate counter
     void CalculateFramerate();
-    bool FixFramerate();
+    bool FixFramerate() throw (Exception);
 };
 
 #endif //__SDLSYSTEM_H__
