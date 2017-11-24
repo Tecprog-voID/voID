@@ -15,6 +15,8 @@
 #include "Components/UIText.hpp"
 #include "Components/UISound.hpp"
 
+#include "Customs/Exception.hpp"
+
 using namespace std;
 
 class QuitButtonScript : public Script {

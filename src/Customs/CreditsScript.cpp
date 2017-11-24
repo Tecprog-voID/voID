@@ -5,15 +5,18 @@
 */
 
 #include "Customs/CreditsScript.hpp"
+#include "Customs/Exception.hpp"
 
 #include "Globals/EngineGlobals.hpp"
+
+#include <cassert>
 
 /**
     @brief Constructor of the class CreditsScript.
     @param[in] GameObject *owner - Owns the component.
 */
 CreditsScript::CreditsScript(GameObject *owner) : Script(owner) {
-
+    assert((owner != NULL) && "the owner must be equal to NULL");
 }
 
 /**

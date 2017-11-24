@@ -5,7 +5,11 @@
 */
 
 #include "Customs/QuitButtonScript.hpp"
+#include "Customs/Exception.hpp"
+
 #include "Log/log.hpp"
+
+#include <cassert>
 
 const int grayTone = 160;
 const int whiteTone = 255;
@@ -15,7 +19,7 @@ const int whiteTone = 255;
     @param[in] GameObject *owner - Owns the component.
 */
 QuitButtonScript::QuitButtonScript(GameObject *owner) : Script(owner) {
-
+    assert((owner != NULL) && "the owner must be equal to NULL");
 }
 
 /**
@@ -23,7 +27,8 @@ QuitButtonScript::QuitButtonScript(GameObject *owner) : Script(owner) {
 */
 void QuitButtonScript::Start() {
     INFO("QuitButtonScript - initializing");
-    m_interactiveButton = (UIButton *)GetOwner()->GetComponent("UIButton");
+    m_interactive_button = (UIButton *)GetOwner()->GetComponent("UIButton");
+    assert((m_interactive_button != NULL) && "the m_interactive_button must be equal to NULL");
     INFO("QuitButtonScript - completed");
 }
 
@@ -33,6 +38,7 @@ void QuitButtonScript::Start() {
 void QuitButtonScript::ComponentUpdate() {
     // Sound component to play the sound of the Play Button
     auto soundButton = (UISound *)GetOwner()->GetComponent("UISound");
+    assert((soundButton != NULL) && "the soundButton must be equal to NULL");
 
     // Change sound and running status when mouse is clicked
     if (m_interactiveButton->IsClicked()) {
@@ -44,6 +50,7 @@ void QuitButtonScript::ComponentUpdate() {
 
     // Text component to set the colors of the Quit Button
     auto textButton = (UIText *)GetOwner()->GetComponent("UIText");
+    assert((textButton != NULL) && "the textButton must be equal to NULL");
 
     // Set QuitButton color depending if mouse is over the button or not
     if (m_interactiveButton->IsOver()) {
