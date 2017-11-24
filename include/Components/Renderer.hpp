@@ -10,6 +10,8 @@
 #include "Engine/Component.hpp"
 #include "Engine/Image.hpp"
 
+#include "Customs/Exception.hpp"
+
 #include "Math/Vector.hpp"
 
 #include <utility>
@@ -32,7 +34,7 @@ public:
 
     // Image handling
     void Rotate(double angles);
-    void RotateTowards(Vector *point);
+    void RotateTowards(Vector *point) throw (Exception);
 
     // Override for start
     void Start() override;

@@ -175,7 +175,7 @@ bool SDLSystem::InitSDL() {
     @brief Initialize image support.
     @return False if the initialization fails and true if it's succeed.
 */
-bool SDLSystem::InitIMG() throw (Exception){
+bool SDLSystem::InitIMG() throw (Exception) {
     INFO("SDLSystem - Initializing IMG");
 
     // Receives 0 if the chosen flags are initialized

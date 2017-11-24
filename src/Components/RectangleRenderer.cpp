@@ -6,6 +6,8 @@
 
 #include "Components/RectangleRenderer.hpp"
 
+#include "Customs/Exception.hpp"
+
 /**
     @brief Constructor for the class RectangleRenderer.
     @param[in] *owner - Owns the component.
@@ -16,24 +18,32 @@
 RectangleRenderer::RectangleRenderer(GameObject *owner, Vector offset,
                                      int width, int height)
     : Component(owner, C_DRAW) {
-    m_offset = offset;
-    m_width = width;
-    m_height = height;
+        m_offset = offset;
+        m_width = width;
+        m_height = height;
 }
 
 /**
     @brief Update the rectangle informations on the screen.
 */
-void RectangleRenderer::ComponentUpdate() {
+void RectangleRenderer::ComponentUpdate() throw (Exception) {
+
     // Draw and fill the rectangle's color.
     int positionX = GetOwner()->GetPosition()->m_x + m_offset.m_x;
+
     // sets the vertical position
     int positionY = GetOwner()->GetPosition()->m_y + m_offset.m_y;
+
     // sets the position using x and y values
-    auto position = Vector(positionX, positionY);
-    GraphicsSystem::GetInstance()->DrawFillRectangle(position, m_width, m_height,
-                                                     m_red, m_green, m_blue,
-                                                     m_alpha);
+    if(positionX != '\0' and positionY != '\0'){
+        auto position = Vector(positionX, positionY);
+        GraphicsSystem::GetInstance()->DrawFillRectangle(position, m_width, m_height,
+                                                         m_red, m_green, m_blue,
+                                                         m_alpha);
+    } else {
+        throw Exception("RectangleRenderer - positionX and positionY can not be empty.");
+    }
+
 }
 
 /**

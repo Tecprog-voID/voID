@@ -42,6 +42,7 @@
 #include "Customs/LeftCenterLightScript.hpp"
 #include "Customs/CentralLightScript3.hpp"
 #include "Customs/TopCenterLightScript.hpp"
+#include "Customs/Exception.hpp"
 
 
 class GamePlayScene : public Scene {

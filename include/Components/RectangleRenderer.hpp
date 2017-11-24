@@ -11,6 +11,8 @@
 #include "Engine/GameObject.hpp"
 #include "Engine/GraphicsSystem.hpp"
 
+#include "Customs/Exception.hpp"
+
 #include "Math/Vector.hpp"
 
 #include <string>
@@ -26,7 +28,9 @@ class RectangleRenderer : public Component {
     virtual string GetComponentName() override {
         return "RectangleRenderer";
     };
-    virtual void ComponentUpdate() override;
+
+    virtual void ComponentUpdate() throw (Exception);
+
     inline void SetWidth(int width) {
         this->m_width = width;
     };
@@ -36,10 +40,14 @@ class RectangleRenderer : public Component {
 
 private:
     // Width and height of the rectangle
-    int m_width = 0, m_height = 0;
+    int m_width = 0;
+    int m_height = 0;
 
     // Specifics values of the colors of the rectangle
-    int m_red = 0, m_green = 0, m_blue = 255, m_alpha = 255;
+    int m_red = 0;
+    int m_green = 0;
+    int m_blue = 255;
+    int m_alpha = 255;
 
     // Vector position of the rectangle
     Vector m_offset = Vector(0, 0);

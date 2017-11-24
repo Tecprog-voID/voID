@@ -8,6 +8,9 @@
 #include "Engine/GraphicsSystem.hpp"
 
 #include "Components/Renderer.hpp"
+
+#include "Customs/Exception.hpp"
+
 #include "Globals/ComponentTypes.hpp"
 #include "Log/log.hpp"
 
@@ -64,22 +67,26 @@ void Renderer::Start() {
     @brief Rotate the image towards the calculated angle.
     @param[in] point
 */
-void Renderer::RotateTowards(Vector *point) {
+void Renderer::RotateTowards(Vector *point) throw (Exception) {
     INFO("Renderer - Initializing rotate towards");
     // Calculate arc tangent in degrees.
     double angles = 0.0;
     angles = atan2(point->m_y - m_position->m_y, point->m_x - m_position->m_x);
-    angles = angles * straightAngle / pi;
 
-    // Keep angles in 0 to 360 range
-    if (angles < 0) {
-        angles = fullAngle - (-angles);
+    if(angles != '\0'){
+        angles = angles * straightAngle / pi;
+
+        // Keep angles in 0 to 360 range
+        if (angles < 0) {
+            angles = fullAngle - (-angles);
+        }
+
+        Rotate(angles);
+        INFO("Renderer - rotate towards initialized");
     } else {
-        // nothing to do.
+        throw Exception("Renderer - angles must be different of null.");
     }
 
-    Rotate(angles);
-    INFO("Renderer - rotate towards initialized");
 }
 
 /**
