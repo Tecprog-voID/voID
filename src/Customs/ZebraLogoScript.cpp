@@ -5,6 +5,8 @@
 */
 
 #include "Customs/ZebraLogoScript.hpp"
+#include "Customs/Exception.hpp"
+
 #include "Globals/EngineGlobals.hpp"
 
 #include <cassert>
@@ -49,6 +51,8 @@ void ZebraLogoScript::CreateAnimations(){
         zebraAnimation->AddFrame(new Frame(i * width, height - height,
                                            width, height));
     }
+
+
 
     // Run through 0 to 14 adding frames in different x positions
     for (int i = 0; i < 15; i++) {

@@ -19,6 +19,7 @@
 #include "Components/RectangleCollider.hpp"
 #include "Customs/PlayerAttackScript.hpp"
 #include "Customs/HitScript.hpp"
+#include "Customs/Exception.hpp"
 
 class NakedManScript : public Script {
 
@@ -40,7 +41,7 @@ class NakedManScript : public Script {
         };
 
         void FixedComponentUpdate() override;
-        void Start() override;
+        void Start() throw (Exception);
 
         char GetMovement() {
             return movements;
@@ -116,7 +117,7 @@ class NakedManScript : public Script {
         void PlayerLife();
 
         void MovementsSounds();
-        
+
     protected:
 
         void ComponentUpdate() override;

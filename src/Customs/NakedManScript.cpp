@@ -10,6 +10,7 @@
 #include "Customs/MapScript.hpp"
 #include "Customs/SnowScript.hpp"
 #include "Customs/RainScript.hpp"
+#include "Customs/Exception.hpp"
 
 #include <cassert>
 #include <math.h>
@@ -43,14 +44,22 @@ NakedManScript::NakedManScript(GameObject *owner) : Script(owner) {
 /**
     @brief Start the first definitions of the player.
 */
-void NakedManScript::Start() {
+void NakedManScript::Start() throw (Exception) {
     INFO("NakedManScript - initializing");
     CreateAnimations();
     position = GetOwner()->GetPosition();
+    assert((position != NULL) && "the position must be different to NULL");
+
     animator = (Animator *)GetOwner()->GetComponent("Animator");
+    assert((animator != NULL) && "the animator must be different to NULL");
+
     input = InputSystem::GetInstance();
+    assert((input != NULL) && "the input must be different to NULL");
+
     CameraSystem::GetInstance()->SetCameraSpeed(walkSpeed);
+
     game_controller = input->GetGameController(0);
+    assert((game_controller == NULL) && "the game_controller must be equal to NULL");
 
     // Get the map of the game
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")
@@ -69,6 +78,11 @@ void NakedManScript::Start() {
     nakedManCollider = new RectangleCollider(GetOwner(), Vector(0, 0),
 	                                         GetOwner()->GetWidth(),
 											 GetOwner()->GetHeight(), 0);
+    if(nakedManCollider == NULL){
+        throw Exception("NakedManScript - NakedManScript nust be different of null.");
+    } else {
+        //nothing to do.
+    }
     INFO("NakedManScript - completed");
 }
 
