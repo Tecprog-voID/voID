@@ -29,18 +29,23 @@ class CreditsScript : public Script {
 
 public:
     CreditsScript(GameObject *owner);
+    ~CreditsScript();
+
+protected:
+
+
+private:
+
+    void ComponentUpdate() override;
 
     // Replace the component name and return it.
     std::string GetComponentName() override {
         return "CreditsScript";
     };
+
     void FixedComponentUpdate() override;
+
     void Start() override;
-
-protected:
-    void ComponentUpdate() override;
-
-private:
     // Sets the CreditsScript position as a vector
     Vector *position = nullptr;
 

@@ -22,16 +22,18 @@ using namespace std;
 class CatchAllButtonScript : public Script {
 public:
     CatchAllButtonScript(GameObject *owner);
+    ~CatchAllButtonScript();
+
+private:
+
     virtual void Start() throw (Exception) override;
+
     virtual void ComponentUpdate() override;
 
     // Replace the component name and return it.
     virtual string GetComponentName() override {
         return "CatchAllButtonScript";
     };
-
-
-private:
     // Set the CatchAll button as a UIButton
     UIButton *m_interactiveButton = nullptr;
 
