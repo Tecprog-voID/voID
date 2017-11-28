@@ -10,6 +10,8 @@
 
 #include <stdio.h>
 
+#include <cassert>
+
 const int logoWidth = 5115;
 const int logoHeight = 512;
 const int framesCounter = 15;
@@ -23,7 +25,9 @@ const int timeUpdateAnimation = 530;
 /**
     @brief Constructor for the ControleLogoScript class.
 */
-ControleLogoScript::ControleLogoScript(GameObject *owner) : Script(owner) {}
+ControleLogoScript::ControleLogoScript(GameObject *owner) : Script(owner) {
+    assert((owner != NULL) && "the owner must be equal to NULL");
+}
 
 /**
     @brief Start the animation of the controle logo.

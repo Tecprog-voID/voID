@@ -1,6 +1,8 @@
 #include "Customs/CutScene1Script.hpp"
 #include "Globals/EngineGlobals.hpp"
 
+#include <cassert>
+
 const int imageWidth = 1705;
 const int imageHeight = 255;
 const int frameWidth = 341;
@@ -12,7 +14,9 @@ const int framesPerSecond = 9;
     @brief Constructor for the ThunderScript class.
     @param[in] owner
 */
-CutScene1Script::CutScene1Script(GameObject *owner) : Script(owner) {}
+CutScene1Script::CutScene1Script(GameObject *owner) : Script(owner) {
+    assert((owner != NULL) && "the owner must be equal to NULL");
+}
 
 /**
     @brief Start the animation for the cut scene 1.

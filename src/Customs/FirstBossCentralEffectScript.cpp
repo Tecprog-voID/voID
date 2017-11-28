@@ -6,6 +6,8 @@
 
 #include "Customs/FirstBossCentralEffectScript.hpp"
 
+#include <cassert>
+
 const int centralImageheight = 70;
 const int centralImageWidth = 700;
 const int animationPosition = 70;
@@ -16,8 +18,9 @@ const int bossYPosition = 7.566428571;
 /**
     @brief Constructor for the FirstBossCentralEffectScript class.
 */
-FirstBossCentralEffectScript::FirstBossCentralEffectScript(GameObject *owner) :
-                                                           Script(owner) {}
+FirstBossCentralEffectScript::FirstBossCentralEffectScript(GameObject *owner) : Script(owner) {
+    assert((owner != NULL) && "the owner must be equal to NULL");                                                      
+}
 
 /**
     @brief Start the animation for the first boss central effect.

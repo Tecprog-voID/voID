@@ -8,6 +8,8 @@
 
 #include "Globals/EngineGlobals.hpp"
 
+#include <cassert>
+
 const int thunderWidth = 2952;
 const int thunderHeight = 815;
 const int blueFrameWidth = 100;
@@ -22,6 +24,7 @@ const int blueCounter = 6;
     @param[in] owner
 */
 ThunderScript::ThunderScript(GameObject *owner) : Script(owner) {
+    assert((owner != NULL) && "the owner must be equal to NULL");
     INFO("ThunderScript - initialized");
 }
 
