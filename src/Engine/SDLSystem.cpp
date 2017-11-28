@@ -52,14 +52,14 @@ void SDLSystem::Init() {
     INFO("SDLSystem - initializing");
 
     // Check initialization fails
-    assert((InitSDL() != '\0') && "InitSDL() must be equal to zero");
-    assert((InitIMG() != '\0') && "InitIMG() must be equal to zero");
-    assert((InitMixer() != '\0') && "InitMixer() must be equal to zero");
-    assert((InitTTF() != '\0') && "InitTTF() must be equal to zero");
+    assert((InitSDL() != '\0') and "InitSDL() must be equal to zero");
+    assert((InitIMG() != '\0') and "InitIMG() must be equal to zero");
+    assert((InitMixer() != '\0') and "InitMixer() must be equal to zero");
+    assert((InitTTF() != '\0') and "InitTTF() must be equal to zero");
 
     // Check creation fails
-    assert((CreateWindow() != '\0') && "CreateWindow() must be equal to zero");
-    assert((CreateRenderer() != '\0') && "CreateRenderer() must be equal to zero");
+    assert((CreateWindow() != '\0') and "CreateWindow() must be equal to zero");
+    assert((CreateRenderer() != '\0') and "CreateRenderer() must be equal to zero");
 
     INFO("SDLSystem - completed");
 }
@@ -165,7 +165,7 @@ bool SDLSystem::InitSDL() {
                SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER | SDL_INIT_EVENTS);
 
     // Check initialization fail
-    assert((initialize == 0) && "initialize must be equal to zero");
+    assert((initialize == 0) and "initialize must be equal to zero");
 
     INFO("SDL Initialized.")
     return true;
@@ -183,8 +183,7 @@ bool SDLSystem::InitIMG() throw (Exception) {
     int initialize = IMG_Init(flags);
 
     // Check image initialization fail
-    assert(((initialize & flags) == flags) && "initialize and flags must have the same status");
-
+    assert(((initialize & flags) == flags) and "initialize and flags must have the same status");
     if(initialize != '\0'){
         INFO("SDLSystem - IMG Initialized.");
         return true;
@@ -205,7 +204,7 @@ bool SDLSystem::InitMixer() {
     int initialize = Mix_OpenAudio(frequency, MIX_DEFAULT_FORMAT, channels, chunksize);
 
     // Check mixer initialization fail
-    assert((initialize == 0) && "initialize must be equal to zero");
+    assert((initialize == 0) and "initialize must be equal to zero");
 
     INFO("SDLSystem - Mixer Initialized.");
     return true;
@@ -221,7 +220,7 @@ bool SDLSystem::InitTTF() {
     int initialize = TTF_Init();
 
     // Check TTF initialization fail
-    assert((initialize == 0) && "initialize must be equal to zero");
+    assert((initialize == 0) and "initialize must be equal to zero");
 
     INFO("SDLSystem - TTF Initialized.");
     return true;
@@ -240,7 +239,7 @@ bool SDLSystem::CreateWindow() {
                                 EngineGlobals::screen_height, SDL_WINDOW_SHOWN);
 
     // Check window creation fail
-    assert((m_window != nullptr) && "m_window can not be null");
+    assert((m_window != nullptr) and "m_window can not be null");
 
     INFO("SDLSystem - Created window successfully.");
         return true;
@@ -257,7 +256,7 @@ bool SDLSystem::CreateRenderer() throw (Exception) {
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
 
     // Check renderer creation fail
-    assert((m_renderer != nullptr) && "m_renderer can not be null");
+    assert((m_renderer != nullptr) and "m_renderer can not be null");
 
     SDL_SetRenderDrawBlendMode(m_renderer,SDL_BLENDMODE_BLEND);
     INFO("SDLSystem - Created renderer successfully.");

@@ -17,10 +17,10 @@
 */
 Frame::Frame(int positionX, int positionY, int width, int height) {
 
-    assert((positionX >= 0) && "the positionX must be greater than zero");
-    assert((positionY >= 0) && "the positionY must be greater than zero");
-    assert((width >= 0) && "the width must be greater than zero");
-    assert((height >= 0) && "the height must be greater than zero");
+    assert((positionX >= 0) and "the positionX must be greater than zero");
+    assert((positionY >= 0) and "the positionY must be greater than zero");
+    assert((width >= 0) and "the width must be greater than zero");
+    assert((height >= 0) and "the height must be greater than zero");
 
     sourceRectangle.x = positionX;
     sourceRectangle.y = positionY;
