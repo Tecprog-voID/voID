@@ -89,7 +89,7 @@ void TopCenterLightScript::CreateAnimations() {
 void TopCenterLightScript::ComponentUpdate() {
 
     // Starting the animator of game.
-    if (!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") && active) {
+    if (!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") and active) {
         m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     } else {
         // Nothing to do

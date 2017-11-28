@@ -13,7 +13,7 @@ UISound::UISound(GameObject *owner, string message, string audioPath,
                  bool isMusic, bool playOnStart)
                  : Component (owner, C_COMMON) {
     INFO("UISound UISound() - initializing");
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
     m_message = message;
     m_audioPath = audioPath;
     m_isMusic = isMusic;

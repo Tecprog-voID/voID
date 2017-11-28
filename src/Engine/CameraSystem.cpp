@@ -422,7 +422,7 @@ void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scen
 
             // Updates the zoom ratio in the x (width) and y (height) axes.
             if ((*it)->GetZoomProportion()->m_x != 0
-                 && (*it)->GetZoomProportion()->m_y != 0) {
+                 and (*it)->GetZoomProportion()->m_y != 0) {
                 (*it)->SetSize(map->GetWidth() / (*it)->GetZoomProportion()->m_x,
                                                   map->GetHeight()
                                                   / (*it)->GetZoomProportion()->m_y);
@@ -595,7 +595,7 @@ void CameraSystem::ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *sce
                                   / (map->GetHeight()));
 
             // Updates the zoom ratio in the x (width) and y (height) axes.
-            if ((*it)->GetZoomProportion()->m_x != 0 && (*it)->GetZoomProportion()->m_y != 0) {
+            if ((*it)->GetZoomProportion()->m_x != 0 and (*it)->GetZoomProportion()->m_y != 0) {
                 (*it)->SetSize(map->GetWidth() / (*it)->GetZoomProportion()->m_x,
                 map->GetHeight() / (*it)->GetZoomProportion()->m_y);
 

@@ -70,7 +70,7 @@ void LeftCenterLightScript::CreateAnimations(){
 void LeftCenterLightScript::ComponentUpdate() {
     INFO("LeftCenterLightScript - updating component");
 
-    if(!animator->IsPlaying("CENTRAL LIGHT ANIMATION") && active){
+    if(!animator->IsPlaying("CENTRAL LIGHT ANIMATION") and active){
         animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     } else {
        // Do nothing

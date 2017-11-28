@@ -76,7 +76,7 @@ void Animation::SetPlaying(bool condition) {
             // Nothing to do
         }
     } else {
-        if (m_hasExitTime && m_currentFrame != m_framesQuantity - 1) {
+        if (m_hasExitTime and m_currentFrame != m_framesQuantity - 1) {
             return;
         } else {
             if (auto comp = GetOwner()->GetComponent("Renderer")) {
@@ -112,7 +112,7 @@ void Animation::AddFrame(Frame *frame) {
 void Animation::ComponentUpdate() {
     if (m_isPlaying) {
         DrawCurrentFrame();
-        if (!m_loop && m_currentFrame == m_framesQuantity - 1) {
+        if (!m_loop and m_currentFrame == m_framesQuantity - 1) {
             SetPlaying(false);
         } else {
             // Nothing to do

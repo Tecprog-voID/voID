@@ -88,7 +88,7 @@ void CentralLightScript3::CreateAnimations(){
 */
 void CentralLightScript3::ComponentUpdate() {
 
-    if(!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") && m_active){
+    if(!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") and m_active){
         m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     }
 }

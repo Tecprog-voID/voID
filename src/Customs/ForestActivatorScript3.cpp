@@ -111,8 +111,8 @@ void ForestActivatorScript3::CreateAnimations() {
 void ForestActivatorScript3::ComponentUpdate() {
 
     // Checks if the game animation has not started and starts the animator actives and runned.
-    if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") && activate == 0
-        && runned == false) {
+    if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") and activate == 0
+        and runned == false) {
 
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION");
         activate = 1;
@@ -122,7 +122,7 @@ void ForestActivatorScript3::ComponentUpdate() {
     }
 
     // Checks if the game is runned and the animator has not started.
-    if (runned && !animator->IsPlaying("FOREST ACTIVATOR ANIMATION")) {
+    if (runned and !animator->IsPlaying("FOREST ACTIVATOR ANIMATION")) {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION2");
     } else {
         // Nothing to do

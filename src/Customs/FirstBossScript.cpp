@@ -12,7 +12,7 @@
     @brief Constructor for the class FirstBossScript.
 */
 FirstBossScript::FirstBossScript(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
     INFO("FirstBossScript FirstBossScript() - completed");
 }
 
@@ -119,7 +119,7 @@ void FirstBossScript::ComponentUpdate() {
     Play the firstBossAnimation animation if isn't the second attack and the
     second attack doesn't fall.
     */
-    if (!m_secondAttack && !m_secondAttackFall) {
+    if (!m_secondAttack and !m_secondAttackFall) {
         //Idle animation
         m_animator->PlayAnimation("firstBossAnimation");
     } else {
@@ -216,7 +216,7 @@ void FirstBossScript::Attack() {
         doesn't has fall.
         */
         if (m_randomNumber == secondAttackNumber
-                        && m_secondAttackFall == false) {
+                        and m_secondAttackFall == false) {
             m_secondAttack = true;
             m_animator->PlayAnimation("firstBossJumpAnimation");
         } else {
@@ -238,7 +238,7 @@ void FirstBossScript::Attack() {
             used more than 3 times.
             */
             if (m_timerFirstAttackCooldown.GetTime() >= maxTimeFirstAttackCooldown
-                    && m_firstAttackCounter < maxFirstAttackCounter) {
+                    and m_firstAttackCounter < maxFirstAttackCounter) {
                 FirstBossController::GetInstance()->FirstAttackSurge();
                 // Restart the timer for the first attack and add to the counter.
                 m_timerFirstAttackCooldown.Restart();
@@ -276,7 +276,7 @@ void FirstBossScript::Attack() {
         const int maxTimeSecondAttack = 500;
         // Check if the second attack time has ended.
         if ((m_timerSecondAttack.GetTime() >= maxTimeSecondAttack)
-                    && m_secondAttack) {
+                    and m_secondAttack) {
             // Check if the boss position is over the lower limit.
             if (GetOwner()->GetPosition()->m_y > -1900) {
                 Vector *newPosition = GetOwner()->GetPosition();
@@ -296,7 +296,7 @@ void FirstBossScript::Attack() {
         const int timeSecondAttackFall = 2000;
         // Check if it is time to end the fall of the second attack.
         if (m_timerSecondAttackFall.GetTime() >= timeSecondAttackFall
-                    && m_secondAttackFall) {
+                    and m_secondAttackFall) {
             // Get player Position
             m_player = SceneManager::GetInstance()->GetCurrentScene()->
                         GetGameObject("NakedMan");

@@ -13,7 +13,7 @@
     @brief Constructor for the classe UnbLogoScript.
 */
 UnbLogoScript::UnbLogoScript(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
     INFO("UnbLogoScript UnbLogoScript() - completed");
 }
 

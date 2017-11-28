@@ -26,7 +26,7 @@ const int timeUpdateAnimation = 530;
     @brief Constructor for the ControleLogoScript class.
 */
 ControleLogoScript::ControleLogoScript(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**

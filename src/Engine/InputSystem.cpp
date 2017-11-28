@@ -85,7 +85,7 @@ bool InputSystem::GetKeyDown(KeyboardInputGlobal key) {
     If respective button is being pressed but was not pressed previously,
     returns true.
     */
-    if (m_states[key] && !m_oldStates[key]) {
+    if (m_states[key] and !m_oldStates[key]) {
         return true;
     } else {
         // Do nothing
@@ -104,7 +104,7 @@ bool InputSystem::GetKeyUp(KeyboardInputGlobal key) {
     If respective button is being pressed but was not pressed previously,
     returns true.
     */
-    if (!m_states[key] && m_oldStates[key]) {
+    if (!m_states[key] and m_oldStates[key]) {
         return true;
     } else {
         // Do nothing
@@ -143,7 +143,7 @@ bool InputSystem::GetMouseButtonDown(MouseInputGlobal button) {
     If respective button is being pressed but was not pressed previously,
     returns true.
     */
-    if (isPressed && !wasPressed) {
+    if (isPressed and !wasPressed) {
         return true;
     } else {
         // Do nothing
@@ -166,7 +166,7 @@ bool InputSystem::GetMouseButtonUp(MouseInputGlobal button) {
     If respective button is being pressed but was not pressed previously,
     returns true.
     */
-    if (!isPressed && wasPressed) {
+    if (!isPressed and wasPressed) {
         return true;
     } else {
         // Do nothing

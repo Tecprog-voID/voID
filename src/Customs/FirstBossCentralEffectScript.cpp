@@ -19,7 +19,7 @@ const int bossYPosition = 7.566428571;
     @brief Constructor for the FirstBossCentralEffectScript class.
 */
 FirstBossCentralEffectScript::FirstBossCentralEffectScript(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");                                                      
+    assert((owner != NULL) and "the owner must be equal to NULL");                                                      
 }
 
 /**

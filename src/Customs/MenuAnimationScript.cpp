@@ -9,7 +9,7 @@ const int framePerSecond = 10;
 
 // Constructor
 MenuAnimationScript::MenuAnimationScript(GameObject *owner) : Script(owner) {
-     assert((owner != NULL) && "the owner must be equal to NULL");
+     assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**
@@ -65,7 +65,7 @@ void MenuAnimationScript::CreateAnimations() {
 void MenuAnimationScript::ComponentUpdate() {
     INFO("MenuAnimationsScript - Component Update");
     // Check the current state of the initial animation and animator, if false, plays it.
-    if (!animator->IsPlaying("mainAnimation") && !initialAnimation) {
+    if (!animator->IsPlaying("mainAnimation") and !initialAnimation) {
         initialAnimation = true;
         animator->PlayAnimation("mainAnimation");
     } else {
@@ -75,7 +75,7 @@ void MenuAnimationScript::ComponentUpdate() {
     // Check the current state of the initial animation, if true, checks the animator state. If false, plays the animator.
     if (initialAnimation) {
         if (!animator->IsPlaying("mainAnimation")) {
-            if (!animator->IsPlaying("mainAnimation2") && initialAnimation) {
+            if (!animator->IsPlaying("mainAnimation2") and initialAnimation) {
                 animator->PlayAnimation("mainAnimation2");
             } else {
                 // Do nothing

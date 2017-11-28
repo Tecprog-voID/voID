@@ -10,7 +10,7 @@ const int framePerSecond = 9;
 
 
 ForestActivatorScript2::ForestActivatorScript2(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**
@@ -73,7 +73,7 @@ void ForestActivatorScript2::CreateAnimations(){
 void ForestActivatorScript2::ComponentUpdate() {
     INFO("ForestActivatorScript - Component Update");
     // Check the animator's state, and ifs true, play animation and activate it.
-    if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") && activate==0 && runned==false) {
+    if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") and activate==0 and runned==false) {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION");
         activate=1;
         runned = true;
@@ -82,7 +82,7 @@ void ForestActivatorScript2::ComponentUpdate() {
     }
 
     // Check if runned and something diferent of animator is playing and active the animattion of the forest.
-    if (runned && !animator->IsPlaying("FOREST ACTIVATOR ANIMATION")) {
+    if (runned and !animator->IsPlaying("FOREST ACTIVATOR ANIMATION")) {
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION2");
     } else {
         // Do nothing

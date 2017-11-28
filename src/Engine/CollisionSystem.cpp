@@ -50,17 +50,17 @@ void CollisionSystem::DetectCollisions() {
         for (unsigned int k = i + 1; k < m_colliders.size(); k++) {
             // Checks the components names, if its circle collider, sets both colliders as circle colliders.
             if (m_colliders[i]->GetComponentName() == m_colliders[k]->GetComponentName()
-                && m_colliders[i]->GetComponentName() == "CircleCollider") {
+                and m_colliders[i]->GetComponentName() == "CircleCollider") {
                     CircleCircle((CircleCollider *)m_colliders[i],
                                 (CircleCollider *)m_colliders[k]);
             // Checks the components names, if its rectangle collider, sets both colliders as rectangle colliders.
             } else if (m_colliders[i]->GetComponentName() == m_colliders[k]->GetComponentName()
-                       && m_colliders[i]->GetComponentName() == "RectangleCollider") {
+                       and m_colliders[i]->GetComponentName() == "RectangleCollider") {
                     RectRect((RectangleCollider *)m_colliders[i],
                              (RectangleCollider *)m_colliders[k]);
             // Checks the components names, if its circle and rectangle colliders, sets both colliders.
             } else if (m_colliders[i]->GetComponentName() != m_colliders[k]->GetComponentName()
-                       && m_colliders[i]->GetComponentName() == "CircleCollider") {
+                       and m_colliders[i]->GetComponentName() == "CircleCollider") {
                     CircleRect((CircleCollider *)m_colliders[i],
                                (RectangleCollider *)m_colliders[k]);
             } else {
@@ -144,10 +144,10 @@ void CollisionSystem::RectRect(RectangleCollider *rectangle1, RectangleCollider 
 
     // Compares the rectangles 1 and 2 positions.
     if (((posR1.m_x <= (posR2.m_x + rectangle2->GetWidth()))
-        && ((posR1.m_x + rectangle1->GetWidth()) >= posR2.m_x))
-        && ((posR1.m_y <= (posR2.m_y + rectangle2->GetHeight()))
-        && ((posR1.m_y + rectangle1->GetHeight()) >= posR2.m_y))
-        && (rectangle1->m_owner->active) && (rectangle2->m_owner->active)) {
+        and ((posR1.m_x + rectangle1->GetWidth()) >= posR2.m_x))
+        and ((posR1.m_y <= (posR2.m_y + rectangle2->GetHeight()))
+        and ((posR1.m_y + rectangle1->GetHeight()) >= posR2.m_y))
+        and (rectangle1->m_owner->active) and (rectangle2->m_owner->active)) {
             collision = true;
     } else {
         // Do nothing

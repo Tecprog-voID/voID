@@ -24,7 +24,7 @@ const int blueCounter = 6;
     @param[in] owner
 */
 ThunderScript::ThunderScript(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
     INFO("ThunderScript - initialized");
 }
 
