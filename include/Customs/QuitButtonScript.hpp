@@ -22,15 +22,19 @@ using namespace std;
 class QuitButtonScript : public Script {
 public:
     QuitButtonScript(GameObject *owner);
+    ~QuitButtonScript();
+    
+private:
 
     // Replace the component name and return it.
     string GetComponentName() override {
         return "QuitButtonScript";
     };
+
     void ComponentUpdate() override;
+
     void Start() override;
 
-private:
     // Sets the QuitButton as a UIButton
     UIButton *m_interactiveButton = nullptr;
 };
