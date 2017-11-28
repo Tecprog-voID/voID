@@ -16,7 +16,7 @@ const int gameMode = 0x02;
     @param[in] GameObject *owner - Owns the component.
 */
 CatchAllButtonScript::CatchAllButtonScript(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**
@@ -27,7 +27,7 @@ void CatchAllButtonScript::Start() throw (Exception) {
     m_interactiveButton = (UIButton *)GetOwner()->GetComponent("UIButton");
     m_checkbox = SceneManager::GetInstance()->GetScene("Main")->GetGameObject(
                  "CatchAll_CB");
-    if(m_interactive_button != NULL and m_checkbox != NULL) {
+    if(m_interactiveButton != NULL and m_checkbox != NULL) {
         INFO("CatchAllButtonScript - completed");
     } else {
         throw Exception("CatchAllButtonScript - Initim_interactive_button and m_checkbox must be different of null.");

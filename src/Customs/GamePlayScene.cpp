@@ -11,7 +11,6 @@
 #include "Customs/GamePlayScene.hpp"
 #include "Customs/CutScene1Script.hpp"
 #include "Customs/AudioController.hpp"
-#include "Customs/Exception.hpp"
 
 const float vectorMapTreeAxisX = -3500;
 const float vectorMapTreeAxisY = -3800;
@@ -156,29 +155,23 @@ const Uint8 bulletCountermode = 1;
 void GamePlayScene::OnActivation() {
     INFO("GamePlayScene - Initializing OnActivation");
     //This must be the first function to be called.
-    try {
-        CreateMap();
-        CreateCreditAnimation();
-        CreateNakedMan();
-        CreateFirstBoss();
-        CreateFirstBossAttack();
-        CreateFirstBossLife();
-        CreateLight();
-        CreateRain();
-        CreateSnow();
-        CreateThunder();
-        CreatePlayerAttack();Scene  CreatePlayerHit();
-        CreateForestActivator();
-        CreateSnowActivator();
-        CreateCentralLights();
-        CreateCutScenes();
-        FirstBossController::GetInstance()->StartBossFight();
-    } catch (Exception ex) {
-        cerr << ex.message() << endl;
-        exit;
-    }
-
-
+    CreateMap();
+    CreateCreditAnimation();
+    CreateNakedMan();
+    CreateFirstBoss();
+    CreateFirstBossAttack();
+    CreateFirstBossLife();
+    CreateLight();
+    CreateRain();
+    CreateSnow();
+    CreateThunder();
+    CreatePlayerAttack();Scene  CreatePlayerHit();
+    CreateForestActivator();
+    CreateSnowActivator();
+    CreateCentralLights();
+    CreateCutScenes();
+    FirstBossController::GetInstance()->StartBossFight();
+    INFO("GamePlayScene - OnActivation completed");
 }
 
 void GamePlayScene::OnDeactivation() {
@@ -207,10 +200,10 @@ void GamePlayScene::CreateMap() {
                               gameObjectCreateMapMapLayer);
 
     // Renderer the map image.
-    auto mapImage = new Image("assets/image/mapa2.png", imageScenePositionX,
+    auto m_mapImage = new Image("assets/map.png", imageScenePositionX,
                               imageScenePositionY, imageSceneWidth, imageSceneHeight);
-    //auto mapImage = new Image("assets/image/transitavel.png", 0, 0, 2678, 2678);
-    auto mapRenderer = new Renderer(map, mapImage);
+
+    new Renderer(m_map, m_mapImage);
 
 
 
@@ -219,7 +212,7 @@ void GamePlayScene::CreateMap() {
                                 gameObjectCreateMapTreeLayer);
 
     // Renderer the trees image.
-    auto treesImage = new Image("assets/image/trees.png", imageScenePositionX,
+    auto m_treesImage = new Image("assets/image/trees.png", imageScenePositionX,
                                 imageScenePositionY, imageSceneWidth, imageSceneHeight);
 
     new Renderer(m_trees, m_treesImage);
@@ -276,17 +269,11 @@ void GamePlayScene::CreateCutScenes() {
 void  GamePlayScene::CreateForestActivator() {
     INFO("GamePlayScene - Creating forest activator");
     //left
-<<<<<<< HEAD
     auto m_forestActivator = new GameObject("FOREST ACTIVATOR",
                                           new Vector(vectorForestActivatorAxisX,
                                           vectorForestActivatorAxisY),
                                           gameObjectForestActivatorWigth,
                                           gameObjectForestActivatorHeight,
-=======
-    auto forestActivator = new GameObject("FOREST ACTIVATOR",
-                                          new Vector(vectorForestActivatorAxisX, vectorForestActivatorAxisY),
-                                          gameObjectForestActivatorWigth, gameObjectForestActivatorHeight,
->>>>>>> 8b88305... Applying techniques of not trusting anyone in RectangleRenderer and Renderer class.
                                           gameObjectForestActivatorLayer);
     new ForestActivatorScript(m_forestActivator);
     AddGameObject(m_forestActivator);
@@ -376,7 +363,6 @@ void GamePlayScene::CreateCentralLights(){
 }
 
 void GamePlayScene::CreateNakedMan() {
-<<<<<<< HEAD
     INFO("GamePlayScene - Creating naked man");
     int positionX = 0;
     int positionY = 0;
@@ -384,14 +370,6 @@ void GamePlayScene::CreateNakedMan() {
     positionY = EngineGlobals::screen_height / 2 - gameObjectNackedManHeight / 2;
 
     auto m_nakedMan = new GameObject("NakedMan", new Vector(positionX,positionY),
-=======
-
-    int xPos = 0;
-    int yPos = 0;
-    xPos = EngineGlobals::screen_width / 2 - gameObjectNackedManWigth / 2;
-    yPos = EngineGlobals::screen_height / 2 - gameObjectNackedManHeight / 2;
-    auto nakedMan = new GameObject("NakedMan", new Vector(xPos,yPos),
->>>>>>> 8b88305... Applying techniques of not trusting anyone in RectangleRenderer and Renderer class.
                                     gameObjectNackedManWigth , gameObjectNackedManHeight,
                                     gameObjectNackedManLayer);
 
@@ -416,17 +394,11 @@ void GamePlayScene::CreateNakedMan() {
 void GamePlayScene::CreateFirstBoss() {
     INFO("GamePlayScene - Creating first boss");
     // Boss Inside FX
-<<<<<<< HEAD
     auto m_firstBossCentralEffect = new GameObject("FirstBossCentralEffect",
                                                  new Vector(vectorFirstBossEffectAxisX,
                                                  vectorFirstBossEffectAxisY),
                                                  gameObjectFirstBossEffectWigth,
                                                  gameObjectFirstBossEffectHeight,
-=======
-    auto FirstBossCentralEffect = new GameObject("FirstBossCentralEffect",
-                                                 new Vector(vectorFirstBossEffectAxisX, vectorFirstBossEffectAxisY),
-                                                 gameObjectFirstBossEffectWigth, gameObjectFirstBossEffectHeight,
->>>>>>> 8b88305... Applying techniques of not trusting anyone in RectangleRenderer and Renderer class.
                                                  gameObjectFirstBossEffectLayer);
 
     new FirstBossCentralEffectScript(m_firstBossCentralEffect);
@@ -512,11 +484,7 @@ void GamePlayScene::CreateFirstBossAttack() {
 void GamePlayScene::CreateFirstBossLife() {
     INFO("GamePlayScene - Creating first boss life");
     // Life Border.
-<<<<<<< HEAD
     auto m_firstBossLifeBorderSprite = new GameObject("FirstBossBorderLife",
-=======
-    auto firstBossLifeBorderSprite = new GameObject("FirstBossBorderLife",
->>>>>>> 8b88305... Applying techniques of not trusting anyone in RectangleRenderer and Renderer class.
                                                     new Vector(vectorFirstBossLifeBorderAxisX,
                                                     vectorFirstBossLifeBorderAxisY),
                                                     gameObjectFirstBossLifeBorderWigth,
@@ -533,11 +501,7 @@ void GamePlayScene::CreateFirstBossLife() {
                                         gameObjectFirstBossLifeWigth, gameObjectFirstBossLifeHeight,
                                         gameObjectFirstBossLifeLayer);
 
-<<<<<<< HEAD
     auto lifeRectangle = new RectangleRenderer(m_firstBossLife, Vector(vectorFisrtBossRectangleRenderAxisX,
-=======
-    auto lifeRectangle = new RectangleRenderer(firstBossLife, Vector(vectorFisrtBossRectangleRenderAxisX,
->>>>>>> 8b88305... Applying techniques of not trusting anyone in RectangleRenderer and Renderer class.
                                                 vectorFisrtBossRectangleRenderAxisY),
                                                 fisrtBossRectangleRenderWidth, fisrtBossRectangleRenderHeight);
 

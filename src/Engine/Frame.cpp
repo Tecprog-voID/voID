@@ -22,10 +22,10 @@ Frame::Frame(int positionX, int positionY, int width, int height) {
     assert((width >= 0) and "the width must be greater than zero");
     assert((height >= 0) and "the height must be greater than zero");
 
-    sourceRectangle.x = positionX;
-    sourceRectangle.y = positionY;
-    sourceRectangle.w = width;
-    sourceRectangle.h = height;
+    originOfRectangle.x = positionX;
+    originOfRectangle.y = positionY;
+    originOfRectangle.w = width;
+    originOfRectangle.h = height;
 }
 
 /**

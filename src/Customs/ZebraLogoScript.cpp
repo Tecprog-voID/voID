@@ -19,7 +19,7 @@ const int height = 256;
     @param[in] GameObject *owner - Owns the component.
 */
 ZebraLogoScript::ZebraLogoScript(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**
