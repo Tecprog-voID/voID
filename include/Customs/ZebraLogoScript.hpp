@@ -21,7 +21,14 @@
 class ZebraLogoScript : public Script {
 
 public:
+    
     ZebraLogoScript(GameObject *owner);
+    ~ZebraLogoScript();
+
+private:
+    void CreateAnimations();
+
+    void ComponentUpdate() override;
 
     // Replace the component name and return it.
     std::string GetComponentName() override {
@@ -29,12 +36,6 @@ public:
     };
     void FixedComponentUpdate() override;
     void Start() override;
-
-protected:
-  void ComponentUpdate() override;
-
-private:
-    void CreateAnimations();
 
     Timer time;
 
