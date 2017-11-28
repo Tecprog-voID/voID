@@ -20,16 +20,12 @@
 using namespace std;
 
 class RectangleRenderer : public Component {
- public:
+public:
+
     RectangleRenderer(GameObject *owner, Vector offset, int width, int height);
+    ~RectangleRenderer();
+
     void SetColor(int red, int green, int blue, int alpha);
-
-    // Replace the component name and return it.
-    virtual string GetComponentName() override {
-        return "RectangleRenderer";
-    };
-
-    virtual void ComponentUpdate() throw (Exception);
 
     inline void SetWidth(int width) {
         this->m_width = width;
@@ -39,6 +35,14 @@ class RectangleRenderer : public Component {
     };
 
 private:
+
+    // Replace the component name and return it.
+    virtual string GetComponentName() override {
+        return "RectangleRenderer";
+    };
+
+    virtual void ComponentUpdate() throw (Exception);
+
     // Width and height of the rectangle
     int m_width = 0;
     int m_height = 0;
@@ -52,5 +56,4 @@ private:
     // Vector position of the rectangle
     Vector m_offset = Vector(0, 0);
 };
-
 #endif

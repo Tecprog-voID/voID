@@ -37,9 +37,8 @@ public:
     static SDLSystem *GetInstance();
 
     // Getters and setters
-    SDL_Window *GetWindow() const {
-        return m_window;
-    };
+
+
     SDL_Renderer *GetRenderer() const {
         return m_renderer;
     };
@@ -50,6 +49,11 @@ public:
     };
 
 private:
+
+    SDL_Window *GetWindow() const {
+        return m_window;
+    };
+
     // SDL window and renderer attributes
     SDL_Window *m_window = nullptr;
     SDL_Renderer *m_renderer = nullptr;

@@ -18,9 +18,12 @@
 
 class Renderer : public Component {
 public:
+
     // Constructor and destructor
     Renderer(GameObject *owner, Image *image);
     ~Renderer();
+
+private:
 
     // Replace the component name and return it.
     inline std::string GetComponentName() override {
@@ -41,15 +44,14 @@ public:
     void SetActivationTrue() {
         m_activation = true;
     };
+
     void SetActivationFalse() {
         m_activation = false;
     };
 
-protected:
     // Overriding method called by final update
     void ComponentUpdate() override;
 
-private:
     // Boolean attribute to track the activation of the renderer
     bool m_activation = true;
 
