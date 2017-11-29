@@ -16,6 +16,7 @@
 #include <math.h>
 #include <stdio.h>
 
+// The constant name must be different.
 const int kUp = 1;
 const int kDown = 2;
 const int kLeft = 3;
@@ -93,6 +94,8 @@ void NakedManScript::Start() throw (Exception) {
 void NakedManScript::SetDirection() {
 	// Get current mouse position
     mousePosition = input->GetMousePosition();
+
+    // Need to break into atomic functions
 
     // Compare direction the player is looking and moving
     if (!game_controller) {
@@ -312,6 +315,8 @@ void NakedManScript::SetDirection() {
     @brief Detect the keyboards that are being pressed to move the player.
 */
 void NakedManScript::KeyBoardUpdate() {
+    // Need to break into atomic functions
+    
     // Detect if zoom is required
     if ((input->GetKeyPressed(INPUT_DOWN))
          || (input->GetKeyPressed(INPUT_UP))) {

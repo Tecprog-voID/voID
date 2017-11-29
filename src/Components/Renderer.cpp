@@ -36,11 +36,13 @@ void Renderer::ComponentUpdate() {
     @param[in] img
 */
 Renderer::Renderer(GameObject *owner, Image *image) : Component(owner, C_DRAW) {
+
+    // Set the local variable
     m_image = image;
 
     m_position = GetOwner()->GetPosition();
 
-    // Detect null image
+    // Detect if the arrival image is empty
     if (!m_image) {
         ERROR("Null image on renderer");
     } else {
@@ -52,6 +54,7 @@ Renderer::Renderer(GameObject *owner, Image *image) : Component(owner, C_DRAW) {
     @brief Destructor for the class Renderer.
 */
 Renderer::~Renderer() {
+    // Destructor
     delete m_image;
 }
 

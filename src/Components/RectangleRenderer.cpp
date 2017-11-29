@@ -54,6 +54,8 @@ void RectangleRenderer::ComponentUpdate() throw (Exception) {
     @param[in] alpha - Specific value of alpha.
 */
 void RectangleRenderer::SetColor(int red, int green, int blue, int alpha) {
+
+    // Set the local variable
     m_red = red;
     m_green = green;
     m_blue = blue;
