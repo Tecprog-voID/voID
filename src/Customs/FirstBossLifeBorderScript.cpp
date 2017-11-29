@@ -7,6 +7,7 @@
 
 #include "Customs/FirstBossLifeBorderScript.hpp"
 #include "Log/log.hpp"
+#include <cassert>
 
 const float vectorAxisX = 0;
 const float vectorAxisY = 0;
@@ -30,7 +31,7 @@ const int maxRow = 3;
 */
 FirstBossLifeBorderScript::FirstBossLifeBorderScript(GameObject *owner) :
     Script(owner) {
-
+    assert((owner != NULL) && "The owner must be equal to NULL");
 }
 
 
