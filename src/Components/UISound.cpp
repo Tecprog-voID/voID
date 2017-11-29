@@ -12,13 +12,18 @@
 UISound::UISound(GameObject *owner, string message, string audioPath,
                  bool isMusic, bool playOnStart)
                  : Component (owner, C_COMMON) {
+
     INFO("UISound UISound() - initializing");
+
     assert((owner != NULL) && "the owner must be equal to NULL");
+
     m_message = message;
     m_audioPath = audioPath;
     m_isMusic = isMusic;
     m_playOnStart = playOnStart;
+
     OnPropertyChange();
+
     INFO("UISound UISound() - completed");
 }
 
@@ -28,8 +33,8 @@ void UISound::Start() {
 }
 
 /**
- @brief Avoids the sound to play on start while updating a component.
- */
+    @brief Avoids the sound to play on start while updating a component.
+*/
 void UISound::ComponentUpdate() {
     // Check if the sound should play in the start.
     if (m_playOnStart) {
@@ -42,49 +47,48 @@ void UISound::ComponentUpdate() {
 }
 
 /**
- @brief Do nothing.
- */
+    @brief Do nothing.
+*/
 void UISound::FixedComponentUpdate() {}
 
 /**
- @brief Handles what happens whenever a property changes.
- @details If the audio file is found, it plays, else, an error message is
- shown.
- */
+    @brief Handles what happens whenever a property changes.
+    @details If the audio file is found, it plays, else, an error message is
+    shown.
+*/
 void UISound::OnPropertyChange() {
     // Check if the audio file is a music or a sound.
     switch (m_isMusic) {
         // Loads the music file.
         case true:
-        m_music = Mix_LoadMUS(m_audioPath.c_str());
-        // Verify if the music exists.
-        if( m_music == NULL) {
-            printf("Failed to load music! SDL_mixer Error: %s\n",
-            Mix_GetError());
-        } else {
-            // Do nothing
-        }
-        break;
+            m_music = Mix_LoadMUS(m_audioPath.c_str());
+            // Verify if the music exists.
+            if( m_music == NULL) {
+                printf("Failed to load music! SDL_mixer Error: %s\n",
+                Mix_GetError());
+            } else {
+                // Do nothing
+            }
+            break;
 
         // Loads the sound effect file.
         case false:
-        m_sound = Mix_LoadWAV(m_audioPath.c_str());
-        // Verify if the sound exists.
-        if (m_sound == NULL) {
-            printf("Failed to load sound effect! SDL_mixer Error: %s\n",
-            Mix_GetError());
-        } else {
-            // Do nothing
-        }
-        break;
+            m_sound = Mix_LoadWAV(m_audioPath.c_str());
+            // Verify if the sound exists.
+            if (m_sound == NULL) {
+                printf("Failed to load sound effect! SDL_mixer Error: %s\n",
+                Mix_GetError());
+            } else {
+                // Do nothing
+            }
     }
 }
 
 /**
- @brief Play a audio file, with or without loop.
- @param loops.
- @param channel.
- */
+    @brief Play a audio file, with or without loop.
+    @param loops.
+    @param channel.
+*/
 void UISound::Play(int loops, int channel) {
     // Plays the file if is a music.
     if (m_isMusic) {
@@ -96,9 +100,9 @@ void UISound::Play(int loops, int channel) {
 }
 
 /**
- @brief Stops the sound either if it's a music or not.
- @param channel.
- */
+    @brief Stops the sound either if it's a music or not.
+    @param channel.
+*/
 void UISound::Stop(int channel) {
     // Stops the music.
     if (m_isMusic) {
@@ -110,9 +114,9 @@ void UISound::Stop(int channel) {
 }
 
 /**
- @brief Pauses the sound either if it's a music or not.
- @param channel.
- */
+    @brief Pauses the sound either if it's a music or not.
+    @param channel.
+*/
 void UISound::Pause(int channel) {
     // Pauses the music.
     if (m_isMusic) {
