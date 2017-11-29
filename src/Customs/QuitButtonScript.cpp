@@ -5,10 +5,13 @@
 */
 
 #include "Customs/QuitButtonScript.hpp"
+
+// include class Exception for appropriate error handling.
 #include "Customs/Exception.hpp"
 
 #include "Log/log.hpp"
 
+// Library for asserts.
 #include <cassert>
 
 const int grayTone = 160;

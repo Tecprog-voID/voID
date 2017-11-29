@@ -5,8 +5,11 @@
 */
 
 #include "Customs/CatchAllButtonScript.hpp"
+
+// include class Exception for appropriate error handling.
 #include "Customs/Exception.hpp"
 
+// Library for asserts.
 #include <cassert>
 
 const int gameMode = 0x02;

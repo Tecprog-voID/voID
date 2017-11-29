@@ -5,10 +5,13 @@
 */
 
 #include "Customs/CreditsScript.hpp"
+
+// include class Exception for appropriate error handling.
 #include "Customs/Exception.hpp"
 
 #include "Globals/EngineGlobals.hpp"
 
+// Library for asserts.
 #include <cassert>
 
 /**
@@ -40,6 +43,7 @@ void CreditsScript::ComponentUpdate() {
     @brief Set the credits x and y positions to zero.
 */
 void CreditsScript::FixedComponentUpdate() {
+    // Set the position of credits in the end of game
     position->m_x = 0;
     position->m_y = 0;
 }
