@@ -6,6 +6,7 @@
 #include "Engine/CollisionSystem.hpp"
 
 #include <math.h>
+#include <cassert>
 
 const int divisor = 2;
 
@@ -30,8 +31,10 @@ CollisionSystem *CollisionSystem::GetInstance() {
     } else {
         // Do nothing
     }
-    
+
+
     return m_instance;
+    assert((m_instance != NULL) and "the return must be different to NULL");
 }
 
 void CollisionSystem::Update() {
@@ -191,7 +194,7 @@ void CollisionSystem::CircleRect(CircleCollider *circle, RectangleCollider *rect
         TextWidth divided by 2 in addition to Circle Radius, in that case
         there is in Collision. The same logic is used on y-axis.
     */
-    
+
     // Compares the rectangles distances.
     if (!((distanceX > (rectangle->GetWidth() / divisor + circle->GetRadius()))
         || (distanceY > (rectangle->GetHeight() / divisor + circle->GetRadius())))){

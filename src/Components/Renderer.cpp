@@ -42,7 +42,6 @@ Renderer::Renderer(GameObject *owner, Image *image) : Component(owner, C_DRAW) {
 
     // Detect null image
     if (!m_image) {
-        // Return error
         ERROR("Null image on renderer");
     } else {
         // nothing to do.
