@@ -6,6 +6,8 @@
 
 #include "Engine/Frame.hpp"
 
+#include "Customs/Exception.hpp"
+
 #include <cassert>
 
 /**
@@ -34,4 +36,7 @@ Frame::Frame(int positionX, int positionY, int width, int height) {
 */
 SDL_Rect *Frame::GetRect() {
     return &originOfRectangle;
+    assert((&originOfRectangle != NULL) and "the return must be different to NULL");
+
+
 }

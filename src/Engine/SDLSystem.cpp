@@ -151,6 +151,8 @@ SDLSystem *SDLSystem::GetInstance() {
     }
 
     return m_instance;
+    assert((m_instance != NULL) and "the return must be different to NULL");
+
 }
 
 /**
@@ -166,9 +168,14 @@ bool SDLSystem::InitSDL() {
 
     // Check initialization fail
     assert((initialize == 0) and "initialize must be equal to zero");
-
+    bool sdlReturn = true;
     INFO("SDL Initialized.")
-    return true;
+
+    if(sdlReturn == false){
+        throw Exception("SDLSystem - The return must be different of false.");
+    } else {
+        return sdlReturn;
+    }
 }
 
 /**
@@ -184,11 +191,13 @@ bool SDLSystem::InitIMG() throw (Exception) {
 
     // Check image initialization fail
     assert(((initialize & flags) == flags) and "initialize and flags must have the same status");
-    if(initialize != '\0'){
-        INFO("SDLSystem - IMG Initialized.");
-        return true;
+
+    bool initImgReturn = true;
+
+    if(initImgReturn != false){
+        return initImgReturn;
     } else {
-        throw Exception("SDLSystem - Initialized nust be different of null.");
+        throw Exception("SDLSystem - initImgReturn must be different of null.");
     }
 
 }
@@ -206,8 +215,15 @@ bool SDLSystem::InitMixer() {
     // Check mixer initialization fail
     assert((initialize == 0) and "initialize must be equal to zero");
 
+    bool initMixerReturn = true;
+
+    if(initMixerReturn != false){
+        return initMixerReturn;
+    } else {
+        throw Exception("SDLSystem - initMixerReturn must be different of null.");
+    }
+
     INFO("SDLSystem - Mixer Initialized.");
-    return true;
 }
 
 /**
@@ -222,8 +238,17 @@ bool SDLSystem::InitTTF() {
     // Check TTF initialization fail
     assert((initialize == 0) and "initialize must be equal to zero");
 
+    bool initTtfReturn = true;
+
     INFO("SDLSystem - TTF Initialized.");
-    return true;
+
+    if(initTtfReturn != false){
+        return initTtfReturn;
+    } else {
+        throw Exception("SDLSystem - initTtfReturn must be different of null.");
+    }
+
+
 }
 
 /**
@@ -241,8 +266,15 @@ bool SDLSystem::CreateWindow() {
     // Check window creation fail
     assert((m_window != nullptr) and "m_window can not be null");
 
+    bool createWindowReturn = true;
+
     INFO("SDLSystem - Created window successfully.");
-        return true;
+
+    if(createWindowReturn != false){
+        return createWindowReturn;
+    } else {
+        throw Exception("SDLSystem - createWindowReturn must be different of null.");
+    }
 }
 
 /**
@@ -259,8 +291,16 @@ bool SDLSystem::CreateRenderer() throw (Exception) {
     assert((m_renderer != nullptr) and "m_renderer can not be null");
 
     SDL_SetRenderDrawBlendMode(m_renderer,SDL_BLENDMODE_BLEND);
+
+    bool createRenderReturn = true;
+
     INFO("SDLSystem - Created renderer successfully.");
-        return true;
+
+    if(createRenderReturn != false){
+        return createRenderReturn;
+    } else {
+        throw Exception("SDLSystem - createRenderReturn must be different of null.");
+    }
 }
 
 /**
@@ -344,18 +384,25 @@ void SDLSystem::LoadCommons() throw (Exception) {
 */
 bool SDLSystem::FixFramerate() throw (Exception) {
     m_currentFix = SDL_GetTicks();
+    bool fixFramerateReturn = '\0';
     if(m_currentFix != '\0'){
         float fixInterval = m_currentFix - m_lastFix;
 
         // Compare intervals to check the need to fix frame rate
         if (fixInterval < update_rate_interval){
-            return false;
+            fixFramerateReturn =  false;
         }
 
         m_lastFix = SDL_GetTicks();
-        return true;
+        fixFramerateReturn =  true;
     } else {
         throw Exception("SDLSystem - m_currentFix must be different of null.");
+    }
+
+    if(fixFramerateReturn != '\0'){
+        return fixFramerateReturn;
+    } else {
+        throw Exception("SDLSystem - fixFramerateReturn must be different of null.");
     }
 
 }
