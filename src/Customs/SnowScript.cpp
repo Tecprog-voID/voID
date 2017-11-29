@@ -7,6 +7,7 @@
 
 #include "Customs/SnowScript.hpp"
 #include "Log/log.hpp"
+#include <cassert>
 
 // Start snow script, zoom proportion
 const float vectorZoomProportionAxisX = 0;
@@ -35,7 +36,7 @@ const int soundLoops = -1;
     @param[in] GameObject *owner - owns the component.
 */
 SnowScript::SnowScript(GameObject *owner) : Script(owner) {
-
+    assert((owner != NULL) && "The owner must be equal to NULL");
 }
 
 /**

@@ -8,6 +8,7 @@
 #include "Customs/TopCenterLightScript.hpp"
 #include "Globals/EngineGlobals.hpp"
 #include "Log/log.hpp"
+#include <cassert>
 
 const int imagePositionX = 0;
 const int imagePositionY = 0;
@@ -26,7 +27,7 @@ const int framesPerSecond = 9;
     @param[in] GameObject *owner - owns the component.
 */
 TopCenterLightScript::TopCenterLightScript(GameObject *owner) : Script(owner) {
-
+    assert((owner != NULL) && "The owner must be equal to NULL");
 }
 
 /**
