@@ -14,6 +14,7 @@
 */
 UnbLogoScript::UnbLogoScript(GameObject *owner) : Script(owner) {
     assert((owner != NULL) && "the owner must be equal to NULL");
+
     INFO("UnbLogoScript UnbLogoScript() - completed");
 }
 
@@ -23,14 +24,18 @@ UnbLogoScript::UnbLogoScript(GameObject *owner) : Script(owner) {
 void UnbLogoScript::Start() {
     // Creates the logo animations.
     CreateAnimations();
+
     // Get the position and the animator of the logo
     m_position = GetOwner()->GetPosition();
     m_animator = (Animator *)GetOwner()->GetComponent("Animator");
+
     // Get the inputs.
     m_input = InputSystem::GetInstance();
+
     // Index of the controller.
     const int gameControllerIndex = 0;
     m_gameController = m_input->GetGameController(gameControllerIndex);
+
     // Set the zoom of the logo.
     GetOwner()->SetZoomProportion(Vector(0,0));
 }
@@ -45,6 +50,7 @@ void UnbLogoScript::CreateAnimations() {
 
     // Number of frames to add in the animation.
     const int numberNewFrames = 15;
+
     // Add 15 frames to the animation.
     for (int i = 0; i < numberNewFrames; i++) {
         // Change the horizontal position of the frames in the animation.
@@ -59,6 +65,7 @@ void UnbLogoScript::CreateAnimations() {
 
     // Set the animator of the logo.
     auto unbAnimator = new Animator(GetOwner());
+
     // Number of frames to add per second.
     const int numberFramesPerSecond = 9;
     unbAnimation->SetFramesPerSecond(numberFramesPerSecond);
@@ -104,6 +111,7 @@ void UnbLogoScript::FixedComponentUpdate() {
 
     // Time before stop all animations.
     const float timeLimit = 100;
+
     // Stop all the animations if the time is bigger than 100 miliseconds.
     if (m_time.GetTime() >= timeLimit) {
         m_animator->StopAllAnimations();

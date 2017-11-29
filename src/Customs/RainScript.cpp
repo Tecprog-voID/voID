@@ -14,6 +14,7 @@
 */
 RainScript::RainScript(GameObject *owner) : Script(owner) {
     assert((owner != NULL) && "the owner must be equal to NULL");
+
     INFO("RainScript RainScript() - completed");
 }
 
@@ -25,8 +26,10 @@ void RainScript::Start() {
     CreateAnimations();
     m_position = GetOwner()->GetPosition();
     m_animator = (Animator *)GetOwner()->GetComponent("Animator");
+
     // Get the input.
     m_input = InputSystem::GetInstance();
+
     // Set the zoom proportion.
     GetOwner()->SetZoomProportion(Vector(0,0));
 }
@@ -38,9 +41,11 @@ void RainScript::CreateAnimations() {
     // Creates the animations for the rain script.
     auto rainImage = new Image("assets/chuva.png",0,0,3410, 256);
     auto rainAnimation= new Animation(GetOwner(),rainImage);
-    // Add 10 frames in the rain animation.
+
     // Number of frames to add in the animation.
     const int numberNewFrames = 10;
+
+    // Add 10 frames in the rain animation.
     for (int i = 0; i < numberNewFrames; i++) {
         rainAnimation->AddFrame(new Frame(i * 341,0, 341, 256));
     }
@@ -81,9 +86,10 @@ void RainScript::ComponentUpdate() {
     @brief Sets the position of the owner as 0 on x and 0 on y.
 */
 void RainScript::FixedComponentUpdate() {
-    // Set the positions X and Y of the component.
     // Coordinate for the position.
     const int valuePosition = 0;
+
+    // Set the positions X and Y of the component.
     m_position->m_x = valuePosition;
     m_position->m_y = valuePosition;
 }
