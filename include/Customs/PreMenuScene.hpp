@@ -16,16 +16,22 @@
 
 
 class PreMenuScene : public Scene {
-public:
-    void OnActivation() override;
-    void OnDeactivation() override;
-    void OnShown() override;
-    void OnHidden() override;
+    public:
+        void OnActivation() override;
 
-private:
-    void CreateLogoSdl();
-    void CreateLogoUnb();
-    void CreateLogoControle();
-    void CreateLogoZebra();
+        void OnDeactivation() override;
+
+        void OnShown() override;
+
+        void OnHidden() override;
+
+    private:
+        void CreateLogoSdl();
+
+        void CreateLogoUnb();
+
+        void CreateLogoControle();
+
+        void CreateLogoZebra();
 };
 #endif

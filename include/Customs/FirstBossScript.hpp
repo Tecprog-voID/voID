@@ -28,8 +28,11 @@ public:
     std::string GetComponentName() override {
         return "FirstBossScript";
     };
+
     void FixedComponentUpdate() override;
+
     void Start() override;
+
     void Attack();
 
 protected:
