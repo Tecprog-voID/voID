@@ -316,7 +316,7 @@ void NakedManScript::SetDirection() {
 */
 void NakedManScript::KeyBoardUpdate() {
     // Need to break into atomic functions
-    
+
     // Detect if zoom is required
     if ((input->GetKeyPressed(INPUT_DOWN))
          || (input->GetKeyPressed(INPUT_UP))) {
@@ -724,6 +724,7 @@ void NakedManScript::GameControllerUpdate() {
         // nothing to do.
     } // if -- Shoot
 
+    // Local variable.
     bulletController = game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERRIGHT);
 
     // Back to menu based in game controller input
@@ -756,6 +757,8 @@ void NakedManScript::CreateAnimations() {
     auto nakedManAnimator = new Animator(GetOwner());
     nakedManAnimator->AddAnimation("Right Dash", dashrightAnimation);
     dashrightAnimation->SetFramesPerSecond(10);
+
+    // Apply técniques of use constants
 
     // Prepare animations with player images in various directions.
     auto nakedManSprite = new Image("assets/image/player.png", 0, 0, 1664, 512);

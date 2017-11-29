@@ -5,6 +5,8 @@
 */
 
 #include "Customs/BulletCounterScript.hpp"
+
+// include class Exception for appropriate error handling.
 #include "Customs/Exception.hpp"
 
 #include "Globals/EngineGlobals.hpp"
@@ -53,6 +55,7 @@ void BulletCounterScript::ComponentUpdate() {
     @brief Set the Bullet Counter's x and y positions.
 */
 void BulletCounterScript::FixedComponentUpdate() {
+    // Set the values.
     counter_position->m_x = 900;
     counter_position->m_y = 700;
 }

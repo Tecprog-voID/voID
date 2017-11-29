@@ -8,8 +8,10 @@
 #include "Customs/AudioController.hpp"
 #include "Customs/Exception.hpp"
 
+// Library for assets
 #include <cassert>
 
+// Constants
 const int grayTone = 160;
 const int whiteTone = 255;
 
@@ -60,6 +62,7 @@ void PlayButtonScript::ComponentUpdate() throw (Exception) {
     // Text component to updates the colors of the Play Button
     auto textButton = (UIText *)GetOwner()->GetComponent("UIText");
 
+    // Verify the variables
     if(textButton != NULL){
         if (m_interactive_button->IsOver()) {
             textButton->SetColor(grayTone, grayTone, grayTone, whiteTone);

@@ -58,6 +58,8 @@ void ZebraLogoScript::CreateAnimations(){
     for (int i = 0; i < 15; i++) {
         zebraAnimation->AddFrame(new Frame(i * width, height, width, height));
     }
+
+    // Sets the size of the animation
     zebraAnimation->SetFramesPerSecond(9);
 
     // Insert the ZebraLogo in the map.
@@ -70,6 +72,7 @@ void ZebraLogoScript::CreateAnimations(){
     @brief Do nothing.
 */
 void ZebraLogoScript::ComponentUpdate() {
+    // Just update. 
 }
 
 /**
