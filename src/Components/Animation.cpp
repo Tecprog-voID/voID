@@ -9,6 +9,7 @@
 
 #include "Components/Animation.hpp"
 #include "Log/log.hpp"
+#include <cassert>
 
 /**
     @brief Responsible for instantiating the class and starting the game animation.
@@ -18,12 +19,11 @@
 */
 Animation::Animation(GameObject *owner, Image *image, bool playOnStart)
                     : Component(owner, C_DRAW) {
+    assert((owner != NULL) && "The owner must be equal to NULL");
+
     // Image validation.
-    if (!image) {
-        ERROR("Animation - Null image not allowed");
-    } else {
-        // Nothing to do
-    }
+    assert((image != NULL) && "Null image not allowed");
+
     m_image = image;
     m_isPlaying = playOnStart;
 }
@@ -96,11 +96,7 @@ void Animation::SetPlaying(bool condition) {
     @param[in] frame Points to the class responsible for creating frames.
 */
 void Animation::AddFrame(Frame *frame) {
-    if (!frame) {
-        ERROR("Animation - Null frame pointer");
-    } else {
-        // Nothing to do
-    }
+    assert((frame != NULL) && "Null frame pointer not allowed");
 
     m_frames.push_back(frame);
     m_framesQuantity++;

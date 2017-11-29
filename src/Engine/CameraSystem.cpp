@@ -6,6 +6,7 @@
 */
 
 #include "Engine/CameraSystem.hpp"
+#include <cassert>
 
 #include "Customs/MapScript.hpp"
 
@@ -27,13 +28,7 @@ CameraSystem::CameraSystem() {
     @param[in] scene Pointer that points to the current scene.
 */
 void CameraSystem::MoveUp(int speed, Scene *scene) {
-
-    // Check if is diferent of scene and return.
-    if (!scene) {
-        return;
-    } else {
-        // Nothing to do
-    }
+    assert((scene != NULL) && "Null scene not allowed");
 
     // Get all scene game objects.
     m_gameObjectsCameraSystem = scene->GetAllGameObjects();
@@ -92,13 +87,7 @@ void CameraSystem::MoveUp(int speed, Scene *scene) {
     @param[in] scene Pointer that points to the current scene.
 */
 void CameraSystem::MoveDown(int speed, Scene *scene) {
-
-    // Check if is diferent of scene and return.
-    if (!scene) {
-        return;
-    } else {
-        // Nothing to do
-    }
+    assert((scene != NULL) && "Null scene not allowed");
 
     // Get the scene game objects.
     m_gameObjectsCameraSystem = scene->GetAllGameObjects();
@@ -159,13 +148,7 @@ void CameraSystem::MoveDown(int speed, Scene *scene) {
     @param[in] scene Pointer that points to the current scene.
 */
 void CameraSystem::MoveLeft(int speed,Scene *scene) {
-
-    // Check if is diferent of scene and return.
-    if (!scene) {
-        return;
-    } else {
-        // Nothing to do
-    }
+    assert((scene != NULL) && "Null scene not allowed");
 
     // Get the scene game objects.
     m_gameObjectsCameraSystem = scene->GetAllGameObjects();
@@ -226,13 +209,7 @@ void CameraSystem::MoveLeft(int speed,Scene *scene) {
     @param[in] scene Pointer that points to the current scene.
 */
 void CameraSystem::MoveRight(int speed, Scene *scene) {
-
-    // Check if is diferent of scene and return.
-    if(!scene) {
-        return;
-    } else {
-        // Nothing to do
-    }
+    assert((scene != NULL) && "Null scene not allowed");
 
     // Get the scene game objects.
     m_gameObjectsCameraSystem = scene->GetAllGameObjects();
@@ -293,14 +270,7 @@ void CameraSystem::MoveRight(int speed, Scene *scene) {
     @param[in] scene Pointer that points to the current scene.
 */
 void CameraSystem::CameraShake(int intensity, float duration, Scene *scene) {
-
-    // Check if is diferent of scene and return.
-    if (!scene) {
-        return;
-    } else {
-        // Nothing to do
-    }
-
+    assert((scene != NULL) && "Null scene not allowed");
 
     static int lastShake = 0;
     m_timer.Update(EngineGlobals::fixed_update_interval);
@@ -393,7 +363,7 @@ void CameraSystem::Reset() {
     @param[in] scene Pointer that points to the current scene.
 */
 void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scene) {
-
+    assert((scene != NULL) && "Null scene not allowed");
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->
                                             GetGameObject("Map");
 
@@ -566,6 +536,7 @@ void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scen
     @param[in] scene Pointer that points to the current scene.
 */
 void CameraSystem::ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *scene){
+    assert((scene != NULL) && "Null scene not allowed");
 
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->
                                             GetGameObject("Map");
