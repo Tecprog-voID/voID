@@ -13,7 +13,7 @@ const int quantityFrameLine = 22;
 const int quantityFrameColumn = 12;
 
 GameOverScript::GameOverScript(GameObject *owner) : Script(owner) {
-     assert((owner != NULL) && "the owner must be equal to NULL");
+     assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**
@@ -70,12 +70,12 @@ void GameOverScript::ComponentUpdate() {
         // Do nothing
     }
 
-    if (input->GetKeyDown(INPUT_T) && play==0) {
+    if (input->GetKeyDown(INPUT_T) and play==0) {
         // animator->StopAllAnimations();
         AudioController::GetInstance()->PlayAudio("snowSound", -1);
         play=1;
     }
-    else if (input->GetKeyDown(INPUT_T) && play==1) {
+    else if (input->GetKeyDown(INPUT_T) and play==1) {
         play=0;
         AudioController::GetInstance()->StopAudio("snowSound");
         animator->StopAllAnimations();
