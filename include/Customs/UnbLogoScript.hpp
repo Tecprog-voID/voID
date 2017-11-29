@@ -21,30 +21,34 @@
 
 class UnbLogoScript : public Script {
 
-public:
-    UnbLogoScript(GameObject *owner);
-    std::string GetComponentName() override {
-        return "UnbLogoScript";
-    };
-    void FixedComponentUpdate() override;
-    void Start() override;
+    public:
+        UnbLogoScript(GameObject *owner);
 
-protected:
-    void ComponentUpdate() override;
+        std::string GetComponentName() override {
+            return "UnbLogoScript";
+        };
 
-private:
-    // Store the time.
-    Timer m_time;
-    void CreateAnimations();
-    // Object for inputs in the snow activator script.
-    InputSystem *m_input = nullptr;
-    // Object for the inputs from the game controller.
-    GameController* m_gameController = nullptr;
-    // Animator for the UNB logo.
-    Animator *m_animator = nullptr;
-    // Object that store positions in the game.
-    Vector *m_position = nullptr;
-    // Attribute not used in the UnbLogoScript.
-    int m_play = 0;
+        void FixedComponentUpdate() override;
+
+        void Start() override;
+
+    protected:
+        void ComponentUpdate() override;
+
+    private:
+        void CreateAnimations();
+
+        // Store the time.
+        Timer m_time;
+        // Object for inputs in the snow activator script.
+        InputSystem *m_input = nullptr;
+        // Object for the inputs from the game controller.
+        GameController* m_gameController = nullptr;
+        // Animator for the UNB logo.
+        Animator *m_animator = nullptr;
+        // Object that store positions in the game.
+        Vector *m_position = nullptr;
+        // Attribute not used in the UnbLogoScript.
+        int m_play = 0;
 };
 #endif

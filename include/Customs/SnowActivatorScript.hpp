@@ -19,41 +19,47 @@
 #include <string>
 
 class SnowActivatorScript : public Script {
-public:
-    SnowActivatorScript(GameObject *owner);
-    std::string GetComponentName() override {
-        return "SnowActivatorScript";
-    };
-    void FixedComponentUpdate() override;
-    void Start() override;
-    void Activate() {
-        m_activateAnimation = animationActivated;
-    }
-protected:
-    void ComponentUpdate() override;
+    public:
+        SnowActivatorScript(GameObject *owner);
 
-private:
-    // Store if the animation has been activated.
-    int m_activateAnimation = animationNotActivated;
-    // Store if the animation has runned.
-    bool m_runnedAnimation = false;
-    // Store the m_time.
-    Timer m_time;
-    void CreateAnimations();
-    // Object for inputs in the snow activator script.
-    InputSystem *m_input = nullptr;
-    // Object for the inputs from the game controller.
-    GameController* m_gameController = nullptr;
-    // Animator for the snow script activator.
-    Animator *m_animator = nullptr;
-    // Object that store positions in the game.
-    Vector *m_position = nullptr;
-    // Attribute not used in the SnowActivatorScript.
-    int m_play = 0;
+        std::string GetComponentName() override {
+            return "SnowActivatorScript";
+        };
 
-    // Animation possible status.
-    const int animationNotActivated = -1;
-    const int animationActivated = 0;
-    const int animationEnded = 1;
+        void FixedComponentUpdate() override;
+
+        void Start() override;
+
+        void Activate() {
+            m_activateAnimation = animationActivated;
+        }
+
+    protected:
+        void ComponentUpdate() override;
+
+    private:
+        void CreateAnimations();
+
+        // Store if the animation has been activated.
+        int m_activateAnimation = animationNotActivated;
+        // Store if the animation has runned.
+        bool m_runnedAnimation = false;
+        // Store the m_time.
+        Timer m_time;
+        // Object for inputs in the snow activator script.
+        InputSystem *m_input = nullptr;
+        // Object for the inputs from the game controller.
+        GameController* m_gameController = nullptr;
+        // Animator for the snow script activator.
+        Animator *m_animator = nullptr;
+        // Object that store positions in the game.
+        Vector *m_position = nullptr;
+        // Attribute not used in the SnowActivatorScript.
+        int m_play = 0;
+
+        // Animation possible status.
+        const int animationNotActivated = -1;
+        const int animationActivated = 0;
+        const int animationEnd  ed = 1;
 };
 #endif
