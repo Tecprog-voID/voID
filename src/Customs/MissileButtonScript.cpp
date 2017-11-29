@@ -7,13 +7,14 @@
 
 #include "Customs/MissileButtonScript.hpp"
 #include "Log/log.hpp"
+#include <cassert>
 
 /**
     @brief Initializes MissileButtonScript instance.
     @param[in] GameObject *owner - owns the component.
 */
 MissileButtonScript::MissileButtonScript(GameObject *owner) : Script(owner) {
-
+    assert((owner != NULL) && "The owner must be equal to NULL");
 }
 
 /**

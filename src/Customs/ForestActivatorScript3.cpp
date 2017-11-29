@@ -6,6 +6,7 @@
 
 #include "Globals/EngineGlobals.hpp"
 #include "Log/log.hpp"
+#include <cassert>
 
 #include "Customs/ForestActivatorScript3.hpp"
 #include "Customs/TopCenterLightScript.hpp"
@@ -28,7 +29,7 @@ const int framesPerSecond = 9;
 
 // Constructor
 ForestActivatorScript3::ForestActivatorScript3(GameObject *owner) : Script(owner) {
-
+    assert((owner != NULL) && "The owner must be equal to NULL");
 }
 
 /**
