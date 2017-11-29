@@ -60,6 +60,6 @@ class SnowActivatorScript : public Script {
         // Animation possible status.
         const int animationNotActivated = -1;
         const int animationActivated = 0;
-        const int animationEnd ed = 1;
+        const int animationEnded = 1;
 };
 #endif
