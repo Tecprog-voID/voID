@@ -21,6 +21,7 @@
 using namespace std;
 
 class UISound : public Component {
+
 public:
     UISound(GameObject *owner, string message, string audio_path, bool is_music,
             bool play_on_start);
@@ -29,17 +30,17 @@ public:
         return "UISound";
     };
 
-    void Start() override;
-    void FixedComponentUpdate() override;
-    void ComponentUpdate() override;
+    inline string GetMessage(){
+        return m_message;
+    };
 
     void Play(int loops = playForever, int channel = emptyChannel);
     void Stop(int channel = emptyChannel);
     void Pause(int channel = emptyChannel);
 
-    inline string GetMessage(){
-        return m_message;
-    };
+    void Start() override;
+    void FixedComponentUpdate() override;
+    void ComponentUpdate() override;
 
 private:
     // Store if the music is playing.

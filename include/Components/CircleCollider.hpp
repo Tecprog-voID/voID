@@ -21,6 +21,7 @@ class CircleCollider : public Collider {
     public:
         CircleCollider(GameObject *owner, Vector &offset, float radius,
                        int layer);
+
         Vector GetCenter() {
             return Vector(m_circleShape.x, m_circleShape.y);
         };
