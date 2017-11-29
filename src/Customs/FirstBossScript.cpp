@@ -57,6 +57,7 @@ void FirstBossScript::CreateAnimations() {
 
     // Create animations for the first boss.
     auto firstBossAnimation = new Animation(GetOwner(),firstBossImage);
+
     // Add 8 frames, changing the X position of the frame in crescent order.
     const int numberNewFramesBossAnimation = 8;
     for (int i = 0; i < numberNewFramesBossAnimation; i++) {
@@ -68,6 +69,7 @@ void FirstBossScript::CreateAnimations() {
     // Possible number of new frames created.
     const int fiveNewFrames = 5;
     const int eightNewFrames = 8;
+
     // Add 5 frames, changing the X position of the frame in crescent order.
     for (int i = 0; i < fiveNewFrames; i++) {
         firstBossJumpAnimation->AddFrame(new Frame(i * 236,0, 236, 406));
@@ -75,6 +77,7 @@ void FirstBossScript::CreateAnimations() {
 
         // Index of the last frame of the jump animation.
         const int lastFrameJumpAnimation = 4;
+
         // For the last iteration of the for, add more frames.
         if (i == lastFrameJumpAnimation) {
             /*
@@ -94,6 +97,7 @@ void FirstBossScript::CreateAnimations() {
 
     // Create a animation for the fall of the first boss.
     auto firstBossFallAnimation = new Animation(GetOwner(),firstBossJumpImage);
+
     // Add 5 frames, changing the X position of the frame in decrescent order.
     for (int i = fiveNewFrames; i > 0; i--) {
         firstBossFallAnimation->AddFrame(new Frame(i * 236, 0, 236, 406));
@@ -211,6 +215,7 @@ void FirstBossScript::Attack() {
 
         // Default number for the second attack.
         const int secondAttackNumber = 0;
+
         /*
         Play the first boss's jump animation if is the second attack and it
         doesn't has fall.
@@ -225,6 +230,7 @@ void FirstBossScript::Attack() {
 
         // Default number for the first attack.
         const int firstAttackNumber = 1;
+
         // Check if the current attack is the first.
         if (m_randomNumber == firstAttackNumber) {
             m_firstAttack = true;
@@ -233,6 +239,7 @@ void FirstBossScript::Attack() {
             const int maxFirstAttackCounter = 3;
             // Cooldown time for the first attack.
             const int maxTimeFirstAttackCooldown = 2000;
+
             /*
             Check if the first attack isn't in the cooldown and hasn't been
             used more than 3 times.
@@ -247,6 +254,7 @@ void FirstBossScript::Attack() {
             } else {
             // Do nothing.
             }
+
             // If is the fourth first attack, set the first attack as gone.
             if (m_firstAttackCounter == maxFirstAttackCounter) {
                 // Activate timer to gone tentacle
@@ -274,6 +282,7 @@ void FirstBossScript::Attack() {
 
         // Max time for the second attack.
         const int maxTimeSecondAttack = 500;
+
         // Check if the second attack time has ended.
         if ((m_timerSecondAttack.GetTime() >= maxTimeSecondAttack)
                     && m_secondAttack) {
@@ -294,6 +303,7 @@ void FirstBossScript::Attack() {
 
         // Time before the second attack fall.
         const int timeSecondAttackFall = 2000;
+
         // Check if it is time to end the fall of the second attack.
         if (m_timerSecondAttackFall.GetTime() >= timeSecondAttackFall
                     && m_secondAttackFall) {
@@ -308,6 +318,7 @@ void FirstBossScript::Attack() {
 
             // Set the horizontal position of the boss's fall.
             GetOwner()->m_position->m_x = m_playerPosition.m_x;
+
             /*
             Check the vertical position of the boss's fall and change it
             depending of the player's position besides play the fall animation.

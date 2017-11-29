@@ -14,6 +14,7 @@
 */
 CentralLightScript1::CentralLightScript1(GameObject *owner) : Script(owner) {
     assert((owner != NULL) && "the owner must be equal to NULL");
+
     INFO("CentralLightScript1 CentralLightScript1() - completed");
 }
 
@@ -25,14 +26,18 @@ void CentralLightScript1::Start() {
     CreateAnimations();
     m_position = GetOwner()->GetPosition();
     m_animator = (Animator *)GetOwner()->GetComponent("Animator");
+
     // Get the inputs.
     m_input = InputSystem::GetInstance();
+
     // Index of the controller.
     const int gameControllerIndex = 0;
     m_gameController = m_input->GetGameController(gameControllerIndex);
+
     // Set the zoom and get the map of the scene.
     GetOwner()->SetZoomProportion(Vector(0,0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
+
     // Check if the map from the scene exists.
     if (map) {
         // Set the zoom for the map.
@@ -54,6 +59,7 @@ void CentralLightScript1::CreateAnimations() {
 
     // Create the animator.
     auto centrallightAnimator = new Animator(GetOwner());
+
     // Number of frames to add per second.
     const int numberFramesPerSecond = 9;
     centrallightAnimation->SetFramesPerSecond(numberFramesPerSecond);
