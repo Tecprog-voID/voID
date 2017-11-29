@@ -15,7 +15,7 @@
 #include "Customs/Exception.hpp"
 
 #include <cassert>
-
+//  Constants of
 const int red = 0;
 const int green = 0;
 const int blue = 0;
@@ -150,6 +150,7 @@ SDLSystem *SDLSystem::GetInstance() {
         // nothing to do.
     }
 
+    // Return of SDLSystem initialized instance.
     return m_instance;
     assert((m_instance != NULL) and "the return must be different to NULL");
 
@@ -171,6 +172,8 @@ bool SDLSystem::InitSDL() {
     bool sdlReturn = true;
     INFO("SDL Initialized.")
 
+
+    // Verify the return.
     if(sdlReturn == false){
         throw Exception("SDLSystem - The return must be different of false.");
     } else {
@@ -194,6 +197,7 @@ bool SDLSystem::InitIMG() throw (Exception) {
 
     bool initImgReturn = true;
 
+    // Verify the return.
     if(initImgReturn != false){
         return initImgReturn;
     } else {
@@ -217,6 +221,7 @@ bool SDLSystem::InitMixer() {
 
     bool initMixerReturn = true;
 
+    // Verify the return.
     if(initMixerReturn != false){
         return initMixerReturn;
     } else {
@@ -242,6 +247,7 @@ bool SDLSystem::InitTTF() {
 
     INFO("SDLSystem - TTF Initialized.");
 
+    // Verify the return.
     if(initTtfReturn != false){
         return initTtfReturn;
     } else {
@@ -270,6 +276,7 @@ bool SDLSystem::CreateWindow() {
 
     INFO("SDLSystem - Created window successfully.");
 
+    // Verify the return.
     if(createWindowReturn != false){
         return createWindowReturn;
     } else {
@@ -296,6 +303,7 @@ bool SDLSystem::CreateRenderer() throw (Exception) {
 
     INFO("SDLSystem - Created renderer successfully.");
 
+    // Verify the return.
     if(createRenderReturn != false){
         return createRenderReturn;
     } else {
@@ -327,6 +335,8 @@ void SDLSystem::LoadCommons() throw (Exception) {
     INFO("SDLSystem - Load common initialized");
     // Instantiate and add multiple scenes to scene manager.
     auto endScene1 = new EndScene1();
+
+    // This decompose
     if(endScene1 != NULL){
         SceneManager::GetInstance()->AddScene(std::make_pair("EndScene1",
                                                              endScene1));
@@ -334,6 +344,7 @@ void SDLSystem::LoadCommons() throw (Exception) {
         throw Exception("SDLSystem - endScene1 must be different of null.");
     }
 
+    // This decompose
     auto endScene2 = new EndScene2();
     if(endScene2 != NULL){
         SceneManager::GetInstance()->AddScene(std::make_pair("EndScene2",
@@ -342,6 +353,7 @@ void SDLSystem::LoadCommons() throw (Exception) {
         throw Exception("SDLSystem - endScene2 must be different of null.");
     }
 
+    // This decompose
     auto preMenuScene = new PreMenuScene();
     if(preMenuScene != NULL){
         SceneManager::GetInstance()->AddScene(std::make_pair("Pre Menu",
@@ -350,6 +362,7 @@ void SDLSystem::LoadCommons() throw (Exception) {
         throw Exception("SDLSystem - preMenuScene must be different of null.");
     }
 
+    // This decompose
     auto mainScene = new MainScene();
     if(mainScene != NULL){
         SceneManager::GetInstance()->AddScene(std::make_pair("Main",
@@ -358,6 +371,7 @@ void SDLSystem::LoadCommons() throw (Exception) {
         throw Exception("SDLSystem - mainScene must be different of null.");
     }
 
+    // This decompose
     auto gameplayScene = new GamePlayScene();
     if(gameplayScene != NULL){
         SceneManager::GetInstance()->AddScene(std::make_pair("Gameplay",
@@ -366,6 +380,7 @@ void SDLSystem::LoadCommons() throw (Exception) {
         throw Exception("SDLSystem - gameplayScene must be different of null.");
     }
 
+    // This decompose
     auto firstBossScene = new FirstBossScene();
     if(firstBossScene != NULL){
         SceneManager::GetInstance()->AddScene(std::make_pair("FirstBossScene",
