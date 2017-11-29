@@ -7,7 +7,7 @@
 const int middlePosition = 2;
 
 LightScript::LightScript(GameObject *owner) : Script(owner) {
-     assert((owner != NULL) && "the owner must be equal to NULL");
+     assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**
@@ -61,9 +61,9 @@ void LightScript::ComponentUpdate() {
             // Do nothing
         }
 
-        if (input->GetKeyDown(INPUT_Y) && play==0) {
+        if (input->GetKeyDown(INPUT_Y) and play==0) {
             play=1;
-        } else if (input->GetKeyDown(INPUT_Y) && play==1) {
+        } else if (input->GetKeyDown(INPUT_Y) and play==1) {
             play=0;
         }
     } else {
