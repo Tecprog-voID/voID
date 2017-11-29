@@ -15,12 +15,15 @@
 */
 Component::Component(GameObject *owner, ComponentType type) {
     INFO("Component Component() - initializing");
+
     // Test if owner exists and show a error if doesn't exists.
     assert((owner != NULL) && "Invalid null owner");
+
     // Instance the owner and type objects
     m_owner = owner;
     m_type = type;
     m_owner->AddComponent(this);
+
     INFO("Component Component() - completed");
 }
 

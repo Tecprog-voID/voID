@@ -53,12 +53,12 @@ void GraphicsSystem::Draw(Image *img, Vector *position,
     dest.x = position->m_x;
     dest.y = position->m_y;
 
-    int result;
     // Copy a portion of the texture to the current rendering target.
-    result = SDL_RenderCopyEx(SDLSystem::GetInstance()->GetRenderer(),
+    int result = SDL_RenderCopyEx(SDLSystem::GetInstance()->GetRenderer(),
                               img->GetTexture(), img->GetRect(), &dest,
                               img->GetRotationAngle(), img->GetSDLPivot(),
                               img->GetSDLFlip());
+
     // Assert if the SDL_RenderCopyEx returned a error.
     assert((result >= noErrorReturnValue) && SDL_GetError());
 }
@@ -74,10 +74,8 @@ void GraphicsSystem::DrawFrame(Image *img, Frame *frame, Vector *position,
     dest.x = position->m_x;
     dest.y = position->m_y;
 
-
-    int result;
     // Copy a portion of the texture to the current rendering target.
-    result = SDL_RenderCopyEx(SDLSystem::GetInstance()->GetRenderer(),
+    int result = SDL_RenderCopyEx(SDLSystem::GetInstance()->GetRenderer(),
                               img->GetTexture(), frame->GetRect(), &dest,
                               img->GetRotationAngle(), img->GetSDLPivot(),
                               img->GetSDLFlip());
@@ -122,6 +120,7 @@ void GraphicsSystem::DrawCircle(Vector &center, float radius, Uint8 redValue,
     SDL_SetRenderDrawColor(SDLSystem::GetInstance()->GetRenderer(), redValue,
                            greenValue, blueValue, alphaValue);
     Vector point;
+
     // Calculates a circle's perimeter.
     for (int angle = 0; angle < 360; angle++) {
         point.m_x = center.m_x + cos(angle) * radius;
@@ -206,6 +205,7 @@ void GraphicsSystem::DrawFillRectangle(SDL_Rect* source, int /*width*/, int /*he
     // Fill a rectangle on the current rendering target with the drawing color.
     int result = SDL_RenderFillRect(SDLSystem::GetInstance()->GetRenderer(),
                                     &rect);
+
     // Assert if the SDL_RenderFillRect returned a error.
     assert((result >= noErrorReturnValue) && SDL_GetError());
 }
