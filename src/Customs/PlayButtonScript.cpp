@@ -12,8 +12,8 @@
 #include <cassert>
 
 // Constants
-const int grayTone = 160;
-const int whiteTone = 255;
+const unsigned int grayTone = 160;
+const unsigned int whiteTone = 255;
 
 /**
     @brief Constructor of the class PlayButtonScript.

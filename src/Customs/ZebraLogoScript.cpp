@@ -11,8 +11,8 @@
 
 #include <cassert>
 
-const int width = 341;
-const int height = 256;
+const unsigned int width = 341;
+const unsigned int height = 256;
 
 /**
     @brief Constructor of the class ZebraLogoScript.
@@ -72,7 +72,7 @@ void ZebraLogoScript::CreateAnimations(){
     @brief Do nothing.
 */
 void ZebraLogoScript::ComponentUpdate() {
-    // Just update. 
+    // Just update.
 }
 
 /**

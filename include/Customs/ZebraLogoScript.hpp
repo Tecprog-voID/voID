@@ -21,7 +21,7 @@
 class ZebraLogoScript : public Script {
 
 public:
-    
+
     ZebraLogoScript(GameObject *owner);
     ~ZebraLogoScript();
 
@@ -48,7 +48,7 @@ private:
     // Position vector of the ZebraLogo
     Vector *zebra_position = nullptr;
 
-    int play = 0;
+    unsigned int play = 0;
 };
 
 #endif
