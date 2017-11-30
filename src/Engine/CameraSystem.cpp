@@ -36,7 +36,7 @@ void CameraSystem::MoveUp(int speed, Scene *scene) {
     }
 
     // Get all scene game objects.
-    m_gameObjectsCameraSystem = scene->GetAllGameObjects();
+    m_gameObjectsCameraSystem = (std::vector<GameObject*>)scene->GetAllGameObjects();
     if (m_gameObjectsCameraSystem.empty()) {
         return;
     } else {
@@ -101,7 +101,7 @@ void CameraSystem::MoveDown(int speed, Scene *scene) {
     }
 
     // Get the scene game objects.
-    m_gameObjectsCameraSystem = scene->GetAllGameObjects();
+    m_gameObjectsCameraSystem = (std::vector<GameObject*>)scene->GetAllGameObjects();
 
     if (m_gameObjectsCameraSystem.empty()) {
         return;
@@ -168,7 +168,7 @@ void CameraSystem::MoveLeft(int speed,Scene *scene) {
     }
 
     // Get the scene game objects.
-    m_gameObjectsCameraSystem = scene->GetAllGameObjects();
+    m_gameObjectsCameraSystem = (std::vector<GameObject*>)scene->GetAllGameObjects();
 
     if (m_gameObjectsCameraSystem.empty()) {
         return;
@@ -235,7 +235,7 @@ void CameraSystem::MoveRight(int speed, Scene *scene) {
     }
 
     // Get the scene game objects.
-    m_gameObjectsCameraSystem = scene->GetAllGameObjects();
+    m_gameObjectsCameraSystem = (std::vector<GameObject*>)scene->GetAllGameObjects();
 
     if (m_gameObjectsCameraSystem.empty()) {
         return;
@@ -403,11 +403,11 @@ void CameraSystem::ZoomIn(int zoomSpeed, GameObject *objectToFollow, Scene *scen
         // Nothing to do
     }
 
-    m_beforePositionX = objectToFollow->GetPosition()->m_x;
-    m_beforePositionY = objectToFollow->GetPosition()->m_y;
+    m_beforePositionX = (float)objectToFollow->GetPosition()->m_x;
+    m_beforePositionY = (float)objectToFollow->GetPosition()->m_y;
     this->m_cameraSpeed = zoomSpeed;
 
-    m_gameObjectsCameraSystem = SceneManager::GetInstance()->GetCurrentScene()->
+    m_gameObjectsCameraSystem = (std::vector<GameObject*>)SceneManager::GetInstance()->GetCurrentScene()->
                                                       GetAllGameObjects();
     // Runs from start to finish of the game.
     for (auto it = m_gameObjectsCameraSystem.begin();
@@ -575,12 +575,12 @@ void CameraSystem::ZoomOut(int zoomSpeed, GameObject *objectToFollow, Scene *sce
         // Nothing to do
     }
 
-    m_beforePositionX = objectToFollow->GetPosition()->m_x;
-    m_beforePositionY = objectToFollow->GetPosition()->m_y;
+    m_beforePositionX = (float)objectToFollow->GetPosition()->m_x;
+    m_beforePositionY = (float)objectToFollow->GetPosition()->m_y;
 
     this->m_cameraSpeed = zoomSpeed;
 
-    m_gameObjectsCameraSystem = SceneManager::GetInstance()->GetCurrentScene()
+    m_gameObjectsCameraSystem = (std::vector<GameObject*>)SceneManager::GetInstance()->GetCurrentScene()
                                 ->GetAllGameObjects();
 
     // Runs from start to finish of the game.

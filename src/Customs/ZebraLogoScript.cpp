@@ -28,7 +28,7 @@ ZebraLogoScript::ZebraLogoScript(GameObject *owner) : Script(owner) {
 void ZebraLogoScript::Start() {
     INFO("ZebraLogoScript - initializing");
     CreateAnimations();
-    zebra_position = GetOwner()->GetPosition();
+    zebra_position = (Vector *)GetOwner()->GetPosition();
     animator = (Animator *)GetOwner()->GetComponent("Animator");
     input = InputSystem::GetInstance();
     GetOwner()->SetZoomProportion(Vector(0, 0));
