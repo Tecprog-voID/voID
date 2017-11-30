@@ -88,406 +88,6 @@ void NakedManScript::Start() throw (Exception) {
 }
 
 /**
-    @brief Sets the direction of the player based on the mouse position
-    or game controller.
-*/
-void NakedManScript::SetDirection() {
-	// Get current mouse position
-    mousePosition = input->GetMousePosition();
-
-    // Need to break into atomic functions
-
-    // Compare direction the player is looking and moving
-    if (!game_controller) {
-        /*
-            Detect if player is moving and looking in same direction
-            based in x, y player's positions and x, y mouse positions.
-        */
-        mousePosition = input->GetMousePosition();
-
-        // Looking to right, set if is also moving to right
-        if (mousePosition.first >= position->m_x and movements == kRight){
-            // Moving to right
-            isMovingLooking = true;
-        } else if (mousePosition.first > position->m_x and movements == kLeft) {
-            // Moving to left
-            isMovingLooking = false;
-        } else {
-            // nothing to do.
-        }
-
-        // Looking to left, set if is also moving to left
-        if (mousePosition.first <= position->m_x and movements == kLeft) {
-            // Moving to left
-            isMovingLooking = true;
-        } else if (mousePosition.first < position->m_x and movements == kRight) {
-            // Moving to right
-            isMovingLooking = false;
-        } else {
-            // nothing to do.
-        }
-
-        // Looking to up, set if is also moving to up
-        if (mousePosition.second <= position->m_y and movements == kUp) {
-            // Moving to up
-            isMovingLooking = true;
-        } else if (mousePosition.second < position->m_y and movements == kDown) {
-            // Moving to down
-            isMovingLooking = false;
-        } else {
-            // nothing to do.
-        }
-
-        // Looking and moving to down
-        if (mousePosition.second >= position->m_y and movements == kDown) {
-            // Looking to down, set if is also moving to down
-            if(mousePosition.second >= position->m_y and movements == kDown) {
-                // Moving to down
-                isMovingLooking = true;
-            } else if (mousePosition.second > position->m_y and movements == kUp) {
-                // Moving to up
-                isMovingLooking = false;
-            } else {
-                // nothing to do.
-            }
-
-            // Looking to up right, set if is also moving to up right
-            if (mousePosition.first >= position->m_x and mousePosition.second
-                <= position->m_y and movements == kUpRight) {
-                // Moving to up right
-                isMovingLooking = true;
-            } else if (mousePosition.second > position->m_y and movements == kUp) {
-                // Moving to up
-                isMovingLooking = false;
-            } else {
-                // nothing to do.
-            }
-        } else {
-            // nothing to do.
-        }// if -- Looking and moving to down
-
-        // Looking to down right, set if is also moving to down right
-        if (mousePosition.first >= position->m_x and mousePosition.second
-            >= position->m_y and movements == kDownRight) {
-            // Moving to down right
-            isMovingLooking = true;
-        } else if (mousePosition.first >= position->m_x and mousePosition.second
-            >= position->m_y and movements == kUpLeft) {
-            // Moving to up left
-            isMovingLooking = false;
-        } else {
-            // nothing to do.
-        }
-
-        // Looking to up left, set if is also moving to up left
-        if (mousePosition.first <= position->m_x and mousePosition.second
-            <= position->m_y and movements == kUpLeft) {
-            // Moving to up left
-            isMovingLooking = true;
-        } else if (mousePosition.first <= position->m_x and mousePosition.second
-            <= position->m_y and movements == kDownRight) {
-            // Moving to down right
-            isMovingLooking = false;
-        } else {
-            // nothing to do.
-        }
-    } else {
-        /*
-            Detect if player is moving and looking in same direction
-            based in x, y player's positions and x, y game controller positions.
-        */
-
-        // Looking to right, set if is also moving to right
-        if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
-            and movements == kRight) {
-            // Moving to right
-            isMovingLooking = true;
-        } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) > 800
-            and movements == kLeft) {
-            // Moving to left
-            isMovingLooking = false;
-        } else {
-            // nothing to do.
-        }
-
-        // Looking to left, set if is also moving to left
-        if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <=-800
-            and movements == kLeft) {
-            // Moving to left
-            isMovingLooking = true;
-        } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) < -800
-                   and movements == kRight) {
-            // Moving to right
-            isMovingLooking = false;
-        } else {
-            // nothing to do.
-        }
-
-        // Looking to up, set if is also moving to up
-        if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY)
-            <= -800 and movements == kUp) {
-            // Moving to up
-            isMovingLooking = true;
-        } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) < -800
-                   and movements == kDown) {
-            // Moving to down
-            isMovingLooking = false;
-        } else {
-            // nothing to do.
-        }
-
-        // Looking to down, set if is also moving to down
-        if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
-            and movements == kDown) {
-            // Moving to down
-            isMovingLooking = true;
-        } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) > 800
-                   and movements == kUp) {
-            // Moving to up
-            isMovingLooking = false;
-        } else {
-            // nothing to do.
-        }
-
-        // Looking to up right, set if is also moving to up right
-        if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) > 800
-            and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) <=-800
-            and movements == kUpRight) {
-            // Moving to up right
-            isMovingLooking = true;
-        } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
-                   and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) <= -800
-                   and movements == kDownLeft) {
-            // Moving to down left
-            isMovingLooking = false;
-        } else {
-            // nothing to do.
-        }
-
-        // Looking to down left, set if is also moving to down left
-        if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
-            and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
-            and movements == kDownLeft) {
-            // Moving to down left
-            isMovingLooking = true;
-        } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
-                   and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
-                   and movements == kUpRight) {
-            // Moving to up right
-            isMovingLooking = false;
-        } else {
-            // nothing to do.
-        }
-
-        // Looking to down right, set if is also moving to down right
-        if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
-            and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
-            and movements == kDownRight) {
-            // Moving to down right
-            isMovingLooking = true;
-        } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
-                   and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
-                   and movements == kUpLeft) {
-            // Moving to up left
-            isMovingLooking = false;
-        } else {
-            // nothing to do.
-        }
-
-        // Looking to up left, set if is also moving to up left
-        if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
-            and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) <= -800
-            and movements == kUpLeft) {
-            // Moving to up left
-            isMovingLooking = true;
-        } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
-                   and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
-                   and movements == kDownRight) {
-            // Moving to down right
-            isMovingLooking = false;
-        } else {
-            // nothing to do.
-        }
-    } // if -- Compare direction the player is looking and moving
-}
-
-/**
-    @brief Detect the keyboards that are being pressed to move the player.
-*/
-void NakedManScript::KeyBoardUpdate() {
-    // Need to break into atomic functions
-
-    // Detect if zoom is required
-    if ((input->GetKeyPressed(INPUT_DOWN))
-         || (input->GetKeyPressed(INPUT_UP))) {
-        isZooming = true;
-    } else {
-        // nothing to do.
-    }
-
-    // Detect if zoom is not required
-    if ((input->GetKeyUp(INPUT_DOWN)) || (input->GetKeyUp(INPUT_UP))) {
-        isZooming = false;
-    } else {
-        // nothing to do.
-    }
-
-    /*
-        Define move direction, define the deadzone and adjust player's image
-        according to the direction he's looking and the presseds keys.
-    */
-    if (isMovingLooking) {
-        /*
-            Detect movement requests by comparing pressed keyboards when player
-            is moving and looking at same direction.
-        */
-        if (input->GetKeyPressed(INPUT_W) and input->GetKeyPressed(INPUT_A)) {
-            // Detect the request to move up left
-            movements = kUpLeft;
-            lastDirection = kUpLeft;
-            animator->GetAnimation("Walk Side")->SetFlip(true, false);
-            animator->PlayAnimation("Walk Side");
-        } else if (input->GetKeyPressed(INPUT_W)
-                   and input->GetKeyPressed(INPUT_D)) {
-            // Detect the request to move up right
-            movements = kUpRight;
-            lastDirection = kUpRight;
-            animator->GetAnimation("Walk Side")->SetFlip(false, false);
-            animator->PlayAnimation("Walk Side");
-        } else if (input->GetKeyPressed(INPUT_S)
-                   and input->GetKeyPressed(INPUT_A)) {
-            // Detect the request to move down left
-            movements = kDownLeft;
-            lastDirection = kDownLeft;
-            animator->GetAnimation("Walk Side")->SetFlip(true, false);
-            animator->PlayAnimation("Walk Side");
-        } else if (input->GetKeyPressed(INPUT_S)
-                   and input->GetKeyPressed(INPUT_D)) {
-            // Detect the request to move down right
-            movements = kDownRight;
-            lastDirection = kDownRight;
-            animator->GetAnimation("Walk Side")->SetFlip(false, false);
-            animator->PlayAnimation("Walk Side");
-        } else if (input->GetKeyPressed(INPUT_W)) {
-            // Detect the request to move up
-            lastDirection = 0;
-            movements = kUp;
-            animator->PlayAnimation("Walk Up");
-        } else if (input->GetKeyPressed(INPUT_S)) {
-            // Detect the request to move down
-            lastDirection = kUp;
-            movements = kDown;
-            animator->PlayAnimation("Walk Down");
-        } else if (input->GetKeyPressed(INPUT_A)) {
-            // Detect the request to move left
-            lastDirection = kLeft;
-            movements = kLeft;
-            animator->GetAnimation("Walk Side")->SetFlip(true, false);
-            animator->PlayAnimation("Walk Side");
-        } else if (input->GetKeyPressed(INPUT_D)) {
-            // Detect the request to move right
-            lastDirection = kLeft;
-            movements = kRight;
-            animator->GetAnimation("Walk Side")->SetFlip(false, false);
-            animator->PlayAnimation("Walk Side");
-        } else {
-            // Detect if player is stopped by comparing lastDirection values
-            if(lastDirection == kDown) {
-                animator->PlayAnimation("Stop Left");
-            } else if (lastDirection == kLeft|| lastDirection == kUpRight
-                       || lastDirection == kDownLeft || lastDirection == kUpLeft
-                       || lastDirection == kUpLeft || lastDirection == kDownRight ) {
-                animator->PlayAnimation("Stop Right");
-            } else if (lastDirection == 0) {
-                animator->PlayAnimation("Stop Up");
-            } else if (lastDirection == kUp) {
-                animator->PlayAnimation("Stop Down");
-            } // if -- Detect if player is stopped
-        } // if -- Detect movement requests
-    } else {
-        /*
-            Detect movement requests by comparing pressed keyboards when player
-            is not moving and looking to same direction.
-        */
-        if (input->GetKeyPressed(INPUT_W) and input->GetKeyPressed(INPUT_A)) {
-            // Detect the request to move up left
-            movements = kUpLeft;
-            lastDirection = kUpLeft;
-            animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
-            animator->PlayAnimation("Back Walk Side");
-        } else if (input->GetKeyPressed(INPUT_W)
-                   and input->GetKeyPressed(INPUT_D)) {
-            // Detect the request to move up right
-            movements = kUpRight;
-            lastDirection = kUpRight;
-            animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
-            animator->PlayAnimation("Back Walk Side");
-        } else if (input->GetKeyPressed(INPUT_S)
-                   and input->GetKeyPressed(INPUT_A)) {
-            // Detect the request to move down left
-            movements = kDownLeft;
-            lastDirection = kDownLeft;
-            animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
-            animator->PlayAnimation("Back Walk Side");
-        } else if (input->GetKeyPressed(INPUT_S)
-                   and input->GetKeyPressed(INPUT_D)) {
-            // Detect the request to move down right
-            movements = kDownRight;
-            lastDirection = kDownRight;
-            animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
-            animator->PlayAnimation("Back Walk Side");
-        } else if (input->GetKeyPressed(INPUT_W)) {
-            // Detect the request to move up
-            lastDirection = 0;
-            movements = kUp;
-            animator->PlayAnimation("Back Walk Down");
-        } else if (input->GetKeyPressed(INPUT_S)) {
-            // Detect the request to move down
-            lastDirection = kUp;
-            movements = kDown;
-            animator->PlayAnimation("Back Walk Up");
-        } else if (input->GetKeyPressed(INPUT_A)) {
-            // Detect the request to move left
-            lastDirection = kLeft;
-            movements = kLeft;
-            animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
-            animator->PlayAnimation("Back Walk Side");
-        } else if (input->GetKeyPressed(INPUT_D)) {
-            // Detect the request to move right
-            lastDirection = kLeft;
-            movements = kRight;
-            animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
-            animator->PlayAnimation("Back Walk Side");
-        } else {
-            // Detect if player is stopped by comparing lastDirection values
-            if (lastDirection == 0) {
-                animator->PlayAnimation("Stop Down");
-            } else if (lastDirection == kUp) {
-                animator->PlayAnimation("Stop Up");
-            } else if (lastDirection == kDown) {
-                animator->PlayAnimation("Stop Left");
-            } else if (lastDirection == kLeft) {
-                animator->PlayAnimation("Stop Right");
-            } // if -- Detect if player is stopped
-        } // if -- Detect movement requests
-
-        // Detect requests to lock the Camera by comparing cameraLock value
-        if (input->GetKeyDown(INPUT_L) and cameraLock == false) {
-            cameraLock = true;
-            deadzoneX = EngineGlobals::screen_width / 2;
-            deadzoneY = EngineGlobals::screen_height / 2;
-        } else if (input->GetKeyDown(INPUT_L) and cameraLock == true) {
-            cameraLock = false;
-            deadzoneX = EngineGlobals::screen_width;
-            deadzoneY = EngineGlobals::screen_height;
-            animator->StopAllAnimations();
-        } else {
-            // nothing to do.
-        } // if -- Detect requests to lock the Camera
-    } // if -- Define move direction, define the deadzone and adjust player's image
-}
-
-/**
     @brief Detect the actions of the game controller to move the player.
 */
 void NakedManScript::GameControllerUpdate() {
@@ -931,6 +531,409 @@ void NakedManScript::ComponentUpdate() {
 
     SetDirection();
 }
+
+/**
+    @brief Sets the direction of the player based on the mouse position
+    or game controller.
+*/
+void NakedManScript::SetDirection() {
+	// Get current mouse position
+    mousePosition = input->GetMousePosition();
+
+    // Need to break into atomic functions
+
+    // Compare direction the player is looking and moving
+    if (!game_controller) {
+        /*
+            Detect if player is moving and looking in same direction
+            based in x, y player's positions and x, y mouse positions.
+        */
+        mousePosition = input->GetMousePosition();
+
+        // Looking to right, set if is also moving to right
+        if (mousePosition.first >= position->m_x and movements == kRight){
+            // Moving to right
+            isMovingLooking = true;
+        } else if (mousePosition.first > position->m_x and movements == kLeft) {
+            // Moving to left
+            isMovingLooking = false;
+        } else {
+            // nothing to do.
+        }
+
+        // Looking to left, set if is also moving to left
+        if (mousePosition.first <= position->m_x and movements == kLeft) {
+            // Moving to left
+            isMovingLooking = true;
+        } else if (mousePosition.first < position->m_x and movements == kRight) {
+            // Moving to right
+            isMovingLooking = false;
+        } else {
+            // nothing to do.
+        }
+
+        // Looking to up, set if is also moving to up
+        if (mousePosition.second <= position->m_y and movements == kUp) {
+            // Moving to up
+            isMovingLooking = true;
+        } else if (mousePosition.second < position->m_y and movements == kDown) {
+            // Moving to down
+            isMovingLooking = false;
+        } else {
+            // nothing to do.
+        }
+
+        // Looking and moving to down
+        if (mousePosition.second >= position->m_y and movements == kDown) {
+            // Looking to down, set if is also moving to down
+            if(mousePosition.second >= position->m_y and movements == kDown) {
+                // Moving to down
+                isMovingLooking = true;
+            } else if (mousePosition.second > position->m_y and movements == kUp) {
+                // Moving to up
+                isMovingLooking = false;
+            } else {
+                // nothing to do.
+            }
+
+            // Looking to up right, set if is also moving to up right
+            if (mousePosition.first >= position->m_x and mousePosition.second
+                <= position->m_y and movements == kUpRight) {
+                // Moving to up right
+                isMovingLooking = true;
+            } else if (mousePosition.second > position->m_y and movements == kUp) {
+                // Moving to up
+                isMovingLooking = false;
+            } else {
+                // nothing to do.
+            }
+        } else {
+            // nothing to do.
+        }// if -- Looking and moving to down
+
+        // Looking to down right, set if is also moving to down right
+        if (mousePosition.first >= position->m_x and mousePosition.second
+            >= position->m_y and movements == kDownRight) {
+            // Moving to down right
+            isMovingLooking = true;
+        } else if (mousePosition.first >= position->m_x and mousePosition.second
+            >= position->m_y and movements == kUpLeft) {
+            // Moving to up left
+            isMovingLooking = false;
+        } else {
+            // nothing to do.
+        }
+
+        // Looking to up left, set if is also moving to up left
+        if (mousePosition.first <= position->m_x and mousePosition.second
+            <= position->m_y and movements == kUpLeft) {
+            // Moving to up left
+            isMovingLooking = true;
+        } else if (mousePosition.first <= position->m_x and mousePosition.second
+            <= position->m_y and movements == kDownRight) {
+            // Moving to down right
+            isMovingLooking = false;
+        } else {
+            // nothing to do.
+        }
+    } else {
+        /*
+            Detect if player is moving and looking in same direction
+            based in x, y player's positions and x, y game controller positions.
+        */
+
+        // Looking to right, set if is also moving to right
+        if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
+            and movements == kRight) {
+            // Moving to right
+            isMovingLooking = true;
+        } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) > 800
+            and movements == kLeft) {
+            // Moving to left
+            isMovingLooking = false;
+        } else {
+            // nothing to do.
+        }
+
+        // Looking to left, set if is also moving to left
+        if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <=-800
+            and movements == kLeft) {
+            // Moving to left
+            isMovingLooking = true;
+        } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) < -800
+                   and movements == kRight) {
+            // Moving to right
+            isMovingLooking = false;
+        } else {
+            // nothing to do.
+        }
+
+        // Looking to up, set if is also moving to up
+        if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY)
+            <= -800 and movements == kUp) {
+            // Moving to up
+            isMovingLooking = true;
+        } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) < -800
+                   and movements == kDown) {
+            // Moving to down
+            isMovingLooking = false;
+        } else {
+            // nothing to do.
+        }
+
+        // Looking to down, set if is also moving to down
+        if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
+            and movements == kDown) {
+            // Moving to down
+            isMovingLooking = true;
+        } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) > 800
+                   and movements == kUp) {
+            // Moving to up
+            isMovingLooking = false;
+        } else {
+            // nothing to do.
+        }
+
+        // Looking to up right, set if is also moving to up right
+        if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) > 800
+            and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) <=-800
+            and movements == kUpRight) {
+            // Moving to up right
+            isMovingLooking = true;
+        } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
+                   and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) <= -800
+                   and movements == kDownLeft) {
+            // Moving to down left
+            isMovingLooking = false;
+        } else {
+            // nothing to do.
+        }
+
+        // Looking to down left, set if is also moving to down left
+        if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
+            and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
+            and movements == kDownLeft) {
+            // Moving to down left
+            isMovingLooking = true;
+        } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
+                   and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
+                   and movements == kUpRight) {
+            // Moving to up right
+            isMovingLooking = false;
+        } else {
+            // nothing to do.
+        }
+
+        // Looking to down right, set if is also moving to down right
+        if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
+            and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
+            and movements == kDownRight) {
+            // Moving to down right
+            isMovingLooking = true;
+        } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
+                   and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
+                   and movements == kUpLeft) {
+            // Moving to up left
+            isMovingLooking = false;
+        } else {
+            // nothing to do.
+        }
+
+        // Looking to up left, set if is also moving to up left
+        if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
+            and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) <= -800
+            and movements == kUpLeft) {
+            // Moving to up left
+            isMovingLooking = true;
+        } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
+                   and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
+                   and movements == kDownRight) {
+            // Moving to down right
+            isMovingLooking = false;
+        } else {
+            // nothing to do.
+        }
+    } // if -- Compare direction the player is looking and moving
+}
+
+/**
+    @brief Detect the keyboards that are being pressed to move the player.
+*/
+void NakedManScript::KeyBoardUpdate() {
+    // Need to break into atomic functions
+
+    // Detect if zoom is required
+    if ((input->GetKeyPressed(INPUT_DOWN))
+         || (input->GetKeyPressed(INPUT_UP))) {
+        isZooming = true;
+    } else {
+        // nothing to do.
+    }
+
+    // Detect if zoom is not required
+    if ((input->GetKeyUp(INPUT_DOWN)) || (input->GetKeyUp(INPUT_UP))) {
+        isZooming = false;
+    } else {
+        // nothing to do.
+    }
+
+    /*
+        Define move direction, define the deadzone and adjust player's image
+        according to the direction he's looking and the presseds keys.
+    */
+    if (isMovingLooking) {
+        /*
+            Detect movement requests by comparing pressed keyboards when player
+            is moving and looking at same direction.
+        */
+        if (input->GetKeyPressed(INPUT_W) and input->GetKeyPressed(INPUT_A)) {
+            // Detect the request to move up left
+            movements = kUpLeft;
+            lastDirection = kUpLeft;
+            animator->GetAnimation("Walk Side")->SetFlip(true, false);
+            animator->PlayAnimation("Walk Side");
+        } else if (input->GetKeyPressed(INPUT_W)
+                   and input->GetKeyPressed(INPUT_D)) {
+            // Detect the request to move up right
+            movements = kUpRight;
+            lastDirection = kUpRight;
+            animator->GetAnimation("Walk Side")->SetFlip(false, false);
+            animator->PlayAnimation("Walk Side");
+        } else if (input->GetKeyPressed(INPUT_S)
+                   and input->GetKeyPressed(INPUT_A)) {
+            // Detect the request to move down left
+            movements = kDownLeft;
+            lastDirection = kDownLeft;
+            animator->GetAnimation("Walk Side")->SetFlip(true, false);
+            animator->PlayAnimation("Walk Side");
+        } else if (input->GetKeyPressed(INPUT_S)
+                   and input->GetKeyPressed(INPUT_D)) {
+            // Detect the request to move down right
+            movements = kDownRight;
+            lastDirection = kDownRight;
+            animator->GetAnimation("Walk Side")->SetFlip(false, false);
+            animator->PlayAnimation("Walk Side");
+        } else if (input->GetKeyPressed(INPUT_W)) {
+            // Detect the request to move up
+            lastDirection = 0;
+            movements = kUp;
+            animator->PlayAnimation("Walk Up");
+        } else if (input->GetKeyPressed(INPUT_S)) {
+            // Detect the request to move down
+            lastDirection = kUp;
+            movements = kDown;
+            animator->PlayAnimation("Walk Down");
+        } else if (input->GetKeyPressed(INPUT_A)) {
+            // Detect the request to move left
+            lastDirection = kLeft;
+            movements = kLeft;
+            animator->GetAnimation("Walk Side")->SetFlip(true, false);
+            animator->PlayAnimation("Walk Side");
+        } else if (input->GetKeyPressed(INPUT_D)) {
+            // Detect the request to move right
+            lastDirection = kLeft;
+            movements = kRight;
+            animator->GetAnimation("Walk Side")->SetFlip(false, false);
+            animator->PlayAnimation("Walk Side");
+        } else {
+            // Detect if player is stopped by comparing lastDirection values
+            if(lastDirection == kDown) {
+                animator->PlayAnimation("Stop Left");
+            } else if (lastDirection == kLeft|| lastDirection == kUpRight
+                       || lastDirection == kDownLeft || lastDirection == kUpLeft
+                       || lastDirection == kUpLeft || lastDirection == kDownRight ) {
+                animator->PlayAnimation("Stop Right");
+            } else if (lastDirection == 0) {
+                animator->PlayAnimation("Stop Up");
+            } else if (lastDirection == kUp) {
+                animator->PlayAnimation("Stop Down");
+            } // if -- Detect if player is stopped
+        } // if -- Detect movement requests
+    } else {
+        /*
+            Detect movement requests by comparing pressed keyboards when player
+            is not moving and looking to same direction.
+        */
+        if (input->GetKeyPressed(INPUT_W) and input->GetKeyPressed(INPUT_A)) {
+            // Detect the request to move up left
+            movements = kUpLeft;
+            lastDirection = kUpLeft;
+            animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
+            animator->PlayAnimation("Back Walk Side");
+        } else if (input->GetKeyPressed(INPUT_W)
+                   and input->GetKeyPressed(INPUT_D)) {
+            // Detect the request to move up right
+            movements = kUpRight;
+            lastDirection = kUpRight;
+            animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
+            animator->PlayAnimation("Back Walk Side");
+        } else if (input->GetKeyPressed(INPUT_S)
+                   and input->GetKeyPressed(INPUT_A)) {
+            // Detect the request to move down left
+            movements = kDownLeft;
+            lastDirection = kDownLeft;
+            animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
+            animator->PlayAnimation("Back Walk Side");
+        } else if (input->GetKeyPressed(INPUT_S)
+                   and input->GetKeyPressed(INPUT_D)) {
+            // Detect the request to move down right
+            movements = kDownRight;
+            lastDirection = kDownRight;
+            animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
+            animator->PlayAnimation("Back Walk Side");
+        } else if (input->GetKeyPressed(INPUT_W)) {
+            // Detect the request to move up
+            lastDirection = 0;
+            movements = kUp;
+            animator->PlayAnimation("Back Walk Down");
+        } else if (input->GetKeyPressed(INPUT_S)) {
+            // Detect the request to move down
+            lastDirection = kUp;
+            movements = kDown;
+            animator->PlayAnimation("Back Walk Up");
+        } else if (input->GetKeyPressed(INPUT_A)) {
+            // Detect the request to move left
+            lastDirection = kLeft;
+            movements = kLeft;
+            animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
+            animator->PlayAnimation("Back Walk Side");
+        } else if (input->GetKeyPressed(INPUT_D)) {
+            // Detect the request to move right
+            lastDirection = kLeft;
+            movements = kRight;
+            animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
+            animator->PlayAnimation("Back Walk Side");
+        } else {
+            // Detect if player is stopped by comparing lastDirection values
+            if (lastDirection == 0) {
+                animator->PlayAnimation("Stop Down");
+            } else if (lastDirection == kUp) {
+                animator->PlayAnimation("Stop Up");
+            } else if (lastDirection == kDown) {
+                animator->PlayAnimation("Stop Left");
+            } else if (lastDirection == kLeft) {
+                animator->PlayAnimation("Stop Right");
+            } // if -- Detect if player is stopped
+        } // if -- Detect movement requests
+
+        // Detect requests to lock the Camera by comparing cameraLock value
+        if (input->GetKeyDown(INPUT_L) and cameraLock == false) {
+            cameraLock = true;
+            deadzoneX = EngineGlobals::screen_width / 2;
+            deadzoneY = EngineGlobals::screen_height / 2;
+        } else if (input->GetKeyDown(INPUT_L) and cameraLock == true) {
+            cameraLock = false;
+            deadzoneX = EngineGlobals::screen_width;
+            deadzoneY = EngineGlobals::screen_height;
+            animator->StopAllAnimations();
+        } else {
+            // nothing to do.
+        } // if -- Detect requests to lock the Camera
+    } // if -- Define move direction, define the deadzone and adjust player's image
+}
+
+
+
 
 /**
     @brief Detect if the player is moving.
