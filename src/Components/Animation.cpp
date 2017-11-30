@@ -76,7 +76,17 @@ void Animation::SetPlaying(bool condition) {
             // Nothing to do
         }
     } else {
-        if (m_hasExitTime and m_currentFrame != m_framesQuantity - 1) {
+        unsigned int m_newFrames =  m_framesQuantity - 1;
+
+        /*
+            Underflow checking is not necessary because all values are initialized
+            with unsigned. When we compile with all warnings connected we get the
+            following message: "warning: comparison of unsigned expression <0 is
+            always false [-Wtype-limits] assert ((m_newTicks <0) and" SDLSystem ::
+            CalculateFramerate - Underflow ");
+        */
+
+        if (m_hasExitTime and m_currentFrame != m_newFrames) {
             return;
         } else {
             if (auto comp = GetOwner()->GetComponent("Renderer")) {
@@ -112,7 +122,17 @@ void Animation::AddFrame(Frame *frame) {
 void Animation::ComponentUpdate() {
     if (m_isPlaying) {
         DrawCurrentFrame();
-        if (!m_loop and m_currentFrame == m_framesQuantity - 1) {
+
+        unsigned int m_newFrames =  m_framesQuantity - 1;
+
+        /*
+            Underflow checking is not necessary because all values are initialized
+            with unsigned. When we compile with all warnings connected we get the
+            following message: "warning: comparison of unsigned expression <0 is
+            always false [-Wtype-limits] assert ((m_newTicks <0) and" SDLSystem ::
+            CalculateFramerate - Underflow ");
+        */
+        if (!m_loop and m_currentFrame == m_newFrames) {
             SetPlaying(false);
         } else {
             // Nothing to do

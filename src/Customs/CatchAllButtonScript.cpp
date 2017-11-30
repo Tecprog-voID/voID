@@ -12,7 +12,7 @@
 // Library for asserts.
 #include <cassert>
 
-const int gameMode = 0x02;
+const unsigned int gameMode = 0x02;
 
 /**
     @brief Constructor of the class CatchAllButtonScript.

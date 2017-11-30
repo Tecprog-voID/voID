@@ -25,7 +25,7 @@ class Animation : public Component {
             m_hasExitTime = condition;
         };
 
-        inline void SetFramesPerSecond(int frames) {
+        inline void SetFramesPerSecond(unsigned int frames) {
             m_framesPerSecond = frames;
         };
 
@@ -51,13 +51,13 @@ class Animation : public Component {
     private:
 
         // Represents the quantity of the frames of the animation.
-        int m_framesQuantity = 0;
+        unsigned int m_framesQuantity = 0;
 
         // Represents the current frame of the animation.
-        int m_currentFrame = 0;
+        unsigned int m_currentFrame = 0;
 
         // Represents the frames per second of the animation.
-        int m_framesPerSecond = 12;
+        unsigned int m_framesPerSecond = 12;
 
         // Represents if someone is playing.
         bool m_isPlaying = false;
