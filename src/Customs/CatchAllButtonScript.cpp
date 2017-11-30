@@ -28,7 +28,7 @@ CatchAllButtonScript::CatchAllButtonScript(GameObject *owner) : Script(owner) {
 void CatchAllButtonScript::Start() throw (Exception) {
     INFO("CatchAllButtonScript - initializing");
     m_interactiveButton = (UIButton *)GetOwner()->GetComponent("UIButton");
-    m_checkbox = SceneManager::GetInstance()->GetScene("Main")->GetGameObject(
+    m_checkbox = (GameObject *)SceneManager::GetInstance()->GetScene("Main")->GetGameObject(
                  "CatchAll_CB");
     if(m_interactiveButton != NULL and m_checkbox != NULL) {
         INFO("CatchAllButtonScript - completed");

@@ -24,7 +24,7 @@ BulletCounterScript::BulletCounterScript(GameObject *owner) : Script(owner) {
 */
 void BulletCounterScript::Start() {
     INFO("PlayButtonScript - initializing");
-    counter_position = GetOwner()->GetPosition();
+    counter_position = (Vector *)GetOwner()->GetPosition();
     GetOwner()->SetZoomProportion(Vector(0, 0));
     INFO("PlayButtonScript - completed");
 }
@@ -40,7 +40,7 @@ void BulletCounterScript::ComponentUpdate() {
                           ->GetComponent("NakedManScript");
 
     if(nakedManScript != NULL){
-        m_numberBullet = nakedManScript->bulletNumber;
+        m_numberBullet = (unsigned int)nakedManScript->bulletNumber;
 
         // Update the text of the left number of bullets.
         auto counterText = (UIText *)GetOwner()->GetComponent("UIText");
