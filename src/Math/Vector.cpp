@@ -43,16 +43,16 @@ float Vector::GetAngleDegrees(Vector &vec){
 float angle  = atan((vec.m_y - m_y)/(vec.m_x - m_x))*180/3.14;
 
   //1 quadrante
-    if(vec.m_x >=m_x && vec.m_y <= m_y )
+    if(vec.m_x >=m_x and vec.m_y <= m_y )
         angle = angle;
   //2 quadrante
-    if(vec.m_x<m_x && vec.m_y> m_y)
+    if(vec.m_x<m_x and vec.m_y> m_y)
         angle = 180 + angle;
   //3 quadrante
-    if(vec.m_x<m_x && vec.m_y< m_y )
+    if(vec.m_x<m_x and vec.m_y< m_y )
        angle = 180  + angle;
   //4 quadrante
-    if(vec.m_x >=m_x && vec.m_y <= m_y )
+    if(vec.m_x >=m_x and vec.m_y <= m_y )
        angle =360 + angle;
 
 return angle;

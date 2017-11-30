@@ -10,15 +10,20 @@
 #include "Engine/Component.hpp"
 #include "Engine/Image.hpp"
 
+#include "Customs/Exception.hpp"
+
 #include "Math/Vector.hpp"
 
 #include <utility>
 
 class Renderer : public Component {
 public:
+
     // Constructor and destructor
     Renderer(GameObject *owner, Image *image);
     ~Renderer();
+
+private:
 
     // Replace the component name and return it.
     inline std::string GetComponentName() override {
@@ -32,22 +37,21 @@ public:
 
     // Image handling
     void Rotate(double angles);
-    void RotateTowards(Vector *point);
+    void RotateTowards(Vector *point) throw (Exception);
 
     // Override for start
     void Start() override;
     void SetActivationTrue() {
         m_activation = true;
     };
+
     void SetActivationFalse() {
         m_activation = false;
     };
 
-protected:
     // Overriding method called by final update
     void ComponentUpdate() override;
 
-private:
     // Boolean attribute to track the activation of the renderer
     bool m_activation = true;
 

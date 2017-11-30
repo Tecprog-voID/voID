@@ -13,7 +13,7 @@ const int quantityFrameLine = 22;
 const int quantityFrameColumn = 12;
 
 GameOverScript::GameOverScript(GameObject *owner) : Script(owner) {
-     assert((owner != NULL) && "the owner must be equal to NULL");
+     assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**
@@ -39,7 +39,7 @@ void GameOverScript::CreateAnimations() {
         Creates game-over animation by setting a image and a animation with
         defined frames positions over it.
     */
-    auto m_snowImage = new Image("assets/Ending_show_image.png",0,0,4096, 2048);
+    auto m_snowImage = new Image("assets/image/Ending_show_image.png",0,0,4096, 2048);
 
     auto m_gameOverAnimation= new Animation(GetOwner(), m_snowImage );
     for (int  line = 0; line < quantityFrameLine; line++) {
@@ -70,12 +70,12 @@ void GameOverScript::ComponentUpdate() {
         // Do nothing
     }
 
-    if (input->GetKeyDown(INPUT_T) && play==0) {
+    if (input->GetKeyDown(INPUT_T) and play==0) {
         // animator->StopAllAnimations();
         AudioController::GetInstance()->PlayAudio("snowSound", -1);
         play=1;
     }
-    else if (input->GetKeyDown(INPUT_T) && play==1) {
+    else if (input->GetKeyDown(INPUT_T) and play==1) {
         play=0;
         AudioController::GetInstance()->StopAudio("snowSound");
         animator->StopAllAnimations();

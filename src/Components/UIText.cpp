@@ -42,7 +42,7 @@ UIText::UIText(GameObject *owner, string message, string fontPath, int size,
     m_font = TTF_OpenFont(fontPath.c_str(), size);
 
     // Check if there is something diferent of the font and if is diferent print a error message.
-    assert((m_font != nullptr) && "m_font cant be null");
+    assert((m_font != nullptr) and "m_font cant be null");
 
     m_color = {red, green, blue, alpha};
 

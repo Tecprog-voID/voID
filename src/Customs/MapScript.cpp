@@ -60,7 +60,7 @@ void MapScript::ComponentUpdate() {
     }
 
     // Zooms the camera out when the corresponding keys are pressed.
-    if (InputSystem::GetInstance()->GetKeyUp(INPUT_DOWN) && CameraSystem::GetInstance()->currentZoom > -50) {
+    if (InputSystem::GetInstance()->GetKeyUp(INPUT_DOWN) and CameraSystem::GetInstance()->currentZoom > -50) {
         INFO("MapScript - zoom out");
         CameraSystem::GetInstance()->ZoomOut(GetOwner()->originalWidth/4 + 1,nakedMan,SceneManager::GetInstance()
                                                                                                 ->GetCurrentScene());
@@ -71,7 +71,7 @@ void MapScript::ComponentUpdate() {
     }
 
     // Zooms the camera in when the corresponding keys are pressed.
-    if (InputSystem::GetInstance()->GetKeyUp(INPUT_UP) && CameraSystem::GetInstance()->currentZoom < 0) {
+    if (InputSystem::GetInstance()->GetKeyUp(INPUT_UP) and CameraSystem::GetInstance()->currentZoom < 0) {
         INFO("MapScript - zoom in");
         CameraSystem::GetInstance()->ZoomIn(GetOwner()->originalWidth/4 +1,nakedMan,SceneManager::GetInstance()
                                                                                             ->GetCurrentScene());
@@ -972,9 +972,9 @@ int MapScript::DetectWallCollision(GameObject* object){
     0 not colliding; 1 = left; 2 = right; 3 = up; 4 = down
     */
     for (int i = 0; i < leftWallsAmount; i++) {
-        if (((leftWalls[i].m_x <= (object->GetPosition()->m_x + object->GetWidth())) &&
-            ((leftWalls[i].m_x + leftWalls[i].m_w) >= object->GetPosition()->m_x)) &&
-            ((leftWalls[i].m_y <=(object->GetPosition()->m_y + object->GetHeight())) &&
+        if (((leftWalls[i].m_x <= (object->GetPosition()->m_x + object->GetWidth())) and
+            ((leftWalls[i].m_x + leftWalls[i].m_w) >= object->GetPosition()->m_x)) and
+            ((leftWalls[i].m_y <=(object->GetPosition()->m_y + object->GetHeight())) and
             ((leftWalls[i].m_y + leftWalls[i].m_h) >= object->GetPosition()->m_y))) {
 
             Vector playerprevious_vec;
@@ -987,9 +987,9 @@ int MapScript::DetectWallCollision(GameObject* object){
     }
 
     for (int j = 0; j < rightWallsAmount; j++) {
-        if (((rightWalls[j].m_x <= (object->GetPosition()->m_x + object->GetWidth())) &&
-            ((rightWalls[j].m_x + rightWalls[j].m_w) >= object->GetPosition()->m_x)) &&
-            ((rightWalls[j].m_y <=(object->GetPosition()->m_y + object->GetHeight())) &&
+        if (((rightWalls[j].m_x <= (object->GetPosition()->m_x + object->GetWidth())) and
+            ((rightWalls[j].m_x + rightWalls[j].m_w) >= object->GetPosition()->m_x)) and
+            ((rightWalls[j].m_y <=(object->GetPosition()->m_y + object->GetHeight())) and
             ((rightWalls[j].m_y + rightWalls[j].m_h) >= object->GetPosition()->m_y))) {
 
             if (j == snowActivatorIndex) {
@@ -1050,9 +1050,9 @@ int MapScript::DetectWallCollision(GameObject* object){
     }
 
     for (int k = 0; k < upWallsAmount; k++) {
-        if (((upWalls[k].m_x <= (object->GetPosition()->m_x + object->GetWidth())) &&
-            ((upWalls[k].m_x + upWalls[k].m_w) >= object->GetPosition()->m_x)) &&
-            ((upWalls[k].m_y <= (object->GetPosition()->m_y + object->GetHeight())) &&
+        if (((upWalls[k].m_x <= (object->GetPosition()->m_x + object->GetWidth())) and
+            ((upWalls[k].m_x + upWalls[k].m_w) >= object->GetPosition()->m_x)) and
+            ((upWalls[k].m_y <= (object->GetPosition()->m_y + object->GetHeight())) and
             ((upWalls[k].m_y + upWalls[k].m_h)>=object->GetPosition()->m_y))) {
 
             Vector playerprevious_vec;
@@ -1066,9 +1066,9 @@ int MapScript::DetectWallCollision(GameObject* object){
 
 
     for (int l = 0; l < downWallsAmount; l++) {
-        if (((downWalls[l].m_x <= (object->GetPosition()->m_x + object->GetWidth())) &&
-            ((downWalls[l].m_x + downWalls[l].m_w) >= object->GetPosition()->m_x)) &&
-            ((downWalls[l].m_y <= (object->GetPosition()->m_y + object->GetHeight())) &&
+        if (((downWalls[l].m_x <= (object->GetPosition()->m_x + object->GetWidth())) and
+            ((downWalls[l].m_x + downWalls[l].m_w) >= object->GetPosition()->m_x)) and
+            ((downWalls[l].m_y <= (object->GetPosition()->m_y + object->GetHeight())) and
             ((downWalls[l].m_y + downWalls[l].m_h) >= object->GetPosition()->m_y))) {
 
             Vector playerprevious_vec;

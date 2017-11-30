@@ -64,7 +64,7 @@ void CentralLightScript3::Start() {
 void CentralLightScript3::CreateAnimations(){
 
     // Create the animation.
-    auto centrallightSprite = new Image("assets/centro3.png", imageLightSpritePositionX, 
+    auto centrallightSprite = new Image("assets/image/centro3.png", imageLightSpritePositionX, 
                                         imageLightSpritePositionY, imageLightSpriteWidth, imageLightSpriteHeight);
 
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
@@ -88,7 +88,7 @@ void CentralLightScript3::CreateAnimations(){
 */
 void CentralLightScript3::ComponentUpdate() {
 
-    if(!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") && m_active){
+    if(!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") and m_active){
         m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     }
 }

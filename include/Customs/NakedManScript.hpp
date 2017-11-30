@@ -19,10 +19,14 @@
 #include "Components/RectangleCollider.hpp"
 #include "Customs/PlayerAttackScript.hpp"
 #include "Customs/HitScript.hpp"
+#include "Customs/Exception.hpp"
 
 class NakedManScript : public Script {
 
     public:
+
+        NakedManScript(GameObject *owner);
+        ~NakedManScript();
 
         // Initicial values of the player informations in the game
         bool lockplayerMovements = false;
@@ -32,7 +36,7 @@ class NakedManScript : public Script {
         int life = 100;
         float gameControllerAngle = 0;
 
-        NakedManScript(GameObject *owner);
+    private:
 
         // Replace the component name and return it.
         std::string GetComponentName() override {
@@ -40,13 +44,12 @@ class NakedManScript : public Script {
         };
 
         void FixedComponentUpdate() override;
-        void Start() override;
+
+        void Start() throw (Exception);
 
         char GetMovement() {
             return movements;
         };
-
-    private:
 
         bool zoom = true;
 
@@ -68,10 +71,6 @@ class NakedManScript : public Script {
         float walkSpeed = 15;
         float fixedWalkSpeed = 15;
 
-        /*
-            1 = UP, 2 = DOWN, 3 = LEFT, 4 = RIGHT, 5 = UP LEFT,
-            6 = UP RIGHT, 7 = DOWN LEFT, 8 = DOWN RIGHT
-        */
         int movements = 0;
 
         // X and Y positions of dead zone
@@ -116,10 +115,8 @@ class NakedManScript : public Script {
         void PlayerLife();
 
         void MovementsSounds();
-        
-    protected:
 
         void ComponentUpdate() override;
-};
 
+};
 #endif

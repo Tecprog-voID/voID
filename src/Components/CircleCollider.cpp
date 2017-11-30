@@ -19,7 +19,7 @@
 CircleCollider::CircleCollider(GameObject *owner, Vector &offset, float radius,
                                int layer) : Collider(owner, layer) {
     INFO("CircleCollider CircleCollider() - initializing");
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
     // Set the offset of the circle.
     m_circleOffset = offset;
     // Set the radius of the circle.

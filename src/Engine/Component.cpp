@@ -16,7 +16,7 @@
 Component::Component(GameObject *owner, ComponentType type) {
     INFO("Component Component() - initializing");
     // Test if owner exists and show a error if doesn't exists.
-    assert((owner != NULL) && "Invalid null owner");
+    assert((owner != NULL) and "Invalid null owner");
     // Instance the owner and type objects
     m_owner = owner;
     m_type = type;

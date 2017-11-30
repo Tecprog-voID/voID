@@ -47,7 +47,7 @@ void ForestActivatorScript::CreateAnimations() {
     INFO("ForestActivatorScript - creating animations");
 
     // Sets the animations' image and its frames.
-    auto forestactivatorSprite = new Image("assets/Forest_activator.png",
+    auto forestactivatorSprite = new Image("assets/image/Forest_activator.png",
                                             0, 0, 832, 64);
     auto forestactivatorAnimation = new Animation(GetOwner(),
                                                     forestactivatorSprite);
@@ -76,7 +76,7 @@ void ForestActivatorScript::ComponentUpdate() {
     The animation is not playing, activate equals 0, and it has not runned,
     runs the animation.
     */
-    if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") && activate == 0 && runned == false) {
+    if (!animator->IsPlaying("FOREST ACTIVATOR ANIMATION") and activate == 0 and runned == false) {
         INFO("ForestActivatorScript - playing forest's animation");
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION");
         activate = 1;
@@ -89,7 +89,7 @@ void ForestActivatorScript::ComponentUpdate() {
     If the forest animation has already ran and the first animation hasn't
     played, runs the second animation.
     */
-    if (runned && !animator->IsPlaying("FOREST ACTIVATOR ANIMATION")) {
+    if (runned and !animator->IsPlaying("FOREST ACTIVATOR ANIMATION")) {
         INFO("ForestActivatorScript - playing forest's animation2");
 
         animator->PlayAnimation("FOREST ACTIVATOR ANIMATION2");

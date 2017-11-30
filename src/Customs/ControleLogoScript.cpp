@@ -26,7 +26,7 @@ const int timeUpdateAnimation = 530;
     @brief Constructor for the ControleLogoScript class.
 */
 ControleLogoScript::ControleLogoScript(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**
@@ -52,7 +52,7 @@ void ControleLogoScript::Start() {
 void ControleLogoScript::CreateAnimations() {
     INFO("ControleLogoScript - Creating Animations");
     // Image logo sprite.
-    auto controle_LogoSprite = new Image("assets/introjoystick.png", 0, 0, logoWidth, logoHeight);
+    auto controle_LogoSprite = new Image("assets/image/introjoystick.png", 0, 0, logoWidth, logoHeight);
     // Aniamtion logo sprite.
     auto controleAnimation = new Animation(GetOwner(), controle_LogoSprite);
 

@@ -52,7 +52,7 @@ void LeftCenterLightScript::CreateAnimations(){
     INFO("LeftCenterLightScript - creating animations");
 
     // Sets the image of the little square placed on the map, where the player has to go to
-    auto centrallightSprite = new Image("assets/left_center.png", 0, 0, imagePlacing * 13, imagePlacing);
+    auto centrallightSprite = new Image("assets/image/left_center.png", 0, 0, imagePlacing * 13, imagePlacing);
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
     centrallightAnimation->AddFrame(new Frame(0, 0, imagePlacing, imagePlacing));
 
@@ -70,7 +70,7 @@ void LeftCenterLightScript::CreateAnimations(){
 void LeftCenterLightScript::ComponentUpdate() {
     INFO("LeftCenterLightScript - updating component");
 
-    if(!animator->IsPlaying("CENTRAL LIGHT ANIMATION") && active){
+    if(!animator->IsPlaying("CENTRAL LIGHT ANIMATION") and active){
         animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     } else {
        // Do nothing

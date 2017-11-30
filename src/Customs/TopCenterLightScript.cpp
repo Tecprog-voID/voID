@@ -65,7 +65,7 @@ void TopCenterLightScript::Start() {
 void TopCenterLightScript::CreateAnimations() {
     INFO("TopCenterLightScript - Creating animations");
     // Creates the image.
-    auto topCenterLightSprite = new Image("assets/topcenter.png",
+    auto topCenterLightSprite = new Image("assets/image/topcenter.png",
                                           imagePositionX, imagePositionY,
                                           imageWidth, imageHeight);
 
@@ -89,7 +89,7 @@ void TopCenterLightScript::CreateAnimations() {
 void TopCenterLightScript::ComponentUpdate() {
 
     // Starting the animator of game.
-    if (!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") && active) {
+    if (!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") and active) {
         m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     } else {
         // Nothing to do

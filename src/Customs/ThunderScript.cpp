@@ -24,7 +24,7 @@ const int blueCounter = 6;
     @param[in] owner
 */
 ThunderScript::ThunderScript(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
     INFO("ThunderScript - initialized");
 }
 
@@ -41,7 +41,7 @@ void ThunderScript::Start() {
     m_animator = (Animator *)GetOwner()->GetComponent("Animator");
     m_input = InputSystem::GetInstance();
     GetOwner()->SetZoomProportion(Vector(0,0));
-    
+
 }
 
 /**
@@ -62,10 +62,10 @@ void ThunderScript::CreateAnimations() {
 
     // Animation thunder wellow.
     auto thunderYellowAnimation = new Animation(GetOwner(),thunderImage);
-    
+
     // Sets the frames for the yellow thunder animation.
     for (int i = 0; i < yellowCounter; i++) {
-        thunderYellowAnimation->AddFrame(new Frame(555 + (i * yellowFrameWidth), framePositionY, 
+        thunderYellowAnimation->AddFrame(new Frame(555 + (i * yellowFrameWidth), framePositionY,
                                                     yellowFrameWidth, frameHeight));
     }
 

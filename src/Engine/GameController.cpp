@@ -70,7 +70,7 @@ bool GameController::GetButtonDown(GameControllerButton button) {
     If respective button has changed its state from false to true, returns
     true.
     */
-    if (m_currentButtonsStates[button] && !m_oldButtonsStates[button]){
+    if (m_currentButtonsStates[button] and !m_oldButtonsStates[button]){
         INFO("GameController - button's state changed");
         return true;
     } else {
@@ -91,7 +91,7 @@ bool GameController::GetButtonUp(GameControllerButton button) {
     If respective button has changed its state from true to false, returns
     true.
     */
-    if (!m_currentButtonsStates[button] && m_oldButtonsStates[button]){
+    if (!m_currentButtonsStates[button] and m_oldButtonsStates[button]){
         INFO("GameController - button's state changed");
         return true;
     } else {

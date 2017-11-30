@@ -13,7 +13,7 @@
     @brief Constructor for the classe UnbLogoScript.
 */
 UnbLogoScript::UnbLogoScript(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
     INFO("UnbLogoScript UnbLogoScript() - completed");
 }
 
@@ -40,7 +40,7 @@ void UnbLogoScript::Start() {
 */
 void UnbLogoScript::CreateAnimations() {
     // Set the animation of the logo.
-    auto unb_LogoSprite = new Image("assets/introunb.png", 0, 0, 5115, 512);
+    auto unb_LogoSprite = new Image("assets/image/introunb.png", 0, 0, 5115, 512);
     auto unbAnimation = new Animation(GetOwner(), unb_LogoSprite);
 
     // Number of frames to add in the animation.

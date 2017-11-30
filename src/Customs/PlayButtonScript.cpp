@@ -6,7 +6,12 @@
 
 #include "Customs/PlayButtonScript.hpp"
 #include "Customs/AudioController.hpp"
+#include "Customs/Exception.hpp"
 
+// Library for assets
+#include <cassert>
+
+// Constants
 const int grayTone = 160;
 const int whiteTone = 255;
 
@@ -30,31 +35,43 @@ void PlayButtonScript::Start() {
 /**
     @brief Update the text, sound and menu of the Play button.
 */
-void PlayButtonScript::ComponentUpdate() {
+void PlayButtonScript::ComponentUpdate() throw (Exception) {
     // Sound component to updates the sound of the Play Button
     auto soundButton = (UISound *)GetOwner()->GetComponent("UISound");
+
 
     // Sound component to turn off the sound of the menu
     auto menuSound = (UISound *)SceneManager::GetInstance()->GetCurrentScene()
                                 ->GetGameObject("Music")->GetComponent("UISound");
 
     // Change sound and scene when mouse is clicked
-    if (m_interactive_button->IsClicked()) {
-        soundButton->Play(0, -1);
-        menuSound->Stop();
-        AudioController::GetInstance()->PlayAudio("mainSound", -1);
-        SceneManager::GetInstance()->SetCurrentScene("Gameplay");
+    if(soundButton != NULL and menuSound != NULL){
+        if (m_interactive_button->IsClicked()) {
+            soundButton->Play(0, -1);
+            menuSound->Stop();
+            AudioController::GetInstance()->PlayAudio("mainSound", -1);
+            SceneManager::GetInstance()->SetCurrentScene("Gameplay");
+        } else {
+            // nothing to do.
+        }
     } else {
-        // nothing to do.
+        throw Exception("PlayButtonScript - soundButton and menuSound nust be different of null.");
     }
+
 
     // Text component to updates the colors of the Play Button
     auto textButton = (UIText *)GetOwner()->GetComponent("UIText");
 
-    // Set PlayButton color depending if mouse is over the button or not
-    if (m_interactive_button->IsOver()) {
-        textButton->SetColor(grayTone, grayTone, grayTone, whiteTone);
+    // Verify the variables
+    if(textButton != NULL){
+        if (m_interactive_button->IsOver()) {
+            textButton->SetColor(grayTone, grayTone, grayTone, whiteTone);
+        } else {
+            textButton->SetColor(whiteTone, whiteTone, whiteTone, whiteTone);
+        }
     } else {
-        textButton->SetColor(whiteTone, whiteTone, whiteTone, whiteTone);
+        throw Exception("PlayButtonScript - textButton and menuSound nust be different of null.");
     }
+    // Set PlayButton color depending if mouse is over the button or not
+
 }

@@ -59,10 +59,8 @@ void FirstBossLifeBorderScript::Start() {
 void FirstBossLifeBorderScript::CreateAnimations() {
     INFO("FirstBossLifeBorderScript - Creating animations");
     // Creates the image.
-    auto firstBossLifeBorderImage = new Image("assets/boss_life_bar.png",
-                                              imageBorderPositionX,
-                                              imageBorderPositionY,
-                                              imageBorderWidth, imageBorderHeight);
+    auto firstBossLifeBorderImage = new Image("assets/image/boss_life_bar.png",imageBorderPositionX,
+                                              imageBorderPositionY, imageBorderWidth, imageBorderHeight);
 
     // Creates the animation
     auto firstBossLifeBorderAnimation = new Animation(GetOwner(),

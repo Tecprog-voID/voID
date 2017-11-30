@@ -212,7 +212,7 @@ void GamePlayScene::CreateMap() {
                                 gameObjectCreateMapTreeLayer);
 
     // Renderer the trees image.
-    auto m_treesImage = new Image("assets/trees.png", imageScenePositionX,
+    auto m_treesImage = new Image("assets/image/trees.png", imageScenePositionX,
                                 imageScenePositionY, imageSceneWidth, imageSceneHeight);
 
     new Renderer(m_trees, m_treesImage);

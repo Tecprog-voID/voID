@@ -15,7 +15,7 @@ const int framesPerSecond = 9;
     @param[in] owner
 */
 CutScene1Script::CutScene1Script(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**
@@ -53,7 +53,7 @@ void CutScene1Script::Start() {
 void CutScene1Script::CreateAnimations() {
     INFO("CutScene1Script - Creating animations");
     // Image light sprite.
-    auto centrallightSprite = new Image("assets/cut1.png", 0, 0, imageWidth, imageHeight);
+    auto centrallightSprite = new Image("assets/image/cut1.png", 0, 0, imageWidth, imageHeight);
 
     // Animation light.
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
@@ -73,7 +73,7 @@ void CutScene1Script::CreateAnimations() {
 */
 void CutScene1Script::ComponentUpdate() {
     // Compares the animator state.
-    if(!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") && m_active) {
+    if(!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") and m_active) {
         m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     } else {
         // Do nothing

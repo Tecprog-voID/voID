@@ -13,7 +13,7 @@
     @brief Constructor for the classe CentralLightScript1.
 */
 CentralLightScript1::CentralLightScript1(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
     INFO("CentralLightScript1 CentralLightScript1() - completed");
 }
 
@@ -48,7 +48,7 @@ void CentralLightScript1::Start() {
 */
 void CentralLightScript1::CreateAnimations() {
     // Create the animation.
-    auto centrallightSprite = new Image("assets/centro4.png", 0, 0, 832, 64);
+    auto centrallightSprite = new Image("assets/image/centro4.png", 0, 0, 832, 64);
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
     centrallightAnimation->AddFrame(new Frame(0, 0, 64, 64));
 
@@ -66,7 +66,7 @@ void CentralLightScript1::CreateAnimations() {
 */
 void CentralLightScript1::ComponentUpdate() {
     // Play the CENTRAL LIGHT ANIMATION if isn't being played and is active.
-    if (!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") && m_active) {
+    if (!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") and m_active) {
         // Play the animation CENTRAL LIGHT ANIMATION
         m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     } else {

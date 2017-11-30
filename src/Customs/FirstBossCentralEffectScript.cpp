@@ -19,7 +19,7 @@ const int bossYPosition = 7.566428571;
     @brief Constructor for the FirstBossCentralEffectScript class.
 */
 FirstBossCentralEffectScript::FirstBossCentralEffectScript(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");                                                      
+    assert((owner != NULL) and "the owner must be equal to NULL");                                                      
 }
 
 /**
@@ -50,7 +50,7 @@ void FirstBossCentralEffectScript::Start() {
 void FirstBossCentralEffectScript::CreateAnimations() {
 
     // Image Attacks.
-    auto firstBossCentralImage1 = new Image("assets/centerBoss11.png", 0, 0, 
+    auto firstBossCentralImage1 = new Image("assets/image/centerBoss11.png", 0, 0, 
                                             centralImageWidth, centralImageheight);
 
     // Surge Animation.
