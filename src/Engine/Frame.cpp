@@ -20,8 +20,9 @@
 Frame::Frame(unsigned int positionX, unsigned int positionY,
              unsigned int width, unsigned int height) {
 
-/* Comparison of unsigned expression> = 0 is always true,
-    with the use of assertions unnecessary here. */
+    /* Comparison of unsigned expression> = 0 is always true,
+        with the use of assertions unnecessary here.
+    */
 
     // Assignment of Values
     originOfRectangle.x = positionX;

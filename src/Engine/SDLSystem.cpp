@@ -157,6 +157,60 @@ SDLSystem *SDLSystem::GetInstance() {
 }
 
 /**
+    @brief Creates a window with the specified title, position and dimensions.
+    @return False if the window creation fails and true if it's succeed.
+*/
+bool SDLSystem::CreateWindow() {
+    INFO("SDLSystem - Creating window.");
+
+    m_window = SDL_CreateWindow(EngineGlobals::window_title.c_str(),
+                                SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                                EngineGlobals::screen_width,
+                                EngineGlobals::screen_height, SDL_WINDOW_SHOWN);
+
+    // Check window creation fail
+    assert((m_window != nullptr) and "m_window can not be null");
+
+    bool createWindowReturn = true;
+
+    INFO("SDLSystem - Created window successfully.");
+
+    // Verify the return.
+    if(createWindowReturn != false){
+        return createWindowReturn;
+    } else {
+        throw Exception("SDLSystem - createWindowReturn must be different of null.");
+    }
+}
+
+/**
+    @brief Creates a 2D rendering context for the window.
+    @return False if the renderer creation fails and true if it's succeed.
+*/
+bool SDLSystem::CreateRenderer() throw (Exception) {
+    INFO("SDLSystem - Creating renderer.");
+
+    // Use hardware acceleration with first rendering driver that support it.
+    m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
+
+    // Check renderer creation fail
+    assert((m_renderer != nullptr) and "m_renderer can not be null");
+
+    SDL_SetRenderDrawBlendMode(m_renderer,SDL_BLENDMODE_BLEND);
+
+    bool createRenderReturn = true;
+
+    INFO("SDLSystem - Created renderer successfully.");
+
+    // Verify the return.
+    if(createRenderReturn != false){
+        return createRenderReturn;
+    } else {
+        throw Exception("SDLSystem - createRenderReturn must be different of null.");
+    }
+}
+
+/**
     @brief Initialize the SDL library and starts its subsystems used in the game.
     @return False if the system initialization fails and true if it's succeed.
 */
@@ -257,59 +311,6 @@ bool SDLSystem::InitTTF() {
 
 }
 
-/**
-    @brief Creates a window with the specified title, position and dimensions.
-    @return False if the window creation fails and true if it's succeed.
-*/
-bool SDLSystem::CreateWindow() {
-    INFO("SDLSystem - Creating window.");
-
-    m_window = SDL_CreateWindow(EngineGlobals::window_title.c_str(),
-                                SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                                EngineGlobals::screen_width,
-                                EngineGlobals::screen_height, SDL_WINDOW_SHOWN);
-
-    // Check window creation fail
-    assert((m_window != nullptr) and "m_window can not be null");
-
-    bool createWindowReturn = true;
-
-    INFO("SDLSystem - Created window successfully.");
-
-    // Verify the return.
-    if(createWindowReturn != false){
-        return createWindowReturn;
-    } else {
-        throw Exception("SDLSystem - createWindowReturn must be different of null.");
-    }
-}
-
-/**
-    @brief Creates a 2D rendering context for the window.
-    @return False if the renderer creation fails and true if it's succeed.
-*/
-bool SDLSystem::CreateRenderer() throw (Exception) {
-    INFO("SDLSystem - Creating renderer.");
-
-    // Use hardware acceleration with first rendering driver that support it.
-    m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
-
-    // Check renderer creation fail
-    assert((m_renderer != nullptr) and "m_renderer can not be null");
-
-    SDL_SetRenderDrawBlendMode(m_renderer,SDL_BLENDMODE_BLEND);
-
-    bool createRenderReturn = true;
-
-    INFO("SDLSystem - Created renderer successfully.");
-
-    // Verify the return.
-    if(createRenderReturn != false){
-        return createRenderReturn;
-    } else {
-        throw Exception("SDLSystem - createRenderReturn must be different of null.");
-    }
-}
 
 /**
     @brief Calculates the frame rate.
