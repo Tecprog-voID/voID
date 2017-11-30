@@ -17,13 +17,11 @@
     @param[in] width - Horizontal frame size
     @param[in] height - Vertical frame size.
 */
-Frame::Frame(int positionX, int positionY, int width, int height) {
+Frame::Frame(unsigned int positionX, unsigned int positionY,
+             unsigned int width, unsigned int height) {
 
-    // Verification
-    assert((positionX >= 0) and "the positionX must be greater than zero");
-    assert((positionY >= 0) and "the positionY must be greater than zero");
-    assert((width >= 0) and "the width must be greater than zero");
-    assert((height >= 0) and "the height must be greater than zero");
+/* Comparison of unsigned expression> = 0 is always true,
+    with the use of assertions unnecessary here. */
 
     // Assignment of Values
     originOfRectangle.x = positionX;

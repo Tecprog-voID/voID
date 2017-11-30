@@ -12,8 +12,11 @@
 
 class Frame {
 	public:
-	    Frame(int positionX, int positionY, int width, int height);
+	    Frame(unsigned int positionX, unsigned int positionY,
+			  unsigned int width, unsigned int height);
+
 		~Frame();
+		
 	    SDL_Rect *GetRect();
 
 	private:

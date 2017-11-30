@@ -63,8 +63,8 @@ private:
 
     // Game attributes
     bool m_isRunning = false;
-    int m_frameRate = 0;
-    int m_frameCounter = 0;
+    unsigned int m_frameRate = 0;
+    unsigned int m_frameCounter = 0;
 
     // Integer types with a width of exactly 32 bits
     Uint32 m_currentTicks = 0;

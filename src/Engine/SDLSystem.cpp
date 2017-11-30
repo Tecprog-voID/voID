@@ -16,14 +16,14 @@
 
 #include <cassert>
 //  Constants of
-const int red = 0;
-const int green = 0;
-const int blue = 0;
-const int alpha = 255;
-const int frequency = 44100;
-const int channels = 2;
-const int chunksize = 2048;
-const int ticksLimit = 1000;
+const unsigned int red = 0;
+const unsigned int green = 0;
+const unsigned int blue = 0;
+const unsigned int alpha = 255;
+const unsigned int frequency = 44100;
+const unsigned int channels = 2;
+const unsigned int chunksize = 2048;
+const unsigned int ticksLimit = 1000;
 
 // Static variables initialization
 SDLSystem *SDLSystem::m_instance = nullptr;
@@ -164,7 +164,7 @@ bool SDLSystem::InitSDL() {
     INFO("Initializing SDL");
 
     // Receives 0 if the chosen flags are initialized.
-    int initialize = SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO |
+    unsigned int initialize = SDL_Init(SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO |
                SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER | SDL_INIT_EVENTS);
 
     // Check initialization fail
@@ -189,8 +189,8 @@ bool SDLSystem::InitIMG() throw (Exception) {
     INFO("SDLSystem - Initializing IMG");
 
     // Receives 0 if the chosen flags are initialized
-    int flags = IMG_INIT_PNG | IMG_INIT_JPG;
-    int initialize = IMG_Init(flags);
+    unsigned int flags = IMG_INIT_PNG | IMG_INIT_JPG;
+    unsigned int initialize = IMG_Init(flags);
 
     // Check image initialization fail
     assert(((initialize & flags) == flags) and "initialize and flags must have the same status");
@@ -214,7 +214,7 @@ bool SDLSystem::InitMixer() {
     INFO("SDLSystem - Initializing Mixer");
 
     // Choose frequency, Uint16 format, channels and chunksize
-    int initialize = Mix_OpenAudio(frequency, MIX_DEFAULT_FORMAT, channels, chunksize);
+    unsigned int initialize = Mix_OpenAudio(frequency, MIX_DEFAULT_FORMAT, channels, chunksize);
 
     // Check mixer initialization fail
     assert((initialize == 0) and "initialize must be equal to zero");
@@ -238,7 +238,7 @@ bool SDLSystem::InitMixer() {
 bool SDLSystem::InitTTF() {
     INFO("SDLSystem - Initializing TTF");
 
-    int initialize = TTF_Init();
+    unsigned int initialize = TTF_Init();
 
     // Check TTF initialization fail
     assert((initialize == 0) and "initialize must be equal to zero");
@@ -317,8 +317,21 @@ bool SDLSystem::CreateRenderer() throw (Exception) {
 void SDLSystem::CalculateFramerate() {
     m_currentTicks = SDL_GetTicks();
 
+    // Checks if ticks have not exceeded the limit
+    Uint32 m_newTicks = m_currentTicks - m_lastFrameTicks;
+
+    /*
+        Underflow checking is not necessary because all values are initialized
+        with unsigned. When we compile with all warnings connected we get the
+        following message: "warning: comparison of unsigned expression <0 is
+        always false [-Wtype-limits] assert ((m_newTicks <0) and" SDLSystem ::
+        CalculateFramerate - Underflow ");
+    */
+
+    bool m_checkTicksLimit = m_newTicks >= ticksLimit;
+
     // Adjust frame rate based on limit of ticks
-    if (m_currentTicks - m_lastFrameTicks >= ticksLimit) {
+    if (m_checkTicksLimit) {
         m_frameRate = m_frameCounter;
         m_frameCounter = 0;
         m_lastFrameTicks = m_currentTicks;
@@ -333,6 +346,7 @@ void SDLSystem::CalculateFramerate() {
 */
 void SDLSystem::LoadCommons() throw (Exception) {
     INFO("SDLSystem - Load common initialized");
+
     // Instantiate and add multiple scenes to scene manager.
     auto endScene1 = new EndScene1();
 
@@ -402,6 +416,14 @@ bool SDLSystem::FixFramerate() throw (Exception) {
     bool fixFramerateReturn = '\0';
     if(m_currentFix != '\0'){
         float fixInterval = m_currentFix - m_lastFix;
+
+        /*
+            Underflow checking is not necessary because all values are initialized
+            with unsigned. When we compile with all warnings connected we get the
+            following message: "warning: comparison of unsigned expression <0 is
+            always false [-Wtype-limits] assert ((m_newTicks <0) and" SDLSystem ::
+            CalculateFramerate - Underflow ");
+        */
 
         // Compare intervals to check the need to fix frame rate
         if (fixInterval < update_rate_interval){
