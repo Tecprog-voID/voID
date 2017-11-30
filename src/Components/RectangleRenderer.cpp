@@ -60,7 +60,8 @@ void RectangleRenderer::ComponentUpdate() throw (Exception) {
     @param[in] blue - Specific value of blue color.
     @param[in] alpha - Specific value of alpha.
 */
-void RectangleRenderer::SetColor(unsigned int red, unsigned int green, unsigned int blue, unsigned int alpha) {
+void RectangleRenderer::SetColor(unsigned int red, unsigned int green,
+                                 unsigned int blue, unsigned int alpha) {
 
     // Set the local variable
     m_red = red;

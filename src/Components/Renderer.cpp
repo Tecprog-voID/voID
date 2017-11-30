@@ -21,16 +21,6 @@ const unsigned int fullAngle = 360;
 const unsigned int straightAngle = 180;
 
 /**
-    @brief Update the images informations on the screen.
-*/
-void Renderer::ComponentUpdate() {
-    // Draw the component.
-    std::pair<int, int> sizes =
-        std::make_pair(GetOwner()->GetWidth(), GetOwner()->GetHeight());
-        GraphicsSystem::GetInstance()->Draw(m_image, m_position, sizes);
-}
-
-/**
     @brief  Constructor for the class Renderer.
     @param[in] owner - Owns the component.
     @param[in] img
@@ -57,6 +47,17 @@ Renderer::~Renderer() {
     // Destructor
     delete m_image;
 }
+
+/**
+    @brief Update the images informations on the screen.
+*/
+void Renderer::ComponentUpdate() {
+    // Draw the component.
+    std::pair<int, int> sizes =
+        std::make_pair(GetOwner()->GetWidth(), GetOwner()->GetHeight());
+        GraphicsSystem::GetInstance()->Draw(m_image, m_position, sizes);
+}
+
 
 /**
     @brief Do nothing.
