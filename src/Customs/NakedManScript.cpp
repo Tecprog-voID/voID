@@ -48,7 +48,7 @@ NakedManScript::NakedManScript(GameObject *owner) : Script(owner) {
 void NakedManScript::Start() throw (Exception) {
     INFO("NakedManScript - initializing");
     CreateAnimations();
-    position = GetOwner()->GetPosition();
+    position = (Vector *)GetOwner()->GetPosition();
     assert((position != NULL) and "the position must be different to NULL");
 
     animator = (Animator *)GetOwner()->GetComponent("Animator");
@@ -94,7 +94,7 @@ void NakedManScript::GameControllerUpdate() {
     isMovingLooking = true;
 
     // Calculate game controller angle in degrees
-    gameControllerAngle = atan2 (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY)
+    gameControllerAngle = (float)atan2 (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY)
                                  * -1, game_controller
                                  ->GetAxis(GC_INPUT_AXIS_RIGHTX))
                                  * kStraightAngle / kPi;
@@ -289,7 +289,7 @@ void NakedManScript::GameControllerUpdate() {
     } else {
         // nothing to do.
     }
-    dashController = game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERLEFT);
+    dashController = (unsigned int)game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERLEFT);
 
     // Shoot depending of game controller angle and number of bullets
     if (game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERRIGHT)
@@ -325,7 +325,7 @@ void NakedManScript::GameControllerUpdate() {
     } // if -- Shoot
 
     // Local variable.
-    bulletController = game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERRIGHT);
+    bulletController = (unsigned int) game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERRIGHT);
 
     // Back to menu based in game controller input
     if (game_controller->GetButtonDown(GC_INPUT_BACK)) {
@@ -502,13 +502,13 @@ void NakedManScript::ComponentUpdate() {
     if (input->GetKeyDown(INPUT_L) and cameraLock == false) {
         // Set cameraLock value and adjust dead zone
         cameraLock = true;
-        deadzoneX = EngineGlobals::screen_width / 2;
-        deadzoneY = EngineGlobals::screen_height / 2;
+        deadzoneX = (unsigned int)EngineGlobals::screen_width / 2;
+        deadzoneY = (unsigned int)EngineGlobals::screen_height / 2;
     } else if (input->GetKeyDown(INPUT_L) and cameraLock == true) {
         // Set cameraLock value and adjust dead zone
         cameraLock = false;
-        deadzoneX = EngineGlobals::screen_width;
-        deadzoneY = EngineGlobals::screen_height;
+        deadzoneX = (unsigned int)EngineGlobals::screen_width;
+        deadzoneY = (unsigned int)EngineGlobals::screen_height;
         animator->StopAllAnimations();
     } else {
         // nothing to do.
@@ -538,7 +538,7 @@ void NakedManScript::ComponentUpdate() {
 */
 void NakedManScript::SetDirection() {
 	// Get current mouse position
-    mousePosition = input->GetMousePosition();
+    mousePosition = (std::pair<int, int>)input->GetMousePosition();
 
     // Need to break into atomic functions
 
@@ -548,7 +548,7 @@ void NakedManScript::SetDirection() {
             Detect if player is moving and looking in same direction
             based in x, y player's positions and x, y mouse positions.
         */
-        mousePosition = input->GetMousePosition();
+        mousePosition = (std::pair<int, int>)input->GetMousePosition();
 
         // Looking to right, set if is also moving to right
         if (mousePosition.first >= position->m_x and movements == kRight){
@@ -919,12 +919,12 @@ void NakedManScript::KeyBoardUpdate() {
         // Detect requests to lock the Camera by comparing cameraLock value
         if (input->GetKeyDown(INPUT_L) and cameraLock == false) {
             cameraLock = true;
-            deadzoneX = EngineGlobals::screen_width / 2;
-            deadzoneY = EngineGlobals::screen_height / 2;
+            deadzoneX = (unsigned int)EngineGlobals::screen_width / 2;
+            deadzoneY = (unsigned int)EngineGlobals::screen_height / 2;
         } else if (input->GetKeyDown(INPUT_L) and cameraLock == true) {
             cameraLock = false;
-            deadzoneX = EngineGlobals::screen_width;
-            deadzoneY = EngineGlobals::screen_height;
+            deadzoneX = (unsigned int)EngineGlobals::screen_width;
+            deadzoneY = (unsigned int)EngineGlobals::screen_height;
             animator->StopAllAnimations();
         } else {
             // nothing to do.
@@ -977,8 +977,8 @@ void NakedManScript::FixedComponentUpdate() {
         FirstBossController::GetInstance()->EndBossFight();
 
         // Posit player on spawn.
-        int positionX = EngineGlobals::screen_width / 2 - 96 / 2;
-        int positionY = EngineGlobals::screen_height / 2 - 96 / 2;
+        unsigned int positionX = (unsigned int)EngineGlobals::screen_width / 2 - 96 / 2;
+        unsigned int positionY = (unsigned int)EngineGlobals::screen_height / 2 - 96 / 2;
 
         FirstBossController::GetInstance()->PositPlayer(Vector(positionX,
                                                                positionY));
