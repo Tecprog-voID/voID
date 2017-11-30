@@ -8,6 +8,8 @@
 
 #include "Log/log.hpp"
 
+#include <cassert>
+
 /**
     @brief Initializes GameObject instance.
     @param[in] name - gameobject name.
@@ -231,6 +233,7 @@ void GameObject::AddVelocity(Vector velocity) {
 Vector GameObject::GetVelocity() {
     INFO("GameObject - Get the velocity");
     return *m_velocity;
+    assert((*m_velocity != NULL) and "the return must be different to NULL");
 }
 
 /**
@@ -258,4 +261,5 @@ void GameObject::ClearCollisions() {
 std::vector<GameObject *> GameObject::GetCollisions() {
     INFO("GameObject - Get collisions");
     return m_colliding;
+    assert((m_colliding != NULL) and "the return must be different to NULL");
 }

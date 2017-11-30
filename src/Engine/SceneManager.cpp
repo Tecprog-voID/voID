@@ -8,6 +8,7 @@
 #include "Log/log.hpp"
 
 #include <iostream>
+#include <cassert>
 
 SceneManager *SceneManager::m_instance = 0;
 
@@ -28,6 +29,7 @@ SceneManager *SceneManager::GetInstance() {
         // Do nothing
     }
     return m_instance;
+    assert((m_instance != NULL) and "the return must be different to NULL");
 }
 
 void SceneManager::SetCurrentScene(std::string sceneName) {
