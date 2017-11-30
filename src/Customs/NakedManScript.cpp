@@ -95,9 +95,9 @@ void NakedManScript::GameControllerUpdate() {
 
     // Calculate game controller angle in degrees
     gameControllerAngle = (float)atan2 (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY)
-                                 * -1, game_controller
-                                 ->GetAxis(GC_INPUT_AXIS_RIGHTX))
-                                 * kStraightAngle / kPi;
+                                         * -1, game_controller
+                                         ->GetAxis(GC_INPUT_AXIS_RIGHTX))
+                                         * kStraightAngle / kPi;
 
     // Set game controller angle depending on axis states
     if (abs(game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY)) < 1000
@@ -106,7 +106,6 @@ void NakedManScript::GameControllerUpdate() {
     } else {
         // nothing to do.
     }
-
 
     // Keep angle positive and in 0 to 360 range
     if (gameControllerAngle < 0) {
@@ -117,7 +116,6 @@ void NakedManScript::GameControllerUpdate() {
         // nothing to do.
     }
 
-
     // Get absolute value of the angle
     if (gameControllerAngle != 0) {
         gameControllerAngle = abs(kFullAngle - gameControllerAngle);
@@ -125,151 +123,15 @@ void NakedManScript::GameControllerUpdate() {
         // nothing to do.
     }
 
-
     /*
         Define move direction and adjust player's image according
         to the direction he's looking, the game controller buttons actions and
         the dash controller state.
     */
     if (isMovingLooking and dashController == 0) {
-        /*
-            Detect movement requests by comparing the current state of an axis
-            control of the game controller when player is moving and looking at
-            same direction.
-        */
-        if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
-             and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
-            // Detect the request to move up left
-            movements = kUpLeft;
-            lastDirection = kUpLeft;
-            animator->GetAnimation("Walk Side")->SetFlip(true, false);
-            animator->PlayAnimation("Walk Side");
-        } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
-                    and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
-            // Detect the request to move up right
-            movements = kUpRight;
-            lastDirection = kUpRight;
-            animator->GetAnimation("Walk Side")->SetFlip(false, false);
-            animator->PlayAnimation("Walk Side");
-        } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) > 1000)
-                    and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
-            // Detect the request to move down left
-            movements = kDownLeft;
-            lastDirection = kDownLeft;
-            animator->GetAnimation("Walk Side")->SetFlip(true, false);
-            animator->PlayAnimation("Walk Side");
-        } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) > 1000)
-                    and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
-            // Detect the request to move down right
-            movements = kDownRight;
-            lastDirection = kDownRight;
-            animator->GetAnimation("Walk Side")->SetFlip(false, false);
-            animator->PlayAnimation("Walk Side");
-        } else if (game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000) {
-            // Detect the request to move up
-            lastDirection = 0;
-            movements = kUp;
-            animator->PlayAnimation("Walk Up");
-        } else if (game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) > 200) {
-            // Detect the request to move down
-            lastDirection = kUp;
-            movements = kDown;
-            animator->PlayAnimation("Walk Down");
-        } else if (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -200) {
-            // Detect the request to move left
-            lastDirection = kLeft;
-            movements = kLeft;
-            animator->GetAnimation("Walk Side")->SetFlip(true, false);
-            animator->PlayAnimation("Walk Side");
-        } else if (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 200) {
-            // Detect the request to move right
-            lastDirection = kLeft;
-            movements = kRight;
-            animator->GetAnimation("Walk Side")->SetFlip(false, false);
-            animator->PlayAnimation("Walk Side");
-        } else {
-            // Detect if player is stopped by comparing lastDirection values
-            if(lastDirection == kDown) {
-                animator->PlayAnimation("Stop Left");
-            } else if (lastDirection == kLeft || lastDirection == kUpRight
-                       || lastDirection == kDownLeft || lastDirection == kUpLeft
-                       || lastDirection == kUpLeft || lastDirection == kDownRight) {
-                animator->PlayAnimation("Stop Right");
-            } else if (lastDirection == 0) {
-                animator->PlayAnimation("Stop Up");
-            } else if(lastDirection == kUp) {
-                animator->PlayAnimation("Stop Down");
-            } // if -- Detect if player is stopped
-        } // if -- Detect movement requests
+        DetectMoovimentForward();
     } else if (!isMovingLooking and dashController == 0) {
-        /*
-            Detect movement requests by comparing the current state of an axis
-            control of the game controller when player is not moving and looking
-            at same direction.
-        */
-        if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
-             and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
-            // Detect the request to move up left
-            movements = kUpLeft;
-            lastDirection = kUpLeft;
-            animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
-            animator->PlayAnimation("Back Walk Side");
-        } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
-                    and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
-            // Detect the request to move up right
-            movements = kUpRight;
-            lastDirection = kUpRight;
-            animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
-            animator->PlayAnimation("Back Walk Side");
-        } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) > 1000)
-                    and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
-            // Detect the request to move down left
-            movements = kDownLeft;
-            lastDirection = kDownLeft;
-            animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
-            animator->PlayAnimation("Back Walk Side");
-        } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
-                    and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
-            // Detect the request to move down right
-            movements = kDownRight;
-            lastDirection = kDownRight;
-            animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
-            animator->PlayAnimation("Back Walk Side");
-        } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)) {
-            // Detect the request to move up
-            lastDirection = 0;
-            movements = kUp;
-            animator->PlayAnimation("Back Walk Down");
-        } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) > 1000)) {
-            // Detect the request to move down
-            lastDirection = kUp;
-            movements = kDown;
-            animator->PlayAnimation("Back Walk Up");
-        } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
-            // Detect the request to move left
-            lastDirection = kLeft;
-            movements = kLeft;
-            animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
-            animator->PlayAnimation("Back Walk Side");
-        } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
-            // Detect the request to move right
-            lastDirection = kLeft;
-            movements = kRight;
-            animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
-            animator->PlayAnimation("Back Walk Side");
-        } else {
-            // Detect if player is stopped by comparing lastDirection values
-            if (lastDirection == 0 || lastDirection == kDownRight) {
-                animator->PlayAnimation("Stop Down");
-            } else if (lastDirection == kUp || lastDirection == kDownLeft) {
-                animator->PlayAnimation("Stop Up");
-            } else if (lastDirection == kDown) {
-                animator->PlayAnimation("Stop Left");
-            } else if (lastDirection == kLeft || lastDirection == kUpLeft
-                       || lastDirection == kUpRight) {
-                animator->PlayAnimation("Stop Right");
-            } // if -- Detect if player is stopped
-        }
+        DetectMoovimentBack();
     } else {
         // nothing to do.
     } // if -- Define move direction and adjust player's image
@@ -337,6 +199,149 @@ void NakedManScript::GameControllerUpdate() {
         SceneManager::GetInstance()->SetCurrentScene("Main");
     } else {
         // nothing to do.
+    }
+}
+
+void NakedManScript::DetectMoovimentForward(){
+    /*
+        Detect movement requests by comparing the current state of an axis
+        control of the game controller when player is moving and looking at
+        same direction.
+    */
+    if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
+         and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
+        // Detect the request to move up left
+        movements = kUpLeft;
+        lastDirection = kUpLeft;
+        animator->GetAnimation("Walk Side")->SetFlip(true, false);
+        animator->PlayAnimation("Walk Side");
+    } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
+                and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
+        // Detect the request to move up right
+        movements = kUpRight;
+        lastDirection = kUpRight;
+        animator->GetAnimation("Walk Side")->SetFlip(false, false);
+        animator->PlayAnimation("Walk Side");
+    } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) > 1000)
+                and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
+        // Detect the request to move down left
+        movements = kDownLeft;
+        lastDirection = kDownLeft;
+        animator->GetAnimation("Walk Side")->SetFlip(true, false);
+        animator->PlayAnimation("Walk Side");
+    } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) > 1000)
+                and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
+        // Detect the request to move down right
+        movements = kDownRight;
+        lastDirection = kDownRight;
+        animator->GetAnimation("Walk Side")->SetFlip(false, false);
+        animator->PlayAnimation("Walk Side");
+    } else if (game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000) {
+        // Detect the request to move up
+        lastDirection = 0;
+        movements = kUp;
+        animator->PlayAnimation("Walk Up");
+    } else if (game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) > 200) {
+        // Detect the request to move down
+        lastDirection = kUp;
+        movements = kDown;
+        animator->PlayAnimation("Walk Down");
+    } else if (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -200) {
+        // Detect the request to move left
+        lastDirection = kLeft;
+        movements = kLeft;
+        animator->GetAnimation("Walk Side")->SetFlip(true, false);
+        animator->PlayAnimation("Walk Side");
+    } else if (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 200) {
+        // Detect the request to move right
+        lastDirection = kLeft;
+        movements = kRight;
+        animator->GetAnimation("Walk Side")->SetFlip(false, false);
+        animator->PlayAnimation("Walk Side");
+    } else {
+        // Detect if player is stopped by comparing lastDirection values
+        if(lastDirection == kDown) {
+            animator->PlayAnimation("Stop Left");
+        } else if (lastDirection == kLeft || lastDirection == kUpRight
+                   || lastDirection == kDownLeft || lastDirection == kUpLeft
+                   || lastDirection == kUpLeft || lastDirection == kDownRight) {
+            animator->PlayAnimation("Stop Right");
+        } else if (lastDirection == 0) {
+            animator->PlayAnimation("Stop Up");
+        } else if(lastDirection == kUp) {
+            animator->PlayAnimation("Stop Down");
+        } // if -- Detect if player is stopped
+    } // if -- Detect movement requests
+}
+
+void NakedManScript::DetectMoovimentBack(){
+    /*
+        Detect movement requests by comparing the current state of an axis
+        control of the game controller when player is not moving and looking
+        at same direction.
+    */
+    if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
+         and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
+        // Detect the request to move up left
+        movements = kUpLeft;
+        lastDirection = kUpLeft;
+        animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
+        animator->PlayAnimation("Back Walk Side");
+    } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
+                and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
+        // Detect the request to move up right
+        movements = kUpRight;
+        lastDirection = kUpRight;
+        animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
+        animator->PlayAnimation("Back Walk Side");
+    } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) > 1000)
+                and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
+        // Detect the request to move down left
+        movements = kDownLeft;
+        lastDirection = kDownLeft;
+        animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
+        animator->PlayAnimation("Back Walk Side");
+    } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
+                and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
+        // Detect the request to move down right
+        movements = kDownRight;
+        lastDirection = kDownRight;
+        animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
+        animator->PlayAnimation("Back Walk Side");
+    } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)) {
+        // Detect the request to move up
+        lastDirection = 0;
+        movements = kUp;
+        animator->PlayAnimation("Back Walk Down");
+    } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) > 1000)) {
+        // Detect the request to move down
+        lastDirection = kUp;
+        movements = kDown;
+        animator->PlayAnimation("Back Walk Up");
+    } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
+        // Detect the request to move left
+        lastDirection = kLeft;
+        movements = kLeft;
+        animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
+        animator->PlayAnimation("Back Walk Side");
+    } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
+        // Detect the request to move right
+        lastDirection = kLeft;
+        movements = kRight;
+        animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
+        animator->PlayAnimation("Back Walk Side");
+    } else {
+        // Detect if player is stopped by comparing lastDirection values
+        if (lastDirection == 0 || lastDirection == kDownRight) {
+            animator->PlayAnimation("Stop Down");
+        } else if (lastDirection == kUp || lastDirection == kDownLeft) {
+            animator->PlayAnimation("Stop Up");
+        } else if (lastDirection == kDown) {
+            animator->PlayAnimation("Stop Left");
+        } else if (lastDirection == kLeft || lastDirection == kUpLeft
+                   || lastDirection == kUpRight) {
+            animator->PlayAnimation("Stop Right");
+        } // if -- Detect if player is stopped
     }
 }
 

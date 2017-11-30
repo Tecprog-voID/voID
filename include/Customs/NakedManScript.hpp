@@ -99,6 +99,8 @@ class NakedManScript : public Script {
 
         void SetDirection();
         void KeyBoardUpdate();
+        void DetectMoovimentForward();
+        void DetectMoovimentBack();
         void GameControllerUpdate();
         void CreateAnimations();
         void WallCollisionResolution();
