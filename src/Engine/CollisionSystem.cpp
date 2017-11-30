@@ -189,6 +189,17 @@ void CollisionSystem::CircleRect(CircleCollider *circle, RectangleCollider *rect
     // Distance between centers  in y-axis.
     double distancey = distanceY - rectangle -> GetHeight() / divisor;
 
+    ValidatorCircleRect(circle, rectangle, collision, distanceX, distanceY, distancex, distancey);
+
+}
+
+void CollisionSystem::ValidatorCircleRect(CircleCollider *circle,
+                                          RectangleCollider *rectangle,
+                                          bool collision,
+                                          double distanceX,
+                                          double distanceY,
+                                          double distancex,
+                                          double distancey){
     /*
         Checks if the distance on x-axis between centers are greater than
         TextWidth divided by 2 in addition to Circle Radius, in that case

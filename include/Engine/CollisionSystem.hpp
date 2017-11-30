@@ -31,6 +31,13 @@ private:
     void PushColliders();
     void CircleCircle(CircleCollider *circle1, CircleCollider *circle2);
     void RectRect(RectangleCollider *rectangle1, RectangleCollider *rectangle2);
+    void ValidatorCircleRect(CircleCollider *circle,
+                             RectangleCollider *rectangle,
+                             bool collision,
+                             double distanceX,
+                             double distanceY,
+                             double distancex,
+                             double distancey);
     void CircleRect(CircleCollider *circle, RectangleCollider *rectangle);
 
     // Pointer that instantiates. Collision system type.
