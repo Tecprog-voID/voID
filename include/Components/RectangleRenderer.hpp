@@ -25,12 +25,12 @@ public:
     RectangleRenderer(GameObject *owner, Vector offset, int width, int height);
     ~RectangleRenderer();
 
-    void SetColor(int red, int green, int blue, int alpha);
+    void SetColor(unsigned int red, unsigned int green, unsigned int blue, unsigned int alpha);
 
-    inline void SetWidth(int width) {
+    inline void SetWidth(unsigned int width) {
         this->m_width = width;
     };
-    inline int GetWidth() {
+    inline unsigned int GetWidth() {
         return m_width;
     };
 
@@ -44,14 +44,14 @@ private:
     virtual void ComponentUpdate() throw (Exception);
 
     // Width and height of the rectangle
-    int m_width = 0;
-    int m_height = 0;
+    unsigned int m_width = 0;
+    unsigned int m_height = 0;
 
     // Specifics values of the colors of the rectangle
-    int m_red = 0;
-    int m_green = 0;
-    int m_blue = 255;
-    int m_alpha = 255;
+    unsigned int m_red = 0;
+    unsigned int m_green = 0;
+    unsigned int m_blue = 255;
+    unsigned int m_alpha = 255;
 
     // Vector position of the rectangle
     Vector m_offset = Vector(0, 0);

@@ -17,8 +17,8 @@
 #include <math.h>
 
 const double pi = 3.1415;
-const int fullAngle = 360;
-const int straightAngle = 180;
+const unsigned int fullAngle = 360;
+const unsigned int straightAngle = 180;
 
 /**
     @brief Update the images informations on the screen.

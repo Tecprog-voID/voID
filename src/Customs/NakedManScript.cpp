@@ -17,18 +17,18 @@
 #include <stdio.h>
 
 // The constant name must be different.
-const int kUp = 1;
-const int kDown = 2;
-const int kLeft = 3;
-const int kRight = 4;
-const int kUpLeft = 5;
-const int kUpRight = 6;
-const int kDownLeft = 7;
-const int kDownRight = 8;
+const unsigned int kUp = 1;
+const unsigned int kDown = 2;
+const unsigned int kLeft = 3;
+const unsigned int kRight = 4;
+const unsigned int kUpLeft = 5;
+const unsigned int kUpRight = 6;
+const unsigned int kDownLeft = 7;
+const unsigned int kDownRight = 8;
 
 const double kPi = 3.1415;
-const int kFullAngle = 360;
-const int kStraightAngle = 180;
+const unsigned int kFullAngle = 360;
+const unsigned int kStraightAngle = 180;
 
 const double kSpeed = 0.70710;
 

@@ -8,6 +8,8 @@
 
 #include "Customs/Exception.hpp"
 
+#include <cassert>
+
 /**
     @brief Constructor for the class RectangleRenderer.
     @param[in] *owner - Owns the component.
@@ -30,9 +32,14 @@ void RectangleRenderer::ComponentUpdate() throw (Exception) {
 
     // Draw and fill the rectangle's color.
     int positionX = GetOwner()->GetPosition()->m_x + m_offset.m_x;
+    assert((positionX < GetOwner()->GetPosition()->m_x or positionX < m_offset.m_x)
+            and "RectangleRenderer::ComponentUpdate - Overflow");
+
 
     // sets the vertical position
     int positionY = GetOwner()->GetPosition()->m_y + m_offset.m_y;
+    assert((positionY < GetOwner()->GetPosition()->m_y or positionX < m_offset.m_y)
+            and "RectangleRenderer::ComponentUpdate - Overflow");
 
     // sets the position using x and y values
     if(positionX != '\0' and positionY != '\0'){
@@ -53,7 +60,7 @@ void RectangleRenderer::ComponentUpdate() throw (Exception) {
     @param[in] blue - Specific value of blue color.
     @param[in] alpha - Specific value of alpha.
 */
-void RectangleRenderer::SetColor(int red, int green, int blue, int alpha) {
+void RectangleRenderer::SetColor(unsigned int red, unsigned int green, unsigned int blue, unsigned int alpha) {
 
     // Set the local variable
     m_red = red;

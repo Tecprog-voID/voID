@@ -58,9 +58,9 @@ class NakedManScript : public Script {
         // Player's walk
         bool walking = false;
 
-        int bulletController = 0;
+        unsigned int bulletController = 0;
 
-        int dashController = 0;
+        unsigned int dashController = 0;
 
         InputSystem *input = nullptr;
         GameController *game_controller = nullptr;
@@ -71,16 +71,16 @@ class NakedManScript : public Script {
         float walkSpeed = 15;
         float fixedWalkSpeed = 15;
 
-        int movements = 0;
+        unsigned int movements = 0;
 
         // X and Y positions of dead zone
-        int deadzoneX = EngineGlobals::screen_width / 2;
-        int deadzoneY = EngineGlobals::screen_height / 2;
+        unsigned int deadzoneX = EngineGlobals::screen_width / 2;
+        unsigned int deadzoneY = EngineGlobals::screen_height / 2;
 
-        int lastDirection = 1;
+        unsigned int lastDirection = 1;
         RectangleCollider *nakedManCollider = nullptr;
 
-        int m_hitFrames = 0;
+        unsigned int m_hitFrames = 0;
         bool m_hit = false;
 
         bool cameraLock = true;
