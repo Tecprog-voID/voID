@@ -151,9 +151,19 @@ void NakedManScript::GameControllerUpdate() {
     } else {
         // nothing to do.
     }
-    dashController = (unsigned int)game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERLEFT);
 
-    // Shoot depending of game controller angle and number of bullets
+    dashController = (unsigned int)game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERLEFT);
+    bulletController = (unsigned int) game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERRIGHT);
+
+    ShootController();
+    BackMenu();
+
+}
+
+/*
+    Shoot depending of game controller angle and number of bullets.
+*/
+void NakedManScript::ShootController() {
     if (game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERRIGHT)
         and bulletController == 0 and gameControllerAngle != 0) {
         cout << "ammo: " << bulletNumber << endl;
@@ -185,11 +195,12 @@ void NakedManScript::GameControllerUpdate() {
     } else {
         // nothing to do.
     } // if -- Shoot
+}
 
-    // Local variable.
-    bulletController = (unsigned int) game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERRIGHT);
-
-    // Back to menu based in game controller input
+/*
+    @brief Back to menu based in game controller input
+*/
+void NakedManScript::BackMenu(){
     if (game_controller->GetButtonDown(GC_INPUT_BACK)) {
         auto textContinue = (UIText *)SceneManager::GetInstance()
                                            ->GetScene("Main")
@@ -202,12 +213,13 @@ void NakedManScript::GameControllerUpdate() {
     }
 }
 
+/*
+    @brief  Detect movement requests by comparing the current state of an axis
+            control of the game controller when player is moving and looking at
+            same direction.
+*/
 void NakedManScript::DetectMoovimentForward(){
-    /*
-        Detect movement requests by comparing the current state of an axis
-        control of the game controller when player is moving and looking at
-        same direction.
-    */
+
     if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
          and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
         // Detect the request to move up left
