@@ -30,7 +30,7 @@ Renderer::Renderer(GameObject *owner, Image *image) : Component(owner, C_DRAW) {
     // Set the local variable
     m_image = image;
 
-    m_position = GetOwner()->GetPosition();
+    m_position = (Vector *)GetOwner()->GetPosition();
 
     // Detect if the arrival image is empty
     if (!m_image) {
@@ -74,7 +74,9 @@ void Renderer::RotateTowards(Vector *point) throw (Exception) {
     INFO("Renderer - Initializing rotate towards");
     // Calculate arc tangent in degrees.
     double angles = 0.0;
-    angles = atan2(point->m_y - m_position->m_y, point->m_x - m_position->m_x);
+    float m_positionX = (float)(point->m_y - m_position->m_y);
+    float m_positionY = (float)(point->m_x - m_position->m_x);
+    angles = (double) atan2( m_positionX, m_positionY);
 
     if(angles != '\0'){
         angles = angles * straightAngle / pi;

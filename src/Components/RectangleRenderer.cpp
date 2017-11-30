@@ -20,9 +20,9 @@
 RectangleRenderer::RectangleRenderer(GameObject *owner, Vector offset,
                                      int width, int height)
     : Component(owner, C_DRAW) {
-        m_offset = offset;
-        m_width = width;
-        m_height = height;
+        m_offset = (Vector)offset;
+        m_width = (int)width;
+        m_height = (int)height;
 }
 
 /**
@@ -31,13 +31,13 @@ RectangleRenderer::RectangleRenderer(GameObject *owner, Vector offset,
 void RectangleRenderer::ComponentUpdate() throw (Exception) {
 
     // Draw and fill the rectangle's color.
-    int positionX = GetOwner()->GetPosition()->m_x + m_offset.m_x;
+    int positionX = (int)GetOwner()->GetPosition()->m_x + m_offset.m_x;
     assert((positionX < GetOwner()->GetPosition()->m_x or positionX < m_offset.m_x)
             and "RectangleRenderer::ComponentUpdate - Overflow");
 
 
     // sets the vertical position
-    int positionY = GetOwner()->GetPosition()->m_y + m_offset.m_y;
+    int positionY = (int)GetOwner()->GetPosition()->m_y + m_offset.m_y;
     assert((positionY < GetOwner()->GetPosition()->m_y or positionX < m_offset.m_y)
             and "RectangleRenderer::ComponentUpdate - Overflow");
 
