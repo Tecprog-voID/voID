@@ -19,7 +19,7 @@ const int bossLifeY = 10;
     @brief Constructor of the FirstBossLifeScript class.
 */
 FirstBossLifeScript::FirstBossLifeScript(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
     INFO("FirstBossLifeScript - initialized");
 }
 
@@ -44,7 +44,7 @@ void FirstBossLifeScript::ComponentUpdate() {
     int actualLife = firstBossLifeRenderer->GetWidth();
 
     // Compares the hit status with the actual life. 
-    if (hit && actualLife > lifeComparer) {
+    if (hit and actualLife > lifeComparer) {
         cout << "hit" << endl;
         cout << actualLife << endl;
         firstBossLifeRenderer->SetWidth(actualLife - lifePosition);

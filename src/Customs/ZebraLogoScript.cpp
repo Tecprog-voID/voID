@@ -5,7 +5,11 @@
 */
 
 #include "Customs/ZebraLogoScript.hpp"
+#include "Customs/Exception.hpp"
+
 #include "Globals/EngineGlobals.hpp"
+
+#include <cassert>
 
 const int width = 341;
 const int height = 256;
@@ -15,7 +19,7 @@ const int height = 256;
     @param[in] GameObject *owner - Owns the component.
 */
 ZebraLogoScript::ZebraLogoScript(GameObject *owner) : Script(owner) {
-
+    assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**
@@ -37,7 +41,7 @@ void ZebraLogoScript::Start() {
 void ZebraLogoScript::CreateAnimations(){
     INFO("ZebraLogoScript - initializing create animations");
     // Keeps the path, positions x and y, width and height of the Zebra image
-    auto zebraSprite = new Image("assets/zebraengineintroduction.png", 0, 0,
+    auto zebraSprite = new Image("assets/image/introzebra.png", 0, 0,
                                  width * 15, height * 2);
 
     auto zebraAnimation = new Animation(GetOwner(), zebraSprite);
@@ -48,10 +52,14 @@ void ZebraLogoScript::CreateAnimations(){
                                            width, height));
     }
 
+
+
     // Run through 0 to 14 adding frames in different x positions
     for (int i = 0; i < 15; i++) {
         zebraAnimation->AddFrame(new Frame(i * width, height, width, height));
     }
+
+    // Sets the size of the animation
     zebraAnimation->SetFramesPerSecond(9);
 
     // Insert the ZebraLogo in the map.
@@ -64,6 +72,7 @@ void ZebraLogoScript::CreateAnimations(){
     @brief Do nothing.
 */
 void ZebraLogoScript::ComponentUpdate() {
+    // Just update. 
 }
 
 /**

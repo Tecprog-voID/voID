@@ -8,6 +8,9 @@
 #include "Engine/GraphicsSystem.hpp"
 
 #include "Components/Renderer.hpp"
+
+#include "Customs/Exception.hpp"
+
 #include "Globals/ComponentTypes.hpp"
 #include "Log/log.hpp"
 
@@ -33,13 +36,14 @@ void Renderer::ComponentUpdate() {
     @param[in] img
 */
 Renderer::Renderer(GameObject *owner, Image *image) : Component(owner, C_DRAW) {
+
+    // Set the local variable
     m_image = image;
 
     m_position = GetOwner()->GetPosition();
 
-    // Detect null image
+    // Detect if the arrival image is empty
     if (!m_image) {
-        // Return error
         ERROR("Null image on renderer");
     } else {
         // nothing to do.
@@ -50,6 +54,7 @@ Renderer::Renderer(GameObject *owner, Image *image) : Component(owner, C_DRAW) {
     @brief Destructor for the class Renderer.
 */
 Renderer::~Renderer() {
+    // Destructor
     delete m_image;
 }
 
@@ -64,22 +69,26 @@ void Renderer::Start() {
     @brief Rotate the image towards the calculated angle.
     @param[in] point
 */
-void Renderer::RotateTowards(Vector *point) {
+void Renderer::RotateTowards(Vector *point) throw (Exception) {
     INFO("Renderer - Initializing rotate towards");
     // Calculate arc tangent in degrees.
     double angles = 0.0;
     angles = atan2(point->m_y - m_position->m_y, point->m_x - m_position->m_x);
-    angles = angles * straightAngle / pi;
 
-    // Keep angles in 0 to 360 range
-    if (angles < 0) {
-        angles = fullAngle - (-angles);
+    if(angles != '\0'){
+        angles = angles * straightAngle / pi;
+
+        // Keep angles in 0 to 360 range
+        if (angles < 0) {
+            angles = fullAngle - (-angles);
+        }
+
+        Rotate(angles);
+        INFO("Renderer - rotate towards initialized");
     } else {
-        // nothing to do.
+        throw Exception("Renderer - angles must be different of null.");
     }
 
-    Rotate(angles);
-    INFO("Renderer - rotate towards initialized");
 }
 
 /**

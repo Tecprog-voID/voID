@@ -7,7 +7,7 @@
 const int middlePosition = 2;
 
 LightScript::LightScript(GameObject *owner) : Script(owner) {
-     assert((owner != NULL) && "the owner must be equal to NULL");
+     assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**
@@ -32,7 +32,7 @@ void LightScript::Start() {
 void LightScript::CreateAnimations(){
     INFO("LightScript - Create Animations");
     // Instantiating lightimage by image file and define its positons.
-    auto m_lightImage = new Image("assets/light.png",0,0,682, 512);
+    auto m_lightImage = new Image("assets/image/light.png",0,0,682, 512);
 
     // Instantiating light animation by gameobject components, image and play state.
     auto m_lightAnimation = new Animation(GetOwner(),m_lightImage );
@@ -61,9 +61,9 @@ void LightScript::ComponentUpdate() {
             // Do nothing
         }
 
-        if (input->GetKeyDown(INPUT_Y) && play==0) {
+        if (input->GetKeyDown(INPUT_Y) and play==0) {
             play=1;
-        } else if (input->GetKeyDown(INPUT_Y) && play==1) {
+        } else if (input->GetKeyDown(INPUT_Y) and play==1) {
             play=0;
         }
     } else {

@@ -60,7 +60,7 @@ void SnowActivatorScript::Start() {
 */
 void SnowActivatorScript::CreateAnimations() {
     // Create the animation for the snow activator.
-    auto snowActivatorSprite = new Image("assets/snowactivator.png",
+    auto snowActivatorSprite = new Image("assets/image/snowactivator.png",
                                          0, 0,832, 64);
     auto snowActivatorAnimation = new Animation(GetOwner(),
                                                 snowActivatorSprite);
@@ -98,8 +98,8 @@ void SnowActivatorScript::CreateAnimations() {
 void SnowActivatorScript::ComponentUpdate() {
     // Play the SNOW ACTIVATOR ANIMATION if isn't playing and has been activated.
     if (!m_animator->IsPlaying("SNOW ACTIVATOR ANIMATION")
-                    && m_activateAnimation == animationActivated
-                    && m_runnedAnimation == false) {
+                    and m_activateAnimation == animationActivated
+                    and m_runnedAnimation == false) {
         // Play the animation.
         m_animator->PlayAnimation("SNOW ACTIVATOR ANIMATION");
         m_activateAnimation = animationEnded;
@@ -113,7 +113,7 @@ void SnowActivatorScript::ComponentUpdate() {
     ended playing.
     */
     if (m_runnedAnimation
-                    && !m_animator->IsPlaying("SNOW ACTIVATOR ANIMATION")) {
+                    and !m_animator->IsPlaying("SNOW ACTIVATOR ANIMATION")) {
         // Play the animation.
         m_animator->PlayAnimation("SNOW ACTIVATOR ANIMATION2");
     } else {

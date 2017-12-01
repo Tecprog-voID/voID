@@ -45,7 +45,7 @@ void UnbLogoScript::Start() {
 */
 void UnbLogoScript::CreateAnimations() {
     // Set the animation of the logo.
-    auto unb_LogoSprite = new Image("assets/introunb.png", 0, 0, 5115, 512);
+    auto unb_LogoSprite = new Image("assets/image/introunb.png", 0, 0, 5115, 512);
     auto unbAnimation = new Animation(GetOwner(), unb_LogoSprite);
 
     // Number of frames to add in the animation.

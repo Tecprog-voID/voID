@@ -5,6 +5,10 @@
 */
 
 #include "Customs/BulletCounterScript.hpp"
+
+// include class Exception for appropriate error handling.
+#include "Customs/Exception.hpp"
+
 #include "Globals/EngineGlobals.hpp"
 
 /**
@@ -34,17 +38,24 @@ void BulletCounterScript::ComponentUpdate() {
                           ->GetCurrentScene()
                           ->GetGameObject("NakedMan")
                           ->GetComponent("NakedManScript");
-    m_numberBullet = nakedManScript->bulletNumber;
 
-    // Update the text of the left number of bullets.
-    auto counterText = (UIText *)GetOwner()->GetComponent("UIText");
-    counterText->SetText(std::to_string(m_numberBullet));
+    if(nakedManScript != NULL){
+        m_numberBullet = nakedManScript->bulletNumber;
+
+        // Update the text of the left number of bullets.
+        auto counterText = (UIText *)GetOwner()->GetComponent("UIText");
+        counterText->SetText(std::to_string(m_numberBullet));
+    } else {
+        throw Exception("BulletCounterScript - nakedManScript must be different of null.");
+    }
+
 }
 
 /**
     @brief Set the Bullet Counter's x and y positions.
 */
 void BulletCounterScript::FixedComponentUpdate() {
+    // Set the values.
     counter_position->m_x = 900;
     counter_position->m_y = 700;
 }

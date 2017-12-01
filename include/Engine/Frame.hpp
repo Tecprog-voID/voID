@@ -8,10 +8,12 @@
 #define __FRAME__
 
 #include "Engine/sdl2include.hpp"
+#include "Customs/Exception.hpp"
 
 class Frame {
 	public:
 	    Frame(int positionX, int positionY, int width, int height);
+		~Frame();
 	    SDL_Rect *GetRect();
 
 	private:

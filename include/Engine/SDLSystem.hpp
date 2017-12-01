@@ -12,6 +12,8 @@
 #include "Engine/SceneManager.hpp"
 #include "Engine/sdl2include.hpp"
 
+#include "Customs/Exception.hpp"
+
 #include "Globals/EngineGlobals.hpp"
 #include "Globals/InputGlobals.hpp"
 #include "Log/log.hpp"
@@ -35,9 +37,8 @@ public:
     static SDLSystem *GetInstance();
 
     // Getters and setters
-    SDL_Window *GetWindow() const {
-        return m_window;
-    };
+
+
     SDL_Renderer *GetRenderer() const {
         return m_renderer;
     };
@@ -48,6 +49,11 @@ public:
     };
 
 private:
+
+    SDL_Window *GetWindow() const {
+        return m_window;
+    };
+
     // SDL window and renderer attributes
     SDL_Window *m_window = nullptr;
     SDL_Renderer *m_renderer = nullptr;
@@ -74,20 +80,20 @@ private:
 
     // Systems init
     bool InitSDL();
-    bool InitIMG();
+    bool InitIMG() throw (Exception);
     bool InitMixer();
     bool InitTTF();
 
     // Commons init
-    void LoadCommons();
+    void LoadCommons() throw (Exception);
 
     // Graphics methods
     bool CreateWindow();
-    bool CreateRenderer();
+    bool CreateRenderer() throw (Exception);
 
     // System framerate counter
     void CalculateFramerate();
-    bool FixFramerate();
+    bool FixFramerate() throw (Exception);
 };
 
 #endif //__SDLSYSTEM_H__

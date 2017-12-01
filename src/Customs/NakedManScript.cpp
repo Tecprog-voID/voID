@@ -10,10 +10,13 @@
 #include "Customs/MapScript.hpp"
 #include "Customs/SnowScript.hpp"
 #include "Customs/RainScript.hpp"
+#include "Customs/Exception.hpp"
 
+#include <cassert>
 #include <math.h>
 #include <stdio.h>
 
+// The constant name must be different.
 const int kUp = 1;
 const int kDown = 2;
 const int kLeft = 3;
@@ -36,20 +39,28 @@ bool NakedManScript::isZooming = false;
     @param[in] GameObject *owner - Owns the component.
 */
 NakedManScript::NakedManScript(GameObject *owner) : Script(owner) {
-
+    assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**
     @brief Start the first definitions of the player.
 */
-void NakedManScript::Start() {
+void NakedManScript::Start() throw (Exception) {
     INFO("NakedManScript - initializing");
     CreateAnimations();
     position = GetOwner()->GetPosition();
+    assert((position != NULL) and "the position must be different to NULL");
+
     animator = (Animator *)GetOwner()->GetComponent("Animator");
+    assert((animator != NULL) and "the animator must be different to NULL");
+
     input = InputSystem::GetInstance();
+    assert((input != NULL) and "the input must be different to NULL");
+
     CameraSystem::GetInstance()->SetCameraSpeed(walkSpeed);
+
     game_controller = input->GetGameController(0);
+    assert((game_controller == NULL) and "the game_controller must be equal to NULL");
 
     // Get the map of the game
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")
@@ -68,6 +79,11 @@ void NakedManScript::Start() {
     nakedManCollider = new RectangleCollider(GetOwner(), Vector(0, 0),
 	                                         GetOwner()->GetWidth(),
 											 GetOwner()->GetHeight(), 0);
+    if(nakedManCollider == NULL){
+        throw Exception("NakedManScript - NakedManScript nust be different of null.");
+    } else {
+        //nothing to do.
+    }
     INFO("NakedManScript - completed");
 }
 
@@ -79,6 +95,8 @@ void NakedManScript::SetDirection() {
 	// Get current mouse position
     mousePosition = input->GetMousePosition();
 
+    // Need to break into atomic functions
+
     // Compare direction the player is looking and moving
     if (!game_controller) {
         /*
@@ -88,10 +106,10 @@ void NakedManScript::SetDirection() {
         mousePosition = input->GetMousePosition();
 
         // Looking to right, set if is also moving to right
-        if (mousePosition.first >= position->m_x && movements == kRight){
+        if (mousePosition.first >= position->m_x and movements == kRight){
             // Moving to right
             isMovingLooking = true;
-        } else if (mousePosition.first > position->m_x && movements == kLeft) {
+        } else if (mousePosition.first > position->m_x and movements == kLeft) {
             // Moving to left
             isMovingLooking = false;
         } else {
@@ -99,10 +117,10 @@ void NakedManScript::SetDirection() {
         }
 
         // Looking to left, set if is also moving to left
-        if (mousePosition.first <= position->m_x && movements == kLeft) {
+        if (mousePosition.first <= position->m_x and movements == kLeft) {
             // Moving to left
             isMovingLooking = true;
-        } else if (mousePosition.first < position->m_x && movements == kRight) {
+        } else if (mousePosition.first < position->m_x and movements == kRight) {
             // Moving to right
             isMovingLooking = false;
         } else {
@@ -110,10 +128,10 @@ void NakedManScript::SetDirection() {
         }
 
         // Looking to up, set if is also moving to up
-        if (mousePosition.second <= position->m_y && movements == kUp) {
+        if (mousePosition.second <= position->m_y and movements == kUp) {
             // Moving to up
             isMovingLooking = true;
-        } else if (mousePosition.second < position->m_y && movements == kDown) {
+        } else if (mousePosition.second < position->m_y and movements == kDown) {
             // Moving to down
             isMovingLooking = false;
         } else {
@@ -121,12 +139,12 @@ void NakedManScript::SetDirection() {
         }
 
         // Looking and moving to down
-        if (mousePosition.second >= position->m_y && movements == kDown) {
+        if (mousePosition.second >= position->m_y and movements == kDown) {
             // Looking to down, set if is also moving to down
-            if(mousePosition.second >= position->m_y && movements == kDown) {
+            if(mousePosition.second >= position->m_y and movements == kDown) {
                 // Moving to down
                 isMovingLooking = true;
-            } else if (mousePosition.second > position->m_y && movements == kUp) {
+            } else if (mousePosition.second > position->m_y and movements == kUp) {
                 // Moving to up
                 isMovingLooking = false;
             } else {
@@ -134,11 +152,11 @@ void NakedManScript::SetDirection() {
             }
 
             // Looking to up right, set if is also moving to up right
-            if (mousePosition.first >= position->m_x && mousePosition.second
-                <= position->m_y && movements == kUpRight) {
+            if (mousePosition.first >= position->m_x and mousePosition.second
+                <= position->m_y and movements == kUpRight) {
                 // Moving to up right
                 isMovingLooking = true;
-            } else if (mousePosition.second > position->m_y && movements == kUp) {
+            } else if (mousePosition.second > position->m_y and movements == kUp) {
                 // Moving to up
                 isMovingLooking = false;
             } else {
@@ -149,12 +167,12 @@ void NakedManScript::SetDirection() {
         }// if -- Looking and moving to down
 
         // Looking to down right, set if is also moving to down right
-        if (mousePosition.first >= position->m_x && mousePosition.second
-            >= position->m_y && movements == kDownRight) {
+        if (mousePosition.first >= position->m_x and mousePosition.second
+            >= position->m_y and movements == kDownRight) {
             // Moving to down right
             isMovingLooking = true;
-        } else if (mousePosition.first >= position->m_x && mousePosition.second
-            >= position->m_y && movements == kUpLeft) {
+        } else if (mousePosition.first >= position->m_x and mousePosition.second
+            >= position->m_y and movements == kUpLeft) {
             // Moving to up left
             isMovingLooking = false;
         } else {
@@ -162,12 +180,12 @@ void NakedManScript::SetDirection() {
         }
 
         // Looking to up left, set if is also moving to up left
-        if (mousePosition.first <= position->m_x && mousePosition.second
-            <= position->m_y && movements == kUpLeft) {
+        if (mousePosition.first <= position->m_x and mousePosition.second
+            <= position->m_y and movements == kUpLeft) {
             // Moving to up left
             isMovingLooking = true;
-        } else if (mousePosition.first <= position->m_x && mousePosition.second
-            <= position->m_y && movements == kDownRight) {
+        } else if (mousePosition.first <= position->m_x and mousePosition.second
+            <= position->m_y and movements == kDownRight) {
             // Moving to down right
             isMovingLooking = false;
         } else {
@@ -181,11 +199,11 @@ void NakedManScript::SetDirection() {
 
         // Looking to right, set if is also moving to right
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
-            && movements == kRight) {
+            and movements == kRight) {
             // Moving to right
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) > 800
-            && movements == kLeft) {
+            and movements == kLeft) {
             // Moving to left
             isMovingLooking = false;
         } else {
@@ -194,11 +212,11 @@ void NakedManScript::SetDirection() {
 
         // Looking to left, set if is also moving to left
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <=-800
-            && movements == kLeft) {
+            and movements == kLeft) {
             // Moving to left
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) < -800
-                   && movements == kRight) {
+                   and movements == kRight) {
             // Moving to right
             isMovingLooking = false;
         } else {
@@ -207,11 +225,11 @@ void NakedManScript::SetDirection() {
 
         // Looking to up, set if is also moving to up
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY)
-            <= -800 && movements == kUp) {
+            <= -800 and movements == kUp) {
             // Moving to up
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) < -800
-                   && movements == kDown) {
+                   and movements == kDown) {
             // Moving to down
             isMovingLooking = false;
         } else {
@@ -220,11 +238,11 @@ void NakedManScript::SetDirection() {
 
         // Looking to down, set if is also moving to down
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
-            && movements == kDown) {
+            and movements == kDown) {
             // Moving to down
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) > 800
-                   && movements == kUp) {
+                   and movements == kUp) {
             // Moving to up
             isMovingLooking = false;
         } else {
@@ -233,13 +251,13 @@ void NakedManScript::SetDirection() {
 
         // Looking to up right, set if is also moving to up right
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) > 800
-            && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) <=-800
-            && movements == kUpRight) {
+            and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) <=-800
+            and movements == kUpRight) {
             // Moving to up right
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
-                   && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) <= -800
-                   && movements == kDownLeft) {
+                   and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) <= -800
+                   and movements == kDownLeft) {
             // Moving to down left
             isMovingLooking = false;
         } else {
@@ -248,13 +266,13 @@ void NakedManScript::SetDirection() {
 
         // Looking to down left, set if is also moving to down left
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
-            && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
-            && movements == kDownLeft) {
+            and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
+            and movements == kDownLeft) {
             // Moving to down left
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
-                   && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
-                   && movements == kUpRight) {
+                   and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
+                   and movements == kUpRight) {
             // Moving to up right
             isMovingLooking = false;
         } else {
@@ -263,13 +281,13 @@ void NakedManScript::SetDirection() {
 
         // Looking to down right, set if is also moving to down right
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
-            && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
-            && movements == kDownRight) {
+            and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
+            and movements == kDownRight) {
             // Moving to down right
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) >= 800
-                   && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
-                   && movements == kUpLeft) {
+                   and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) >= 800
+                   and movements == kUpLeft) {
             // Moving to up left
             isMovingLooking = false;
         } else {
@@ -278,13 +296,13 @@ void NakedManScript::SetDirection() {
 
         // Looking to up left, set if is also moving to up left
         if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
-            && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) <= -800
-            && movements == kUpLeft) {
+            and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY) <= -800
+            and movements == kUpLeft) {
             // Moving to up left
             isMovingLooking = true;
         } else if (game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
-                   && game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
-                   && movements == kDownRight) {
+                   and game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX) <= -800
+                   and movements == kDownRight) {
             // Moving to down right
             isMovingLooking = false;
         } else {
@@ -297,6 +315,8 @@ void NakedManScript::SetDirection() {
     @brief Detect the keyboards that are being pressed to move the player.
 */
 void NakedManScript::KeyBoardUpdate() {
+    // Need to break into atomic functions
+
     // Detect if zoom is required
     if ((input->GetKeyPressed(INPUT_DOWN))
          || (input->GetKeyPressed(INPUT_UP))) {
@@ -321,28 +341,28 @@ void NakedManScript::KeyBoardUpdate() {
             Detect movement requests by comparing pressed keyboards when player
             is moving and looking at same direction.
         */
-        if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_A)) {
+        if (input->GetKeyPressed(INPUT_W) and input->GetKeyPressed(INPUT_A)) {
             // Detect the request to move up left
             movements = kUpLeft;
             lastDirection = kUpLeft;
             animator->GetAnimation("Walk Side")->SetFlip(true, false);
             animator->PlayAnimation("Walk Side");
         } else if (input->GetKeyPressed(INPUT_W)
-                   && input->GetKeyPressed(INPUT_D)) {
+                   and input->GetKeyPressed(INPUT_D)) {
             // Detect the request to move up right
             movements = kUpRight;
             lastDirection = kUpRight;
             animator->GetAnimation("Walk Side")->SetFlip(false, false);
             animator->PlayAnimation("Walk Side");
         } else if (input->GetKeyPressed(INPUT_S)
-                   && input->GetKeyPressed(INPUT_A)) {
+                   and input->GetKeyPressed(INPUT_A)) {
             // Detect the request to move down left
             movements = kDownLeft;
             lastDirection = kDownLeft;
             animator->GetAnimation("Walk Side")->SetFlip(true, false);
             animator->PlayAnimation("Walk Side");
         } else if (input->GetKeyPressed(INPUT_S)
-                   && input->GetKeyPressed(INPUT_D)) {
+                   and input->GetKeyPressed(INPUT_D)) {
             // Detect the request to move down right
             movements = kDownRight;
             lastDirection = kDownRight;
@@ -389,28 +409,28 @@ void NakedManScript::KeyBoardUpdate() {
             Detect movement requests by comparing pressed keyboards when player
             is not moving and looking to same direction.
         */
-        if (input->GetKeyPressed(INPUT_W) && input->GetKeyPressed(INPUT_A)) {
+        if (input->GetKeyPressed(INPUT_W) and input->GetKeyPressed(INPUT_A)) {
             // Detect the request to move up left
             movements = kUpLeft;
             lastDirection = kUpLeft;
             animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
             animator->PlayAnimation("Back Walk Side");
         } else if (input->GetKeyPressed(INPUT_W)
-                   && input->GetKeyPressed(INPUT_D)) {
+                   and input->GetKeyPressed(INPUT_D)) {
             // Detect the request to move up right
             movements = kUpRight;
             lastDirection = kUpRight;
             animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
             animator->PlayAnimation("Back Walk Side");
         } else if (input->GetKeyPressed(INPUT_S)
-                   && input->GetKeyPressed(INPUT_A)) {
+                   and input->GetKeyPressed(INPUT_A)) {
             // Detect the request to move down left
             movements = kDownLeft;
             lastDirection = kDownLeft;
             animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
             animator->PlayAnimation("Back Walk Side");
         } else if (input->GetKeyPressed(INPUT_S)
-                   && input->GetKeyPressed(INPUT_D)) {
+                   and input->GetKeyPressed(INPUT_D)) {
             // Detect the request to move down right
             movements = kDownRight;
             lastDirection = kDownRight;
@@ -452,11 +472,11 @@ void NakedManScript::KeyBoardUpdate() {
         } // if -- Detect movement requests
 
         // Detect requests to lock the Camera by comparing cameraLock value
-        if (input->GetKeyDown(INPUT_L) && cameraLock == false) {
+        if (input->GetKeyDown(INPUT_L) and cameraLock == false) {
             cameraLock = true;
             deadzoneX = EngineGlobals::screen_width / 2;
             deadzoneY = EngineGlobals::screen_height / 2;
-        } else if (input->GetKeyDown(INPUT_L) && cameraLock == true) {
+        } else if (input->GetKeyDown(INPUT_L) and cameraLock == true) {
             cameraLock = false;
             deadzoneX = EngineGlobals::screen_width;
             deadzoneY = EngineGlobals::screen_height;
@@ -481,7 +501,7 @@ void NakedManScript::GameControllerUpdate() {
 
     // Set game controller angle depending on axis states
     if (abs(game_controller->GetAxis(GC_INPUT_AXIS_RIGHTY)) < 1000
-            && abs(game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX)) < 1000) {
+            and abs(game_controller->GetAxis(GC_INPUT_AXIS_RIGHTX)) < 1000) {
         gameControllerAngle = 0;
     } else {
         // nothing to do.
@@ -511,35 +531,35 @@ void NakedManScript::GameControllerUpdate() {
         to the direction he's looking, the game controller buttons actions and
         the dash controller state.
     */
-    if (isMovingLooking && dashController == 0) {
+    if (isMovingLooking and dashController == 0) {
         /*
             Detect movement requests by comparing the current state of an axis
             control of the game controller when player is moving and looking at
             same direction.
         */
         if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
-             && (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
+             and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
             // Detect the request to move up left
             movements = kUpLeft;
             lastDirection = kUpLeft;
             animator->GetAnimation("Walk Side")->SetFlip(true, false);
             animator->PlayAnimation("Walk Side");
         } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
-                    && (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
+                    and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
             // Detect the request to move up right
             movements = kUpRight;
             lastDirection = kUpRight;
             animator->GetAnimation("Walk Side")->SetFlip(false, false);
             animator->PlayAnimation("Walk Side");
         } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) > 1000)
-                    && (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
+                    and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
             // Detect the request to move down left
             movements = kDownLeft;
             lastDirection = kDownLeft;
             animator->GetAnimation("Walk Side")->SetFlip(true, false);
             animator->PlayAnimation("Walk Side");
         } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) > 1000)
-                    && (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
+                    and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
             // Detect the request to move down right
             movements = kDownRight;
             lastDirection = kDownRight;
@@ -581,35 +601,35 @@ void NakedManScript::GameControllerUpdate() {
                 animator->PlayAnimation("Stop Down");
             } // if -- Detect if player is stopped
         } // if -- Detect movement requests
-    } else if (!isMovingLooking && dashController == 0) {
+    } else if (!isMovingLooking and dashController == 0) {
         /*
             Detect movement requests by comparing the current state of an axis
             control of the game controller when player is not moving and looking
             at same direction.
         */
         if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
-             && (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
+             and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
             // Detect the request to move up left
             movements = kUpLeft;
             lastDirection = kUpLeft;
             animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
             animator->PlayAnimation("Back Walk Side");
         } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
-                    && (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
+                    and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
             // Detect the request to move up right
             movements = kUpRight;
             lastDirection = kUpRight;
             animator->GetAnimation("Back Walk Side")->SetFlip(true, false);
             animator->PlayAnimation("Back Walk Side");
         } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) > 1000)
-                    && (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
+                    and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
             // Detect the request to move down left
             movements = kDownLeft;
             lastDirection = kDownLeft;
             animator->GetAnimation("Back Walk Side")->SetFlip(false, false);
             animator->PlayAnimation("Back Walk Side");
         } else if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
-                    && (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
+                    and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) > 1000)) {
             // Detect the request to move down right
             movements = kDownRight;
             lastDirection = kDownRight;
@@ -663,7 +683,7 @@ void NakedManScript::GameControllerUpdate() {
 
     // Play or stop animations based on dash actions
     if (game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERLEFT)
-        && dashController == 0) {
+        and dashController == 0) {
         animator->StopAllAnimations();
         animator->PlayAnimation("Right Dash");
     } else {
@@ -673,7 +693,7 @@ void NakedManScript::GameControllerUpdate() {
 
     // Shoot depending of game controller angle and number of bullets
     if (game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERRIGHT)
-        && bulletController == 0 && gameControllerAngle != 0) {
+        and bulletController == 0 and gameControllerAngle != 0) {
         cout << "ammo: " << bulletNumber << endl;
 
         // Get and activate the updated bullet object.
@@ -704,6 +724,7 @@ void NakedManScript::GameControllerUpdate() {
         // nothing to do.
     } // if -- Shoot
 
+    // Local variable.
     bulletController = game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERRIGHT);
 
     // Back to menu based in game controller input
@@ -724,7 +745,7 @@ void NakedManScript::GameControllerUpdate() {
 */
 void NakedManScript::CreateAnimations() {
     // Prepare animations with pictures of the player in motion.
-    auto dashrightSprite = new Image("assets/dashright.png", 0, 0, 210, 27);
+    auto dashrightSprite = new Image("assets/image/dashright.png", 0, 0, 210, 27);
     auto dashrightAnimation = new Animation(GetOwner(), dashrightSprite);
 
     // Run through 0 to 4 adding frames in different x positions
@@ -737,8 +758,10 @@ void NakedManScript::CreateAnimations() {
     nakedManAnimator->AddAnimation("Right Dash", dashrightAnimation);
     dashrightAnimation->SetFramesPerSecond(10);
 
+    // Apply técniques of use constants
+
     // Prepare animations with player images in various directions.
-    auto nakedManSprite = new Image("assets/player.png", 0, 0, 1664, 512);
+    auto nakedManSprite = new Image("assets/image/player.png", 0, 0, 1664, 512);
     auto StopDownAnimation = new Animation(GetOwner(), nakedManSprite);
     StopDownAnimation->AddFrame(new Frame(0, 256, 128, 128));
     auto StopRightAnimation = new Animation(GetOwner(), nakedManSprite);
@@ -818,8 +841,8 @@ void NakedManScript::ComponentUpdate() {
 
     // Activate rainScript based in position of camera
     if ((CameraSystem::GetInstance()->worldCameraY < 3435)
-         && (CameraSystem::GetInstance()->worldCameraX > 3410)
-         && (CameraSystem::GetInstance()->worldCameraX < 3500)) {
+         and (CameraSystem::GetInstance()->worldCameraX > 3410)
+         and (CameraSystem::GetInstance()->worldCameraX < 3500)) {
         rainScript->m_play = 1;
     } else {
         // nothing to do.
@@ -827,8 +850,8 @@ void NakedManScript::ComponentUpdate() {
 
     // Deactivate rainScript based in position of camera
     if ((CameraSystem::GetInstance()->worldCameraY > 3435)
-         && (CameraSystem::GetInstance()->worldCameraX > 3410)
-         && (CameraSystem::GetInstance()->worldCameraX < 3500)) {
+         and (CameraSystem::GetInstance()->worldCameraX > 3410)
+         and (CameraSystem::GetInstance()->worldCameraX < 3500)) {
         rainScript->m_play = 0;
     } else {
         // nothing to do.
@@ -842,7 +865,7 @@ void NakedManScript::ComponentUpdate() {
 
    // Activate snowScript based in position of camera
     if ((CameraSystem::GetInstance()->worldCameraX < 3315)
-         && (CameraSystem::GetInstance()->worldCameraY > 3860)) {
+         and (CameraSystem::GetInstance()->worldCameraY > 3860)) {
         snowScript->play = 1;
     } else {
         // nothing to do.
@@ -850,7 +873,7 @@ void NakedManScript::ComponentUpdate() {
 
     // Deactivate snowScript based in position of camera
     if ((CameraSystem::GetInstance()->worldCameraX > 3315)
-         && (CameraSystem::GetInstance()->worldCameraY > 3860)) {
+         and (CameraSystem::GetInstance()->worldCameraY > 3860)) {
         snowScript->play = 0;
     } else {
         // nothing to do.
@@ -876,12 +899,12 @@ void NakedManScript::ComponentUpdate() {
     }
 
     // Detect request to lock or unlock Camera based on keyboard input
-    if (input->GetKeyDown(INPUT_L) && cameraLock == false) {
+    if (input->GetKeyDown(INPUT_L) and cameraLock == false) {
         // Set cameraLock value and adjust dead zone
         cameraLock = true;
         deadzoneX = EngineGlobals::screen_width / 2;
         deadzoneY = EngineGlobals::screen_height / 2;
-    } else if (input->GetKeyDown(INPUT_L) && cameraLock == true) {
+    } else if (input->GetKeyDown(INPUT_L) and cameraLock == true) {
         // Set cameraLock value and adjust dead zone
         cameraLock = false;
         deadzoneX = EngineGlobals::screen_width;
@@ -970,7 +993,7 @@ void NakedManScript::FixedComponentUpdate() {
 */
 void NakedManScript::PlayerLife() {
     // Recover life when the boss fight is not ended
-    if (life < 100 && !endBossFight) {
+    if (life < 100 and !endBossFight) {
         lifeRecover.Update(EngineGlobals::fixed_update_interval);
         cout << life << endl;
         // Increase life and restart lifeRecover

@@ -39,7 +39,7 @@ void RainScript::Start() {
 */
 void RainScript::CreateAnimations() {
     // Creates the animations for the rain script.
-    auto rainImage = new Image("assets/chuva.png",0,0,3410, 256);
+    auto rainImage = new Image("assets/image/chuva.png",0,0,3410, 256);
     auto rainAnimation= new Animation(GetOwner(),rainImage);
 
     // Number of frames to add in the animation.
@@ -68,12 +68,12 @@ void RainScript::ComponentUpdate() {
     }
 
     // Check if the INPUT_R key is pressed and m_play is set to 0.
-    if (m_input->GetKeyDown(INPUT_R) && m_play == stopPlay) {
+    if (m_input->GetKeyDown(INPUT_R) and m_play == stopPlay) {
         // Play the rain sound and set m_play to 1.
         AudioController::GetInstance()->PlayAudio("rainSound", -1);
         m_play = startPlay;
     // Check if the INPUT_R key is pressed and m_play is set to 1.
-    } else if (m_input->GetKeyDown(INPUT_R) && m_play == startPlay) {
+    } else if (m_input->GetKeyDown(INPUT_R) and m_play == startPlay) {
         // Set m_play to 0 and stop all animations playing.
         m_play = stopPlay;
         m_animator->StopAllAnimations();

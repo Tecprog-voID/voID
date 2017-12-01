@@ -19,7 +19,7 @@
     @param[in] C_PHYSICS - physics component.
 */
 Rigidbody::Rigidbody(GameObject *owner) : Component(owner, C_PHYSICS) {
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**

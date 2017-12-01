@@ -9,5 +9,5 @@ float Math::Distance(Vector &a, Vector &b) {
 }
 
 bool RangeIntersect(float min0, float max0, float min1, float max1) {
-  return max0 >= min1 && min0 <= max1;
+  return max0 >= min1 and min0 <= max1;
 }

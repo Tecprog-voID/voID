@@ -22,7 +22,7 @@ const int framesNumber = 40;
     @brief Constructor for the FirstBossAttackScript class.
 */
 FirstBossAttackScript::FirstBossAttackScript(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
     INFO("FirstBossAttackScript - initialized");
 }
 
@@ -56,7 +56,7 @@ void FirstBossAttackScript::Start() {
 void FirstBossAttackScript::CreateAnimations() {
 
     //Image Attacks.
-    auto firstBossAttackImage = new Image("assets/firstBossAttack.png",0, 0, imageWidth, imageHeight);
+    auto firstBossAttackImage = new Image("assets/image/firstBossAttack.png",0, 0, imageWidth, imageHeight);
 
     //Surge Animation.
     auto firstBossAttackSurgeAnimation = new Animation(GetOwner(),firstBossAttackImage);
@@ -113,7 +113,7 @@ void FirstBossAttackScript::ComponentUpdate() {
     }
 
     // Checks the input system status set the attack status.
-    if(InputSystem::GetInstance()->GetKeyUp(INPUT_M) && attack == false){
+    if(InputSystem::GetInstance()->GetKeyUp(INPUT_M) and attack == false){
         attack = true;
     } else {
         // Do nothing
@@ -160,7 +160,7 @@ void FirstBossAttackScript::Attack() {
     }
 
     // Compares the idle animation, to activate the animator.
-    if (m_idleAnimation && m_timerAnimation.GetTime() >= 1 * 1000) {
+    if (m_idleAnimation and m_timerAnimation.GetTime() >= 1 * 1000) {
         m_animator -> PlayAnimation("firstBossAttackIdleAnimation");
     } else {
         // Do nothing

@@ -12,7 +12,7 @@
 #include <cassert>
 
 PlayerAttackScript::PlayerAttackScript(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) && "the owner must be equal to NULL");
+    assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**
@@ -70,7 +70,7 @@ void PlayerAttackScript::ComponentUpdate() {
     auto m_playerScript = (NakedManScript*)player->GetComponent("NakedManScript");
 
     // Check for the player and playerScript, and if exists, get the position of the player and his mouse position.
-    if (player && m_playerScript) {
+    if (player and m_playerScript) {
 
         //Get player Position.
         playerPosition.m_x  =  player->GetPosition()->m_x +  player->GetWidth() / 2;
@@ -81,7 +81,7 @@ void PlayerAttackScript::ComponentUpdate() {
         mousePosition.m_y = input->GetMousePosition().second;
 
         // Check for shoot and something diferent of the playerScript.
-        if (shoot && !m_playerScript->gameControllerActivated) {
+        if (shoot and !m_playerScript->gameControllerActivated) {
             GetOwner()->active = true;
             // angle  according to the player position and his mouse position.
             angle = playerPosition.GetAngleRadians(mousePosition);
@@ -96,7 +96,7 @@ void PlayerAttackScript::ComponentUpdate() {
             shoot = false;
         }
         // Check for shoot and the playerScript.
-        if (shoot && m_playerScript->gameControllerActivated) {
+        if (shoot and m_playerScript->gameControllerActivated) {
             GetOwner()->active = true;
             angle = m_playerScript->gameControllerAngle*3.14/180;
             bulletVelocity.m_x = bulletSpeed * cos(angle);
