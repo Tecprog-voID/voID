@@ -43,6 +43,8 @@ class NakedManScript : public Script {
             return "NakedManScript";
         };
 
+        void RainScriptUpdate();
+        void SnowScriptUpdate();
         void FixedComponentUpdate() override;
 
         void Start() throw (Exception);

@@ -450,52 +450,9 @@ void NakedManScript::CreateAnimations() {
     @brief Update the components of the player.
 */
 void NakedManScript::ComponentUpdate() {
-    // Initialize rain script
-    auto rainScript = (RainScript *)SceneManager::GetInstance()
-                                ->GetCurrentScene()
-                                ->GetGameObject("Rain")
-                                ->GetComponent("RainScript");
 
-    // Activate rainScript based in position of camera
-    if ((CameraSystem::GetInstance()->worldCameraY < 3435)
-         and (CameraSystem::GetInstance()->worldCameraX > 3410)
-         and (CameraSystem::GetInstance()->worldCameraX < 3500)) {
-        rainScript->m_play = 1;
-    } else {
-        // nothing to do.
-    }
-
-    // Deactivate rainScript based in position of camera
-    if ((CameraSystem::GetInstance()->worldCameraY > 3435)
-         and (CameraSystem::GetInstance()->worldCameraX > 3410)
-         and (CameraSystem::GetInstance()->worldCameraX < 3500)) {
-        rainScript->m_play = 0;
-    } else {
-        // nothing to do.
-    }
-
-    // Initialize snow script
-    auto snowScript = (SnowScript *)SceneManager::GetInstance()
-                                ->GetCurrentScene()
-                                ->GetGameObject("Snow")
-                                ->GetComponent("SnowScript");
-
-   // Activate snowScript based in position of camera
-    if ((CameraSystem::GetInstance()->worldCameraX < 3315)
-         and (CameraSystem::GetInstance()->worldCameraY > 3860)) {
-        snowScript->play = 1;
-    } else {
-        // nothing to do.
-    }
-
-    // Deactivate snowScript based in position of camera
-    if ((CameraSystem::GetInstance()->worldCameraX > 3315)
-         and (CameraSystem::GetInstance()->worldCameraY > 3860)) {
-        snowScript->play = 0;
-    } else {
-        // nothing to do.
-    }
-
+    RainScriptUpdate();
+    SnowScriptUpdate();
     SetDirection();
     walkSpeed = fixedWalkSpeed;
     Animations();
@@ -547,6 +504,56 @@ void NakedManScript::ComponentUpdate() {
     } // if -- Update game controller or keyboard
 
     SetDirection();
+}
+
+void NakedManScript::RainScriptUpdate(){
+    // Initialize rain script
+    auto rainScript = (RainScript *)SceneManager::GetInstance()
+                                ->GetCurrentScene()
+                                ->GetGameObject("Rain")
+                                ->GetComponent("RainScript");
+
+    // Activate rainScript based in position of camera
+    if ((CameraSystem::GetInstance()->worldCameraY < 3435)
+         and (CameraSystem::GetInstance()->worldCameraX > 3410)
+         and (CameraSystem::GetInstance()->worldCameraX < 3500)) {
+        rainScript->m_play = 1;
+    } else {
+        // nothing to do.
+    }
+
+    // Deactivate rainScript based in position of camera
+    if ((CameraSystem::GetInstance()->worldCameraY > 3435)
+         and (CameraSystem::GetInstance()->worldCameraX > 3410)
+         and (CameraSystem::GetInstance()->worldCameraX < 3500)) {
+        rainScript->m_play = 0;
+    } else {
+        // nothing to do.
+    }
+}
+
+void NakedManScript::SnowScriptUpdate(){
+    // Initialize snow script
+    auto snowScript = (SnowScript *)SceneManager::GetInstance()
+                                ->GetCurrentScene()
+                                ->GetGameObject("Snow")
+                                ->GetComponent("SnowScript");
+
+   // Activate snowScript based in position of camera
+    if ((CameraSystem::GetInstance()->worldCameraX < 3315)
+         and (CameraSystem::GetInstance()->worldCameraY > 3860)) {
+        snowScript->play = 1;
+    } else {
+        // nothing to do.
+    }
+
+    // Deactivate snowScript based in position of camera
+    if ((CameraSystem::GetInstance()->worldCameraX > 3315)
+         and (CameraSystem::GetInstance()->worldCameraY > 3860)) {
+        snowScript->play = 0;
+    } else {
+        // nothing to do.
+    }
 }
 
 /**
