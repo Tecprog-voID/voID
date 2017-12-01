@@ -32,7 +32,7 @@ void MapScript::Start() {
     CameraSystem::GetInstance()->SetAndMovePos_y(mapPosition->m_y*-1);
     this->mapSpeed=CameraSystem::GetInstance()->GetCameraSpeed();
     nakedMan = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("NakedMan");
-    script = (NakedManScript *)nakedMan->GetComponent("NakedManScript");
+    script = (AloneWalkerScript *)nakedMan->GetComponent("AloneWalkerScript");
     nakedManPosition = nakedMan->GetPosition();
     input = InputSystem::GetInstance();
     CreateWalls();
@@ -84,16 +84,16 @@ void MapScript::ComponentUpdate() {
 
 void MapScript::FixedComponentUpdate() {
     INFO("MapScript - updating fixed components");
-    auto nakedManScript = (NakedManScript*) SceneManager::GetInstance()
+    auto aloneWalkerScript = (AloneWalkerScript*) SceneManager::GetInstance()
                                                 ->GetCurrentScene()
                                                 ->GetGameObject("NakedMan")
-                                                ->GetComponent("NakedManScript");
+                                                ->GetComponent("AloneWalkerScript");
 
     /*
     If the character's life is lower or equal to 0, the game ends with
     EndScene1.
     */
-    if (nakedManScript->life <= 0) {
+    if (aloneWalkerScript->life <= 0) {
         INFO("MapScript - ends scene with endscene1");
         SceneManager::GetInstance()->SetCurrentScene("EndScene1");
     } else {

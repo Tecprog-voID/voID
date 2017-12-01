@@ -62,8 +62,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/Engine/CollisionSystem.cpp" />
-        <option value="$PROJECT_DIR$/include/Customs/NakedManScript.h" />
-        <option value="$PROJECT_DIR$/src/Customs/NakedManScript.cpp" />
+        <option value="$PROJECT_DIR$/include/Customs/AloneWalkerScript.h" />
+        <option value="$PROJECT_DIR$/src/Customs/AloneWalkerScript.cpp" />
         <option value="$PROJECT_DIR$/src/Customs/MapScript.cpp" />
         <option value="$PROJECT_DIR$/src/Customs/GamePlayScene.cpp" />
         <option value="$PROJECT_DIR$/include/Customs/GamePlayScene.h" />
@@ -647,7 +647,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Customs/NakedManScript.cpp">
+    <entry file="file://$PROJECT_DIR$/src/Customs/AloneWalkerScript.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3180">
           <caret line="159" column="2" lean-forward="false" selection-start-line="159" selection-start-column="2" selection-end-line="159" selection-end-column="2" />
@@ -662,7 +662,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/Customs/NakedManScript.h">
+    <entry file="file://$PROJECT_DIR$/include/Customs/AloneWalkerScript.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="8" column="31" lean-forward="false" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
@@ -676,7 +676,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Customs/NakedManScript.cpp">
+    <entry file="file://$PROJECT_DIR$/src/Customs/AloneWalkerScript.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3180">
           <caret line="159" column="2" lean-forward="false" selection-start-line="159" selection-start-column="2" selection-end-line="159" selection-end-column="2" />
@@ -691,7 +691,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/Customs/NakedManScript.h">
+    <entry file="file://$PROJECT_DIR$/include/Customs/AloneWalkerScript.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="8" column="31" lean-forward="false" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
@@ -705,7 +705,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Customs/NakedManScript.cpp">
+    <entry file="file://$PROJECT_DIR$/src/Customs/AloneWalkerScript.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3180">
           <caret line="159" column="2" lean-forward="false" selection-start-line="159" selection-start-column="2" selection-end-line="159" selection-end-column="2" />
@@ -868,7 +868,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Customs/NakedManScript.cpp">
+    <entry file="file://$PROJECT_DIR$/src/Customs/AloneWalkerScript.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3180">
           <caret line="159" column="2" lean-forward="false" selection-start-line="159" selection-start-column="2" selection-end-line="159" selection-end-column="2" />
@@ -882,7 +882,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/Customs/NakedManScript.h">
+    <entry file="file://$PROJECT_DIR$/include/Customs/AloneWalkerScript.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="8" column="31" lean-forward="false" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />

@@ -18,7 +18,7 @@
 #include "Components/UIText.hpp"
 
 #include "Customs/MapScript.hpp"
-#include "Customs/NakedManScript.hpp"
+#include "Customs/AloneWalkerScript.hpp"
 #include "Customs/SnowScript.hpp"
 #include "Customs/RainScript.hpp"
 #include "Customs/HitScript.hpp"

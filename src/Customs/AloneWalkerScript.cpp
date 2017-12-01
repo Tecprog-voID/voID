@@ -1,10 +1,10 @@
 /**
-    @file NakedManScript.cpp
+    @file AloneWalkerScript.cpp
     @brief Manages the functions of the player in the game.
     @copyright LGPL. MIT License.
 */
 
-#include "Customs/NakedManScript.hpp"
+#include "Customs/AloneWalkerScript.hpp"
 #include "Customs/FirstBossController.hpp"
 #include "Customs/AudioController.hpp"
 #include "Customs/MapScript.hpp"
@@ -32,21 +32,21 @@ const unsigned int kStraightAngle = 180;
 
 const double kSpeed = 0.70710;
 
-bool NakedManScript::isZooming = false;
+bool AloneWalkerScript::isZooming = false;
 
 /**
-    @brief Constructor of the class NakedManScript.
+    @brief Constructor of the class AloneWalkerScript.
     @param[in] GameObject *owner - Owns the component.
 */
-NakedManScript::NakedManScript(GameObject *owner) : Script(owner) {
+AloneWalkerScript::AloneWalkerScript(GameObject *owner) : Script(owner) {
     assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**
     @brief Start the first definitions of the player.
 */
-void NakedManScript::Start() throw (Exception) {
-    INFO("NakedManScript - initializing");
+void AloneWalkerScript::Start() throw (Exception) {
+    INFO("AloneWalkerScript - initializing");
     CreateAnimations();
     position = (Vector *)GetOwner()->GetPosition();
     assert((position != NULL) and "the position must be different to NULL");
@@ -80,17 +80,17 @@ void NakedManScript::Start() throw (Exception) {
 	                                         GetOwner()->GetWidth(),
 											 GetOwner()->GetHeight(), 0);
     if(nakedManCollider == NULL){
-        throw Exception("NakedManScript - NakedManScript nust be different of null.");
+        throw Exception("AloneWalkerScript - AloneWalkerScript nust be different of null.");
     } else {
         //nothing to do.
     }
-    INFO("NakedManScript - completed");
+    INFO("AloneWalkerScript - completed");
 }
 
 /**
     @brief Detect the actions of the game controller to move the player.
 */
-void NakedManScript::GameControllerUpdate() {
+void AloneWalkerScript::GameControllerUpdate() {
     isMovingLooking = true;
 
     // Calculate game controller angle in degrees
@@ -163,7 +163,7 @@ void NakedManScript::GameControllerUpdate() {
 /*
     Shoot depending of game controller angle and number of bullets.
 */
-void NakedManScript::ShootController() {
+void AloneWalkerScript::ShootController() {
     if (game_controller->GetAxis(GC_INPUT_AXIS_TRIGGERRIGHT)
         and bulletController == 0 and gameControllerAngle != 0) {
         cout << "ammo: " << bulletNumber << endl;
@@ -200,7 +200,7 @@ void NakedManScript::ShootController() {
 /*
     @brief Back to menu based in game controller input
 */
-void NakedManScript::BackMenu(){
+void AloneWalkerScript::BackMenu(){
     if (game_controller->GetButtonDown(GC_INPUT_BACK)) {
         auto textContinue = (UIText *)SceneManager::GetInstance()
                                            ->GetScene("Main")
@@ -218,7 +218,7 @@ void NakedManScript::BackMenu(){
             control of the game controller when player is moving and looking at
             same direction.
 */
-void NakedManScript::DetectMoovimentForward(){
+void AloneWalkerScript::DetectMoovimentForward(){
 
     if ((game_controller->GetAxis(GC_INPUT_AXIS_LEFTY) < -1000)
          and (game_controller->GetAxis(GC_INPUT_AXIS_LEFTX) < -1000)) {
@@ -286,7 +286,7 @@ void NakedManScript::DetectMoovimentForward(){
     } // if -- Detect movement requests
 }
 
-void NakedManScript::DetectMoovimentBack(){
+void AloneWalkerScript::DetectMoovimentBack(){
     /*
         Detect movement requests by comparing the current state of an axis
         control of the game controller when player is not moving and looking
@@ -360,7 +360,7 @@ void NakedManScript::DetectMoovimentBack(){
 /**
     @brief Create the animations related with the player.
 */
-void NakedManScript::CreateAnimations() {
+void AloneWalkerScript::CreateAnimations() {
     // Prepare animations with pictures of the player in motion.
     auto dashrightSprite = new Image("assets/image/dashright.png", 0, 0, 210, 27);
     auto dashrightAnimation = new Animation(GetOwner(), dashrightSprite);
@@ -449,7 +449,7 @@ void NakedManScript::CreateAnimations() {
 /**
     @brief Update the components of the player.
 */
-void NakedManScript::ComponentUpdate() {
+void AloneWalkerScript::ComponentUpdate() {
 
     RainScriptUpdate();
     SnowScriptUpdate();
@@ -506,7 +506,7 @@ void NakedManScript::ComponentUpdate() {
     SetDirection();
 }
 
-void NakedManScript::RainScriptUpdate(){
+void AloneWalkerScript::RainScriptUpdate(){
     // Initialize rain script
     auto rainScript = (RainScript *)SceneManager::GetInstance()
                                 ->GetCurrentScene()
@@ -532,7 +532,7 @@ void NakedManScript::RainScriptUpdate(){
     }
 }
 
-void NakedManScript::SnowScriptUpdate(){
+void AloneWalkerScript::SnowScriptUpdate(){
     // Initialize snow script
     auto snowScript = (SnowScript *)SceneManager::GetInstance()
                                 ->GetCurrentScene()
@@ -560,7 +560,7 @@ void NakedManScript::SnowScriptUpdate(){
     @brief Sets the direction of the player based on the mouse position
     or game controller.
 */
-void NakedManScript::SetDirection() {
+void AloneWalkerScript::SetDirection() {
 	// Get current mouse position
     mousePosition = (std::pair<int, int>)input->GetMousePosition();
 
@@ -783,7 +783,7 @@ void NakedManScript::SetDirection() {
 /**
     @brief Detect the keyboards that are being pressed to move the player.
 */
-void NakedManScript::KeyBoardUpdate() {
+void AloneWalkerScript::KeyBoardUpdate() {
     // Need to break into atomic functions
 
     // Detect if zoom is required
@@ -962,7 +962,7 @@ void NakedManScript::KeyBoardUpdate() {
 /**
     @brief Detect if the player is moving.
 */
-void NakedManScript::MovementsSounds() {
+void AloneWalkerScript::MovementsSounds() {
 	// Set walking value
     if (input->GetKeyPressed(INPUT_W) || input->GetKeyPressed(INPUT_A)
         || input->GetKeyPressed(INPUT_S) || input->GetKeyPressed(INPUT_D)) {
@@ -981,7 +981,7 @@ void NakedManScript::MovementsSounds() {
 /**
     @brief Update the components of the player.
 */
-void NakedManScript::FixedComponentUpdate() {
+void AloneWalkerScript::FixedComponentUpdate() {
     GameCollisionCheck();
     WallCollisionResolution();
     StartFirstBoss();
@@ -1018,7 +1018,7 @@ void NakedManScript::FixedComponentUpdate() {
     @brief Detect the amount of player's life to recover it or end the fight
     with the boss.
 */
-void NakedManScript::PlayerLife() {
+void AloneWalkerScript::PlayerLife() {
     // Recover life when the boss fight is not ended
     if (life < 100 and !endBossFight) {
         lifeRecover.Update(EngineGlobals::fixed_update_interval);
@@ -1050,7 +1050,7 @@ void NakedManScript::PlayerLife() {
 /**
     @brief Allow the player to shoot if he has bullets.
 */
-void NakedManScript::Shoot() {
+void AloneWalkerScript::Shoot() {
     // Shoot and decrease bullet number if there are bullets
     if (bulletNumber > 0) {
         // Get and activate the updated bullet object.
@@ -1077,7 +1077,7 @@ void NakedManScript::Shoot() {
 /**
     @brief Reloads the player's gun based on number of shots or time.
 */
-void NakedManScript::ReloadGun() {
+void AloneWalkerScript::ReloadGun() {
     /*
         Add fixed_update_interval time to timerReload when bullet number
         equals to zero.
@@ -1100,7 +1100,7 @@ void NakedManScript::ReloadGun() {
 /**
     @brief Constantly update the animations based on collisions and time.
 */
-void NakedManScript::Animations() {
+void AloneWalkerScript::Animations() {
     // Mange m_hitFrames value when m_hit is true
     if (m_hit) {
         m_hitFrames++;
@@ -1135,7 +1135,7 @@ void NakedManScript::Animations() {
     @brief Define the direction in which the player will move based
     on the pressed keys or the game controller buttons actions.
 */
-void NakedManScript::Movements() {
+void AloneWalkerScript::Movements() {
     /*
         Define x, y positions and  walk speed of the player based
         on the movements values.
@@ -1291,7 +1291,7 @@ void NakedManScript::Movements() {
 /**
     @brief Check the collisions that occur during the game.
 */
-void NakedManScript::GameCollisionCheck() {
+void AloneWalkerScript::GameCollisionCheck() {
     // Run through objects to get the collisions
     for (auto object : GetOwner()->GetCollisions()) {
 
@@ -1335,7 +1335,7 @@ void NakedManScript::GameCollisionCheck() {
     @brief Start the first boss depending on the position of the Camera
     of the game.
 */
-void NakedManScript::StartFirstBoss() {
+void AloneWalkerScript::StartFirstBoss() {
     // Print the x,y positions of worldCamera when X key is pressed
     if (input->GetKeyDown(INPUT_X)) {
         cout << "X: " << CameraSystem::GetInstance()->worldCameraX << endl;
@@ -1390,7 +1390,7 @@ void NakedManScript::StartFirstBoss() {
 /**
     @brief Detect collisions between the player and the wall.
 */
-void NakedManScript::WallCollisionResolution() {
+void AloneWalkerScript::WallCollisionResolution() {
     // Get map script object.
     auto mapscript = (MapScript *)SceneManager::GetInstance()
                                   ->GetScene("Gameplay")

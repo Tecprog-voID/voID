@@ -7,7 +7,7 @@
 #include "Customs/PlayerAttackScript.hpp"
 #include "Globals/EngineGlobals.hpp"
 #include "Log/log.hpp"
-#include "Customs/NakedManScript.hpp"
+#include "Customs/AloneWalkerScript.hpp"
 
 #include <cassert>
 
@@ -67,7 +67,7 @@ void PlayerAttackScript::ComponentUpdate() {
 
     player =  SceneManager::GetInstance()->GetCurrentScene()->
               GetGameObject("NakedMan");
-    auto m_playerScript = (NakedManScript*)player->GetComponent("NakedManScript");
+    auto m_playerScript = (AloneWalkerScript*)player->GetComponent("AloneWalkerScript");
 
     // Check for the player and playerScript, and if exists, get the position of the player and his mouse position.
     if (player and m_playerScript) {

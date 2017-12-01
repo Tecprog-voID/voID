@@ -374,7 +374,7 @@ void GamePlayScene::CreateNakedMan() {
                                     gameObjectNackedManLayer);
 
     // Script.
-    new NakedManScript(m_nakedMan);
+    new AloneWalkerScript(m_nakedMan);
 
     auto runSound = new UISound(m_nakedMan, "runSound",
                                 "assets/Audio/Player/runcrushed.ogg", false,

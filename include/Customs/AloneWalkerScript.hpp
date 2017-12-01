@@ -1,11 +1,11 @@
 /**
-    @file NakedManScript.hpp
+    @file AloneWalkerScript.hpp
     @brief Manages the functions of the player in the game.
     @copyright LGPL. MIT License.
 */
 
-#ifndef __NAKED_MAN_SCRIPT__
-#define __NAKED_MAN_SCRIPT__
+#ifndef __ALONE_WALKER_SCRIPT__
+#define __ALONE_WALKER_SCRIPT__
 
 #include "Engine/InputSystem.hpp"
 #include "Engine/SceneManager.hpp"
@@ -21,12 +21,12 @@
 #include "Customs/HitScript.hpp"
 #include "Customs/Exception.hpp"
 
-class NakedManScript : public Script {
+class AloneWalkerScript : public Script {
 
     public:
 
-        NakedManScript(GameObject *owner);
-        ~NakedManScript();
+        AloneWalkerScript(GameObject *owner);
+        ~AloneWalkerScript();
 
         // Initicial values of the player informations in the game
         bool lockplayerMovements = false;
@@ -40,7 +40,7 @@ class NakedManScript : public Script {
 
         // Replace the component name and return it.
         std::string GetComponentName() override {
-            return "NakedManScript";
+            return "AloneWalkerScript";
         };
 
         void RainScriptUpdate();

@@ -5,7 +5,7 @@
     #include "Engine/SceneManager.hpp"
 
     #include "Components/Script.hpp"
-    #include "Customs/NakedManScript.hpp"
+    #include "Customs/AloneWalkerScript.hpp"
     #include "Customs/ForestActivatorScript.hpp"
     #include "Customs/ForestActivatorScript2.hpp"
     #include "Customs/ForestActivatorScript3.hpp"
@@ -48,7 +48,7 @@
             GameObject *map = nullptr;
             Vector *nakedManPosition = nullptr;
             Vector *mapPosition = nullptr;
-            NakedManScript *script = nullptr;
+            AloneWalkerScript *script = nullptr;
             // player inputs
             InputSystem *input = nullptr;
             char nakedManMovements = ' ';

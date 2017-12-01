@@ -16,7 +16,7 @@
 #include "Components/UIText.hpp"
 #include "Components/Animator.hpp"
 #include "Components/Script.hpp"
-#include "Customs/NakedManScript.hpp"
+#include "Customs/AloneWalkerScript.hpp"
 #include "Customs/Exception.hpp"
 
 #include <string>

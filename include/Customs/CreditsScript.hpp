@@ -19,7 +19,7 @@
 #include "Components/Script.hpp"
 #include "Customs/Exception.hpp"
 
-#include "Customs/NakedManScript.hpp"
+#include "Customs/AloneWalkerScript.hpp"
 #include "Customs/FirstBossController.hpp"
 #include "Math/Vector.hpp"
 

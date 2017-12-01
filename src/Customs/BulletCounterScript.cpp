@@ -34,19 +34,19 @@ void BulletCounterScript::Start() {
 */
 void BulletCounterScript::ComponentUpdate() {
     // Get player's component number of bullets.
-    auto nakedManScript = (NakedManScript *)SceneManager::GetInstance()
+    auto aloneWalkerScript = (AloneWalkerScript *)SceneManager::GetInstance()
                           ->GetCurrentScene()
                           ->GetGameObject("NakedMan")
-                          ->GetComponent("NakedManScript");
+                          ->GetComponent("AloneWalkerScript");
 
-    if(nakedManScript != NULL){
-        m_numberBullet = (unsigned int)nakedManScript->bulletNumber;
+    if(aloneWalkerScript != NULL){
+        m_numberBullet = (unsigned int)aloneWalkerScript->bulletNumber;
 
         // Update the text of the left number of bullets.
         auto counterText = (UIText *)GetOwner()->GetComponent("UIText");
         counterText->SetText(std::to_string(m_numberBullet));
     } else {
-        throw Exception("BulletCounterScript - nakedManScript must be different of null.");
+        throw Exception("BulletCounterScript - AloneWalkerScript must be different of null.");
     }
 
 }
