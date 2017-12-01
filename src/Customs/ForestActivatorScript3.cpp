@@ -73,7 +73,7 @@ void ForestActivatorScript3::Start() {
 void ForestActivatorScript3::CreateAnimations() {
     INFO("ForestActivatorScript3 - Creating animations");
     // Creates the image.
-    auto forestactivatorSprite = new Image("assets/image/Forest_activator.png",
+    auto forestactivatorSprite = new Image("assets/image/game_effects/forest_activator.png",
                                            imageActivatorPositionX, imageActivatorPositionY,
                                            imageActivatorWidth, imageActivatorHeight);
 

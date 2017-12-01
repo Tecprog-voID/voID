@@ -36,7 +36,7 @@ void RainScript::Start() {
 */
 void RainScript::CreateAnimations() {
     // Creates the animations for the rain script.
-    auto rainImage = new Image("assets/image/chuva.png",0,0,3410, 256);
+    auto rainImage = new Image("assets/image/game_effects/rain.png",0,0,3410, 256);
     auto rainAnimation= new Animation(GetOwner(),rainImage);
     // Add 10 frames in the rain animation.
     // Number of frames to add in the animation.

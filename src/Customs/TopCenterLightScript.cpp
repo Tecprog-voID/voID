@@ -65,7 +65,7 @@ void TopCenterLightScript::Start() {
 void TopCenterLightScript::CreateAnimations() {
     INFO("TopCenterLightScript - Creating animations");
     // Creates the image.
-    auto topCenterLightSprite = new Image("assets/image/topcenter.png",
+    auto topCenterLightSprite = new Image("assets/image/center_lights/top_center.png",
                                           imagePositionX, imagePositionY,
                                           imageWidth, imageHeight);
 

@@ -56,7 +56,7 @@ void FirstBossAttackScript::Start() {
 void FirstBossAttackScript::CreateAnimations() {
 
     //Image Attacks.
-    auto firstBossAttackImage = new Image("assets/image/firstBossAttack.png",0, 0, imageWidth, imageHeight);
+    auto firstBossAttackImage = new Image("assets/image/boss/first_boss_attack.png",0, 0, imageWidth, imageHeight);
 
     //Surge Animation.
     auto firstBossAttackSurgeAnimation = new Animation(GetOwner(),firstBossAttackImage);

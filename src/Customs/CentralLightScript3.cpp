@@ -51,9 +51,9 @@ void CentralLightScript3::Start() {
 
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
 
-    if(map) GetOwner()->SetZoomProportion(Vector(map->originalWidth / 
-                                                 GetOwner()->originalWidth, 
-                                                 map->originalHeight / 
+    if(map) GetOwner()->SetZoomProportion(Vector(map->originalWidth /
+                                                 GetOwner()->originalWidth,
+                                                 map->originalHeight /
                                                  GetOwner()->originalHeight));
 
 }
@@ -64,13 +64,13 @@ void CentralLightScript3::Start() {
 void CentralLightScript3::CreateAnimations(){
 
     // Create the animation.
-    auto centrallightSprite = new Image("assets/image/centro3.png", imageLightSpritePositionX, 
+    auto centrallightSprite = new Image("assets/image/center_lights/botton_center.png", imageLightSpritePositionX, 
                                         imageLightSpritePositionY, imageLightSpriteWidth, imageLightSpriteHeight);
 
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
 
-    centrallightAnimation->AddFrame(new Frame( frameLightAnimationPositionX, 
-                                               frameLightAnimationPositionY, frameLightAnimationWidth, 
+    centrallightAnimation->AddFrame(new Frame( frameLightAnimationPositionX,
+                                               frameLightAnimationPositionY, frameLightAnimationWidth,
                                                frameLightAnimationHeight));
 
     // Create the animator.

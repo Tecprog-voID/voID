@@ -57,7 +57,7 @@ void SnowActivatorScript::Start() {
 */
 void SnowActivatorScript::CreateAnimations() {
     // Create the animation for the snow activator.
-    auto snowActivatorSprite = new Image("assets/image/snowactivator.png",
+    auto snowActivatorSprite = new Image("assets/image/game_effects/snow_activator.png",
                                          0, 0,832, 64);
     auto snowActivatorAnimation = new Animation(GetOwner(),
                                                 snowActivatorSprite);

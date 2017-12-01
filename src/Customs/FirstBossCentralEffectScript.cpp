@@ -19,7 +19,7 @@ const int bossYPosition = 7.566428571;
     @brief Constructor for the FirstBossCentralEffectScript class.
 */
 FirstBossCentralEffectScript::FirstBossCentralEffectScript(GameObject *owner) : Script(owner) {
-    assert((owner != NULL) and "the owner must be equal to NULL");                                                      
+    assert((owner != NULL) and "the owner must be equal to NULL");
 }
 
 /**
@@ -35,7 +35,7 @@ void FirstBossCentralEffectScript::Start() {
     m_animator = (Animator *)GetOwner() -> GetComponent("Animator");
     m_input = InputSystem::GetInstance();
     auto map = SceneManager::GetInstance() -> GetScene("Gameplay") -> GetGameObject("Map");
-    
+
     // Checks for the map, and sets its properties.
     if (map) {
         GetOwner()->SetZoomProportion(Vector(map -> originalWidth / GetOwner()
@@ -50,14 +50,14 @@ void FirstBossCentralEffectScript::Start() {
 void FirstBossCentralEffectScript::CreateAnimations() {
 
     // Image Attacks.
-    auto firstBossCentralImage1 = new Image("assets/image/centerBoss11.png", 0, 0, 
+    auto firstBossCentralImage1 = new Image("assets/image/boss/first_boss.png", 0, 0, 
                                             centralImageWidth, centralImageheight);
 
     // Surge Animation.
     auto firstBossCentralAnimation1 = new Animation(GetOwner(), firstBossCentralImage1);
 
     for (int counter = 0; counter < frameCounter; counter++) {
-        firstBossCentralAnimation1->AddFrame(new Frame(counter * animationPosition, 0, 
+        firstBossCentralAnimation1->AddFrame(new Frame(counter * animationPosition, 0,
                                                        animationPosition, centralImageheight));
         // Animator.
         auto firstBossAnimator = new Animator(GetOwner());

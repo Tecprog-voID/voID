@@ -52,8 +52,8 @@ void FirstBossScript::Start() {
 */
 void FirstBossScript::CreateAnimations() {
     // Get images from the first boss.
-    auto firstBossImage = new Image("assets/image/boss1.png",0,0,1896, 324);
-    auto firstBossJumpImage = new Image("assets/image/boss1_jump.png",0,0,1180, 406);
+    auto firstBossImage = new Image("assets/image/boss/first_boss.png",0,0,1896, 324);
+    auto firstBossJumpImage = new Image("assets/image/boss/boss1_jump.png",0,0,1180, 406);
 
     // Create animations for the first boss.
     auto firstBossAnimation = new Animation(GetOwner(),firstBossImage);

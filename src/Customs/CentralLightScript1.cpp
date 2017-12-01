@@ -48,7 +48,7 @@ void CentralLightScript1::Start() {
 */
 void CentralLightScript1::CreateAnimations() {
     // Create the animation.
-    auto centrallightSprite = new Image("assets/image/centro4.png", 0, 0, 832, 64);
+    auto centrallightSprite = new Image("assets/image/center_lights/right_center.png", 0, 0, 832, 64);
     auto centrallightAnimation = new Animation(GetOwner(), centrallightSprite);
     centrallightAnimation->AddFrame(new Frame(0, 0, 64, 64));
 

@@ -69,7 +69,7 @@ void MainScene::CreateLogo() {
     */
     auto m_logo = new GameObject("Logo", new Vector(-30,0), 1024, 800,1);
 
-    auto logoImage = new Image("assets/image/logo2.png", 0, 0, 311, 256);
+    auto logoImage = new Image("assets/image/introduction/logo.png", 0, 0, 311, 256);
     new Renderer(m_logo, logoImage);
 
     AddGameObject(m_logo);

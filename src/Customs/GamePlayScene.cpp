@@ -200,7 +200,7 @@ void GamePlayScene::CreateMap() {
                               gameObjectCreateMapMapLayer);
 
     // Renderer the map image.
-    auto m_mapImage = new Image("assets/map.png", imageScenePositionX,
+    auto m_mapImage = new Image("assets/image/map/map.png", imageScenePositionX,
                               imageScenePositionY, imageSceneWidth, imageSceneHeight);
 
     new Renderer(m_map, m_mapImage);
@@ -212,7 +212,7 @@ void GamePlayScene::CreateMap() {
                                 gameObjectCreateMapTreeLayer);
 
     // Renderer the trees image.
-    auto m_treesImage = new Image("assets/image/trees.png", imageScenePositionX,
+    auto m_treesImage = new Image("assets/image/map/trees.png", imageScenePositionX,
                                 imageScenePositionY, imageSceneWidth, imageSceneHeight);
 
     new Renderer(m_trees, m_treesImage);
