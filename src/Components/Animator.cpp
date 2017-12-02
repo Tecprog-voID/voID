@@ -11,6 +11,7 @@
     @param[in] owner
     @param[in] C_DRAW Enumerator from ComponentTypes.
 */
+// Constructor
 Animator::Animator(GameObject *owner) : Component(owner, C_DRAW) {
     assert((owner != NULL) and "the owner must be equal to NULL");
     INFO("Animator - initialized");
@@ -32,6 +33,7 @@ void Animator::AddAnimation(std::string name, Animation *animation) {
 void Animator::PlayAnimation(std::string name) {
     for (auto result : m_animationMap) {
         // Checks if the first result of the variable has the same name of a given animation.
+        //Verification
         if (result.first == name) {
             // sets the state of the animation
             result.second->SetPlaying(true);
@@ -49,6 +51,7 @@ void Animator::PlayAnimation(std::string name) {
 void Animator::StopAnimation(std::string name) {
     auto result = m_animationMap.find(name);
     // If the current animations name wasnt found, show error message.
+    //Verification
     if (result == m_animationMap.end()) {
         ERROR("Couldn't find animation: " << name);
     } else {
@@ -83,6 +86,7 @@ bool Animator::IsPlaying(std::string name){
     }
 
     // If the name matches, set the playing state.
+    //Verification
     if (result->second->IsPlaying()) {
         return true;
     } else {
@@ -99,6 +103,7 @@ bool Animator::IsPlaying(std::string name){
 Animation *Animator::GetAnimation(std::string name) {
     for (auto result : m_animationMap) {
         // If the first name of the animation was found, return the second name.
+        //Verification
         if (result.first == name) {
             return result.second;
         } else {

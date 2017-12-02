@@ -8,7 +8,7 @@
 
 #include <cassert>
 
-
+// Constructor
 CircleRenderer::CircleRenderer(GameObject *owner, Vector offset, float radius)
                                                     : Component(owner, C_DRAW) {
 
