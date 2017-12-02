@@ -10,6 +10,7 @@
 
 #include <cassert>
 
+// Constants declaration
 const int thunderWidth = 2952;
 const int thunderHeight = 815;
 const int blueFrameWidth = 100;
@@ -23,6 +24,7 @@ const int blueCounter = 6;
     @brief Constructor for the ThunderScript class.
     @param[in] owner
 */
+//Constructor
 ThunderScript::ThunderScript(GameObject *owner) : Script(owner) {
     assert((owner != NULL) and "the owner must be equal to NULL");
     INFO("ThunderScript - initialized");
@@ -83,6 +85,7 @@ void ThunderScript::CreateAnimations() {
 */
 void ThunderScript::ComponentUpdate() {
     // Checks the input status to set the blue animation.
+    //Verification
     if (m_input->GetKeyDown(INPUT_1)) {
         m_animator->PlayAnimation("thunderBlueAnimation");
     } else {
@@ -90,6 +93,7 @@ void ThunderScript::ComponentUpdate() {
     }
 
     // Checks the input status to set the yellow animation.
+    //Verification
     if (m_input->GetKeyDown(INPUT_2)) {
         m_animator->PlayAnimation("thunderYellowAnimation");
     } else {
