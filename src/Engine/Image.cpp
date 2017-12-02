@@ -12,6 +12,7 @@
 /**
     @brief Simple constructor of the Image class.
 */
+// Constructor
 Image::Image() {
     INFO("Image - initialized");
 }
@@ -42,6 +43,7 @@ void Image::LoadImage(std::string path, int _x, int _y, int _width, int _height)
     SDL_Surface *surface = IMG_Load(path.c_str());
 
     // Checks if the surface exists, if not, return an error message. 
+    //Verification
     if (!surface) {
         ERROR(IMG_GetError());
     } else {
@@ -53,6 +55,7 @@ void Image::LoadImage(std::string path, int _x, int _y, int _width, int _height)
                                              surface);
 
     // Checks if the texture exists, if not, return an error message.                                          
+    //Verification
     if (!m_texture) {
         ERROR(SDL_GetError());
     } else {
@@ -119,11 +122,13 @@ void Image::Flip(bool horizontal, bool vertical) {
     SDL_RendererFlip flag = SDL_FLIP_NONE;
 
     // Checks the image orientation, if horizontal, sets a flag. 
+    //Verification
     if (horizontal) {
         flag = SDL_FLIP_HORIZONTAL;
     }
     
     // Checks the image orientation, if vertical, sets a flag. 
+    //Verification
     if (vertical) {
         flag = (SDL_RendererFlip)(flag | SDL_FLIP_VERTICAL);
     }

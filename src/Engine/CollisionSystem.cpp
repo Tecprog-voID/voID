@@ -16,6 +16,7 @@ CollisionSystem *CollisionSystem::m_instance = nullptr;
 /**
     @brief Constructor for the class CollisionSystem.
 */
+// Constructor
 CollisionSystem::CollisionSystem() {
     INFO("CollisionSystem - initialized");
 }
