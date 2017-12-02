@@ -14,6 +14,7 @@ const int framesPerSecond = 9;
     @brief Constructor for the ThunderScript class.
     @param[in] owner
 */
+// Constructor
 CutScene1Script::CutScene1Script(GameObject *owner) : Script(owner) {
     assert((owner != NULL) and "the owner must be equal to NULL");
 }
@@ -35,6 +36,7 @@ void CutScene1Script::Start() {
     GetOwner()->SetZoomProportion(Vector(0,0));
     auto map = SceneManager::GetInstance()->GetScene("Gameplay")->GetGameObject("Map");
     // Checks for the map, and sets its properties.
+    //Verification
     if(map) {
         GetOwner()->SetZoomProportion(Vector(map -> originalWidth / GetOwner()
                                              ->originalWidth, map
@@ -73,6 +75,7 @@ void CutScene1Script::CreateAnimations() {
 */
 void CutScene1Script::ComponentUpdate() {
     // Compares the animator state.
+    //Verification
     if(!m_animator->IsPlaying("CENTRAL LIGHT ANIMATION") and m_active) {
         m_animator->PlayAnimation("CENTRAL LIGHT ANIMATION");
     } else {
